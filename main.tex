@@ -186,19 +186,22 @@ Tél. : +33 (0) 4 72 44 84 57}
 
 \newpage
 \section{Introduction}
-- annonce decouverte Higgs 2012 par ATLAS [ref] et CMS [ref]. \\
+- annonce decouverte Higgs 2012 par ATLAS \cite{HiggsAtlas} et CMS\cite{HiggsCMS}. \\
 - Ces deux experiences generalistes, installees sur le LHC du CERN, sont toujours en place pour tenter de decouvrir de la nouvelle physique au dela du modele standard. \\
 - Les detecteurs ATLAS et CMS sont bases sur les meme principes. \\
 - structure cylindrique en couches placée autour du point d?interaction ou les collisions proton-proton sont realisees\\
 - but: determiner le type, l?energie et la direction des particules de l?etat final de la collision, 
 pour pouvoir en mesurer les proprietes, et par exemple determiner si une nouvelle particule instable a ete produite. \\
 - description du detecteur et du comportement des differentes particules \\
-	champ magnetique\\
-	tracker \\
-	ecal \\
-	hcal\\
-	chambre a muons\\
-	
+Pour suivre le flux de particule, le détecteur CMS \cite{CMS} dispose :
+\begin{itemize}
+\item d'un champ magnétique, pour séparer les dépôts d'énergie du calorimètre des particules chargées et neutres dans les jets
+\item d'un traceur, pour reconstruire la trajectoire des particules chargées
+\item d'un calorimètre éléctromagnétique (ECAL), permettant de dégager des dépôts d'énergie à partir de particules dans des jets (hadrons chargés, hadrons neutres et photons) clairement séparés l'un de l'autre jusqu'à un jet pT de l'ordre de 1 TeV. L'identification efficace du photon résultant, couplée à la résolution élevée de l'énergie ECAL, permet une excellente mesure d'environ $\tilda 25\%$ de l'énergie du jet
+\item Un calorimètre hadronique (HCAL )  avec une segmentation grossière mais suffisante pour séparer les dépôts d'énergie hadron chargés et neutres dans des jets jusqu'à de $\SIUnits{200-300}{\giga\electronvolt}$, ce qui permet de reconstruire les $10\%$ restants de l'énergie du jet, bien qu'avec une modeste résolution
+\item Un système de suivi des muons, fournissant une identification, indépendamment des particules environnantes.
+\end{itemize}
+
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[width=0.7\textwidth]{images/detecteur.pdf}
@@ -225,348 +228,353 @@ Le but final de cette calibration sera d'améliorer la reconstruction des flux de
 
 
 
-
-
-\section{Méthodes de calibrations développées pendant le stage}
-
-\subsection{Explications valables pour toutes les méthodes}
-\subsubsection{Séparation des données}
-On séparera et traitera différemment les événements qui ont $e_{cal} = 0$.  Ces événements sont liés à des particules qui ont intéragit avec le détecteur hardronique mais pas avec le détecteur électromagnétique (cf Fig.\ref{detecteur}). \\
-Cette séparation se justifie par le fait que modéliser les dépôts d'énergie dans les deux calorimètres pour en conclure ce qui se passe dans le cas particulier où il n'y a des dépôts que dans un amène un biais. Ainsi, à chaque "création" de calibration, on créera en fait deux modèles.
-
-- limite ecal + hcal < 150
-\begin{figure}[!h]
-\begin{center}
-\includegraphics[width=0.9\textwidth]{images/pictures/explain/limit.png}
-\caption{On place une limite à $e_{cal}+h_{cal} = 150$. \'A gauche, ..., en haut à droite, ..., en bas à doite, ...}
-\end{center}
-\end{figure}
-
-\subsubsection{Moyenne / moyenne de la gaussienne ajustée ("gaussian fit", "gaussienne fitée")?}
-	A différents moment, nous aurons besoin de calculer des moyennes. Or souvent, la moyenne classique ne serait pas représentative de ce que tous souhaitons montrer car certains points sont ont des valeurs $e_{cal},h_{cal}$ mal estimées car la simulation prend en compte les défauts des calorimètres. Il serait donc alors incorrecte de les prendre en compte pour juger l'efficacité d'une calibration car ils sont complètement incohérents.\\
-Pour résoudre ce problème, nous allons ajuster une gaussienne de la distribution des points à moyenner et choisir considérer que la moyenne à prendre en compte est la moyenne de la gaussienne. Ainsi, les points aberrants totalement écarté du centre de la distribution ne perturberont pas le calcul de la moyenne alors que dans le cas d'une moyenne classique, ils peuvent fortement attirer la moyenne vers eux.\\
-Ces points aberrants peuvent également venir d'une particule qui se serait décomposée avant le calorimètre. Ainsi on trouve près de l'origine, des points à fort $e_{true}$ et pour de faibles valeurs de  $e_{cal}$ et $h_{cal}$, et ces points ne sont pas du tout représentatif de l'efficacité d'une calibration. 
-
-\begin{minipage}{0.5\linewidth}
-	\begin{center}
-	\includegraphics[height=5cm]{images/pictures/testKNNGF/KNNGaussianFit_example_hist.eps}
-	\end{center}
-\end{minipage}
-\hfill
-\begin{minipage}{0.45\linewidth}
-	Ici, on peut voir sur cet exemple que si nous prenons la moyenne classique de $e_{true}$,  on obtient $79.12$, or la moyenne de la gaussienne fitée est de $77.82$, au vu de ce que nous avons dit précédemment, nous considèrerons que la seconde est plus judicieuse.
-\end{minipage}
-
-\subsubsection{Comment est fait un fit ?}
-expliquer : \\
-- barre d'erreur\\
-- minimisation du chi2\\
-- un bon chi2 réduit ?
-
-
-
-\subsection{Régression Linéaire}
-Pour s'entrainer à l'utilisation de \textit{SciKit Learn}, j'ai d'abord utilisé la régression linéaire. Il s'agit alors de représenter les relations entre les énergies par :
-\begin{equation}
-    e_{true} = a_1 e_{cal} + a_2 h_{cal} + b
-\end{equation}
-
-\begin{figure}[!h]
-\begin{center}
-\includegraphics[height=5cm]{images/pictures/testLinearRegression/LinearRegression_plot3D_training.png}
-\includegraphics[height=5cm]{images/pictures/testLinearRegression/LinearRegression_plot3D_surf.eps}
-\caption{Le nuage de points modélisé (à gauche) par un plan (à droite).}
-\end{center}
-\end{figure}
-
-Nous avons ainsi modélisé le nuage de point par un plan, pour voir si cela était réaliste, nous allons d'abord regarder ce qui se passe dans le plan $e_{cal} = 0$ :
-\begin{figure}[!h]
-\begin{center}
-\includegraphics[height =5cm]{images/pictures/testLinearRegression/LinearRegression_calibration.png}
-\caption{Courbe de calibration pour $e_{cal} = 0$.}
-\end{center}
-\end{figure}
-
-Nous constatons alors que la courbe ne passe pas par le le coeur du nuage de point à faible énergie. Pour avoir une vue d'ensemble, nous allons tracer  $e_{calib}/e_{true}$ qui doit être proche de $1$ si la calibration est bonne. \\
-
-\begin{figure}[!h]
-\begin{center}
-\includegraphics[height =4.5cm]{images/pictures/testLinearRegression/LinearRegression_ecalib_over_etrue_functionof_ecal_hcal.png}
-\caption{$e_{calib}/e_{true}$ en fonction de $e_{cal}$ et $h_{cal}$.}
-\end{center}
-\end{figure}
-
-En regardant la figure de droite, nous constatons que comme prévu la régression linéaire est mauvaise à faible énergie car en moyenne, $e_{calib}/e_{true}$ n'est pas proche de $1$. Plus intéressant, la figure de droite met en avant les non-linéarités du nuage de point.\\
-
-\begin{figure}[!h]
-\begin{center}
-\includegraphics[height =4.5cm]{images/pictures/testLinearRegression/LinearRegression_ecalib_over_etrue.png}
-\caption{$e_{calib}/e_{true}$ en fonction de $e_{true}$.}
-\label{ecaliboveretrueLR}
-\end{center}
-\end{figure}
-
-Ici nous constatons que à faible et haut $e_{true}$, la calibration ne donne pas de bons résultats. En effet, la courbe de la moyenne (fit gaussien) s'écarte très fortement d'une constante égale à 1.
-
-
-
-
+%
+%
+%\section{Méthodes de calibrations développées pendant le stage}
+%
+%\subsection{Explications valables pour toutes les méthodes}
+%\subsubsection{Séparation des données}
+%On séparera et traitera différemment les événements qui ont $e_{cal} = 0$.  Ces événements sont liés à des particules qui ont intéragit avec le détecteur hardronique mais pas avec le détecteur électromagnétique (cf Fig.\ref{detecteur}). \\
+%Cette séparation se justifie par le fait que modéliser les dépôts d'énergie dans les deux calorimètres pour en conclure ce qui se passe dans le cas particulier où il n'y a des dépôts que dans un amène un biais. Ainsi, à chaque "création" de calibration, on créera en fait deux modèles.
+%
+%- limite ecal + hcal < 150
+%\begin{figure}[!h]
+%\begin{center}
+%\includegraphics[width=0.9\textwidth]{images/pictures/explain/limit.png}
+%\caption{On place une limite à $e_{cal}+h_{cal} = 150$. \'A gauche, ..., en haut à droite, ..., en bas à doite, ...}
+%\end{center}
+%\end{figure}
+%
+%\subsubsection{Moyenne / moyenne de la gaussienne ajustée ("gaussian fit", "gaussienne fitée")?}
+%	A différents moment, nous aurons besoin de calculer des moyennes. Or souvent, la moyenne classique ne serait pas représentative de ce que tous souhaitons montrer car certains points sont ont des valeurs $e_{cal},h_{cal}$ mal estimées car la simulation prend en compte les défauts des calorimètres. Il serait donc alors incorrecte de les prendre en compte pour juger l'efficacité d'une calibration car ils sont complètement incohérents.\\
+%Pour résoudre ce problème, nous allons ajuster une gaussienne de la distribution des points à moyenner et choisir considérer que la moyenne à prendre en compte est la moyenne de la gaussienne. Ainsi, les points aberrants totalement écarté du centre de la distribution ne perturberont pas le calcul de la moyenne alors que dans le cas d'une moyenne classique, ils peuvent fortement attirer la moyenne vers eux.\\
+%Ces points aberrants peuvent également venir d'une particule qui se serait décomposée avant le calorimètre. Ainsi on trouve près de l'origine, des points à fort $e_{true}$ et pour de faibles valeurs de  $e_{cal}$ et $h_{cal}$, et ces points ne sont pas du tout représentatif de l'efficacité d'une calibration. 
+%
+%\begin{minipage}{0.5\linewidth}
+%	\begin{center}
+%	\includegraphics[height=5cm]{images/pictures/testKNNGF/KNNGaussianFit_example_hist.eps}
+%	\end{center}
+%\end{minipage}
+%\hfill
+%\begin{minipage}{0.45\linewidth}
+%	Ici, on peut voir sur cet exemple que si nous prenons la moyenne classique de $e_{true}$,  on obtient $79.12$, or la moyenne de la gaussienne fitée est de $77.82$, au vu de ce que nous avons dit précédemment, nous considèrerons que la seconde est plus judicieuse.
+%\end{minipage}
+%
+%\subsubsection{Comment est fait un fit ?}
+%expliquer : \\
+%- barre d'erreur\\
+%- minimisation du chi2\\
+%- un bon chi2 réduit ?
+%
+%
+%
+%\subsection{Régression Linéaire}
+%Pour s'entrainer à l'utilisation de \textit{SciKit Learn}, j'ai d'abord utilisé la régression linéaire. Il s'agit alors de représenter les relations entre les énergies par :
+%\begin{equation}
+%    e_{true} = a_1 e_{cal} + a_2 h_{cal} + b
+%\end{equation}
+%
+%\begin{figure}[!h]
+%\begin{center}
+%\includegraphics[height=5cm]{images/pictures/testLinearRegression/LinearRegression_plot3D_training.png}
+%\includegraphics[height=5cm]{images/pictures/testLinearRegression/LinearRegression_plot3D_surf.eps}
+%\caption{Le nuage de points modélisé (à gauche) par un plan (à droite).}
+%\end{center}
+%\end{figure}
+%
+%Nous avons ainsi modélisé le nuage de point par un plan, pour voir si cela était réaliste, nous allons d'abord regarder ce qui se passe dans le plan $e_{cal} = 0$ :
+%\begin{figure}[!h]
+%\begin{center}
+%\includegraphics[height =5cm]{images/pictures/testLinearRegression/LinearRegression_calibration.png}
+%\caption{Courbe de calibration pour $e_{cal} = 0$.}
+%\end{center}
+%\end{figure}
+%
+%Nous constatons alors que la courbe ne passe pas par le le coeur du nuage de point à faible énergie. Pour avoir une vue d'ensemble, nous allons tracer  $e_{calib}/e_{true}$ qui doit être proche de $1$ si la calibration est bonne. \\
+%
+%\begin{figure}[!h]
+%\begin{center}
+%\includegraphics[height =4.5cm]{images/pictures/testLinearRegression/LinearRegression_ecalib_over_etrue_functionof_ecal_hcal.png}
+%\caption{$e_{calib}/e_{true}$ en fonction de $e_{cal}$ et $h_{cal}$.}
+%\end{center}
+%\end{figure}
+%
+%En regardant la figure de droite, nous constatons que comme prévu la régression linéaire est mauvaise à faible énergie car en moyenne, $e_{calib}/e_{true}$ n'est pas proche de $1$. Plus intéressant, la figure de droite met en avant les non-linéarités du nuage de point.\\
+%
+%\begin{figure}[!h]
+%\begin{center}
+%\includegraphics[height =4.5cm]{images/pictures/testLinearRegression/LinearRegression_ecalib_over_etrue.png}
+%\caption{$e_{calib}/e_{true}$ en fonction de $e_{true}$.}
+%\label{ecaliboveretrueLR}
+%\end{center}
+%\end{figure}
+%
+%Ici nous constatons que à faible et haut $e_{true}$, la calibration ne donne pas de bons résultats. En effet, la courbe de la moyenne (fit gaussien) s'écarte très fortement d'une constante égale à 1.
+%
+%
+%
+%
+%
+%\newpage
+%\subsection{Méthode des "legos"}
+%\subsubsection{Principe général de l'algorithme}
+%Comme nous l'avons vu précédemment, il faut une calibration qui prenne en compte les non-linéarité. Ici, l'idée est de découper le plan $(e_{cal},h_{cal})$ en carré et de calculer la moyenne des $e_{true}$ dans chaque carré qui sera la valeur $e_{calib}$.\\
+%Ainsi pour prédire une énergie de $e_{calib}^i$ pour un point $(e_{cal}^i,h_{cal}^i)$, nous allons regarder dans quel carré il se trouve et retourner la valeur d'énergie calibrée correspondante, faisant apparaître ainsi des "legos".
+%
+%\subsubsection{Résultat de la calibration}
+%\begin{figure}[!h]
+%\begin{center}
+%\includegraphics[height=4cm]{images/pictures/testCalibrationLego/CalibrationLego_plot3D_legos.eps}
+%\includegraphics[height=4cm]{images/pictures/testCalibrationLego/CalibrationLego_plot3D_surf.eps}
+%\caption{Le nuage de points modélisé par des legos (à gauche) ainsi que la surface correspondante (à droite). $100\times100$ legos.}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[!h]
+%\begin{center}
+%\includegraphics[width=0.9\textwidth]{images/pictures/testCalibrationLego/CalibrationLego_calibration.png}
+%\caption{Courbe de calibration pour $e_{cal} = 0$.}
+%\end{center}
+%\end{figure}
+%
+%Bien que cette méthode prenne en compte les linéarité, nous pouvons voir sur les figures ci-dessus qu'il y a un effet de pas, ce qui n'est pas bon car beaucoup trop d'événements on le même $e_{calib}$ et la courbe de calibration ne suit pas bien le coeur de distribution, surtout à faible énergie.
+%
+%
+%\begin{figure}[!h]
+%\begin{center}
+%\includegraphics[width=0.9\textwidth]{images/pictures/testCalibrationLego/CalibrationLego_ecalib_over_etrue.png}
+%\caption{$e_{calib}/e_{true}$ en fonction de $e_{true}$.}
+%\label{ecaliboveretrueCL}
+%\end{center}
+%\end{figure}
+%
+%Cet effet de pas se retrouve également si l'on trace $e_{calib}/e_{true}$ en fonction de $e_{true}$ (Fig. \ref{ecaliboveretrueCL}) et nous y voyons alors un structure (des hyperboles) liées aux points qui ont la même énergie de calibration (contrairement à la régression linéaire Fig.  \ref{ecaliboveretrueLR}).\\
+%Cet illustration montre à nouveau que nous sommes loin d'une répartition des points autour de $e_{calib}/e_{true} = 1$.
+%
+%\begin{figure}[!h]
+%\begin{center}
+%\includegraphics[width=0.9\textwidth]{images/pictures/testCalibrationLego/CalibrationLego_ecalib_over_etrue_functionof_ecal_hcal.png}
+%\caption{$e_{calib}/e_{true}$ en fonction de $e_{cal}$ et $h_{cal}$.}
+%\end{center}
+%\end{figure}
+%
+%Ici nous constatons malgré tout que nous avons mieux pris en compte la non-linéarité, mais que en majorité, l'énergie calibrée est sur-estimée.
+%
+%
+%
+%
+%\subsection{Méthode des plus proches voisins (KNN)}
+%\subsubsection{Principe général de l'algorithme}
+%Nous utilisons encore des données simulées pour effectuer une calibration, chaque particule simulée $i$ est vue comme un point d'un espace tridimensionnel possédant des coordonnées $(e_{cal}^i, h_{cal}^i,e_{true}^i)$, correspondant respectivement à l'énergie déposée dans le calorimètre électromagnétique, dans le calorimètre hadronique et l'énergie vraie.\\
+%Pour trouver l'énergie calibrée d'un point de coordonnées $(e_{cal}^0, h_{cal}^0)$ :
+%\begin{itemize}
+%	\item on recherche ses $k$ plus proches voisins dans le plan $(e_{cal}, h_{cal}) \rightarrow (e_{cal}^i, h_{cal}^i), i \in [|1,...,k|]$
+%	\begin{figure}[!h]
+%	\begin{center}
+%		\includegraphics[width=0.9\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_neighborhood.png}
+%		\caption{$n_{voisins} = 2000$ pour $e_{cal} = 0$, $n_{voisins} = 250$ pour $e_{cal} \neq 0$}
+%		\label{neighbors}
+%		\end{center}
+%	\end{figure}
+%	\item on effectue une moyenne pondérée une moyenne pondérée de l'énergie vraie de ces plus proches voisins $\rightarrow e_{calib}^0$ : l'énergie calibrée 
+%\end{itemize}
+%
+%La moyenne pondérée va donc s'exprimer ainsi :
+%\begin{equation}
+%	 e_{calib}^0 = \frac{\sum_{i=1}^k g(e_{cal}^i, h_{cal}^i) \times e_{true}^i}{\sum_{i=1}^k g(e_{cal}^i, h_{cal}^i)}
+%\end{equation}
+%Dans notre cas nous avons pris pour $g$ la distribution gaussienne $g(\vec{x}) = \exp{-\frac{1}{2}(\frac{(\vec{x} - \vec{x}^0)^2}{\sigma^2})}$, pour donner plus d'importance aux plus proches des k plus proches voisins.\\
+%
+%\subsubsection{Résultat de la calibration}
+%\begin{figure}[!h]
+%\begin{center}
+%\includegraphics[width=0.37\textwidth]{images/pictures/testKNN/KNN_plot3D_training.png}
+%\includegraphics[width=0.37\textwidth]{images/pictures/testKNN/KNN_plot3D_surf.eps}
+%\caption{Le nuage de points modélisé (à gauche) par une surface (à droite).}
+%\end{center}
+%\end{figure}
+%
+%Nous constatons  ici que la surface est beaucoup plus lisse que pour la méthode précédente, mais en regardant le cas particulier de $e_{cal} = 0$, nous constatons encore une fois que à faible énergie, la courbe de calibration ne passe pas par le coeur de la distribution. Cela vient du fait qu'il y a des points aberrants qui ont une forte énergie vraie mais qui ont une très faible énergie détectée par les calorimètres. \\
+%Il nous faut donc un moyen pour ne plus les prendre en compte pour avoir une courbe de calibration plus réaliste. \\
+%
+%\begin{figure}[!h]
+%\begin{center}
+%\includegraphics[width=0.9\textwidth]{images/pictures/testKNN/KNN_calibration.png}
+%\caption{Courbe de calibration pour $e_{cal} = 0$.}
+%\end{center}
+%\end{figure}
+%
+%Malgré tout, en regardant la Fig.  \ref{ecaliboveretrueKNN}, nous constatons que les points sont mieux répartis autour de $e_{calib}/e_{true} = 1$.
+%
+%\begin{figure}[!h]
+%\begin{center}
+%\includegraphics[width=0.9\textwidth]{images/pictures/testKNN/KNN_ecalib_over_etrue.png}
+%\caption{$e_{calib}/e_{true}$ en fonction de $e_{true}$.}
+%\label{ecaliboveretrueKNN}
+%\end{center}
+%\end{figure}
+%
+%Nous prenons également en compte les non-linéarité dans ce cas mais nous sur-estimons encore la valuer de l'énergie calibrée (encore une fois, à cause de ces points à fort $e_{true}$
+%
+%\begin{figure}[!h]
+%\begin{center}
+%\includegraphics[width=0.9\textwidth]{images/pictures/testKNN/KNN_ecalib_over_etrue_functionof_ecal_hcal.png}
+%\caption{$e_{calib}/e_{true}$ en fonction de $e_{cal}$ et $h_{cal}$.}
+%\end{center}
+%\end{figure}
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%\subsection{KNN Gaussian Cleaning}
+%\subsubsection{Principe général de l'algorithme}
+%Cette méthode est assez similaires à la précédente. Elle se base sur la constatation que la distribution en énergie vraie des paquets de plus proches voisins est un distribution gaussienne. Nous allons donc en utilisant la méthode des moindres carrés trouver les paramètres de la gaussienne en question et ne prendre en compte les plus proches voisins dont l'énergie vraie est $\mu -c\sigma \leq e_{true}^i \leq \mu + c\sigma$ (nous prenons par défaut $c = 2$), avec $\mu, \sigma$ la moyenne et l'écart type de la distribution gaussienne.\\
+%Principe de l'algorithme :
+%\begin{itemize}
+%	\item on considère des points $(e_{cal}^{0,j}, h_{cal}^{0,j})$ où nous allons évaluer l'énergie calibrée.
+%	\item pour chaque $(e_{cal}^{0,j}, h_{cal}^{0,j})$ :
+%	\begin{itemize}
+%		\item on recherche ses $k$ plus proches voisins dans le plan $(e_{cal}, h_{cal}) \rightarrow (e_{cal}^i, h_{cal}^i), i \in [|1,...,k|]$
+%		\item on trouve la gaussienne correspondante $\mu -c\sigma \leq e_{true}^i \leq \mu + c\sigma$
+%		\item on ne conserve que les voisins dont : $\mu -c\sigma \leq e_{true}^i \leq \mu + c\sigma$
+%		\item on effectue une moyenne pondérée une moyenne pondérée de l'énergie vraie de ces plus proches voisins $\rightarrow e_{calib}^0$ : l'énergie calibrée 
+%	\end{itemize}
+%	\item on effectue une interpolation pour donner une valeur d'énergie calibrée quelque soit $(e_{cal}^{0}, h_{cal}^{0})$
+%\end{itemize}
+%
+%\subsubsection{Efficacité du fit}
+%\begin{figure}[!h]
+%\begin{center}
+%\includegraphics[width=0.9\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_chi2_calib.eps}
+%\caption{Le $\chi^2$ réduit pour chaque fit effectué.}
+%\end{center}
+%\end{figure}
+%
+%\subsubsection{Résultat de la calibration}
+%
+%\begin{figure}[!h]
+%\begin{center}
+%\includegraphics[width=0.37\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_plot3D_training.png}
+%\includegraphics[width=0.37\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_plot3D_surf.eps}
+%\caption{Le nuage de points modélisé (à gauche) par une surface (à droite).}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[!h]
+%\begin{center}
+%\includegraphics[width=0.9\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_calibration.png}
+%\caption{Courbe de calibration pour $e_{cal} = 0$.}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[!h]
+%\begin{center}
+%\includegraphics[width=0.9\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_ecalib_over_etrue_functionof_ecal_hcal.png}
+%\caption{$e_{calib}/e_{true}$ en fonction de $e_{cal}$ et $h_{cal}$.}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[!h]
+%\begin{center}
+%\includegraphics[width=0.9\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_ecalib_over_etrue.png}
+%\caption{$e_{calib}/e_{true}$ en fonction de $e_{true}$.}
+%\end{center}
+%\end{figure}
+%
+%
+%
+%
+%\newpage
+%\subsection{KNN Gaussian Fit}
+%\subsubsection{Principe général de l'algorithme}
+%Ici, il s'agit du même principe que précédemment mais nous allons considérer que la valeur de $e_{calib}$ est la moyenne de la gaussienne. 
+%Principe de l'algorithme :
+%\begin{itemize}
+%	\item on considère des points $(e_{cal}^{0,j}, h_{cal}^{0,j})$ où nous allons évaluer l'énergie calibrée.
+%	\item pour chaque $(e_{cal}^{0,j}, h_{cal}^{0,j})$ :
+%	\begin{itemize}
+%		\item on recherche ses $k$ plus proches voisins dans le plan $(e_{cal}, h_{cal}) \rightarrow (e_{cal}^i, h_{cal}^i), i \in [|1,...,k|]$
+%		\item on trouve la gaussienne correspondante \rightarrow \sigma, \mu$
+%		\item $\rightarrow e_{calib}^0 = \mu$
+%	\end{itemize}
+%	\item on effectue une interpolation pour donner une valeur d'énergie calibrée quelque soit $(e_{cal}^{0}, h_{cal}^{0})$
+%\end{itemize}
+%
+%\subsubsection{Résultat de la calibration}
+%\begin{figure}[!h]
+%\begin{center}
+%\includegraphics[width=0.37\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_plot3D_training.png}
+%\includegraphics[width=0.37\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_plot3D_surf.eps}
+%\caption{Le nuage de points modélisé (à gauche) par une surface (à droite).}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[!h]
+%\begin{center}
+%\includegraphics[width=0.9\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_calibration.png}
+%\caption{Courbe de calibration pour $e_{cal} = 0$.}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[!h]
+%\begin{center}
+%\includegraphics[width=0.9\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_ecalib_over_etrue_functionof_ecal_hcal.png}
+%\caption{$e_{calib}/e_{true}$ en fonction de $e_{cal}$ et $h_{cal}$.}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[!h]
+%\begin{center}
+%\includegraphics[width=0.9\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_ecalib_over_etrue.png}
+%\caption{$e_{calib}/e_{true}$ en fonction de $e_{true}$.}
+%\end{center}
+%\end{figure}
+%
+%
+%
+%
+%\newpage
+%\section{Comparaison des méthodes}
+%\subsection{Méthodes basées sur KNN}
+%\begin{figure}[!h]
+%\begin{center}
+%\includegraphics[width=0.9\textwidth]{images/pictures/comparisons/comparison1.eps}
+%\caption{$e_{calib}/e_{true}$ en fonction de $e_{true}$.}
+%\end{center}
+%\end{figure}
+%
+%
+%\subsection{Meilleure méthode}
+%\begin{figure}[!h]
+%\begin{center}
+%\includegraphics[width=0.9\textwidth]{images/pictures/comparisons/comparison2.eps}
+%\caption{$e_{calib}/e_{true}$ en fonction de $e_{true}$.}
+%\end{center}
+%\end{figure}
+%
+%
+%
+%
+%\newpage
+%\section{Partage du programme}
+%
+%
+%
+%
+%
+%\newpage
+%\section{Annexes}
+%\subsection{Comment créer une calibration?}
+%\subsection{Fonctions utiles du programme}
 
 \newpage
-\subsection{Méthode des "legos"}
-\subsubsection{Principe général de l'algorithme}
-Comme nous l'avons vu précédemment, il faut une calibration qui prenne en compte les non-linéarité. Ici, l'idée est de découper le plan $(e_{cal},h_{cal})$ en carré et de calculer la moyenne des $e_{true}$ dans chaque carré qui sera la valeur $e_{calib}$.\\
-Ainsi pour prédire une énergie de $e_{calib}^i$ pour un point $(e_{cal}^i,h_{cal}^i)$, nous allons regarder dans quel carré il se trouve et retourner la valeur d'énergie calibrée correspondante, faisant apparaître ainsi des "legos".
+\bibliographystyle{plain} % Le style est mis entre accolades.
+\bibliography{biblio} % mon fichier de base de données s'appelle biblio.bib
 
-\subsubsection{Résultat de la calibration}
-\begin{figure}[!h]
-\begin{center}
-\includegraphics[height=4cm]{images/pictures/testCalibrationLego/CalibrationLego_plot3D_legos.eps}
-\includegraphics[height=4cm]{images/pictures/testCalibrationLego/CalibrationLego_plot3D_surf.eps}
-\caption{Le nuage de points modélisé par des legos (à gauche) ainsi que la surface correspondante (à droite). $100\times100$ legos.}
-\end{center}
-\end{figure}
-
-\begin{figure}[!h]
-\begin{center}
-\includegraphics[width=0.9\textwidth]{images/pictures/testCalibrationLego/CalibrationLego_calibration.png}
-\caption{Courbe de calibration pour $e_{cal} = 0$.}
-\end{center}
-\end{figure}
-
-Bien que cette méthode prenne en compte les linéarité, nous pouvons voir sur les figures ci-dessus qu'il y a un effet de pas, ce qui n'est pas bon car beaucoup trop d'événements on le même $e_{calib}$ et la courbe de calibration ne suit pas bien le coeur de distribution, surtout à faible énergie.
-
-
-\begin{figure}[!h]
-\begin{center}
-\includegraphics[width=0.9\textwidth]{images/pictures/testCalibrationLego/CalibrationLego_ecalib_over_etrue.png}
-\caption{$e_{calib}/e_{true}$ en fonction de $e_{true}$.}
-\label{ecaliboveretrueCL}
-\end{center}
-\end{figure}
-
-Cet effet de pas se retrouve également si l'on trace $e_{calib}/e_{true}$ en fonction de $e_{true}$ (Fig. \ref{ecaliboveretrueCL}) et nous y voyons alors un structure (des hyperboles) liées aux points qui ont la même énergie de calibration (contrairement à la régression linéaire Fig.  \ref{ecaliboveretrueLR}).\\
-Cet illustration montre à nouveau que nous sommes loin d'une répartition des points autour de $e_{calib}/e_{true} = 1$.
-
-\begin{figure}[!h]
-\begin{center}
-\includegraphics[width=0.9\textwidth]{images/pictures/testCalibrationLego/CalibrationLego_ecalib_over_etrue_functionof_ecal_hcal.png}
-\caption{$e_{calib}/e_{true}$ en fonction de $e_{cal}$ et $h_{cal}$.}
-\end{center}
-\end{figure}
-
-Ici nous constatons malgré tout que nous avons mieux pris en compte la non-linéarité, mais que en majorité, l'énergie calibrée est sur-estimée.
-
-
-
-
-\subsection{Méthode des plus proches voisins (KNN)}
-\subsubsection{Principe général de l'algorithme}
-Nous utilisons encore des données simulées pour effectuer une calibration, chaque particule simulée $i$ est vue comme un point d'un espace tridimensionnel possédant des coordonnées $(e_{cal}^i, h_{cal}^i,e_{true}^i)$, correspondant respectivement à l'énergie déposée dans le calorimètre électromagnétique, dans le calorimètre hadronique et l'énergie vraie.\\
-Pour trouver l'énergie calibrée d'un point de coordonnées $(e_{cal}^0, h_{cal}^0)$ :
-\begin{itemize}
-	\item on recherche ses $k$ plus proches voisins dans le plan $(e_{cal}, h_{cal}) \rightarrow (e_{cal}^i, h_{cal}^i), i \in [|1,...,k|]$
-	\begin{figure}[!h]
-	\begin{center}
-		\includegraphics[width=0.9\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_neighborhood.png}
-		\caption{$n_{voisins} = 2000$ pour $e_{cal} = 0$, $n_{voisins} = 250$ pour $e_{cal} \neq 0$}
-		\label{neighbors}
-		\end{center}
-	\end{figure}
-	\item on effectue une moyenne pondérée une moyenne pondérée de l'énergie vraie de ces plus proches voisins $\rightarrow e_{calib}^0$ : l'énergie calibrée 
-\end{itemize}
-
-La moyenne pondérée va donc s'exprimer ainsi :
-\begin{equation}
-	 e_{calib}^0 = \frac{\sum_{i=1}^k g(e_{cal}^i, h_{cal}^i) \times e_{true}^i}{\sum_{i=1}^k g(e_{cal}^i, h_{cal}^i)}
-\end{equation}
-Dans notre cas nous avons pris pour $g$ la distribution gaussienne $g(\vec{x}) = \exp{-\frac{1}{2}(\frac{(\vec{x} - \vec{x}^0)^2}{\sigma^2})}$, pour donner plus d'importance aux plus proches des k plus proches voisins.\\
-
-\subsubsection{Résultat de la calibration}
-\begin{figure}[!h]
-\begin{center}
-\includegraphics[width=0.37\textwidth]{images/pictures/testKNN/KNN_plot3D_training.png}
-\includegraphics[width=0.37\textwidth]{images/pictures/testKNN/KNN_plot3D_surf.eps}
-\caption{Le nuage de points modélisé (à gauche) par une surface (à droite).}
-\end{center}
-\end{figure}
-
-Nous constatons  ici que la surface est beaucoup plus lisse que pour la méthode précédente, mais en regardant le cas particulier de $e_{cal} = 0$, nous constatons encore une fois que à faible énergie, la courbe de calibration ne passe pas par le coeur de la distribution. Cela vient du fait qu'il y a des points aberrants qui ont une forte énergie vraie mais qui ont une très faible énergie détectée par les calorimètres. \\
-Il nous faut donc un moyen pour ne plus les prendre en compte pour avoir une courbe de calibration plus réaliste. \\
-
-\begin{figure}[!h]
-\begin{center}
-\includegraphics[width=0.9\textwidth]{images/pictures/testKNN/KNN_calibration.png}
-\caption{Courbe de calibration pour $e_{cal} = 0$.}
-\end{center}
-\end{figure}
-
-Malgré tout, en regardant la Fig.  \ref{ecaliboveretrueKNN}, nous constatons que les points sont mieux répartis autour de $e_{calib}/e_{true} = 1$.
-
-\begin{figure}[!h]
-\begin{center}
-\includegraphics[width=0.9\textwidth]{images/pictures/testKNN/KNN_ecalib_over_etrue.png}
-\caption{$e_{calib}/e_{true}$ en fonction de $e_{true}$.}
-\label{ecaliboveretrueKNN}
-\end{center}
-\end{figure}
-
-Nous prenons également en compte les non-linéarité dans ce cas mais nous sur-estimons encore la valuer de l'énergie calibrée (encore une fois, à cause de ces points à fort $e_{true}$
-
-\begin{figure}[!h]
-\begin{center}
-\includegraphics[width=0.9\textwidth]{images/pictures/testKNN/KNN_ecalib_over_etrue_functionof_ecal_hcal.png}
-\caption{$e_{calib}/e_{true}$ en fonction de $e_{cal}$ et $h_{cal}$.}
-\end{center}
-\end{figure}
-
-
-
-
-
-
-
-
-
-\subsection{KNN Gaussian Cleaning}
-\subsubsection{Principe général de l'algorithme}
-Cette méthode est assez similaires à la précédente. Elle se base sur la constatation que la distribution en énergie vraie des paquets de plus proches voisins est un distribution gaussienne. Nous allons donc en utilisant la méthode des moindres carrés trouver les paramètres de la gaussienne en question et ne prendre en compte les plus proches voisins dont l'énergie vraie est $\mu -c\sigma \leq e_{true}^i \leq \mu + c\sigma$ (nous prenons par défaut $c = 2$), avec $\mu, \sigma$ la moyenne et l'écart type de la distribution gaussienne.\\
-Principe de l'algorithme :
-\begin{itemize}
-	\item on considère des points $(e_{cal}^{0,j}, h_{cal}^{0,j})$ où nous allons évaluer l'énergie calibrée.
-	\item pour chaque $(e_{cal}^{0,j}, h_{cal}^{0,j})$ :
-	\begin{itemize}
-		\item on recherche ses $k$ plus proches voisins dans le plan $(e_{cal}, h_{cal}) \rightarrow (e_{cal}^i, h_{cal}^i), i \in [|1,...,k|]$
-		\item on trouve la gaussienne correspondante $\mu -c\sigma \leq e_{true}^i \leq \mu + c\sigma$
-		\item on ne conserve que les voisins dont : $\mu -c\sigma \leq e_{true}^i \leq \mu + c\sigma$
-		\item on effectue une moyenne pondérée une moyenne pondérée de l'énergie vraie de ces plus proches voisins $\rightarrow e_{calib}^0$ : l'énergie calibrée 
-	\end{itemize}
-	\item on effectue une interpolation pour donner une valeur d'énergie calibrée quelque soit $(e_{cal}^{0}, h_{cal}^{0})$
-\end{itemize}
-
-\subsubsection{Efficacité du fit}
-\begin{figure}[!h]
-\begin{center}
-\includegraphics[width=0.9\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_chi2_calib.eps}
-\caption{Le $\chi^2$ réduit pour chaque fit effectué.}
-\end{center}
-\end{figure}
-
-\subsubsection{Résultat de la calibration}
-
-\begin{figure}[!h]
-\begin{center}
-\includegraphics[width=0.37\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_plot3D_training.png}
-\includegraphics[width=0.37\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_plot3D_surf.eps}
-\caption{Le nuage de points modélisé (à gauche) par une surface (à droite).}
-\end{center}
-\end{figure}
-
-\begin{figure}[!h]
-\begin{center}
-\includegraphics[width=0.9\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_calibration.png}
-\caption{Courbe de calibration pour $e_{cal} = 0$.}
-\end{center}
-\end{figure}
-
-\begin{figure}[!h]
-\begin{center}
-\includegraphics[width=0.9\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_ecalib_over_etrue_functionof_ecal_hcal.png}
-\caption{$e_{calib}/e_{true}$ en fonction de $e_{cal}$ et $h_{cal}$.}
-\end{center}
-\end{figure}
-
-\begin{figure}[!h]
-\begin{center}
-\includegraphics[width=0.9\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_ecalib_over_etrue.png}
-\caption{$e_{calib}/e_{true}$ en fonction de $e_{true}$.}
-\end{center}
-\end{figure}
-
-
-
-
-\newpage
-\subsection{KNN Gaussian Fit}
-\subsubsection{Principe général de l'algorithme}
-Ici, il s'agit du même principe que précédemment mais nous allons considérer que la valeur de $e_{calib}$ est la moyenne de la gaussienne. 
-Principe de l'algorithme :
-\begin{itemize}
-	\item on considère des points $(e_{cal}^{0,j}, h_{cal}^{0,j})$ où nous allons évaluer l'énergie calibrée.
-	\item pour chaque $(e_{cal}^{0,j}, h_{cal}^{0,j})$ :
-	\begin{itemize}
-		\item on recherche ses $k$ plus proches voisins dans le plan $(e_{cal}, h_{cal}) \rightarrow (e_{cal}^i, h_{cal}^i), i \in [|1,...,k|]$
-		\item on trouve la gaussienne correspondante \rightarrow \sigma, \mu$
-		\item $\rightarrow e_{calib}^0 = \mu$
-	\end{itemize}
-	\item on effectue une interpolation pour donner une valeur d'énergie calibrée quelque soit $(e_{cal}^{0}, h_{cal}^{0})$
-\end{itemize}
-
-\subsubsection{Résultat de la calibration}
-\begin{figure}[!h]
-\begin{center}
-\includegraphics[width=0.37\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_plot3D_training.png}
-\includegraphics[width=0.37\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_plot3D_surf.eps}
-\caption{Le nuage de points modélisé (à gauche) par une surface (à droite).}
-\end{center}
-\end{figure}
-
-\begin{figure}[!h]
-\begin{center}
-\includegraphics[width=0.9\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_calibration.png}
-\caption{Courbe de calibration pour $e_{cal} = 0$.}
-\end{center}
-\end{figure}
-
-\begin{figure}[!h]
-\begin{center}
-\includegraphics[width=0.9\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_ecalib_over_etrue_functionof_ecal_hcal.png}
-\caption{$e_{calib}/e_{true}$ en fonction de $e_{cal}$ et $h_{cal}$.}
-\end{center}
-\end{figure}
-
-\begin{figure}[!h]
-\begin{center}
-\includegraphics[width=0.9\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_ecalib_over_etrue.png}
-\caption{$e_{calib}/e_{true}$ en fonction de $e_{true}$.}
-\end{center}
-\end{figure}
-
-
-
-
-\newpage
-\section{Comparaison des méthodes}
-\subsection{Méthodes basées sur KNN}
-\begin{figure}[!h]
-\begin{center}
-\includegraphics[width=0.9\textwidth]{images/pictures/comparisons/comparison1.eps}
-\caption{$e_{calib}/e_{true}$ en fonction de $e_{true}$.}
-\end{center}
-\end{figure}
-
-
-\subsection{Meilleure méthode}
-\begin{figure}[!h]
-\begin{center}
-\includegraphics[width=0.9\textwidth]{images/pictures/comparisons/comparison2.eps}
-\caption{$e_{calib}/e_{true}$ en fonction de $e_{true}$.}
-\end{center}
-\end{figure}
-
-
-
-
-\newpage
-\section{Partage du programme}
-
-
-
-
-
-\newpage
-\section{Annexes}
-\subsection{Comment créer une calibration?}
-\subsection{Fonctions utiles du programme}
 \end{document}
 
