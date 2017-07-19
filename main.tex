@@ -100,7 +100,7 @@ decorations.pathreplacing}
 
 \thispagestyle{empty}
 
-\includegraphics[height=2cm]{images/logoens.eps} \hfill \includegraphics[height=2cm]{images/logoucbl.eps} \hfill \includegraphics[height=2cm]{images/logounivlyon.eps}
+\includegraphics[height=1.5cm]{images/logoens.eps} \hfill \includegraphics[height=1.5cm]{images/logoucbl.eps} \hfill \includegraphics[height=1.5cm]{images/logounivlyon.eps}
 
 \vspace{0.5cm}
 
@@ -114,7 +114,7 @@ decorations.pathreplacing}
 
 \begin{center}
 
-\vspace{1.5cm}
+\vspace{1cm}
 
 \rule[11pt]{5cm}{0.5pt}
 
@@ -122,7 +122,7 @@ decorations.pathreplacing}
 
 \rule{5cm}{0.5pt}
 
-\vspace{1.5cm}
+\vspace{1cm}
 
 \parbox{15cm}{\small
 \textbf{Résumé} : \\
@@ -135,16 +135,16 @@ Pour lisser cette méthode précédente et enlever ces dépendances, j'ai donc cette
 Cette dernière idée fût la plus prometteuse et reste à être améliorée.
 }
 
-\vspace{1cm}
+\vspace{0.5cm}
 \begin{center}
 
-\includegraphics[height=2cm]{images/Logo_IPNL.jpg} 
+\includegraphics[height=1.5cm]{images/Logo_IPNL.jpg} 
 \hspace{1cm}
-\includegraphics[height=2cm]{images/Logo_CMS.png} 
+\includegraphics[height=1.5cm]{images/Logo_CMS.png} 
 \hspace{1cm}
-\includegraphics[height=2cm]{images/cern_logo.png} 
+\includegraphics[height=1.5cm]{images/cern_logo.png} 
 \end{center}
-\vspace{1cm}
+\vspace{0.5cm}
 
 \parbox{15cm}{
 \textbf{Mots clefs} : \it Calibration, Modélisation, Physique des particules
@@ -186,8 +186,19 @@ Tél. : +33 (0) 4 72 44 84 57}
 
 \newpage
 \section{Introduction}
-Le but de ce stage est de trouver une méthode de calibration des calorimètres hadroniques et électromagnétiques de CMS, c'est à dire, pour une particules qui va laisser un dépôt d'énergie $h_{cal}$, $e_{cal}$ dans chacun des calorimètres, comment approximer sa vraie énergie $e_{true}$? 
-
+- annonce decouverte Higgs 2012 par ATLAS [ref] et CMS [ref]. 
+- Ces deux experiences generalistes, installees sur le LHC du CERN, sont toujours en place pour tenter de decouvrir de la nouvelle physique au dela du modele standard. 
+- Les detecteurs ATLAS et CMS sont bases sur les meme principes. 
+- structure cylindrique en couches placée autour du point d?interaction ou les collisions proton-proton sont realisees
+- but: determiner le type, l?energie et la direction des particules de l?etat final de la collision, 
+pour pouvoir en mesurer les proprietes, et par exemple determiner si une nouvelle particule instable a ete produite. 
+- description du detecteur et du comportement des differentes particules 
+	champ magnetique
+	tracker 
+	ecal 
+	hcal
+	chambre a muons
+	
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[width=0.7\textwidth]{images/detecteur.pdf}
@@ -195,6 +206,18 @@ Le but de ce stage est de trouver une méthode de calibration des calorimètres ha
 \label{detecteur}
 \end{center}
 \end{figure}
+
+- expliquer comment on mesure les proprietes des differentes particules. 
+- hadrons neutres: detectes uniquement par les calorimetres
+- expliquer en 1 ou 2 paragraphes le fonctionnement d?un calorimetre. rapport e/pi, non linearite 
+- necessite d?une calibration
+- une technique classique de calibration consiste a determiner l?energie calibree par une fonction lineaire de l?energie lue dans le ecal, et de l?energie lue dans le hcal. Cette technique et ses resultats sont presentes dans la section 2. 
+- ce rapport presente une nouvelle technique de calibration qui permet de prendre en compte la non-linearite des calorimetres. Cette technique est presentee dans la section 3.
+- enfin, la section 4 presente une comparaison des deux methodes. 
+
+Le but de ce stage est de trouver une méthode de calibration des calorimètres hadroniques et électromagnétiques de CMS, c'est à dire, pour une particules qui va laisser un dépôt d'énergie $h_{cal}$, $e_{cal}$ dans chacun des calorimètres, comment approximer sa vraie énergie $e_{true}$? 
+
+
 
 Cette énergie dite énergie calibrée $e_{calib}$ sera déterminée à l'aide de particules issues d'une simulation très précise (prenant en compte les défauts des calorimètres) qui serviront de données d'entrainement aux différents algorithme que j'ai développés durant mon stage. \\
 Le but final de cette calibration sera d'améliorer la reconstruction des flux de particules (particules flow).
