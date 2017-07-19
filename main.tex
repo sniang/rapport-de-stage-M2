@@ -10,8 +10,7 @@
 \setlength{\hoffset}{-0.5cm}
 \setlength{\oddsidemargin}{0cm}
 \setlength{\evensidemargin}{0cm}
-
-
+\setlength{\parskip}{6pt}
 
 
 
@@ -50,27 +49,8 @@
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
-%Code listing style named "mystyle"
 
-\lstdefinestyle{mystyle}{
-  backgroundcolor=\color{backcolour},   commentstyle=\color{codegreen},
-  keywordstyle=\color{magenta},
-  numberstyle=\tiny\color{codegray},
-  stringstyle=\color{codepurple},
-  basicstyle=\footnotesize,
-  breakatwhitespace=false,         
-  breaklines=true,                 
-  captionpos=b,                    
-  keepspaces=true,                 
-  numbers=left,                    
-  numbersep=5pt,                  
-  showspaces=false,                
-  showstringspaces=false,
-  showtabs=false,                  
-  tabsize=2
-}
-%"mystyle" code listing set
-\lstset{style=mystyle}
+
 
 
 
@@ -82,7 +62,7 @@ decorations.pathreplacing}
 \usetikzlibrary{calc,3d}
 
 \pagestyle{fancy}
-\fancyhead[L]{\scriptsize \textsc{Calibration des calorimètres de CMS pour la reconstruction de flux de particules}}
+\fancyhead[L]{\scriptsize \textsc{Une méthode de calibration non paramétrique pour les calorimètres de CMS}}
 \fancyhead[R]{\scriptsize \textsc{Samuel Niang}} 
 \fancyfoot[C]{ \thepage}
 
@@ -100,9 +80,9 @@ decorations.pathreplacing}
 
 \thispagestyle{empty}
 
-\includegraphics[height=1.5cm]{images/logoens.eps} \hfill \includegraphics[height=1.5cm]{images/logoucbl.eps} \hfill \includegraphics[height=1.5cm]{images/logounivlyon.eps}
+\includegraphics[height=2cm]{images/logoens.eps} \hfill \includegraphics[height=2cm]{images/logoucbl.eps} \hfill \includegraphics[height=2cm]{images/logounivlyon.eps}
 
-\vspace{0.5cm}
+\vspace{1cm}
 
 \begin{tabularx}{\textwidth}{@{} l X l @{} }
 {\sc Master Science de la matière} & & Rapport de stage\\
@@ -118,33 +98,26 @@ decorations.pathreplacing}
 
 \rule[11pt]{5cm}{0.5pt}
 
-\textbf{\huge Calibration des calorimètres de CMS pour la reconstruction de flux de particules.}
+\textbf{\huge Une méthode de calibration non paramétrique pour les calorimètres de CMS.}
 
 \rule{5cm}{0.5pt}
 
-\vspace{1cm}
+\vspace{2cm}
 
 \parbox{15cm}{\small
 \textbf{Résumé} : \\
-\rm Les énergies des flux de particules dans le détecteur CMS sont mesurées à l'aide d'un calorimètre électromagnétique (ECAL) et d'un calorimètre hadronique (HCAL). Pour reconstruire les flux de particules dans le traqueur, il nous faut connaître au mieux l'énergie de la particule qui a engendrée ces dépôt d'énergies dans les calorimètres.\\
-Pour se faire, j'ai développé durant ce stage des algorithmes qui, connaissant les énergies déposées dans les calorimètres pour un événement, lui prédisent une énergie de calibration ($e_{calib}$) qui se veut la plus proche possible de la vraie énergie en se basant sur des données d'entrainement simulées, c'est à dire un ensemble d'événements qui contiennent l'énergie déposée dans ECAL, dans HCAL et la vraie énergie, ($e_{cal},h_{cal},e_{true}$).\\
-L'idée générale des différentes méthodes proposées est de modéliser ce nuage de points simulés ($e_{cal},h_{cal},e_{true}$), par une surface $e_{calib} = f($e_{cal},h_{cal})$.\\
-En première approximation, j'ai utilisé une régression linéaire, qui modélise grossièrement le nuage de point et qui met en avant des non-linéarités locales.\\
-Pour prendre en compte les non-linéarités, j'ai maillé le plan $(e_{cal},h_{cal})$ en petits carrés et j'ai moyenné les vraies énergies pour obtenir une énergie de calibrations par carré. Cependant, cette méthode de calibration fait apparaitre des paliers et est trop dépendante de la répartition des données d'entrainement et de la taille arbitraire des carrés.\\
-Pour lisser cette méthode précédente et enlever ces dépendances, j'ai donc cette fois-ci choisi de travailler en fonction des plus proches voisins : pour un couple ($e_{cal},h_{cal}$), l'énergie calibrée sera dépendante des varies énergies de ces plus proches voisins. \\
-Cette dernière idée fût la plus prometteuse et reste à être améliorée.
+\rm Dans le détecteur CMS, l'énergie des hadrons neutres est déterminée à partir de l'énergie mesurée dans les calorimètres électromagnétiques ($E_{\rm ecal}$) et hadroniques ($E_{\rm hcal}$). Une calibration est cependant nécessaire pour estimer l'énergie vraie du hadron neutre à partir de $E_{\rm ecal}$ et $E_{\rm hcal}$. Dans un premier temps, j'ai utilisé comme calibration une fonction linéaire de $E_{\rm ecal}$ et $E_{\rm hcal}$. Ensuite, afin de décrire la non linéarité de la mesure de l'énergie, j'ai inventé une nouvelle méthode de calibration non paramétrique.
 }
 
-\vspace{0.5cm}
+\vspace{1cm}
 \begin{center}
-
-\includegraphics[height=1.5cm]{images/Logo_IPNL.jpg} 
+\includegraphics[height=2cm]{images/Logo_IPNL.jpg} 
 \hspace{1cm}
-\includegraphics[height=1.5cm]{images/Logo_CMS.png} 
+\includegraphics[height=2cm]{images/Logo_CMS.png} 
 \hspace{1cm}
-\includegraphics[height=1.5cm]{images/cern_logo.png} 
+\includegraphics[height=2cm]{images/cern_logo.png} 
 \end{center}
-\vspace{0.5cm}
+\vspace{1cm}
 
 \parbox{15cm}{
 \textbf{Mots clefs} : \it Calibration, Modélisation, Physique des particules
@@ -186,18 +159,18 @@ Tél. : +33 (0) 4 72 44 84 57}
 
 \newpage
 \section{Introduction}
-Après avoir permis la découverte expérimentale du boson de Higgs en 2012 \cite{HiggsAtlas,HiggsCMS}, les expériences généralistes ATLAS et CMS installées sur le LHC du CERN, sont toujours en place dans l'optique de découvrir de la nouvelle physique au delà du modele standard. \\
+Après avoir permis la découverte expérimentale du boson de Higgs en 2012, les expériences généralistes ATLAS \cite{HiggsAtlas} et CMS \cite{HiggsCMS} installées sur le LHC du CERN, sont toujours en place dans l'optique de découvrir de la nouvelle physique au delà du modele standard. 
 
-Les détecteur ATLAS et CMS sont basés sur les mêmes principes : ils disposent tous deux d'une structure cylindrique en couches placées autour du point d'interaction où les collisions proton-proton sont réalisées.\\
-Le but de ces détecteur étant de déterminer le type, l'énergie ainsi que la direction des particules de l'état final de la collision, pour pouvoir en mesurer les propriétés, et par exemple determiner si une nouvelle particule instable a été produite. \\
+
+Les détecteurs ATLAS et CMS sont basés sur les mêmes principes : cylindriques, ils sont constitués d'un ensemble de sous-détecteurs disposés en couches concentriques autour du point d'interaction. Les informations provenant de ces sous-détecteurs sont combinées pour déterminer le type, l'énergie ainsi que la direction des particules de l'état final de la collision, pour pouvoir mesurer les propriétés de celles-ci, et par exemple determiner si une nouvelle particule instable a été produite. 
 
 Nous allons alors nous intéresser plus spécifiquement au détecteur CMS \cite{CMS}, celui-ci dispose  :
 \begin{itemize}
-\item d'un champ magnétique, pour séparer les dépôts d'énergie du calorimètre des particules chargées et neutres dans les jets
-\item d'un traceur, pour reconstruire la trajectoire des particules chargées
-\item d'un calorimètre éléctromagnétique (ECAL) \cite{ECAL1,ECAL2}, constitué d'un cristal de tungstate de plomb, permettant de dégager des dépôts d'énergie à partir de particules dans des jets (hadrons chargés, hadrons neutres et photons) clairement séparés l'un de l'autre jusqu'à un jet pT de l'ordre de \SIUnits{1}{\tera\electronvolt}. L'identification efficace du photon résultant, couplée à la résolution élevée de l'énergie ECAL, permet une excellente mesure d'environ $\tilda 25\%$ de l'énergie du jet
-\item d'un calorimètre hadronique (HCAL) \cite{HCAL}, composé de plusieurs couches d'amortisseurs en laiton et de carreaux scintillateurs en plastique, avec une segmentation grossière mais suffisante pour séparer les dépôts d'énergie hadron chargés et neutres dans des jets jusqu'à de $\SIUnits{200-300}{\giga\electronvolt}$, ce qui permet de reconstruire les $10\%$ restants de l'énergie du jet, bien qu'avec une modeste résolution
-\item d'un système de suivi des muons, fournissant une identification, indépendamment des particules environnantes.
+\item d'un champ magnétique, pour courber la trajectoire des particules chargées pour en mesurer la charge et l'impulsion
+\item d'un trajectographe, pour reconstruire la trajectoire des particules chargées
+\item d'un calorimètre électromagnétique (ECAL) \cite{ECAL1,ECAL2}, constitué d'un cristal de tungstate de plomb, permettant de collecter des dépôts d'énergie de particules (hadrons chargés, hadrons neutres et photons). 
+\item d'un calorimètre hadronique (HCAL) \cite{HCAL}, composé de plusieurs couches d'absorbeur en laiton et de carreaux scintillateurs en plastique, avec une segmentation grossière
+\item de chambres à muons.
 \end{itemize}
 
 \begin{figure}[!h]
@@ -209,18 +182,18 @@ Nous allons alors nous intéresser plus spécifiquement au détecteur CMS \cite{CMS
 \end{center}
 \end{figure}
 
-Détaillons alors le comportement des particules stables dans le détecteur :
+Détaillons alors le comportement des particules stables  :
 \begin{itemize}
     \item $e^+,e^-$ :
         \begin{itemize}
-        		\item suivis dans le traceur
+        		\item suivis dans le trajectographe
 		\item déposent leur énergie dans ECAL
         \end{itemize}
     \item hadrons chargés :
         \begin{itemize}
-        		\item suivis dans le traceur
+        		\item suivis dans le trajectographe
     		\item déposent leur énergie dans ECAL
-    		\item déposent leur énergie dans le HCAL
+    		\item déposent leur énergie dans HCAL
 		\item fin de course dans HCAL
         \end{itemize}
     \item hadrons neutres :
@@ -230,39 +203,39 @@ Détaillons alors le comportement des particules stables dans le détecteur :
         \end{itemize}
     \item $\mu^+,\mu^-$ :
         \begin{itemize}
-        		\item suivis dans le traceur
-		\item traverse ECAL, HCAL
-		\item système de suivi des muons
+        		\item suivis dans le trajectographe
+		\item traversent ECAL, HCAL
+		\item chambre à muons
         \end{itemize}
 \end{itemize}
-\`A noter que dans notre étude seuls les hadrons chargés nous intéressent. \\
-Toutes ces informations vont permettre par la suite de reconstruire toute la décomposition qui s'effectue dans le détecteur, cette opération s'appelle le \textit{Particle Flow (PF)}.\\
+\`A noter que dans notre étude seuls les hadrons neutres nous intéressent. \\
+Toutes ces informations vont permettre par la suite de reconstruire toute la décomposition qui s'effectue dans le détecteur, cette opération s'appelle le \textit{Particle Flow (PF)}.
 
-Cette complexité de détection, plus le fait que les dépôts d'énergies sont reliés aux sections efficaces des particules en mises en jeu font que la réponse des calorimètres n'est pas linéaire et que la somme des énergies dans les calorimètres ne correspond pas à l'énergie de l'événement incident, d'où la nécessité d'une calibration.\\
+Cette complexité de détection, plus le fait que les dépôts d'énergies sont reliés aux sections efficaces des particules en mises en jeu font que la réponse des calorimètres n'est pas linéaire et que la somme des énergies dans les calorimètres ne correspond pas à l'énergie de l'événement incident, d'où la nécessité d'une calibration.
 
-Une technique classique de calibration consiste à déterminer l'énergie calibrée par une fonction linéaire de l'énergie lue dans le ECAL et de celle lue dans le HCAL (malgré ce qui fût dit plus haut). Nous reviendrons en détail sur cette méthode dans la section \ref{LR}.\\
-De plus, ce rapport présente de nouvelles techniques de calibration qui permettent de prendre en compte la non-linearité des calorimètres. Ces techniques sont présentées dans les sections \ref{CL}, \ref{KNN}, \ref{KNNGC} et enfin \ref{KNNGF}.\\
+Une technique classique de calibration consiste à déterminer l'énergie calibrée par une fonction linéaire de l'énergie lue dans le ECAL et de celle lue dans le HCAL. Cette méthode sera présentée dans la section \ref{LR}.
+
+Ensuite, ce rapport présente de nouvelles techniques de calibration qui permettent de prendre en compte la non-linearité des calorimètres. Ces techniques seront présentées dans les sections \ref{CL} et \ref{KNN}.\\
 Enfin, dans la section \ref{comparaison} nous comparerons ces méthodes. 
 
 
-\section{Méthodes de calibrations développées pendant le stage}
-%\subsection{Explications valables pour toutes les méthodes}
-%\subsubsection{Séparation des données}
-%On séparera et traitera différemment les événements qui ont $e_{cal} = 0$.  Ces événements sont liés à des particules qui ont intéragit avec le détecteur hardronique mais pas avec le détecteur électromagnétique (cf Fig.\ref{detecteur}). \\
+%\section{Explications valables pour toutes les méthodes}
+%\subsection{Séparation des données}
+%On séparera et traitera différemment les événements qui ont $E_{\rm ecal} = 0$.  Ces événements sont liés à des particules qui ont intéragit avec le détecteur hardronique mais pas avec le détecteur électromagnétique (cf Fig.\ref{detecteur}). \\
 %Cette séparation se justifie par le fait que modéliser les dépôts d'énergie dans les deux calorimètres pour en conclure ce qui se passe dans le cas particulier où il n'y a des dépôts que dans un amène un biais. Ainsi, à chaque "création" de calibration, on créera en fait deux modèles.
 %
 %- limite ecal + hcal < 150
 %\begin{figure}[!h]
 %\begin{center}
 %\includegraphics[width=0.9\textwidth]{images/pictures/explain/limit.png}
-%\caption{On place une limite à $e_{cal}+h_{cal} = 150$. \'A gauche, ..., en haut à droite, ..., en bas à doite, ...}
+%\caption{On place une limite à $E_{\rm ecal}+E_{\rm hcal} = 150$. \'A gauche, ..., en haut à droite, ..., en bas à doite, ...}
 %\end{center}
 %\end{figure}
 %
-%\subsubsection{Moyenne / moyenne de la gaussienne ajustée ("gaussian fit", "gaussienne fitée")?}
-%	A différents moment, nous aurons besoin de calculer des moyennes. Or souvent, la moyenne classique ne serait pas représentative de ce que tous souhaitons montrer car certains points sont ont des valeurs $e_{cal},h_{cal}$ mal estimées car la simulation prend en compte les défauts des calorimètres. Il serait donc alors incorrecte de les prendre en compte pour juger l'efficacité d'une calibration car ils sont complètement incohérents.\\
+%\subsection{Moyenne / moyenne de la gaussienne ajustée ("gaussian fit", "gaussienne fitée")?}
+%	A différents moment, nous aurons besoin de calculer des moyennes. Or souvent, la moyenne classique ne serait pas représentative de ce que tous souhaitons montrer car certains points sont ont des valeurs $E_{\rm ecal},E_{\rm hcal}$ mal estimées car la simulation prend en compte les défauts des calorimètres. Il serait donc alors incorrecte de les prendre en compte pour juger l'efficacité d'une calibration car ils sont complètement incohérents.\\
 %Pour résoudre ce problème, nous allons ajuster une gaussienne de la distribution des points à moyenner et choisir considérer que la moyenne à prendre en compte est la moyenne de la gaussienne. Ainsi, les points aberrants totalement écarté du centre de la distribution ne perturberont pas le calcul de la moyenne alors que dans le cas d'une moyenne classique, ils peuvent fortement attirer la moyenne vers eux.\\
-%Ces points aberrants peuvent également venir d'une particule qui se serait décomposée avant le calorimètre. Ainsi on trouve près de l'origine, des points à fort $e_{true}$ et pour de faibles valeurs de  $e_{cal}$ et $h_{cal}$, et ces points ne sont pas du tout représentatif de l'efficacité d'une calibration. 
+%Ces points aberrants peuvent également venir d'une particule qui se serait décomposée avant le calorimètre. Ainsi on trouve près de l'origine, des points à fort $E_{\rm true}$ et pour de faibles valeurs de  $E_{\rm ecal}$ et $E_{\rm hcal}$, et ces points ne sont pas du tout représentatif de l'efficacité d'une calibration. 
 %
 %\begin{minipage}{0.5\linewidth}
 %	\begin{center}
@@ -271,10 +244,10 @@ Enfin, dans la section \ref{comparaison} nous comparerons ces méthodes.
 %\end{minipage}
 %\hfill
 %\begin{minipage}{0.45\linewidth}
-%	Ici, on peut voir sur cet exemple que si nous prenons la moyenne classique de $e_{true}$,  on obtient $79.12$, or la moyenne de la gaussienne fitée est de $77.82$, au vu de ce que nous avons dit précédemment, nous considèrerons que la seconde est plus judicieuse.
+%	Ici, on peut voir sur cet exemple que si nous prenons la moyenne classique de $E_{\rm true}$,  on obtient $79.12$, or la moyenne de la gaussienne fitée est de $77.82$, au vu de ce que nous avons dit précédemment, nous considèrerons que la seconde est plus judicieuse.
 %\end{minipage}
 %
-%\subsubsection{Comment est fait un fit ?}
+%\subsection{Comment est fait un fit ?}
 %expliquer : \\
 %- barre d'erreur\\
 %- minimisation du chi2\\
@@ -282,11 +255,11 @@ Enfin, dans la section \ref{comparaison} nous comparerons ces méthodes.
 %
 %
 %
-\subsection{Régression Linéaire}
+\section{Régression Linéaire}
 \label{LR}
 %Pour s'entrainer à l'utilisation de \textit{SciKit Learn}, j'ai d'abord utilisé la régression linéaire. Il s'agit alors de représenter les relations entre les énergies par :
 %\begin{equation}
-%    e_{true} = a_1 e_{cal} + a_2 h_{cal} + b
+%    E_{\rm true} = a_1 E_{\rm ecal} + a_2 E_{\rm hcal} + b
 %\end{equation}
 %
 %\begin{figure}[!h]
@@ -297,47 +270,47 @@ Enfin, dans la section \ref{comparaison} nous comparerons ces méthodes.
 %\end{center}
 %\end{figure}
 %
-%Nous avons ainsi modélisé le nuage de point par un plan, pour voir si cela était réaliste, nous allons d'abord regarder ce qui se passe dans le plan $e_{cal} = 0$ :
+%Nous avons ainsi modélisé le nuage de point par un plan, pour voir si cela était réaliste, nous allons d'abord regarder ce qui se passe dans le plan $E_{\rm ecal} = 0$ :
 %\begin{figure}[!h]
 %\begin{center}
 %\includegraphics[height =5cm]{images/pictures/testLinearRegression/LinearRegression_calibration.png}
-%\caption{Courbe de calibration pour $e_{cal} = 0$.}
+%\caption{Courbe de calibration pour $E_{\rm ecal} = 0$.}
 %\end{center}
 %\end{figure}
 %
-%Nous constatons alors que la courbe ne passe pas par le le coeur du nuage de point à faible énergie. Pour avoir une vue d'ensemble, nous allons tracer  $e_{calib}/e_{true}$ qui doit être proche de $1$ si la calibration est bonne. \\
+%Nous constatons alors que la courbe ne passe pas par le le coeur du nuage de point à faible énergie. Pour avoir une vue d'ensemble, nous allons tracer  $E_{\rm calib}/E_{\rm true}$ qui doit être proche de $1$ si la calibration est bonne. \\
 %
 %\begin{figure}[!h]
 %\begin{center}
 %\includegraphics[height =4.5cm]{images/pictures/testLinearRegression/LinearRegression_ecalib_over_etrue_functionof_ecal_hcal.png}
-%\caption{$e_{calib}/e_{true}$ en fonction de $e_{cal}$ et $h_{cal}$.}
+%\caption{$E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm ecal}$ et $E_{\rm hcal}$.}
 %\end{center}
 %\end{figure}
 %
-%En regardant la figure de droite, nous constatons que comme prévu la régression linéaire est mauvaise à faible énergie car en moyenne, $e_{calib}/e_{true}$ n'est pas proche de $1$. Plus intéressant, la figure de droite met en avant les non-linéarités du nuage de point.\\
+%En regardant la figure de droite, nous constatons que comme prévu la régression linéaire est mauvaise à faible énergie car en moyenne, $E_{\rm calib}/E_{\rm true}$ n'est pas proche de $1$. Plus intéressant, la figure de droite met en avant les non-linéarités du nuage de point.\\
 %
 %\begin{figure}[!h]
 %\begin{center}
 %\includegraphics[height =4.5cm]{images/pictures/testLinearRegression/LinearRegression_ecalib_over_etrue.png}
-%\caption{$e_{calib}/e_{true}$ en fonction de $e_{true}$.}
+%\caption{$E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm true}$.}
 %\label{ecaliboveretrueLR}
 %\end{center}
 %\end{figure}
 %
-%Ici nous constatons que à faible et haut $e_{true}$, la calibration ne donne pas de bons résultats. En effet, la courbe de la moyenne (fit gaussien) s'écarte très fortement d'une constante égale à 1.
+%Ici nous constatons que à faible et haut $E_{\rm true}$, la calibration ne donne pas de bons résultats. En effet, la courbe de la moyenne (fit gaussien) s'écarte très fortement d'une constante égale à 1.
 %
 %
 %
 %
 %
 %\newpage
-\subsection{Méthode des "legos"}
+\section{Méthode non paramétrique binnée}
 \label{CL}
-%\subsubsection{Principe général de l'algorithme}
-%Comme nous l'avons vu précédemment, il faut une calibration qui prenne en compte les non-linéarité. Ici, l'idée est de découper le plan $(e_{cal},h_{cal})$ en carré et de calculer la moyenne des $e_{true}$ dans chaque carré qui sera la valeur $e_{calib}$.\\
-%Ainsi pour prédire une énergie de $e_{calib}^i$ pour un point $(e_{cal}^i,h_{cal}^i)$, nous allons regarder dans quel carré il se trouve et retourner la valeur d'énergie calibrée correspondante, faisant apparaître ainsi des "legos".
+%\subsection{Principe général de l'algorithme}
+%Comme nous l'avons vu précédemment, il faut une calibration qui prenne en compte les non-linéarité. Ici, l'idée est de découper le plan $(E_{\rm ecal},E_{\rm hcal})$ en carré et de calculer la moyenne des $E_{\rm true}$ dans chaque carré qui sera la valeur $E_{\rm calib}$.\\
+%Ainsi pour prédire une énergie de $E_{\rm calib}^i$ pour un point $(E_{\rm ecal}^i,E_{\rm hcal}^i)$, nous allons regarder dans quel carré il se trouve et retourner la valeur d'énergie calibrée correspondante, faisant apparaître ainsi des "legos".
 %
-%\subsubsection{Résultat de la calibration}
+%\subsection{Résultat de la calibration}
 %\begin{figure}[!h]
 %\begin{center}
 %\includegraphics[height=4cm]{images/pictures/testCalibrationLego/CalibrationLego_plot3D_legos.eps}
@@ -349,28 +322,28 @@ Enfin, dans la section \ref{comparaison} nous comparerons ces méthodes.
 %\begin{figure}[!h]
 %\begin{center}
 %\includegraphics[width=0.9\textwidth]{images/pictures/testCalibrationLego/CalibrationLego_calibration.png}
-%\caption{Courbe de calibration pour $e_{cal} = 0$.}
+%\caption{Courbe de calibration pour $E_{\rm ecal} = 0$.}
 %\end{center}
 %\end{figure}
 %
-%Bien que cette méthode prenne en compte les linéarité, nous pouvons voir sur les figures ci-dessus qu'il y a un effet de pas, ce qui n'est pas bon car beaucoup trop d'événements on le même $e_{calib}$ et la courbe de calibration ne suit pas bien le coeur de distribution, surtout à faible énergie.
+%Bien que cette méthode prenne en compte les linéarité, nous pouvons voir sur les figures ci-dessus qu'il y a un effet de pas, ce qui n'est pas bon car beaucoup trop d'événements on le même $E_{\rm calib}$ et la courbe de calibration ne suit pas bien le coeur de distribution, surtout à faible énergie.
 %
 %
 %\begin{figure}[!h]
 %\begin{center}
 %\includegraphics[width=0.9\textwidth]{images/pictures/testCalibrationLego/CalibrationLego_ecalib_over_etrue.png}
-%\caption{$e_{calib}/e_{true}$ en fonction de $e_{true}$.}
+%\caption{$E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm true}$.}
 %\label{ecaliboveretrueCL}
 %\end{center}
 %\end{figure}
 %
-%Cet effet de pas se retrouve également si l'on trace $e_{calib}/e_{true}$ en fonction de $e_{true}$ (Fig. \ref{ecaliboveretrueCL}) et nous y voyons alors un structure (des hyperboles) liées aux points qui ont la même énergie de calibration (contrairement à la régression linéaire Fig.  \ref{ecaliboveretrueLR}).\\
-%Cet illustration montre à nouveau que nous sommes loin d'une répartition des points autour de $e_{calib}/e_{true} = 1$.
+%Cet effet de pas se retrouve également si l'on trace $E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm true}$ (Fig. \ref{ecaliboveretrueCL}) et nous y voyons alors un structure (des hyperboles) liées aux points qui ont la même énergie de calibration (contrairement à la régression linéaire Fig.  \ref{ecaliboveretrueLR}).\\
+%Cet illustration montre à nouveau que nous sommes loin d'une répartition des points autour de $E_{\rm calib}/E_{\rm true} = 1$.
 %
 %\begin{figure}[!h]
 %\begin{center}
 %\includegraphics[width=0.9\textwidth]{images/pictures/testCalibrationLego/CalibrationLego_ecalib_over_etrue_functionof_ecal_hcal.png}
-%\caption{$e_{calib}/e_{true}$ en fonction de $e_{cal}$ et $h_{cal}$.}
+%\caption{$E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm ecal}$ et $E_{\rm hcal}$.}
 %\end{center}
 %\end{figure}
 %
@@ -379,30 +352,31 @@ Enfin, dans la section \ref{comparaison} nous comparerons ces méthodes.
 %
 %
 %
-\subsection{Méthode des plus proches voisins (KNN)}
+\section{Méthode des plus proches voisins}
 \label{KNN}
-%\subsubsection{Principe général de l'algorithme}
-%Nous utilisons encore des données simulées pour effectuer une calibration, chaque particule simulée $i$ est vue comme un point d'un espace tridimensionnel possédant des coordonnées $(e_{cal}^i, h_{cal}^i,e_{true}^i)$, correspondant respectivement à l'énergie déposée dans le calorimètre électromagnétique, dans le calorimètre hadronique et l'énergie vraie.\\
-%Pour trouver l'énergie calibrée d'un point de coordonnées $(e_{cal}^0, h_{cal}^0)$ :
+\subsection{Moyenne pondérée}
+%\subsection{Principe général de l'algorithme}
+%Nous utilisons encore des données simulées pour effectuer une calibration, chaque particule simulée $i$ est vue comme un point d'un espace tridimensionnel possédant des coordonnées $(E_{\rm ecal}^i, E_{\rm hcal}^i,E_{\rm true}^i)$, correspondant respectivement à l'énergie déposée dans le calorimètre électromagnétique, dans le calorimètre hadronique et l'énergie vraie.\\
+%Pour trouver l'énergie calibrée d'un point de coordonnées $(E_{\rm ecal}^0, E_{\rm hcal}^0)$ :
 %\begin{itemize}
-%	\item on recherche ses $k$ plus proches voisins dans le plan $(e_{cal}, h_{cal}) \rightarrow (e_{cal}^i, h_{cal}^i), i \in [|1,...,k|]$
+%	\item on recherche ses $k$ plus proches voisins dans le plan $(E_{\rm ecal}, E_{\rm hcal}) \rightarrow (E_{\rm ecal}^i, E_{\rm hcal}^i), i \in [|1,...,k|]$
 %	\begin{figure}[!h]
 %	\begin{center}
 %		\includegraphics[width=0.9\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_neighborhood.png}
-%		\caption{$n_{voisins} = 2000$ pour $e_{cal} = 0$, $n_{voisins} = 250$ pour $e_{cal} \neq 0$}
+%		\caption{$n_{voisins} = 2000$ pour $E_{\rm ecal} = 0$, $n_{voisins} = 250$ pour $E_{\rm ecal} \neq 0$}
 %		\label{neighbors}
 %		\end{center}
 %	\end{figure}
-%	\item on effectue une moyenne pondérée une moyenne pondérée de l'énergie vraie de ces plus proches voisins $\rightarrow e_{calib}^0$ : l'énergie calibrée 
+%	\item on effectue une moyenne pondérée une moyenne pondérée de l'énergie vraie de ces plus proches voisins $\rightarrow E_{\rm calib}^0$ : l'énergie calibrée 
 %\end{itemize}
 %
 %La moyenne pondérée va donc s'exprimer ainsi :
 %\begin{equation}
-%	 e_{calib}^0 = \frac{\sum_{i=1}^k g(e_{cal}^i, h_{cal}^i) \times e_{true}^i}{\sum_{i=1}^k g(e_{cal}^i, h_{cal}^i)}
+%	 E_{\rm calib}^0 = \frac{\sum_{i=1}^k g(E_{\rm ecal}^i, E_{\rm hcal}^i) \times E_{\rm true}^i}{\sum_{i=1}^k g(E_{\rm ecal}^i, E_{\rm hcal}^i)}
 %\end{equation}
 %Dans notre cas nous avons pris pour $g$ la distribution gaussienne $g(\vec{x}) = \exp{-\frac{1}{2}(\frac{(\vec{x} - \vec{x}^0)^2}{\sigma^2})}$, pour donner plus d'importance aux plus proches des k plus proches voisins.\\
 %
-%\subsubsection{Résultat de la calibration}
+%\subsection{Résultat de la calibration}
 %\begin{figure}[!h]
 %\begin{center}
 %\includegraphics[width=0.37\textwidth]{images/pictures/testKNN/KNN_plot3D_training.png}
@@ -411,55 +385,54 @@ Enfin, dans la section \ref{comparaison} nous comparerons ces méthodes.
 %\end{center}
 %\end{figure}
 %
-%Nous constatons  ici que la surface est beaucoup plus lisse que pour la méthode précédente, mais en regardant le cas particulier de $e_{cal} = 0$, nous constatons encore une fois que à faible énergie, la courbe de calibration ne passe pas par le coeur de la distribution. Cela vient du fait qu'il y a des points aberrants qui ont une forte énergie vraie mais qui ont une très faible énergie détectée par les calorimètres. \\
+%Nous constatons  ici que la surface est beaucoup plus lisse que pour la méthode précédente, mais en regardant le cas particulier de $E_{\rm ecal} = 0$, nous constatons encore une fois que à faible énergie, la courbe de calibration ne passe pas par le coeur de la distribution. Cela vient du fait qu'il y a des points aberrants qui ont une forte énergie vraie mais qui ont une très faible énergie détectée par les calorimètres. \\
 %Il nous faut donc un moyen pour ne plus les prendre en compte pour avoir une courbe de calibration plus réaliste. \\
 %
 %\begin{figure}[!h]
 %\begin{center}
 %\includegraphics[width=0.9\textwidth]{images/pictures/testKNN/KNN_calibration.png}
-%\caption{Courbe de calibration pour $e_{cal} = 0$.}
+%\caption{Courbe de calibration pour $E_{\rm ecal} = 0$.}
 %\end{center}
 %\end{figure}
 %
-%Malgré tout, en regardant la Fig.  \ref{ecaliboveretrueKNN}, nous constatons que les points sont mieux répartis autour de $e_{calib}/e_{true} = 1$.
+%Malgré tout, en regardant la Fig.  \ref{ecaliboveretrueKNN}, nous constatons que les points sont mieux répartis autour de $E_{\rm calib}/E_{\rm true} = 1$.
 %
 %\begin{figure}[!h]
 %\begin{center}
 %\includegraphics[width=0.9\textwidth]{images/pictures/testKNN/KNN_ecalib_over_etrue.png}
-%\caption{$e_{calib}/e_{true}$ en fonction de $e_{true}$.}
+%\caption{$E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm true}$.}
 %\label{ecaliboveretrueKNN}
 %\end{center}
 %\end{figure}
 %
-%Nous prenons également en compte les non-linéarité dans ce cas mais nous sur-estimons encore la valuer de l'énergie calibrée (encore une fois, à cause de ces points à fort $e_{true}$
+%Nous prenons également en compte les non-linéarité dans ce cas mais nous sur-estimons encore la valuer de l'énergie calibrée (encore une fois, à cause de ces points à fort $E_{\rm true}$
 %
 %\begin{figure}[!h]
 %\begin{center}
 %\includegraphics[width=0.9\textwidth]{images/pictures/testKNN/KNN_ecalib_over_etrue_functionof_ecal_hcal.png}
-%\caption{$e_{calib}/e_{true}$ en fonction de $e_{cal}$ et $h_{cal}$.}
+%\caption{$E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm ecal}$ et $E_{\rm hcal}$.}
 %\end{center}
 %\end{figure}
 %
 %
 %
-\subsection{KNN Gaussian Cleaning}
-\label{KNNGC}
-%\subsubsection{Principe général de l'algorithme}
-%Cette méthode est assez similaires à la précédente. Elle se base sur la constatation que la distribution en énergie vraie des paquets de plus proches voisins est un distribution gaussienne. Nous allons donc en utilisant la méthode des moindres carrés trouver les paramètres de la gaussienne en question et ne prendre en compte les plus proches voisins dont l'énergie vraie est $\mu -c\sigma \leq e_{true}^i \leq \mu + c\sigma$ (nous prenons par défaut $c = 2$), avec $\mu, \sigma$ la moyenne et l'écart type de la distribution gaussienne.\\
+\subsection{Nettoyage gaussien}
+%\subsection{Principe général de l'algorithme}
+%Cette méthode est assez similaires à la précédente. Elle se base sur la constatation que la distribution en énergie vraie des paquets de plus proches voisins est un distribution gaussienne. Nous allons donc en utilisant la méthode des moindres carrés trouver les paramètres de la gaussienne en question et ne prendre en compte les plus proches voisins dont l'énergie vraie est $\mu -c\sigma \leq E_{\rm true}^i \leq \mu + c\sigma$ (nous prenons par défaut $c = 2$), avec $\mu, \sigma$ la moyenne et l'écart type de la distribution gaussienne.\\
 %Principe de l'algorithme :
 %\begin{itemize}
-%	\item on considère des points $(e_{cal}^{0,j}, h_{cal}^{0,j})$ où nous allons évaluer l'énergie calibrée.
-%	\item pour chaque $(e_{cal}^{0,j}, h_{cal}^{0,j})$ :
+%	\item on considère des points $(E_{\rm ecal}^{0,j}, E_{\rm hcal}^{0,j})$ où nous allons évaluer l'énergie calibrée.
+%	\item pour chaque $(E_{\rm ecal}^{0,j}, E_{\rm hcal}^{0,j})$ :
 %	\begin{itemize}
-%		\item on recherche ses $k$ plus proches voisins dans le plan $(e_{cal}, h_{cal}) \rightarrow (e_{cal}^i, h_{cal}^i), i \in [|1,...,k|]$
-%		\item on trouve la gaussienne correspondante $\mu -c\sigma \leq e_{true}^i \leq \mu + c\sigma$
-%		\item on ne conserve que les voisins dont : $\mu -c\sigma \leq e_{true}^i \leq \mu + c\sigma$
-%		\item on effectue une moyenne pondérée une moyenne pondérée de l'énergie vraie de ces plus proches voisins $\rightarrow e_{calib}^0$ : l'énergie calibrée 
+%		\item on recherche ses $k$ plus proches voisins dans le plan $(E_{\rm ecal}, E_{\rm hcal}) \rightarrow (E_{\rm ecal}^i, E_{\rm hcal}^i), i \in [|1,...,k|]$
+%		\item on trouve la gaussienne correspondante $\mu -c\sigma \leq E_{\rm true}^i \leq \mu + c\sigma$
+%		\item on ne conserve que les voisins dont : $\mu -c\sigma \leq E_{\rm true}^i \leq \mu + c\sigma$
+%		\item on effectue une moyenne pondérée une moyenne pondérée de l'énergie vraie de ces plus proches voisins $\rightarrow E_{\rm calib}^0$ : l'énergie calibrée 
 %	\end{itemize}
-%	\item on effectue une interpolation pour donner une valeur d'énergie calibrée quelque soit $(e_{cal}^{0}, h_{cal}^{0})$
+%	\item on effectue une interpolation pour donner une valeur d'énergie calibrée quelque soit $(E_{\rm ecal}^{0}, E_{\rm hcal}^{0})$
 %\end{itemize}
 %
-%\subsubsection{Efficacité du fit}
+%\subsection{Efficacité du fit}
 %\begin{figure}[!h]
 %\begin{center}
 %\includegraphics[width=0.9\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_chi2_calib.eps}
@@ -467,7 +440,7 @@ Enfin, dans la section \ref{comparaison} nous comparerons ces méthodes.
 %\end{center}
 %\end{figure}
 %
-%\subsubsection{Résultat de la calibration}
+%\subsection{Résultat de la calibration}
 %
 %\begin{figure}[!h]
 %\begin{center}
@@ -480,21 +453,21 @@ Enfin, dans la section \ref{comparaison} nous comparerons ces méthodes.
 %\begin{figure}[!h]
 %\begin{center}
 %\includegraphics[width=0.9\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_calibration.png}
-%\caption{Courbe de calibration pour $e_{cal} = 0$.}
+%\caption{Courbe de calibration pour $E_{\rm ecal} = 0$.}
 %\end{center}
 %\end{figure}
 %
 %\begin{figure}[!h]
 %\begin{center}
 %\includegraphics[width=0.9\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_ecalib_over_etrue_functionof_ecal_hcal.png}
-%\caption{$e_{calib}/e_{true}$ en fonction de $e_{cal}$ et $h_{cal}$.}
+%\caption{$E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm ecal}$ et $E_{\rm hcal}$.}
 %\end{center}
 %\end{figure}
 %
 %\begin{figure}[!h]
 %\begin{center}
 %\includegraphics[width=0.9\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_ecalib_over_etrue.png}
-%\caption{$e_{calib}/e_{true}$ en fonction de $e_{true}$.}
+%\caption{$E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm true}$.}
 %\end{center}
 %\end{figure}
 %
@@ -502,23 +475,22 @@ Enfin, dans la section \ref{comparaison} nous comparerons ces méthodes.
 %
 %
 %\newpage
-\subsection{KNN Gaussian Fit}
-\label{KNNGF}
-%\subsubsection{Principe général de l'algorithme}
-%Ici, il s'agit du même principe que précédemment mais nous allons considérer que la valeur de $e_{calib}$ est la moyenne de la gaussienne. 
+\subsection{Fit gaussien}
+%\subsection{Principe général de l'algorithme}
+%Ici, il s'agit du même principe que précédemment mais nous allons considérer que la valeur de $E_{\rm calib}$ est la moyenne de la gaussienne. 
 %Principe de l'algorithme :
 %\begin{itemize}
-%	\item on considère des points $(e_{cal}^{0,j}, h_{cal}^{0,j})$ où nous allons évaluer l'énergie calibrée.
-%	\item pour chaque $(e_{cal}^{0,j}, h_{cal}^{0,j})$ :
+%	\item on considère des points $(E_{\rm ecal}^{0,j}, E_{\rm hcal}^{0,j})$ où nous allons évaluer l'énergie calibrée.
+%	\item pour chaque $(E_{\rm ecal}^{0,j}, E_{\rm hcal}^{0,j})$ :
 %	\begin{itemize}
-%		\item on recherche ses $k$ plus proches voisins dans le plan $(e_{cal}, h_{cal}) \rightarrow (e_{cal}^i, h_{cal}^i), i \in [|1,...,k|]$
+%		\item on recherche ses $k$ plus proches voisins dans le plan $(E_{\rm ecal}, E_{\rm hcal}) \rightarrow (E_{\rm ecal}^i, E_{\rm hcal}^i), i \in [|1,...,k|]$
 %		\item on trouve la gaussienne correspondante \rightarrow \sigma, \mu$
-%		\item $\rightarrow e_{calib}^0 = \mu$
+%		\item $\rightarrow E_{\rm calib}^0 = \mu$
 %	\end{itemize}
-%	\item on effectue une interpolation pour donner une valeur d'énergie calibrée quelque soit $(e_{cal}^{0}, h_{cal}^{0})$
+%	\item on effectue une interpolation pour donner une valeur d'énergie calibrée quelque soit $(E_{\rm ecal}^{0}, E_{\rm hcal}^{0})$
 %\end{itemize}
 %
-%\subsubsection{Résultat de la calibration}
+%\subsection{Résultat de la calibration}
 %\begin{figure}[!h]
 %\begin{center}
 %\includegraphics[width=0.37\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_plot3D_training.png}
@@ -530,21 +502,21 @@ Enfin, dans la section \ref{comparaison} nous comparerons ces méthodes.
 %\begin{figure}[!h]
 %\begin{center}
 %\includegraphics[width=0.9\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_calibration.png}
-%\caption{Courbe de calibration pour $e_{cal} = 0$.}
+%\caption{Courbe de calibration pour $E_{\rm ecal} = 0$.}
 %\end{center}
 %\end{figure}
 %
 %\begin{figure}[!h]
 %\begin{center}
 %\includegraphics[width=0.9\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_ecalib_over_etrue_functionof_ecal_hcal.png}
-%\caption{$e_{calib}/e_{true}$ en fonction de $e_{cal}$ et $h_{cal}$.}
+%\caption{$E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm ecal}$ et $E_{\rm hcal}$.}
 %\end{center}
 %\end{figure}
 %
 %\begin{figure}[!h]
 %\begin{center}
 %\includegraphics[width=0.9\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_ecalib_over_etrue.png}
-%\caption{$e_{calib}/e_{true}$ en fonction de $e_{true}$.}
+%\caption{$E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm true}$.}
 %\end{center}
 %\end{figure}
 %
@@ -554,20 +526,20 @@ Enfin, dans la section \ref{comparaison} nous comparerons ces méthodes.
 %\newpage
 \section{Comparaison des méthodes}
 \label{comparaison}
-%\subsection{Méthodes basées sur KNN}
+%\section{Méthodes basées sur KNN}
 %\begin{figure}[!h]
 %\begin{center}
 %\includegraphics[width=0.9\textwidth]{images/pictures/comparisons/comparison1.eps}
-%\caption{$e_{calib}/e_{true}$ en fonction de $e_{true}$.}
+%\caption{$E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm true}$.}
 %\end{center}
 %\end{figure}
 %
 %
-%\subsection{Meilleure méthode}
+%\section{Meilleure méthode}
 %\begin{figure}[!h]
 %\begin{center}
 %\includegraphics[width=0.9\textwidth]{images/pictures/comparisons/comparison2.eps}
-%\caption{$e_{calib}/e_{true}$ en fonction de $e_{true}$.}
+%\caption{$E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm true}$.}
 %\end{center}
 %\end{figure}
 %
@@ -583,8 +555,8 @@ Enfin, dans la section \ref{comparaison} nous comparerons ces méthodes.
 %
 %\newpage
 %\section{Annexes}
-%\subsection{Comment créer une calibration?}
-%\subsection{Fonctions utiles du programme}
+%\section{Comment créer une calibration?}
+%\section{Fonctions utiles du programme}
 
 \newpage
 \bibliographystyle{plain} % Le style est mis entre accolades.
