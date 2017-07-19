@@ -186,20 +186,18 @@ Tél. : +33 (0) 4 72 44 84 57}
 
 \newpage
 \section{Introduction}
-- annonce decouverte Higgs 2012 par ATLAS \cite{HiggsAtlas} et CMS\cite{HiggsCMS}. \\
-- Ces deux experiences generalistes, installees sur le LHC du CERN, sont toujours en place pour tenter de decouvrir de la nouvelle physique au dela du modele standard. \\
-- Les detecteurs ATLAS et CMS sont bases sur les meme principes. \\
-- structure cylindrique en couches placée autour du point d?interaction ou les collisions proton-proton sont realisees\\
-- but: determiner le type, l?energie et la direction des particules de l?etat final de la collision, 
-pour pouvoir en mesurer les proprietes, et par exemple determiner si une nouvelle particule instable a ete produite. \\
-- description du detecteur et du comportement des differentes particules \\
-Pour suivre le flux de particule, le détecteur CMS \cite{CMS} dispose :
+Après avoir permis la découverte expérimentale du boson de Higgs en 2012 \cite{HiggsAtlas,HiggsCMS}, les expériences généralistes ATLAS et CMS installées sur le LHC du CERN, sont toujours en place dans l'optique de découvrir de la nouvelle physique au delà du modele standard. \\
+
+Les détecteur ATLAS et CMS sont basés sur les mêmes principes : ils disposent tous deux d'une structure cylindrique en couches placées autour du point d'interaction où les collisions proton-proton sont réalisées.\\
+Le but de ces détecteur étant de déterminer le type, l'énergie ainsi que la direction des particules de l'état final de la collision, pour pouvoir en mesurer les propriétés, et par exemple determiner si une nouvelle particule instable a été produite. \\
+
+Nous allons alors nous intéresser plus spécifiquement au détecteur CMS \cite{CMS}, celui-ci dispose  :
 \begin{itemize}
 \item d'un champ magnétique, pour séparer les dépôts d'énergie du calorimètre des particules chargées et neutres dans les jets
 \item d'un traceur, pour reconstruire la trajectoire des particules chargées
-\item d'un calorimètre éléctromagnétique (ECAL), permettant de dégager des dépôts d'énergie à partir de particules dans des jets (hadrons chargés, hadrons neutres et photons) clairement séparés l'un de l'autre jusqu'à un jet pT de l'ordre de 1 TeV. L'identification efficace du photon résultant, couplée à la résolution élevée de l'énergie ECAL, permet une excellente mesure d'environ $\tilda 25\%$ de l'énergie du jet
-\item Un calorimètre hadronique (HCAL )  avec une segmentation grossière mais suffisante pour séparer les dépôts d'énergie hadron chargés et neutres dans des jets jusqu'à de $\SIUnits{200-300}{\giga\electronvolt}$, ce qui permet de reconstruire les $10\%$ restants de l'énergie du jet, bien qu'avec une modeste résolution
-\item Un système de suivi des muons, fournissant une identification, indépendamment des particules environnantes.
+\item d'un calorimètre éléctromagnétique (ECAL), permettant de dégager des dépôts d'énergie à partir de particules dans des jets (hadrons chargés, hadrons neutres et photons) clairement séparés l'un de l'autre jusqu'à un jet pT de l'ordre de \SIUnits{1}{\tera\electronvolt}. L'identification efficace du photon résultant, couplée à la résolution élevée de l'énergie ECAL, permet une excellente mesure d'environ $\tilda 25\%$ de l'énergie du jet
+\item d'n calorimètre hadronique (HCAL )  avec une segmentation grossière mais suffisante pour séparer les dépôts d'énergie hadron chargés et neutres dans des jets jusqu'à de $\SIUnits{200-300}{\giga\electronvolt}$, ce qui permet de reconstruire les $10\%$ restants de l'énergie du jet, bien qu'avec une modeste résolution
+\item d'n système de suivi des muons, fournissant une identification, indépendamment des particules environnantes.
 \end{itemize}
 
 \begin{figure}[!h]
@@ -210,28 +208,19 @@ Pour suivre le flux de particule, le détecteur CMS \cite{CMS} dispose :
 \end{center}
 \end{figure}
 
+fontionnement de ECAL \cite{ECAL1,ECAL2}
+fonctionnement de HCAL \cite{HCAL}
 - expliquer comment on mesure les proprietes des differentes particules. \\
 - hadrons neutres: detectes uniquement par les calorimetres\\
-- expliquer en 1 ou 2 paragraphes le fonctionnement d?un calorimetre. rapport e/pi, non linearite \\
-- necessite d?une calibration\\
-- une technique classique de calibration consiste a determiner l?energie calibree par une fonction lineaire de l?energie lue dans le ecal, et de l?energie\\ lue dans le hcal. Cette technique et ses resultats sont presentes dans la section 2. \\
-- ce rapport presente une nouvelle technique de calibration qui permet de prendre en compte la non-linearite des calorimetres. Cette technique est presentee dans la section 3.\\
-- enfin, la section 4 presente une comparaison des deux methodes. \\
+- expliquer en 1 ou 2 paragraphes le fonctionnement d'un calorimetre. rapport e/pi, non linearite \\
+- necessite d'une calibration\\
 
-Le but de ce stage est de trouver une méthode de calibration des calorimètres hadroniques et électromagnétiques de CMS, c'est à dire, pour une particules qui va laisser un dépôt d'énergie $h_{cal}$, $e_{cal}$ dans chacun des calorimètres, comment approximer sa vraie énergie $e_{true}$? 
-
+Une technique classique de calibration consiste à déterminer l'énergie calibrée par une fonction linéaire de l'énergie lue dans le ECAL et de celle lue dans le HCAL. Nous reviendrons en détail sur cette méthode dans la section \ref{LR}.\\
+De plus, ce rapport présente de nouvelles techniques de calibration qui permettent de prendre en compte la non-linearité des calorimètres. Ces techniques sont présentées dans les sections \ref{CL}, \ref{KNN}, \ref{KNNGC} et enfin \ref{KNNGF}.\\
+Enfin, dans la section \ref{comparaison} nous comparerons ces méthodes. 
 
 
-Cette énergie dite énergie calibrée $e_{calib}$ sera déterminée à l'aide de particules issues d'une simulation très précise (prenant en compte les défauts des calorimètres) qui serviront de données d'entrainement aux différents algorithme que j'ai développés durant mon stage. \\
-Le but final de cette calibration sera d'améliorer la reconstruction des flux de particules (particules flow).
-
-
-
-
-%
-%
-%\section{Méthodes de calibrations développées pendant le stage}
-%
+\section{Méthodes de calibrations développées pendant le stage}
 %\subsection{Explications valables pour toutes les méthodes}
 %\subsubsection{Séparation des données}
 %On séparera et traitera différemment les événements qui ont $e_{cal} = 0$.  Ces événements sont liés à des particules qui ont intéragit avec le détecteur hardronique mais pas avec le détecteur électromagnétique (cf Fig.\ref{detecteur}). \\
@@ -268,7 +257,8 @@ Le but final de cette calibration sera d'améliorer la reconstruction des flux de
 %
 %
 %
-%\subsection{Régression Linéaire}
+\subsection{Régression Linéaire}
+\label{LR}
 %Pour s'entrainer à l'utilisation de \textit{SciKit Learn}, j'ai d'abord utilisé la régression linéaire. Il s'agit alors de représenter les relations entre les énergies par :
 %\begin{equation}
 %    e_{true} = a_1 e_{cal} + a_2 h_{cal} + b
@@ -316,7 +306,8 @@ Le but final de cette calibration sera d'améliorer la reconstruction des flux de
 %
 %
 %\newpage
-%\subsection{Méthode des "legos"}
+\subsection{Méthode des "legos"}
+\label{CL}
 %\subsubsection{Principe général de l'algorithme}
 %Comme nous l'avons vu précédemment, il faut une calibration qui prenne en compte les non-linéarité. Ici, l'idée est de découper le plan $(e_{cal},h_{cal})$ en carré et de calculer la moyenne des $e_{true}$ dans chaque carré qui sera la valeur $e_{calib}$.\\
 %Ainsi pour prédire une énergie de $e_{calib}^i$ pour un point $(e_{cal}^i,h_{cal}^i)$, nous allons regarder dans quel carré il se trouve et retourner la valeur d'énergie calibrée correspondante, faisant apparaître ainsi des "legos".
@@ -363,7 +354,8 @@ Le but final de cette calibration sera d'améliorer la reconstruction des flux de
 %
 %
 %
-%\subsection{Méthode des plus proches voisins (KNN)}
+\subsection{Méthode des plus proches voisins (KNN)}
+\label{KNN}
 %\subsubsection{Principe général de l'algorithme}
 %Nous utilisons encore des données simulées pour effectuer une calibration, chaque particule simulée $i$ est vue comme un point d'un espace tridimensionnel possédant des coordonnées $(e_{cal}^i, h_{cal}^i,e_{true}^i)$, correspondant respectivement à l'énergie déposée dans le calorimètre électromagnétique, dans le calorimètre hadronique et l'énergie vraie.\\
 %Pour trouver l'énergie calibrée d'un point de coordonnées $(e_{cal}^0, h_{cal}^0)$ :
@@ -425,13 +417,8 @@ Le but final de cette calibration sera d'améliorer la reconstruction des flux de
 %
 %
 %
-%
-%
-%
-%
-%
-%
-%\subsection{KNN Gaussian Cleaning}
+\subsection{KNN Gaussian Cleaning}
+\label{KNNGC}
 %\subsubsection{Principe général de l'algorithme}
 %Cette méthode est assez similaires à la précédente. Elle se base sur la constatation que la distribution en énergie vraie des paquets de plus proches voisins est un distribution gaussienne. Nous allons donc en utilisant la méthode des moindres carrés trouver les paramètres de la gaussienne en question et ne prendre en compte les plus proches voisins dont l'énergie vraie est $\mu -c\sigma \leq e_{true}^i \leq \mu + c\sigma$ (nous prenons par défaut $c = 2$), avec $\mu, \sigma$ la moyenne et l'écart type de la distribution gaussienne.\\
 %Principe de l'algorithme :
@@ -490,7 +477,8 @@ Le but final de cette calibration sera d'améliorer la reconstruction des flux de
 %
 %
 %\newpage
-%\subsection{KNN Gaussian Fit}
+\subsection{KNN Gaussian Fit}
+\label{KNNGF}
 %\subsubsection{Principe général de l'algorithme}
 %Ici, il s'agit du même principe que précédemment mais nous allons considérer que la valeur de $e_{calib}$ est la moyenne de la gaussienne. 
 %Principe de l'algorithme :
@@ -539,7 +527,8 @@ Le but final de cette calibration sera d'améliorer la reconstruction des flux de
 %
 %
 %\newpage
-%\section{Comparaison des méthodes}
+\section{Comparaison des méthodes}
+\label{comparaison}
 %\subsection{Méthodes basées sur KNN}
 %\begin{figure}[!h]
 %\begin{center}
