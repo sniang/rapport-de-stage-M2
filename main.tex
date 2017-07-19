@@ -195,8 +195,8 @@ Nous allons alors nous intéresser plus spécifiquement au détecteur CMS \cite{CMS
 \begin{itemize}
 \item d'un champ magnétique, pour séparer les dépôts d'énergie du calorimètre des particules chargées et neutres dans les jets
 \item d'un traceur, pour reconstruire la trajectoire des particules chargées
-\item d'un calorimètre éléctromagnétique (ECAL) \cite{ECAL1,ECAL2}, permettant de dégager des dépôts d'énergie à partir de particules dans des jets (hadrons chargés, hadrons neutres et photons) clairement séparés l'un de l'autre jusqu'à un jet pT de l'ordre de \SIUnits{1}{\tera\electronvolt}. L'identification efficace du photon résultant, couplée à la résolution élevée de l'énergie ECAL, permet une excellente mesure d'environ $\tilda 25\%$ de l'énergie du jet
-\item d'un calorimètre hadronique (HCAL) \cite{HCAL}, avec une segmentation grossière mais suffisante pour séparer les dépôts d'énergie hadron chargés et neutres dans des jets jusqu'à de $\SIUnits{200-300}{\giga\electronvolt}$, ce qui permet de reconstruire les $10\%$ restants de l'énergie du jet, bien qu'avec une modeste résolution
+\item d'un calorimètre éléctromagnétique (ECAL) \cite{ECAL1,ECAL2}, constitué d'un cristal de tungstate de plomb, permettant de dégager des dépôts d'énergie à partir de particules dans des jets (hadrons chargés, hadrons neutres et photons) clairement séparés l'un de l'autre jusqu'à un jet pT de l'ordre de \SIUnits{1}{\tera\electronvolt}. L'identification efficace du photon résultant, couplée à la résolution élevée de l'énergie ECAL, permet une excellente mesure d'environ $\tilda 25\%$ de l'énergie du jet
+\item d'un calorimètre hadronique (HCAL) \cite{HCAL}, composé de plusieurs couches d'amortisseurs en laiton et de carreaux scintillateurs en plastique, avec une segmentation grossière mais suffisante pour séparer les dépôts d'énergie hadron chargés et neutres dans des jets jusqu'à de $\SIUnits{200-300}{\giga\electronvolt}$, ce qui permet de reconstruire les $10\%$ restants de l'énergie du jet, bien qu'avec une modeste résolution
 \item d'un système de suivi des muons, fournissant une identification, indépendamment des particules environnantes.
 \end{itemize}
 
@@ -209,7 +209,31 @@ Nous allons alors nous intéresser plus spécifiquement au détecteur CMS \cite{CMS
 \end{center}
 \end{figure}
 
-Ainsi, les particules chargées seront donc d'abord suivies dans le traceur, et interagiront avec le calorimètre électromagnétique et les hadrons non chargés ne seront détectés potentiellement dans le ECAL constitué d'un cristal de tungstate de plomb et obligatoirement dans le HCAL, composé de plusieurs couches d'amortisseurs en laiton et de carreaux scintillateurs en plastique, et qui arrête toutes les particules sauf les muons qui seront suivis justement par le système de suivis des muons (cf Fig. \ref{schemaCMS}).
+Détaillons alors le comportement des particules stables dans le détecteur :
+\begin{itemize}
+    \item $e^+,e^-$ :
+        \begin{itemize}
+        		\item suivis dans le traceur
+		\item dépôt d'énergies dans ECAL
+        \end{itemize}
+    \item hadrons chargés :
+        \begin{itemize}
+        		\item suivis dans le traceur
+    		\item dépôt d'énergies dans ECAL
+    		\item dépôt d'énergies et fin de course dans HCAL
+        \end{itemize}
+    \item hadrons neutres :
+        \begin{itemize}
+        		\item dépôt d'énergies et fin de course dans HCAL
+        \end{itemize}
+    \item $\mu^+,\mu^-$ :
+        \begin{itemize}
+        		\item suivis dans le traceur
+		\item traverse ECAL, HCAL
+		\item système de suivis des muons
+        \end{itemize}
+\end{itemize}
+
 Cette complexité de détection, plus le fait que les dépôts d'énergies sont reliés aux sections efficaces des particules en mises en jeu font que la réponse des calorimètres n'est pas linéaire et que la somme des énergies dans les calorimètres ne correspond pas à l'énergie de l'événement incident, d'où la nécessité d'une calibration.\\
 
 Une technique classique de calibration consiste à déterminer l'énergie calibrée par une fonction linéaire de l'énergie lue dans le ECAL et de celle lue dans le HCAL (malgré ce qui fût dit plus haut). Nous reviendrons en détail sur cette méthode dans la section \ref{LR}.\\
