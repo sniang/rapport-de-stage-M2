@@ -126,11 +126,14 @@ decorations.pathreplacing}
 
 \parbox{15cm}{\small
 \textbf{Résumé} : \\
-\rm 
-Pour reconstruire la trajectoire d'une particule, il est nécessaire de connaître son énergie. Cette énergie est estimée à partir d'un détecteur hadronique et d'un détecteur électromagnétiques, problématique de ce stage est : connaissant les dépôts d'énergie d'une particules dans ces deux calorimètres, quelle est son énergie?\\
-Pour répondre à ces questions, j'ai développé des algorithmes qui prennent en données d'entrainement des particules simulées et qui pour chaque couple d'énergie déposée $(e_{cal},h_{cal})$ nous donne une énergie calibrée $e_{calib}$.\\
-On peut alors ré-expliquer la problématique des algorithmes de la façon suivante : comment modéliser un nuage de points $(e_{cal},h_{cal},e_{true})$ par une surface $e_{calib} = f(h_{cal},e_{true})$?}
-
+\rm Les énergies des flux de particules dans le détecteur CMS sont mesurées à l'aide d'un calorimètre électromagnétique (ECAL) et d'un calorimètre hadronique (HCAL). Pour reconstruire les flux de particules dans le traqueur, il nous faut connaître au mieux l'énergie de la particule qui a engendrée ces dépôt d'énergies dans les calorimètres.\\
+Pour se faire, j'ai développé durant ce stage des algorithmes qui, connaissant les énergies déposées dans les calorimètres pour un événement, lui prédisent une énergie de calibration ($e_{calib}$) qui se veut la plus proche possible de la vraie énergie en se basant sur des données d'entrainement simulées, c'est à dire un ensemble d'événements qui contiennent l'énergie déposée dans ECAL, dans HCAL et la vraie énergie, ($e_{cal},h_{cal},e_{true}$).\\
+L'idée générale des différentes méthodes proposées est de modéliser ce nuage de points simulés ($e_{cal},h_{cal},e_{true}$), par une surface $e_{calib} = f($e_{cal},h_{cal})$.\\
+En première approximation, j'ai utilisé une régression linéaire, qui modélise grossièrement le nuage de point et qui met en avant des non-linéarités locales.\\
+Pour prendre en compte les non-linéarités, j'ai maillé le plan $(e_{cal},h_{cal})$ en petits carrés et j'ai moyenné les vraies énergies pour obtenir une énergie de calibrations par carré. Cependant, cette méthode de calibration fait apparaitre des paliers et est trop dépendante de la répartition des données d'entrainement et de la taille arbitraire des carrés.\\
+Pour lisser cette méthode précédente et enlever ces dépendances, j'ai donc cette fois-ci choisi de travailler en fonction des plus proches voisins : pour un couple ($e_{cal},h_{cal}$), l'énergie calibrée sera dépendante des varies énergies de ces plus proches voisins. \\
+Cette dernière idée fût la plus prometteuse et reste à être améliorée.
+}
 
 \vspace{1cm}
 \begin{center}
