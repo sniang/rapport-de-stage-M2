@@ -214,17 +214,19 @@ Détaillons alors le comportement des particules stables dans le détecteur :
     \item $e^+,e^-$ :
         \begin{itemize}
         		\item suivis dans le traceur
-		\item dépôt d'énergies dans ECAL
+		\item déposent leur énergie dans ECAL
         \end{itemize}
     \item hadrons chargés :
         \begin{itemize}
         		\item suivis dans le traceur
-    		\item dépôt d'énergies dans ECAL
-    		\item dépôt d'énergies et fin de course dans HCAL
+    		\item déposent leur énergie dans ECAL
+    		\item déposent leur énergie dans le HCAL
+		\item fin de course dans HCAL
         \end{itemize}
     \item hadrons neutres :
         \begin{itemize}
-        		\item dépôt d'énergies et fin de course dans HCAL
+        		\item déposent leur énergie dans le HCAL
+		\item fin de course dans HCAL
         \end{itemize}
     \item $\mu^+,\mu^-$ :
         \begin{itemize}
@@ -233,6 +235,8 @@ Détaillons alors le comportement des particules stables dans le détecteur :
 		\item système de suivis des muons
         \end{itemize}
 \end{itemize}
+\`A noter que dans notre étude seul les hadrons chargés nous intéressent. \\
+Toutes ces informations vont permettre par la suite permettre de reconstruire toute la décomposition qui s'effectue dans le détecteur, ce que l'on appelle le \textit{Particle Flow (PF)}.\\
 
 Cette complexité de détection, plus le fait que les dépôts d'énergies sont reliés aux sections efficaces des particules en mises en jeu font que la réponse des calorimètres n'est pas linéaire et que la somme des énergies dans les calorimètres ne correspond pas à l'énergie de l'événement incident, d'où la nécessité d'une calibration.\\
 
