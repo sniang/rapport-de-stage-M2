@@ -195,27 +195,24 @@ Nous allons alors nous intéresser plus spécifiquement au détecteur CMS \cite{CMS
 \begin{itemize}
 \item d'un champ magnétique, pour séparer les dépôts d'énergie du calorimètre des particules chargées et neutres dans les jets
 \item d'un traceur, pour reconstruire la trajectoire des particules chargées
-\item d'un calorimètre éléctromagnétique (ECAL), permettant de dégager des dépôts d'énergie à partir de particules dans des jets (hadrons chargés, hadrons neutres et photons) clairement séparés l'un de l'autre jusqu'à un jet pT de l'ordre de \SIUnits{1}{\tera\electronvolt}. L'identification efficace du photon résultant, couplée à la résolution élevée de l'énergie ECAL, permet une excellente mesure d'environ $\tilda 25\%$ de l'énergie du jet
-\item d'n calorimètre hadronique (HCAL )  avec une segmentation grossière mais suffisante pour séparer les dépôts d'énergie hadron chargés et neutres dans des jets jusqu'à de $\SIUnits{200-300}{\giga\electronvolt}$, ce qui permet de reconstruire les $10\%$ restants de l'énergie du jet, bien qu'avec une modeste résolution
-\item d'n système de suivi des muons, fournissant une identification, indépendamment des particules environnantes.
+\item d'un calorimètre éléctromagnétique (ECAL) \cite{ECAL1,ECAL2}, permettant de dégager des dépôts d'énergie à partir de particules dans des jets (hadrons chargés, hadrons neutres et photons) clairement séparés l'un de l'autre jusqu'à un jet pT de l'ordre de \SIUnits{1}{\tera\electronvolt}. L'identification efficace du photon résultant, couplée à la résolution élevée de l'énergie ECAL, permet une excellente mesure d'environ $\tilda 25\%$ de l'énergie du jet
+\item d'un calorimètre hadronique (HCAL) \cite{HCAL}, avec une segmentation grossière mais suffisante pour séparer les dépôts d'énergie hadron chargés et neutres dans des jets jusqu'à de $\SIUnits{200-300}{\giga\electronvolt}$, ce qui permet de reconstruire les $10\%$ restants de l'énergie du jet, bien qu'avec une modeste résolution
+\item d'un système de suivi des muons, fournissant une identification, indépendamment des particules environnantes.
 \end{itemize}
 
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[width=0.7\textwidth]{images/detecteur.pdf}
 \caption{Une esquisse des interactions spécifiques des particules dans une tranche transversale du détecteur CMS.}
+\label{schemaCMS}
 \label{detecteur}
 \end{center}
 \end{figure}
 
-fontionnement de ECAL \cite{ECAL1,ECAL2}
-fonctionnement de HCAL \cite{HCAL}
-- expliquer comment on mesure les proprietes des differentes particules. \\
-- hadrons neutres: detectes uniquement par les calorimetres\\
-- expliquer en 1 ou 2 paragraphes le fonctionnement d'un calorimetre. rapport e/pi, non linearite \\
-- necessite d'une calibration\\
+Ainsi, les particules chargées seront donc d'abord suivies dans le traceur, et interagiront avec le calorimètre électromagnétique et les hadrons non chargés ne seront détectés potentiellement dans le ECAL constitué d'un cristal de tungstate de plomb et obligatoirement dans le HCAL, composé de plusieurs couches d'amortisseurs en laiton et de carreaux scintillateurs en plastique, et qui arrête toutes les particules sauf les muons qui seront suivis justement par le système de suivis des muons (cf Fig. \ref{schemaCMS}).
+Cette complexité de détection, plus le fait que les dépôts d'énergies sont reliés aux sections efficaces des particules en mises en jeu font que la réponse des calorimètres n'est pas linéaire et que la somme des énergies dans les calorimètres ne correspond pas à l'énergie de l'événement incident, d'où la nécessité d'une calibration.\\
 
-Une technique classique de calibration consiste à déterminer l'énergie calibrée par une fonction linéaire de l'énergie lue dans le ECAL et de celle lue dans le HCAL. Nous reviendrons en détail sur cette méthode dans la section \ref{LR}.\\
+Une technique classique de calibration consiste à déterminer l'énergie calibrée par une fonction linéaire de l'énergie lue dans le ECAL et de celle lue dans le HCAL (malgré ce qui fût dit plus haut). Nous reviendrons en détail sur cette méthode dans la section \ref{LR}.\\
 De plus, ce rapport présente de nouvelles techniques de calibration qui permettent de prendre en compte la non-linearité des calorimètres. Ces techniques sont présentées dans les sections \ref{CL}, \ref{KNN}, \ref{KNNGC} et enfin \ref{KNNGF}.\\
 Enfin, dans la section \ref{comparaison} nous comparerons ces méthodes. 
 
