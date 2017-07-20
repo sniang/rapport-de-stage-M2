@@ -212,40 +212,53 @@ En première approximation, nous déterminerons l'énergie calibrée par une fonctio
 Ensuite, ce rapport présente de nouvelles techniques de calibration qui permettent de prendre en compte la non-linearité des calorimètres. Ces techniques seront présentées dans les sections \ref{CL} et \ref{KNN}.\\
 Enfin, dans la section \ref{comparaison} nous comparerons ces méthodes. 
 
-\section{Régression Linéaire}
-\label{LR}
-\subsection{Principe de la calibration}
-- Un première calibration\\
-\begin{equation}
-    E_{\rm calib} = a_1 E_{\rm ecal} + a_2 E_{\rm hcal} + b
-\end{equation}
-- ref scikitLearn \cite{scikitLR}\\
-- séparation ecal != 0 , ecal = 0\\
-%On séparera et traitera différemment les événements qui ont $E_{\rm ecal} = 0$.  Ces événements sont liés à des particules qui ont intéragit avec le détecteur hardronique mais pas avec le détecteur électromagnétique (cf Fig.\ref{detecteur}). \\
-%Cette séparation se justifie par le fait que modéliser les dépôts d'énergie dans les deux calorimètres pour en conclure ce qui se passe dans le cas particulier où il n'y a des dépôts que dans un amène un biais. Ainsi, à chaque "création" de calibration, on créera en fait deux modèles.
-%
-%- limite ecal + hcal < 150
+\section{Production de l'échantillon}
+- paragraphe de Colin sur la simulation\\
+-  passer de Root à pyhton -> 1 ligne pour dire que j'ai fait un script\\
+-> plot du nage de point\\
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[height=5cm]{images/pictures/testLinearRegression/LinearRegression_plot3D_training.png}
+\caption{Le nuage de points modélisé}
+\end{center}
+\end{figure}
+- séparation ecal != 0 , ecal = 0 : \\
+
+On séparera et traitera différemment les événements qui ont $E_{\rm ecal} = 0$.  Ces événements sont liés à des particules qui ont interagit avec le détecteur hardronique mais pas avec le détecteur électromagnétique (cf Fig.\ref{detecteur}). Cette séparation se justifie par le fait que modéliser les dépôts d'énergie dans les deux calorimètres pour en conclure ce qui se passe dans le cas particulier où il n'y a des dépôts que dans un amène un biais. Ainsi, à chaque "création" de calibration, on créera en fait deux modèles.\\
+-> image illustrant la séparation : ecal + hcal < 150
 %\begin{figure}[!h]
 %\begin{center}
 %\includegraphics[width=0.9\textwidth]{images/pictures/explain/limit.png}
 %\caption{On place une limite à $E_{\rm ecal}+E_{\rm hcal} = 150$. \'A gauche, ..., en haut à droite, ..., en bas à doite, ...}
 %\end{center}
 %\end{figure}
-\subsection{Résultat de la calibration}
-- doc GitHub \cite{GitHubLR}\\
-- paramètres utilisés :\\
-LinearRegression:
-lim -> 150\\
-limmax -> 80\\
-limmin -> 20\\
-numberPart -> 162195\\
+
+\section{Calibration par régression linéaire}
+\label{LR}
+
+- Un première calibration, non binnée\\
+\begin{equation}
+    E_{\rm true} = a_1 E_{\rm ecal} + a_2 E_{\rm hcal} + b
+\end{equation}
+- trouver la meilleure $a_1, a_2, b$\\
+- pas d'incertitude\\
+- méthode des moindres carrés, ref scikitLearn \cite{scikitLR}\\
+- on limite les points de la calibration, lim min, lim max\\
+
+- lancer la calibration, doc GitHub \cite{GitHubLR}\\
+paramères : $lim = 150, lim_{min} = 20, lim_{max} = 80$\\
+régession obtenue : \\
 for ecal == 0 : \\
         ecalib = 0.960326144365 hcal + 5.92100531606\\
 for ecal != 0 : \\
-        ecalib = 1.34578479311 ecal + 0.987111240421 ecal + 8.27380815395\\
+        ecalib = 1.34578479311 ecal + 0.987111240421 hcal + 8.27380815395\\
+-> plot surface, courbe de calibration\\
+- on calibre un second jeu de données\\
+-> plot ecalib/etrue\\
+- que vaut la calibration?\\
+-> mise en évidence des non linéarités\\
 %\begin{figure}[!h]
 %\begin{center}
-%\includegraphics[height=5cm]{images/pictures/testLinearRegression/LinearRegression_plot3D_training.png}
 %\includegraphics[height=5cm]{images/pictures/testLinearRegression/LinearRegression_plot3D_surf.eps}
 %\caption{Le nuage de points modélisé (à gauche) par un plan (à droite).}
 %\end{center}
@@ -306,14 +319,26 @@ expliquer : \\
 %\newpage
 \section{Méthode non paramétrique binnée}
 \label{CL}
-\subsection{Principe général de l'algorithme}
+- principe de l'algo\\
+- méthode binné\\
+- illustration : \\
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[height=4cm]{images/pictures/testCalibrationLego/CalibrationLego_plot3D_legos.eps}
+\caption{Le nuage de points modélisé par des legos}
+\end{center}
+\end{figure}
+
 %Comme nous l'avons vu précédemment, il faut une calibration qui prenne en compte les non-linéarité. Ici, l'idée est de découper le plan $(E_{\rm ecal},E_{\rm hcal})$ en carré et de calculer la moyenne des $E_{\rm true}$ dans chaque carré qui sera la valeur $E_{\rm calib}$.\\
 %Ainsi pour prédire une énergie de $E_{\rm calib}^i$ pour un point $(E_{\rm ecal}^i,E_{\rm hcal}^i)$, nous allons regarder dans quel carré il se trouve et retourner la valeur d'énergie calibrée correspondante, faisant apparaître ainsi des "legos".
 %
-\subsection{Résultat de la calibration}
-- ref Git \cite{GitHubCL}\\
+->{Résultat de la calibration}
+- lancer la calibration ref Git \cite{GitHubCL}\\
 - paramètres \\
-- biai lié aux bins \\
+-> plot surface, courbe de calibration\\
+- on calibre un second jeu de données\\
+-> plot ecalib/etrue\\
+- biais lié aux bins \\
 %\begin{figure}[!h]
 %\begin{center}
 %\includegraphics[height=4cm]{images/pictures/testCalibrationLego/CalibrationLego_plot3D_legos.eps}
@@ -355,13 +380,22 @@ expliquer : \\
 %
 %
 %
-\section{Méthodes des plus proches voisins}
+\section{Méthodes basées sur les plus proches voisins}
 \label{KNN}
 \subsection{Moyenne pondérée}
-\subsubsection{Principe général de l'algorithme}
-- l'algo\\
+-{Principe général de l'algorithme}\\
+- trouver les plus proches voisin :  sckitlearn \cite{scikitKNN}, algorithmes de recherches optimisés\\
+
+\begin{figure}[!h]
+	\begin{center}
+		\includegraphics[width=0.9\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_neighborhood.png}
+		\caption{$n_{voisins} = 2000$ pour $E_{\rm ecal} = 0$, $n_{voisins} = 250$ pour $E_{\rm ecal} \neq 0$}
+		\label{neighbors}
+		\end{center}
+\end{figure}
+
 - moyenne pondérée par une gaussienne\\
-- trouver les plus proches voisin sckitlearn \cite{scikitKNN}\\
+- pas assez lissé, des particules à fort Etrue mal détectées perturbent la calibration, il faut les enlever
 %Nous utilisons encore des données simulées pour effectuer une calibration, chaque particule simulée $i$ est vue comme un point d'un espace tridimensionnel possédant des coordonnées $(E_{\rm ecal}^i, E_{\rm hcal}^i,E_{\rm true}^i)$, correspondant respectivement à l'énergie déposée dans le calorimètre électromagnétique, dans le calorimètre hadronique et l'énergie vraie.\\
 %Pour trouver l'énergie calibrée d'un point de coordonnées $(E_{\rm ecal}^0, E_{\rm hcal}^0)$ :
 %\begin{itemize}
@@ -382,15 +416,14 @@ expliquer : \\
 %\end{equation}
 %Dans notre cas nous avons pris pour $g$ la distribution gaussienne $g(\vec{x}) = \exp{-\frac{1}{2}(\frac{(\vec{x} - \vec{x}^0)^2}{\sigma^2})}$, pour donner plus d'importance aux plus proches des k plus proches voisins.\\
 %
-\subsubsection{Résultat de la calibration}
-- doc git \cite{GitHubKNN}
+-{Résultat de la calibration}\\
+-  créer la calibration, doc git \cite{GitHubKNN}
 - paramètres : \\
-lim -> 150\\
-n_neighbors_ecal_eq_0 -> 2000\\
-n_neighbors_ecal_neq_0 -> 250\\
-numberPart -> 162195\\
-recalibrated -> False\\
-sigma -> 5\\
+$lim =150, n_{\rm neighbors, Ecal = 0} = 2000, n_{\rm neighbors, Ecal \neq 0} = 250, lim = 150, \sigma  = 5$\\
+weights = 'gaussian'\\
+-> plot surface, courbe de calibration\\
+- on calibre un second jeu de données\\
+-> plot ecalib/etrue\\
 %\begin{figure}[!h]
 %\begin{center}
 %\includegraphics[width=0.37\textwidth]{images/pictures/testKNN/KNN_plot3D_training.png}
@@ -460,15 +493,16 @@ sigma -> 5\\
 \subsubsection{Résultat de la calibration}
 - doc git \cite{GitHubKNNGC}
 - paramètres : \\
-n_neighbors_ecal_eq_0 = 2000\\
-n_neighbors_ecal_neq_0 = 250\\
+$lim =150, n_{\rm neighbors, Ecal = 0} = 2000, n_{\rm neighbors, Ecal \neq 0} = 250, lim = 150, \sigma  = 5$\\
 weights = 'gaussian'\\
 algorithm = 'auto'\\
-sigma = 5\\
-lim = 150\\
 energystep = 1\\
 kind = 'cubic'\\
 cut = 2\\
+-> plot surface, courbe de calibration\\
+- on calibre un second jeu de données\\
+-> plot ecalib/etrue\\
+- mise en évidence des non linéarités\\
 %
 %\begin{figure}[!h]
 %\begin{center}
@@ -523,11 +557,16 @@ cut = 2\\
 \subsubsection{Résultat de la calibration}
 - doc git \cite{GitHubKNNGF}
 - paramètres : \\
-lim = 150                   # if ecal + hcal > lim, ecalib = math.nan\\
-n_neighbors_ecal_eq_0=2000  # number of neighbors for ecal = 0\\
-n_neighbors_ecal_neq_0=250  # number of neighbors for ecal ? 0\\
+$lim =150, n_{\rm neighbors, Ecal = 0} = 2000, n_{\rm neighbors, Ecal \neq 0} = 250, lim = 150, \sigma  = 5$\\
+algorithm = 'auto'\\
+kind = 'cubic'\\
 energystep_ecal_eq_0 = 1\\
 energystep_ecal_neq_0 = 5\\
+-> plot surface, courbe de calibration\\
+- on calibre un second jeu de données\\
+-> plot ecalib/etrue\\
+- mise en évidence des non linéarités\\
+
 %\begin{figure}[!h]
 %\begin{center}
 %\includegraphics[width=0.37\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_plot3D_training.png}
