@@ -181,26 +181,31 @@ Nous allons nous intéresser plus spécifiquement au détecteur CMS \cite{CMS}. Cel
 \end{center}
 \end{figure}
 
-Détaillons alors le comportement des particules stables  :
+Détaillons alors le comportement des particules  :
 \begin{itemize}
-    \item $e^+,e^-$ :
+    \item photons (exemple 1 dans la Fig. \ref{schemaCMS}) :
+    	\begin{itemize}
+		\item déposent leur énergie dans ECAL;
+	\end{itemize}
+    \item $e^+,e^-$ (exemple 2 dans la Fig. \ref{schemaCMS}) :
         \begin{itemize}
         		\item produisent une trace dans le trajectographe;
 		\item déposent leur énergie dans ECAL;
         \end{itemize}
-    \item hadrons chargés :
+    \item hadrons chargés (exemple 3 dans la Fig. \ref{schemaCMS}) :
         \begin{itemize}
         		\item produisent une trace dans le trajectographe;
-    		\item déposent leur énergie dans ECAL;
+    		\item déposent en minorité des cas leur énergie dans ECAL;
     		\item déposent leur énergie dans HCAL;
 		\item fin de course dans HCAL;
         \end{itemize}
-    \item hadrons neutres :
+    \item hadrons neutres (exemple 4 dans la Fig. \ref{schemaCMS}) :
         \begin{itemize}
         		\item déposent leur énergie dans le HCAL;
+		\item déposent en minorité des cas leur énergie dans ECAL;
 		\item fin de course dans HCAL;
         \end{itemize}
-    \item $\mu^+,\mu^-$ :
+    \item $\mu^+,\mu^-$ (exemple 5 dans la Fig. \ref{schemaCMS}) :
         \begin{itemize}
         		\item produisent une trace dans le trajectographe;
 		\item traversent ECAL, HCAL;
@@ -238,7 +243,7 @@ Enfin, dans la section \ref{comparaison} nous comparerons ces méthodes.
 %\end{figure}
 \subsection{Résultat de la calibration}
 - Résultat de la calibration\\
-- paramètres utilisés\\
+- paramètres utilisés :\\
 %\begin{figure}[!h]
 %\begin{center}
 %\includegraphics[height=5cm]{images/pictures/testLinearRegression/LinearRegression_plot3D_training.png}
@@ -306,6 +311,7 @@ expliquer : \\
 %Ainsi pour prédire une énergie de $E_{\rm calib}^i$ pour un point $(E_{\rm ecal}^i,E_{\rm hcal}^i)$, nous allons regarder dans quel carré il se trouve et retourner la valeur d'énergie calibrée correspondante, faisant apparaître ainsi des "legos".
 %
 \subsection{Résultat de la calibration}
+- paramètres : \\
 %\begin{figure}[!h]
 %\begin{center}
 %\includegraphics[height=4cm]{images/pictures/testCalibrationLego/CalibrationLego_plot3D_legos.eps}
@@ -372,6 +378,7 @@ expliquer : \\
 %Dans notre cas nous avons pris pour $g$ la distribution gaussienne $g(\vec{x}) = \exp{-\frac{1}{2}(\frac{(\vec{x} - \vec{x}^0)^2}{\sigma^2})}$, pour donner plus d'importance aux plus proches des k plus proches voisins.\\
 %
 \subsubsection{Résultat de la calibration}
+- paramètres : \\
 %\begin{figure}[!h]
 %\begin{center}
 %\includegraphics[width=0.37\textwidth]{images/pictures/testKNN/KNN_plot3D_training.png}
@@ -436,6 +443,7 @@ expliquer : \\
 %\end{figure}
 %
 \subsubsection{Résultat de la calibration}
+- paramètres : \\
 %
 %\begin{figure}[!h]
 %\begin{center}
@@ -486,6 +494,7 @@ expliquer : \\
 %\end{itemize}
 %
 \subsubsection{Résultat de la calibration}
+- paramètres : \\
 %\begin{figure}[!h]
 %\begin{center}
 %\includegraphics[width=0.37\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_plot3D_training.png}
@@ -548,6 +557,7 @@ expliquer : \\
 
 \newpage
 \bibliographystyle{plain} % Le style est mis entre accolades.
+\bibliographystyle{unsrt}
 \bibliography{biblio} % mon fichier de base de données s'appelle biblio.bib
 
 \end{document}
