@@ -40,7 +40,6 @@
 \usepackage{stmaryrd} 
 \usepackage{placeins} 
 
-
 \usepackage{listings}
 \usepackage{color}
 
@@ -52,14 +51,6 @@
 
 
 
-
-
-
-\usetikzlibrary{arrows,shapes,positioning}
-\usetikzlibrary{decorations.markings,decorations.pathmorphing,
-decorations.pathreplacing}
-\usetikzlibrary{calc,patterns,shapes.geometric}
-\usetikzlibrary{calc,3d}
 
 \pagestyle{fancy}
 \fancyhead[L]{\scriptsize \textsc{Une méthode de calibration non paramétrique pour les calorimètres de CMS}}
@@ -159,7 +150,7 @@ Tél. : +33 (0) 4 72 44 84 57}
 
 \newpage
 \section{Introduction}
-Après avoir permis la découverte expérimentale du boson de Higgs en 2012, les expériences généralistes ATLAS \cite{HiggsAtlas} et CMS \cite{HiggsCMS} installées sur le LHC du CERN, sont toujours en place dans l'optique de découvrir de la nouvelle physique au-delà du modèle standard.
+Après avoir permis la découverte expérimentale du boson de Higgs en 2012, les expériences généralistes ATLAS \cite{HiggsATLAS} et CMS \cite{HiggsCMS} installées sur le LHC du CERN, sont toujours en place dans l'optique de découvrir de la nouvelle physique au-delà du modèle standard.
 
 Les détecteurs ATLAS et CMS sont basés sur les mêmes principes : cylindriques, ils sont constitués d'un ensemble de sous-détecteurs disposés en couches concentriques autour du point d'interaction. Les informations provenant de ces sous-détecteurs sont combinées pour déterminer le type, l'énergie et la direction des particules de l'état final de la collision, pour pouvoir mesurer les propriétés de celle-ci, et par exemple determiner si une particule instable encore inconnue a été produite. 
 
@@ -167,7 +158,7 @@ Nous allons nous intéresser plus spécifiquement au détecteur CMS \cite{CMS}. Cel
 \begin{itemize}
 \item d'un champ magnétique, pour courber la trajectoire des particules chargées;
 \item d'un trajectographe, pour reconstruire la trajectoire des particules chargées, et ainsi obtenir la charge et l'impulsion;
-\item d'un calorimètre électromagnétique (ECAL) \cite{ECAL1}, constitué d'un cristal de tungstate de plomb, permettant de collecter les dépôts d'énergie des particules, principalement électrons et photons, mais aussi hadrons chargés et neutres);
+\item d'un calorimètre électromagnétique (ECAL) \cite{ECAL}, constitué d'un cristal de tungstate de plomb, permettant de collecter les dépôts d'énergie des particules, principalement électrons et photons, mais aussi hadrons chargés et neutres);
 \item d'un calorimètre hadronique (HCAL) \cite{HCAL}, composé de plusieurs couches d'absorbeur en laiton et de carreaux scintillateurs en plastique, avec une segmentation grossière. La resolution du HCAL pour la mesure de l'energie $E$ d'un hadron est de l'ordre de $100\%\sqrt{(E / \SIUnits{}{\giga\electronvolt})}$;
 \item de chambres à muons, qui permettent l'dentification de ces particules, les seules à pouvoir y parvenir.
 \end{itemize}
@@ -213,11 +204,10 @@ Détaillons alors le comportement des particules  :
         \end{itemize}
 \end{itemize}
 \`A noter que dans notre étude seuls les hadrons neutres nous intéressent. \\
-Toutes ces informations vont permettre par la suite de reconstruire toute la décomposition qui s'effectue dans le détecteur, cette opération s'appelle le \textit{Particle Flow (PF)}.
 
-Cette complexité de détection, plus le fait que les dépôts d'énergies sont reliés aux sections efficaces des particules en mises en jeu font que la réponse des calorimètres n'est pas linéaire et que la somme des énergies dans les calorimètres ne correspond pas à l'énergie de l'événement incident, d'où la nécessité d'une calibration.
+Le connaissance des dépôts d'énergies et ainsi que la connaissance du comportement des particules dans les différentes parties du détecteur nous permette de reconnaître et distinguer les particules, cette opération s'appelle le \textit{Particle Flow (PF)}. Cependant, il est aussi nécessaire n'estimer l'énergie des particules ($E_{\rm true})$ à l'aide d'une calibration des calorimètres. En effet, ces derniers ne présentent pas une réponse linéaire et la somme des énergies dans les calorimètres ne correspond pas à l'énergie de la particule. Cette énergie de calibration sera notée $E_{\rm calib}$.
 
-Une technique de calibration consiste à déterminer l'énergie calibrée par une fonction linéaire de l'énergie lue dans le ECAL et de celle lue dans le HCAL. Cette méthode sera présentée dans la section \ref{LR}.
+En première approximation, nous déterminerons l'énergie calibrée par une fonction linéaire de l'énergie lue dans le ECAL (énergie notée par la suite $E_{\rm ecal}$) et de celle lue dans le HCAL (notée par la suite $H_{\rm ecal}$). Cette méthode sera présentée dans la section \ref{LR}.
 
 Ensuite, ce rapport présente de nouvelles techniques de calibration qui permettent de prendre en compte la non-linearité des calorimètres. Ces techniques seront présentées dans les sections \ref{CL} et \ref{KNN}.\\
 Enfin, dans la section \ref{comparaison} nous comparerons ces méthodes. 
@@ -227,9 +217,9 @@ Enfin, dans la section \ref{comparaison} nous comparerons ces méthodes.
 \subsection{Principe de la calibration}
 - Un première calibration\\
 \begin{equation}
-    E_{\rm true} = a_1 E_{\rm ecal} + a_2 E_{\rm hcal} + b
+    E_{\rm calib} = a_1 E_{\rm ecal} + a_2 E_{\rm hcal} + b
 \end{equation}
-- ref scikitLearn \\
+- ref scikitLearn \cite{scikitLR}\\
 - séparation ecal != 0 , ecal = 0\\
 %On séparera et traitera différemment les événements qui ont $E_{\rm ecal} = 0$.  Ces événements sont liés à des particules qui ont intéragit avec le détecteur hardronique mais pas avec le détecteur électromagnétique (cf Fig.\ref{detecteur}). \\
 %Cette séparation se justifie par le fait que modéliser les dépôts d'énergie dans les deux calorimètres pour en conclure ce qui se passe dans le cas particulier où il n'y a des dépôts que dans un amène un biais. Ainsi, à chaque "création" de calibration, on créera en fait deux modèles.
@@ -242,8 +232,17 @@ Enfin, dans la section \ref{comparaison} nous comparerons ces méthodes.
 %\end{center}
 %\end{figure}
 \subsection{Résultat de la calibration}
-- Résultat de la calibration\\
+- doc GitHub \cite{GitHubLR}\\
 - paramètres utilisés :\\
+LinearRegression:
+lim -> 150\\
+limmax -> 80\\
+limmin -> 20\\
+numberPart -> 162195\\
+for ecal == 0 : \\
+        ecalib = 0.960326144365 hcal + 5.92100531606\\
+for ecal != 0 : \\
+        ecalib = 1.34578479311 ecal + 0.987111240421 ecal + 8.27380815395\\
 %\begin{figure}[!h]
 %\begin{center}
 %\includegraphics[height=5cm]{images/pictures/testLinearRegression/LinearRegression_plot3D_training.png}
@@ -282,6 +281,7 @@ Enfin, dans la section \ref{comparaison} nous comparerons ces méthodes.
 %Ici nous constatons que à faible et haut $E_{\rm true}$, la calibration ne donne pas de bons résultats. En effet, la courbe de la moyenne (fit gaussien) s'écarte très fortement d'une constante égale à 1.
 - origine de la courbe de fit\\
 - comment fait-on un fit\\
+-scipy \cite{scipyFit}\\
 %	A différents moment, nous aurons besoin de calculer des moyennes. Or souvent, la moyenne classique ne serait pas représentative de ce que tous souhaitons montrer car certains points sont ont des valeurs $E_{\rm ecal},E_{\rm hcal}$ mal estimées car la simulation prend en compte les défauts des calorimètres. Il serait donc alors incorrecte de les prendre en compte pour juger l'efficacité d'une calibration car ils sont complètement incohérents.\\
 %Pour résoudre ce problème, nous allons ajuster une gaussienne de la distribution des points à moyenner et choisir considérer que la moyenne à prendre en compte est la moyenne de la gaussienne. Ainsi, les points aberrants totalement écarté du centre de la distribution ne perturberont pas le calcul de la moyenne alors que dans le cas d'une moyenne classique, ils peuvent fortement attirer la moyenne vers eux.\\
 %Ces points aberrants peuvent également venir d'une particule qui se serait décomposée avant le calorimètre. Ainsi on trouve près de l'origine, des points à fort $E_{\rm true}$ et pour de faibles valeurs de  $E_{\rm ecal}$ et $E_{\rm hcal}$, et ces points ne sont pas du tout représentatif de l'efficacité d'une calibration. 
@@ -300,7 +300,7 @@ Enfin, dans la section \ref{comparaison} nous comparerons ces méthodes.
 expliquer : \\
 - barre d'erreur\\
 - minimisation du chi2\\
-- un bon chi2 réduit ?
+- un bon chi2 réduit ?\\
 - quand nous ferons un fit gaussien ce sera toujours le même principe\\
 
 %\newpage
@@ -311,7 +311,9 @@ expliquer : \\
 %Ainsi pour prédire une énergie de $E_{\rm calib}^i$ pour un point $(E_{\rm ecal}^i,E_{\rm hcal}^i)$, nous allons regarder dans quel carré il se trouve et retourner la valeur d'énergie calibrée correspondante, faisant apparaître ainsi des "legos".
 %
 \subsection{Résultat de la calibration}
-- paramètres : \\
+- ref Git \cite{GitHubCL}\\
+- paramètres \\
+- biai lié aux bins \\
 %\begin{figure}[!h]
 %\begin{center}
 %\includegraphics[height=4cm]{images/pictures/testCalibrationLego/CalibrationLego_plot3D_legos.eps}
@@ -357,6 +359,9 @@ expliquer : \\
 \label{KNN}
 \subsection{Moyenne pondérée}
 \subsubsection{Principe général de l'algorithme}
+- l'algo\\
+- moyenne pondérée par une gaussienne\\
+- trouver les plus proches voisin sckitlearn \cite{scikitKNN}\\
 %Nous utilisons encore des données simulées pour effectuer une calibration, chaque particule simulée $i$ est vue comme un point d'un espace tridimensionnel possédant des coordonnées $(E_{\rm ecal}^i, E_{\rm hcal}^i,E_{\rm true}^i)$, correspondant respectivement à l'énergie déposée dans le calorimètre électromagnétique, dans le calorimètre hadronique et l'énergie vraie.\\
 %Pour trouver l'énergie calibrée d'un point de coordonnées $(E_{\rm ecal}^0, E_{\rm hcal}^0)$ :
 %\begin{itemize}
@@ -378,7 +383,14 @@ expliquer : \\
 %Dans notre cas nous avons pris pour $g$ la distribution gaussienne $g(\vec{x}) = \exp{-\frac{1}{2}(\frac{(\vec{x} - \vec{x}^0)^2}{\sigma^2})}$, pour donner plus d'importance aux plus proches des k plus proches voisins.\\
 %
 \subsubsection{Résultat de la calibration}
+- doc git \cite{GitHubKNN}
 - paramètres : \\
+lim -> 150\\
+n_neighbors_ecal_eq_0 -> 2000\\
+n_neighbors_ecal_neq_0 -> 250\\
+numberPart -> 162195\\
+recalibrated -> False\\
+sigma -> 5\\
 %\begin{figure}[!h]
 %\begin{center}
 %\includegraphics[width=0.37\textwidth]{images/pictures/testKNN/KNN_plot3D_training.png}
@@ -420,6 +432,9 @@ expliquer : \\
 %
 \subsection{Nettoyage gaussien}
 \subsubsection{Principe général de l'algorithme}
+- on enlève les points éloignés du coeur de la distribution\\
+- principe de l'algo\\
+- interpolation \cite{scipyInterp}\\
 %Cette méthode est assez similaires à la précédente. Elle se base sur la constatation que la distribution en énergie vraie des paquets de plus proches voisins est un distribution gaussienne. Nous allons donc en utilisant la méthode des moindres carrés trouver les paramètres de la gaussienne en question et ne prendre en compte les plus proches voisins dont l'énergie vraie est $\mu -c\sigma \leq E_{\rm true}^i \leq \mu + c\sigma$ (nous prenons par défaut $c = 2$), avec $\mu, \sigma$ la moyenne et l'écart type de la distribution gaussienne.\\
 %Principe de l'algorithme :
 %\begin{itemize}
@@ -443,7 +458,17 @@ expliquer : \\
 %\end{figure}
 %
 \subsubsection{Résultat de la calibration}
+- doc git \cite{GitHubKNNGC}
 - paramètres : \\
+n_neighbors_ecal_eq_0 = 2000\\
+n_neighbors_ecal_neq_0 = 250\\
+weights = 'gaussian'\\
+algorithm = 'auto'\\
+sigma = 5\\
+lim = 150\\
+energystep = 1\\
+kind = 'cubic'\\
+cut = 2\\
 %
 %\begin{figure}[!h]
 %\begin{center}
@@ -480,6 +505,8 @@ expliquer : \\
 %\newpage
 \subsection{Fit gaussien}
 \subsubsection{Principe général de l'algorithme}
+- principe de l'algo\\
+- Ecalib = $\mu$\\
 %Ici, il s'agit du même principe que précédemment mais nous allons considérer que la valeur de $E_{\rm calib}$ est la moyenne de la gaussienne. 
 %Principe de l'algorithme :
 %\begin{itemize}
@@ -494,7 +521,13 @@ expliquer : \\
 %\end{itemize}
 %
 \subsubsection{Résultat de la calibration}
+- doc git \cite{GitHubKNNGF}
 - paramètres : \\
+lim = 150                   # if ecal + hcal > lim, ecalib = math.nan\\
+n_neighbors_ecal_eq_0=2000  # number of neighbors for ecal = 0\\
+n_neighbors_ecal_neq_0=250  # number of neighbors for ecal ? 0\\
+energystep_ecal_eq_0 = 1\\
+energystep_ecal_neq_0 = 5\\
 %\begin{figure}[!h]
 %\begin{center}
 %\includegraphics[width=0.37\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_plot3D_training.png}
@@ -552,11 +585,9 @@ expliquer : \\
 %
 
 \section{Annexes}
-\subsection{Comment créer une calibration?}
 \subsection{Fonctions utiles du programme}
 
 \newpage
-\bibliographystyle{plain} % Le style est mis entre accolades.
 \bibliographystyle{unsrt}
 \bibliography{biblio} % mon fichier de base de données s'appelle biblio.bib
 
