@@ -40,15 +40,40 @@
 \usepackage{stmaryrd} 
 \usepackage{placeins} 
 
+
+% faire du code python
 \usepackage{listings}
 \usepackage{color}
-
-%New colors defined below
-\definecolor{codegreen}{rgb}{0,0.6,0}
-\definecolor{codegray}{rgb}{0.5,0.5,0.5}
-\definecolor{codepurple}{rgb}{0.58,0,0.82}
-\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
-
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,	                   % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=Octave,                 % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=2,	                   % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
 
 
 
@@ -205,7 +230,7 @@ Détaillons alors le comportement des particules  :
 \end{itemize}
 \`A noter que dans notre étude seuls les hadrons neutres nous intéressent. \\
 
-Le connaissance des dépôts d'énergies et du comportement des particules dans les différentes parties du détecteur nous permette de reconnaître et distinguer les particules, cette opération s'appelle le \textit{Particle Flow (PF)}. Cependant, il est aussi nécessaire n'estimer l'énergie des particules ($E_{\rm true})$ à l'aide d'une calibration des calorimètres. En effet, ces derniers ne présentent pas une réponse linéaire et la somme des énergies dans les calorimètres ne correspond pas à l'énergie de la particule. Cette énergie de calibration sera notée $E_{\rm calib}$.
+La connaissance des dépôts d'énergies et du comportement des particules dans les différentes parties du détecteur nous permette de reconnaître et distinguer les particules, cette opération s'appelle le \textit{Particle Flow (PF)}. Cependant, il est aussi nécessaire d'estimer l'énergie des particules ($E_{\rm true})$ à l'aide d'une calibration des calorimètres. En effet, ces derniers ne présentent pas une réponse linéaire et la somme des énergies dans les calorimètres ne correspond pas à l'énergie de la particule. Cette énergie de calibration sera notée $E_{\rm calib}$.
 
 En première approximation, nous déterminerons l'énergie calibrée par une fonction linéaire de l'énergie lue dans le ECAL (énergie notée par la suite $E_{\rm ecal}$) et de celle lue dans le HCAL (notée par la suite $H_{\rm ecal}$). Cette méthode sera présentée dans la section \ref{LR}.
 
@@ -213,113 +238,103 @@ Ensuite, ce rapport présente de nouvelles techniques de calibration qui permette
 Enfin, dans la section \ref{comparaison} nous comparerons ces méthodes. 
 
 \section{Production de l'échantillon}
-- paragraphe de Colin sur la simulation\\
--  passer de Root à pyhton -> 1 ligne pour dire que j'ai fait un script\\
--> plot du nage de point\\
+
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[height=5cm]{images/pictures/testLinearRegression/LinearRegression_plot3D_training.png}
-\caption{Le nuage de points modélisé}
+\caption{Le nuage de points $(E_{\rm ecal},E_{\rm hcal}, E_{\rm true})$}
 \end{center}
 \end{figure}
-- séparation ecal != 0 , ecal = 0 : \\
 
-On séparera et traitera différemment les événements qui ont $E_{\rm ecal} = 0$.  Ces événements sont liés à des particules qui ont interagit avec le détecteur hardronique mais pas avec le détecteur électromagnétique (cf Fig.\ref{detecteur}). Cette séparation se justifie par le fait que modéliser les dépôts d'énergie dans les deux calorimètres pour en conclure ce qui se passe dans le cas particulier où il n'y a des dépôts que dans un amène un biais. Ainsi, à chaque "création" de calibration, on créera en fait deux modèles.\\
--> image illustrant la séparation : ecal + hcal < 150
-%\begin{figure}[!h]
-%\begin{center}
-%\includegraphics[width=0.9\textwidth]{images/pictures/explain/limit.png}
-%\caption{On place une limite à $E_{\rm ecal}+E_{\rm hcal} = 150$. \'A gauche, ..., en haut à droite, ..., en bas à doite, ...}
-%\end{center}
-%\end{figure}
+- paragraphe de Colin sur la simulation\\
+
+Les données simulées sont stockées dans un fichier \textit{.root}. Pour des soucis de compatibilité, j'ai voulu écarter \textit{Root}, qui est à  la fois un programme et une librairie C++ pour tout faire en Python.  J'ai donc écrit un programme \cite{RootToPhython} pour extraire les données du fichier initial pour les déplacer dans un nouveau dans un fichier binaire importable facilement par Python et qui contient pour chaque hadron simulée : son énergie réelle ($E_{\rm true}$), son impulsion, l'énergie déposée dans ECAL ($E_{\rm ecal}$), l'énergie déposée dans HCAL ($E_{\rm hcal}$), la pseudo-rapidité.
+
+On séparera et traitera différemment les événements qui ont $E_{\rm ecal} = 0$.  Ces événements sont liés à des particules qui ont interagit avec le détecteur hardronique mais pas avec le détecteur électromagnétique (cf Fig.\ref{detecteur}). Cette séparation se justifie par le fait que modéliser les dépôts d'énergie dans les deux calorimètres pour en conclure ce qui se passe dans le cas particulier où il n'y a des dépôts que dans un amène un biais. Ainsi, à chaque construction de calibration, on créera en fait deux modèles.
+
+De plus, la simulation crée un palier car les particules sont limitées à $E_{\rm true} = \SIUnits{200}{\giga\electronvolt}$, si l'on regarde par exemple sur la Fig. \ref{limite} ce qui se passe dans le plan $E_{\rm ecal} = 0$, on voit bien ce palier qui apparaît vers $\SIUnits{150}{\giga\electronvolt}$, il est donc ici impossible de déduire une énergie de calibration à partir des points au-delà de cette limite . Avec ce jeu de donnée, nous allons fixer une limite $E_{\rm ecal} + E_{\rm hcal}$  = (lim = \SIUnits{150}{\giga\electronvolt})$.
+
+\begin{figure}[!h]
+    \begin{center}
+        \includegraphics[width=0.9\textwidth]{images/pictures/explain/limit_arrow.png}
+        \caption{On place une limite à $E_{\rm ecal}+E_{\rm hcal} = 150$. Les points verts sont les points rejetés.}
+        \label{limite}
+    \end{center}
+\end{figure}
 
 \section{Calibration par régression linéaire}
 \label{LR}
 
-- Un première calibration, non binnée\\
+Comme première calibration, j'ai utilisé une méthode simple, la régression linéaire. Il s'agit de supposer qu'il existe une relation 
 \begin{equation}
     E_{\rm true} = a_1 E_{\rm ecal} + a_2 E_{\rm hcal} + b
 \end{equation}
-- trouver la meilleure $a_1, a_2, b$\\
-- pas d'incertitude\\
-- méthode des moindres carrés, ref scikitLearn \cite{scikitLR}\\
-- on limite les points de la calibration, lim min, lim max\\
+et de trouver les coefficient $a_1, a_2,  b$ optimaux pour que le modèle coïncide au mieux aux données d'entrainement. Au niveau de la programmation, j'ai utilisé la librairie de \textit{Sciki Learn}  \cite{scikitLR} qui se base une méthode des moindres carrés, c'est à dire dans notre cas, trouver les coefficients qui, pour un ensemble de données d'entraînement  $(E_{\rm ecal}^n,E_{\rm hcal}^n, E_{\rm true}^n)$ minimiseront :
+\begin{equation}
+	\epsilon = \sum_n |E_{\rm true} - a_1 E_{\rm ecal} - a_2 E_{\rm hcal} - b|^2
+\end{equation}
 
-- lancer la calibration, doc GitHub \cite{GitHubLR}\\
-paramères : $\rm{lim} = 150, lim_{min} = 20, lim_{max} = 80$\\
-régession obtenue : \\
-for ecal == 0 : \\
-        ecalib = 0.960326144365 hcal + 5.92100531606\\
-for ecal != 0 : \\
-        ecalib = 1.34578479311 ecal + 0.987111240421 hcal + 8.27380815395\\
--> plot surface, courbe de calibration\\
-- on calibre un second jeu de données\\
--> plot ecalib/etrue\\
-- que vaut la calibration?\\
--> mise en évidence des non linéarités\\
-%\begin{figure}[!h]
-%\begin{center}
-%\includegraphics[height=5cm]{images/pictures/testLinearRegression/LinearRegression_plot3D_surf.eps}
-%\caption{Le nuage de points modélisé (à gauche) par un plan (à droite).}
-%\end{center}
-%\end{figure}
-%
-%Nous avons ainsi modélisé le nuage de point par un plan, pour voir si cela était réaliste, nous allons d'abord regarder ce qui se passe dans le plan $E_{\rm ecal} = 0$ :
-%\begin{figure}[!h]
-%\begin{center}
-%\includegraphics[height =5cm]{images/pictures/testLinearRegression/LinearRegression_calibration.png}
-%\caption{Courbe de calibration pour $E_{\rm ecal} = 0$.}
-%\end{center}
-%\end{figure}
-%
-%Nous constatons alors que la courbe ne passe pas par le le coeur du nuage de point à faible énergie. Pour avoir une vue d'ensemble, nous allons tracer  $E_{\rm calib}/E_{\rm true}$ qui doit être proche de $1$ si la calibration est bonne. \\
-%
-%\begin{figure}[!h]
-%\begin{center}
-%\includegraphics[height =4.5cm]{images/pictures/testLinearRegression/LinearRegression_ecalib_over_etrue_functionof_ecal_hcal.png}
-%\caption{$E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm ecal}$ et $E_{\rm hcal}$.}
-%\end{center}
-%\end{figure}
-%
-%En regardant la figure de droite, nous constatons que comme prévu la régression linéaire est mauvaise à faible énergie car en moyenne, $E_{\rm calib}/E_{\rm true}$ n'est pas proche de $1$. Plus intéressant, la figure de droite met en avant les non-linéarités du nuage de point.\\
-%
-%\begin{figure}[!h]
-%\begin{center}
-%\includegraphics[height =4.5cm]{images/pictures/testLinearRegression/LinearRegression_ecalib_over_etrue.png}
-%\caption{$E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm true}$.}
-%\label{ecaliboveretrueLR}
-%\end{center}
-%\end{figure}
-%
-%Ici nous constatons que à faible et haut $E_{\rm true}$, la calibration ne donne pas de bons résultats. En effet, la courbe de la moyenne (fit gaussien) s'écarte très fortement d'une constante égale à 1.
-- origine de la courbe de fit\\
-- comment fait-on un fit\\
--scipy \cite{scipyFit}\\
-%	A différents moment, nous aurons besoin de calculer des moyennes. Or souvent, la moyenne classique ne serait pas représentative de ce que tous souhaitons montrer car certains points sont ont des valeurs $E_{\rm ecal},E_{\rm hcal}$ mal estimées car la simulation prend en compte les défauts des calorimètres. Il serait donc alors incorrecte de les prendre en compte pour juger l'efficacité d'une calibration car ils sont complètement incohérents.\\
-%Pour résoudre ce problème, nous allons ajuster une gaussienne de la distribution des points à moyenner et choisir considérer que la moyenne à prendre en compte est la moyenne de la gaussienne. Ainsi, les points aberrants totalement écarté du centre de la distribution ne perturberont pas le calcul de la moyenne alors que dans le cas d'une moyenne classique, ils peuvent fortement attirer la moyenne vers eux.\\
-%Ces points aberrants peuvent également venir d'une particule qui se serait décomposée avant le calorimètre. Ainsi on trouve près de l'origine, des points à fort $E_{\rm true}$ et pour de faibles valeurs de  $E_{\rm ecal}$ et $E_{\rm hcal}$, et ces points ne sont pas du tout représentatif de l'efficacité d'une calibration. 
-%
-%\begin{minipage}{0.5\linewidth}
-%	\begin{center}
-%	\includegraphics[height=5cm]{images/pictures/testKNNGF/KNNGaussianFit_example_hist.eps}
-%	\end{center}
-%\end{minipage}
-%\hfill
-%\begin{minipage}{0.45\linewidth}
-%	Ici, on peut voir sur cet exemple que si nous prenons la moyenne classique de $E_{\rm true}$,  on obtient $79.12$, or la moyenne de la gaussienne fitée est de $77.82$, au vu de ce que nous avons dit précédemment, nous considèrerons que la seconde est plus judicieuse.
-%\end{minipage}
-%
-%\subsection{Comment est fait un fit ?}
-expliquer : \\
-- barre d'erreur\\
-- minimisation du chi2\\
-- un bon chi2 réduit ?\\
-- quand nous ferons un fit gaussien ce sera toujours le même principe\\
+Comme j'ai constaté qu'à faible  $E_{\rm ecal},  E_{\rm hcal}$ il y a quelques points à très haut $E_{\rm true}$ qui correspondent à des défauts de la détection des énergies dans les calorimètres, je les ai enlevés des données d'entraînement pour la regression linéaire (cf Fig. \ref{selectedpoints}).
 
-%\newpage
+\begin{figure}[!h]
+    \begin{center}
+        \includegraphics[width=0.9\textwidth]{images/pictures/testLinearRegression/LinearRegression_selectedpoints.png}
+        \caption{En bleu, les points sélectionnés pour faire la régression linéaire.}
+        \label{selectedpoints}
+    \end{center}
+\end{figure}
+
+\begin{minipage}{0.65\linewidth}
+    Nous pouvons à présent effectuer la regression linéaire sur un premier jeu de donné d'entrainement \cite{GitHubLR}  en ne prenant en compte dans la régression que les points tels que $ $\rm{lim_{\rm min}} < E_{\rm ecal} + E_{\rm hcal} < \rm{lim_{\rm max}}$, avec $\rm{lim_{\rm min}} = 10,\rm{lim_{\rm min}} = 150 $. Nous obtenons alors :
+    \[
+    \begin{cases}
+    E_{\rm calib} =  0.95359395 E_{\rm hcal}  + 5.9057809 & E_{\rm ecal} = 0 \\
+    E_{\rm calib} = 0.9876819  E_{\rm hcal}   + 1.3081561  E_{\rm ecal} + 8.5016036 & E_{\rm ecal} \neq 0
+    \end{cases}
+	\]
+\end{minipage}
+\begin{minipage}{0.35\linewidth}
+	\includegraphics[width = \textwidth]{images/pictures/testLinearRegression/LinearRegression_plot3D_surf.eps}
+\end{minipage}
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[height =5cm]{images/pictures/testLinearRegression/LinearRegression_calibration.png}
+\caption{Courbe de calibration pour $E_{\rm ecal} = 0$.}
+\end{center}
+\end{figure}
+
+Nous constatons en particulier dans le cas  $E_{\rm ecal} = 0$ que la courbe ne passe pas par le le coeur du nuage de point à faible  $E_{\rm hcal} = 0$. Maintenant que la régression est faite, nous allons calibrer un second jeu de données et afficher $E_{\rm calib}/$E_{\rm true}$ pour ce nouveau jeu de donnée. $E_{\rm calib}/$E_{\rm true}$ doit être le plus proche possible de 1.
+
+Sur la Fig. \ref{LR_ecaliboveretrue_ecal_hcal}, à gauche, nous constatons que comme prévu la régression linéaire est mauvaise à faible $E_{\rm hcal}$ car en moyenne, $E_{\rm calib}/E_{\rm true}$ n'est pas proche de $1$. Plus intéressant, la figure de droite met en avant les non-linéarités du nuage de point.\\
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[height =4.5cm]{images/pictures/testLinearRegression/LinearRegression_ecalib_over_etrue_functionof_ecal_hcal.png}
+\caption{$E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm ecal}$ et $E_{\rm hcal}$.}
+\label{LR_ecaliboveretrue_ecal_hcal}
+\end{center}
+\end{figure}
+
+
+Sur la Fig. \ref{LR_ecaliboveretrue_etrue} nous constatons également que la calibration s'écarte $E_{\rm calib}/E_{\rm true}$  est trop écartée de 1.
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[height =4.5cm]{images/pictures/testLinearRegression/LinearRegression_ecalib_over_etrue.png}
+\caption{$E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm true}$.}
+\label{LR_ecaliboveretrue_etrue}
+\end{center}
+\end{figure}
+
+Il faut donc proposer une méthode qui prend en compte la non-linéarité entre les 3 variables. 
+
+
+
 \section{Méthode non paramétrique binnée}
 \label{CL}
-- principe de l'algo\\
+Comme nous l'avons vu précédemment, il faut une calibration qui prenne en compte les non-linéarités. Ici, l'idée est de découper le plan $(E_{\rm ecal},E_{\rm hcal})$ en carré et de calculer la moyenne des $E_{\rm true}$ dans chaque carré qui sera la valeur $E_{\rm calib}$. Ainsi pour prédire une énergie de $E_{\rm calib}^i$ pour un point $(E_{\rm ecal}^i,E_{\rm hcal}^i)$, nous allons regarder dans quel carré il se trouve et retourner la valeur d'énergie calibrée correspondante, faisant apparaître ainsi des "legos".
+
+
 - méthode binné\\
 - illustration : \\
 \begin{figure}[!h]
@@ -329,9 +344,7 @@ expliquer : \\
 \end{center}
 \end{figure}
 
-%Comme nous l'avons vu précédemment, il faut une calibration qui prenne en compte les non-linéarité. Ici, l'idée est de découper le plan $(E_{\rm ecal},E_{\rm hcal})$ en carré et de calculer la moyenne des $E_{\rm true}$ dans chaque carré qui sera la valeur $E_{\rm calib}$.\\
-%Ainsi pour prédire une énergie de $E_{\rm calib}^i$ pour un point $(E_{\rm ecal}^i,E_{\rm hcal}^i)$, nous allons regarder dans quel carré il se trouve et retourner la valeur d'énergie calibrée correspondante, faisant apparaître ainsi des "legos".
-%
+
 ->{Résultat de la calibration}
 - lancer la calibration ref Git \cite{GitHubCL}\\
 - paramètres \\
@@ -467,6 +480,28 @@ weights = 'gaussian'\\
 \subsubsection{Principe général de l'algorithme}
 - on enlève les points éloignés du coeur de la distribution\\
 - principe de l'algo\\
+- comment fait-on un fit\\
+-scipy \cite{scipyFit}\\
+%	A différents moment, nous aurons besoin de calculer des moyennes. Or souvent, la moyenne classique ne serait pas représentative de ce que tous souhaitons montrer car certains points sont ont des valeurs $E_{\rm ecal},E_{\rm hcal}$ mal estimées car la simulation prend en compte les défauts des calorimètres. Il serait donc alors incorrecte de les prendre en compte pour juger l'efficacité d'une calibration car ils sont complètement incohérents.\\
+%Pour résoudre ce problème, nous allons ajuster une gaussienne de la distribution des points à moyenner et choisir considérer que la moyenne à prendre en compte est la moyenne de la gaussienne. Ainsi, les points aberrants totalement écarté du centre de la distribution ne perturberont pas le calcul de la moyenne alors que dans le cas d'une moyenne classique, ils peuvent fortement attirer la moyenne vers eux.\\
+%Ces points aberrants peuvent également venir d'une particule qui se serait décomposée avant le calorimètre. Ainsi on trouve près de l'origine, des points à fort $E_{\rm true}$ et pour de faibles valeurs de  $E_{\rm ecal}$ et $E_{\rm hcal}$, et ces points ne sont pas du tout représentatif de l'efficacité d'une calibration. 
+%
+%\begin{minipage}{0.5\linewidth}
+%	\begin{center}
+%	\includegraphics[height=5cm]{images/pictures/testKNNGF/KNNGaussianFit_example_hist.eps}
+%	\end{center}
+%\end{minipage}
+%\hfill
+%\begin{minipage}{0.45\linewidth}
+%	Ici, on peut voir sur cet exemple que si nous prenons la moyenne classique de $E_{\rm true}$,  on obtient $79.12$, or la moyenne de la gaussienne fitée est de $77.82$, au vu de ce que nous avons dit précédemment, nous considèrerons que la seconde est plus judicieuse.
+%\end{minipage}
+%
+%\subsection{Comment est fait un fit ?}
+expliquer : \\
+- barre d'erreur\\
+- minimisation du chi2\\
+- un bon chi2 réduit ?\\
+- quand nous ferons un fit gaussien ce sera toujours le même principe\\
 - interpolation \cite{scipyInterp}\\
 %Cette méthode est assez similaires à la précédente. Elle se base sur la constatation que la distribution en énergie vraie des paquets de plus proches voisins est un distribution gaussienne. Nous allons donc en utilisant la méthode des moindres carrés trouver les paramètres de la gaussienne en question et ne prendre en compte les plus proches voisins dont l'énergie vraie est $\mu -c\sigma \leq E_{\rm true}^i \leq \mu + c\sigma$ (nous prenons par défaut $c = 2$), avec $\mu, \sigma$ la moyenne et l'écart type de la distribution gaussienne.\\
 %Principe de l'algorithme :
