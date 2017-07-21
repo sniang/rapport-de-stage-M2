@@ -71,7 +71,7 @@
 
 \thispagestyle{empty}
 
-\includegraphics[height=2cm]{images/logoens.eps} \hfill \includegraphics[height=2cm]{images/logoucbl.eps} \hfill \includegraphics[height=2cm]{images/logounivlyon.eps}
+\includegraphics[height=2cm]{images/logoens.eps} \hfill \includegraphics[height=2cm]{images/logoucbl.eps} \hfill \includegraphics[height=2cm]{images/logounivlyon.png}
 
 \vspace{1cm}
 
@@ -246,7 +246,7 @@ On séparera et traitera différemment les événements qui ont $E_{\rm ecal} = 0$. 
 - on limite les points de la calibration, lim min, lim max\\
 
 - lancer la calibration, doc GitHub \cite{GitHubLR}\\
-paramères : $lim = 150, lim_{min} = 20, lim_{max} = 80$\\
+paramères : $\rm{lim} = 150, lim_{min} = 20, lim_{max} = 80$\\
 régession obtenue : \\
 for ecal == 0 : \\
         ecalib = 0.960326144365 hcal + 5.92100531606\\
@@ -419,7 +419,7 @@ expliquer : \\
 -{Résultat de la calibration}\\
 -  créer la calibration, doc git \cite{GitHubKNN}
 - paramètres : \\
-$lim =150, n_{\rm neighbors, Ecal = 0} = 2000, n_{\rm neighbors, Ecal \neq 0} = 250, lim = 150, \sigma  = 5$\\
+$\rm{lim} = 150, n_{\rm neighbors, Ecal = 0} = 2000, n_{\rm neighbors, Ecal \neq 0} = 250, \rm{lim} = 150, \sigma  = 5$\\
 weights = 'gaussian'\\
 -> plot surface, courbe de calibration\\
 - on calibre un second jeu de données\\
@@ -493,7 +493,7 @@ weights = 'gaussian'\\
 \subsubsection{Résultat de la calibration}
 - doc git \cite{GitHubKNNGC}
 - paramètres : \\
-$lim =150, n_{\rm neighbors, Ecal = 0} = 2000, n_{\rm neighbors, Ecal \neq 0} = 250, lim = 150, \sigma  = 5$\\
+$\rm{lim} = 150, n_{\rm neighbors, Ecal = 0} = 2000, n_{\rm neighbors, Ecal \neq 0} = 250, \rm{lim} = 150, \sigma  = 5$\\
 weights = 'gaussian'\\
 algorithm = 'auto'\\
 energystep = 1\\
@@ -557,7 +557,7 @@ cut = 2\\
 \subsubsection{Résultat de la calibration}
 - doc git \cite{GitHubKNNGF}
 - paramètres : \\
-$lim =150, n_{\rm neighbors, Ecal = 0} = 2000, n_{\rm neighbors, Ecal \neq 0} = 250, lim = 150, \sigma  = 5$\\
+$\rm{lim} = 150, n_{\rm neighbors, Ecal = 0} = 2000, n_{\rm neighbors, Ecal \neq 0} = 250, \rm{lim} = 150, \sigma  = 5$\\
 algorithm = 'auto'\\
 kind = 'cubic'\\
 energystep_ecal_eq_0 = 1\\
