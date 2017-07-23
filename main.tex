@@ -391,11 +391,11 @@ La Fig. \ref{ecaliboveretrueCL_etrue} nous montre une fois de plus que $E_{\rm c
 \section{Méthodes basées sur les plus proches voisins}
 \label{KNN}
 \subsection{Moyenne pondérée}
-Nous utilisons encore des données simulées pour effectuer une calibration, chaque particule simulée $i$ est vue comme un point d'un espace tridimensionnel possédant des coordonnées $(E_{\rm ecal}^i, E_{\rm hcal}^i,E_{\rm true}^i)$.
+Nous utilisons encore des données simulées pour effectuer la calibration : chaque particule simulée $i$ est vue comme un point d'un espace tridimensionnel possédant des coordonnées $(E_{\rm ecal}^i, E_{\rm hcal}^i,E_{\rm true}^i)$.
 Pour trouver l'énergie calibrée d'un point de coordonnées $(E_{\rm ecal}^0, E_{\rm hcal}^0)$ :
 \begin{itemize}
 	\item on recherche ses $k$ plus proches voisins dans le plan $(E_{\rm ecal}, E_{\rm hcal}) \rightarrow (E_{\rm ecal}^i, E_{\rm hcal}^i), i \in [|1,...,k|]$
-	\item on effectue une moyenne pondérée une moyenne pondérée de l'énergie vraie de ces plus proches voisins $\rightarrow E_{\rm calib}^0$ : l'énergie calibrée 
+	\item on effectue une moyenne pondérée une moyenne pondérée des $E_{\rm true}^i$ de ces plus proches voisins $\rightarrow E_{\rm calib}^0$ : l'énergie calibrée 
 \end{itemize}
 
 La moyenne pondérée va donc s'exprimer ainsi :
@@ -463,7 +463,7 @@ Effectuons alors la calibration d'un second jeu de données :
 \end{center}
 \end{figure}
 
-Nous constations que partout l'énergie de calibration est sur-estimée et particulièrement à bas$E_{\rm ecal}$ et $E_{\rm hcal}$ si l'on regarde \r la Fig. \ref{ecaliboveretrueKNNGC_ecal_hcal}.
+Nous constatons que partout l'énergie de calibration est sur-estimée et particulièrement à bas $E_{\rm ecal}$ et $E_{\rm hcal}$ si l'on regarde la Fig. \ref{ecaliboveretrueKNN_ecal_hcal}.
 
 
 
