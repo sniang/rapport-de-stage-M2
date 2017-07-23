@@ -41,6 +41,8 @@
 \usepackage{placeins} 
 
 
+\usepackage{caption}
+
 % faire du code python
 \usepackage{listings}
 \usepackage{color}
@@ -88,7 +90,7 @@
 \usepackage[printwatermark]{xwatermark}
 \newwatermark[allpages,color=red!50,angle=45,scale=3,xpos=0,ypos=0]{DRAFT}
 
-
+  
 \begin{document}
 
 % Pour faciliter la mise en forme de la page du titre, on supprime l'indentation automatique en dÃƒÂ©but de paragraphe
@@ -256,7 +258,7 @@ De plus, la simulation crée un palier car les particules sont limitées à $E_{\rm
 
 \begin{figure}[!h]
     \begin{center}
-        \includegraphics[width=0.9\textwidth]{images/pictures/explain/limit_arrow.png}
+        \includegraphics[width=\textwidth]{images/pictures/explain/limit_arrow.png}
         \caption{On place une limite à $E_{\rm ecal}+E_{\rm hcal} = 150$. Les points verts sont les points rejetés.}
         \label{limite}
     \end{center}
@@ -278,7 +280,7 @@ Comme j'ai constaté qu'à faible  $E_{\rm ecal},  E_{\rm hcal}$ il y a quelques p
 
 \begin{figure}[!h]
     \begin{center}
-        \includegraphics[width=0.9\textwidth]{images/pictures/testLinearRegression/LinearRegression_selectedpoints.png}
+        \includegraphics[width=\textwidth]{images/pictures/testLinearRegression/LinearRegression_selectedpoints.png}
         \caption{En bleu, les points sélectionnés pour faire la régression linéaire.}
         \label{selectedpoints}
     \end{center}
@@ -295,6 +297,7 @@ Comme j'ai constaté qu'à faible  $E_{\rm ecal},  E_{\rm hcal}$ il y a quelques p
 \end{minipage}
 \begin{minipage}{0.35\linewidth}
 	\includegraphics[width = \textwidth]{images/pictures/testLinearRegression/LinearRegression_plot3D_surf.eps}
+	\captionof{figure}{Nuage de points modélisé par un plan}
 \end{minipage}
 
 \begin{figure}[!h]
@@ -332,67 +335,59 @@ Il faut donc proposer une méthode qui prend en compte la non-linéarité entre les
 
 \section{Méthode non paramétrique binnée}
 \label{CL}
-Comme nous l'avons vu précédemment, il faut une calibration qui prenne en compte les non-linéarités. Ici, l'idée est de découper le plan $(E_{\rm ecal},E_{\rm hcal})$ en carré et de calculer la moyenne des $E_{\rm true}$ dans chaque carré qui sera la valeur $E_{\rm calib}$. Ainsi pour prédire une énergie de $E_{\rm calib}^i$ pour un point $(E_{\rm ecal}^i,E_{\rm hcal}^i)$, nous allons regarder dans quel carré il se trouve et retourner la valeur d'énergie calibrée correspondante, faisant apparaître ainsi des "legos".
+\noindent
+\begin{minipage}{0.60\linewidth}
+Ici, l'idée est de découper le plan $(E_{\rm ecal},E_{\rm hcal})$ en carré et de calculer la moyenne des $E_{\rm true}$ dans chaque carré qui sera la valeur $E_{\rm calib}$. Ainsi pour prédire une énergie de $E_{\rm calib}^i$ pour un point $(E_{\rm ecal}^i,E_{\rm hcal}^i)$, nous allons regarder dans quel carré il se trouve et retourner la valeur d'énergie calibrée correspondante. Nous pouvons voir sur la Fig. \ref{legos} une illustration où la hauteur de chaque brique correspond à l'énergie calibrée d'un carré.
+\end{minipage}
+\begin{minipage}{0.4\linewidth}
+	\includegraphics[width=\linewidth]{images/pictures/testCalibrationLego/CalibrationLego_plot3D_legos.eps}
+	\captionof{figure}{Illustration de la calibration avec $100\times100$ carrés.}
+	\label{legos}
+\end{minipage}
 
+L'avantage de cette calibration est de prendre en compte ce qui se passe localement dans la distribution contrairement à la régression linéaire, mais elle a pour désavantage d'être liée au pas des carrés. Un pas trop grand fait perdre en précision, un pas trop petit laisse des trous dans la position des briques (cf Fig. \ref{legos}), et fait exploser le temps de calcul. 
 
-- méthode binné\\
-- illustration : \\
+\noindent
+\begin{minipage}{0.60\linewidth}
+Construisons la calibration \cite{GitHubCL} à l'aide d'un premier jeu de données, avec $100\times100$ carrés. Premièrement, nous constatons que la surface est toute cabossée, et si nous regardons ce qui se passe dans le plan $E{\rm ecal} = 0$ (Fig. \ref{calibCL}), nous voyons que cette méthode binnée donne des énergies calibrée $E_{\rm calib}$ égales pour des ensembles de points, par paliers. Deuxièmement, nous constatons une fois de plus que la courbe de calibration ne passe pas par le coeur de la distribution à bas $E_{\rm hcal}$, $E_{\rm calib}$ y est sur-évaluée.
+\end{minipage}
+\hfill
+\begin{minipage}{0.4\linewidth}
+	\includegraphics[width=\textwidth]{images/pictures/testCalibrationLego/CalibrationLego_plot3D_surf.eps}
+	\captionof{figure}{Surface de calibration avec $100\times100$ carrés.}
+	\label{legos}
+\end{minipage}
+
 \begin{figure}[!h]
 \begin{center}
-\includegraphics[height=4cm]{images/pictures/testCalibrationLego/CalibrationLego_plot3D_legos.eps}
-\caption{Le nuage de points modélisé par des legos}
+\includegraphics[width=\textwidth]{images/pictures/testCalibrationLego/CalibrationLego_calibration.png}
+\caption{Courbe de calibration pour $E_{\rm ecal} = 0$.}
+\label{calibCL}
 \end{center}
 \end{figure}
 
+Effectuons la calibration d'un second jeu de données :
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=\textwidth]{images/pictures/testCalibrationLego/CalibrationLego_ecalib_over_etrue.png}
+\caption{$E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm true}$. Nous voyons clairement une structure qui s'est formée liée au caractère binnée de la méthode.}
+\label{ecaliboveretrueCL}
+\end{center}
+\end{figure}
 
-->{Résultat de la calibration}
-- lancer la calibration ref Git \cite{GitHubCL}\\
-- paramètres \\
--> plot surface, courbe de calibration\\
-- on calibre un second jeu de données\\
--> plot ecalib/etrue\\
-- biais lié aux bins \\
-%\begin{figure}[!h]
-%\begin{center}
-%\includegraphics[height=4cm]{images/pictures/testCalibrationLego/CalibrationLego_plot3D_legos.eps}
-%\includegraphics[height=4cm]{images/pictures/testCalibrationLego/CalibrationLego_plot3D_surf.eps}
-%\caption{Le nuage de points modélisé par des legos (à gauche) ainsi que la surface correspondante (à droite). $100\times100$ legos.}
-%\end{center}
-%\end{figure}
-%
-%\begin{figure}[!h]
-%\begin{center}
-%\includegraphics[width=0.9\textwidth]{images/pictures/testCalibrationLego/CalibrationLego_calibration.png}
-%\caption{Courbe de calibration pour $E_{\rm ecal} = 0$.}
-%\end{center}
-%\end{figure}
-%
-%Bien que cette méthode prenne en compte les linéarité, nous pouvons voir sur les figures ci-dessus qu'il y a un effet de pas, ce qui n'est pas bon car beaucoup trop d'événements on le même $E_{\rm calib}$ et la courbe de calibration ne suit pas bien le coeur de distribution, surtout à faible énergie.
-%
-%
-%\begin{figure}[!h]
-%\begin{center}
-%\includegraphics[width=0.9\textwidth]{images/pictures/testCalibrationLego/CalibrationLego_ecalib_over_etrue.png}
-%\caption{$E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm true}$.}
-%\label{ecaliboveretrueCL}
-%\end{center}
-%\end{figure}
-%
-%Cet effet de pas se retrouve également si l'on trace $E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm true}$ (Fig. \ref{ecaliboveretrueCL}) et nous y voyons alors un structure (des hyperboles) liées aux points qui ont la même énergie de calibration (contrairement à la régression linéaire Fig.  \ref{ecaliboveretrueLR}).\\
-%Cet illustration montre à nouveau que nous sommes loin d'une répartition des points autour de $E_{\rm calib}/E_{\rm true} = 1$.
-%
-%\begin{figure}[!h]
-%\begin{center}
-%\includegraphics[width=0.9\textwidth]{images/pictures/testCalibrationLego/CalibrationLego_ecalib_over_etrue_functionof_ecal_hcal.png}
-%\caption{$E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm ecal}$ et $E_{\rm hcal}$.}
-%\end{center}
-%\end{figure}
-%
-%Ici nous constatons malgré tout que nous avons mieux pris en compte la non-linéarité, mais que en majorité, l'énergie calibrée est sur-estimée.
-%
-%
-%
-%
+Nous remarquons que la présence de paliers dans la courbe de calibration biaise la calibration en faisant apparaître une structure (des hyperboles) dans $E_{\rm calib}/E_{\rm true}$ comme nous pouvons le voir dans la Fig. \ref{ecaliboveretrueCL}, structure liée aux points qui ont la même énergie de calibration, contrairement à la régression linéaire (cf Fig.  \ref{LR_ecaliboveretrue_etrue}). 
+Nous constatons également sur la Fig. \ref{ecaliboveretrueCL} que $E_{\rm calib}/E_{\rm true}$ est en moyenne constamment $> 1$, ce qui montre qu'il y a une tendance à la sur-évaluation de $E_{\rm calib}$.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=\textwidth]{images/pictures/testCalibrationLego/CalibrationLego_ecalib_over_etrue_functionof_ecal_hcal.png}
+\caption{$E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm ecal}$ et $E_{\rm hcal}$.}
+\label{ecaliboveretrueCL_etrue}
+\end{center}
+\end{figure}
+
+La Fig. \ref{ecaliboveretrueCL_etrue} nous montre une fois de plus que $E_{\rm calib}/E_{\rm true}$  est globalement sur-évaluée, mais que cette fois si, nous avons pris en compte les non-linéarités. Il nous faut alors une méthode qui reprenne l'idée de moyenner des $E_{\rm true}$ en enlevant les contraintes et biais provenants des bins.
+
 \section{Méthodes basées sur les plus proches voisins}
 \label{KNN}
 \subsection{Moyenne pondérée}
@@ -401,7 +396,7 @@ Comme nous l'avons vu précédemment, il faut une calibration qui prenne en compte
 
 \begin{figure}[!h]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_neighborhood.png}
+		\includegraphics[width=\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_neighborhood.png}
 		\caption{$n_{voisins} = 2000$ pour $E_{\rm ecal} = 0$, $n_{voisins} = 250$ pour $E_{\rm ecal} \neq 0$}
 		\label{neighbors}
 		\end{center}
@@ -415,7 +410,7 @@ Comme nous l'avons vu précédemment, il faut une calibration qui prenne en compte
 %	\item on recherche ses $k$ plus proches voisins dans le plan $(E_{\rm ecal}, E_{\rm hcal}) \rightarrow (E_{\rm ecal}^i, E_{\rm hcal}^i), i \in [|1,...,k|]$
 %	\begin{figure}[!h]
 %	\begin{center}
-%		\includegraphics[width=0.9\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_neighborhood.png}
+%		\includegraphics[width=\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_neighborhood.png}
 %		\caption{$n_{voisins} = 2000$ pour $E_{\rm ecal} = 0$, $n_{voisins} = 250$ pour $E_{\rm ecal} \neq 0$}
 %		\label{neighbors}
 %		\end{center}
@@ -450,7 +445,7 @@ weights = 'gaussian'\\
 %
 %\begin{figure}[!h]
 %\begin{center}
-%\includegraphics[width=0.9\textwidth]{images/pictures/testKNN/KNN_calibration.png}
+%\includegraphics[width=\textwidth]{images/pictures/testKNN/KNN_calibration.png}
 %\caption{Courbe de calibration pour $E_{\rm ecal} = 0$.}
 %\end{center}
 %\end{figure}
@@ -459,7 +454,7 @@ weights = 'gaussian'\\
 %
 %\begin{figure}[!h]
 %\begin{center}
-%\includegraphics[width=0.9\textwidth]{images/pictures/testKNN/KNN_ecalib_over_etrue.png}
+%\includegraphics[width=\textwidth]{images/pictures/testKNN/KNN_ecalib_over_etrue.png}
 %\caption{$E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm true}$.}
 %\label{ecaliboveretrueKNN}
 %\end{center}
@@ -469,7 +464,7 @@ weights = 'gaussian'\\
 %
 %\begin{figure}[!h]
 %\begin{center}
-%\includegraphics[width=0.9\textwidth]{images/pictures/testKNN/KNN_ecalib_over_etrue_functionof_ecal_hcal.png}
+%\includegraphics[width=\textwidth]{images/pictures/testKNN/KNN_ecalib_over_etrue_functionof_ecal_hcal.png}
 %\caption{$E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm ecal}$ et $E_{\rm hcal}$.}
 %\end{center}
 %\end{figure}
@@ -520,7 +515,7 @@ expliquer : \\
 %\subsection{Efficacité du fit}
 %\begin{figure}[!h]
 %\begin{center}
-%\includegraphics[width=0.9\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_chi2_calib.eps}
+%\includegraphics[width=\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_chi2_calib.eps}
 %\caption{Le $\chi^2$ réduit pour chaque fit effectué.}
 %\end{center}
 %\end{figure}
@@ -549,21 +544,21 @@ cut = 2\\
 %
 %\begin{figure}[!h]
 %\begin{center}
-%\includegraphics[width=0.9\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_calibration.png}
+%\includegraphics[width=\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_calibration.png}
 %\caption{Courbe de calibration pour $E_{\rm ecal} = 0$.}
 %\end{center}
 %\end{figure}
 %
 %\begin{figure}[!h]
 %\begin{center}
-%\includegraphics[width=0.9\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_ecalib_over_etrue_functionof_ecal_hcal.png}
+%\includegraphics[width=\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_ecalib_over_etrue_functionof_ecal_hcal.png}
 %\caption{$E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm ecal}$ et $E_{\rm hcal}$.}
 %\end{center}
 %\end{figure}
 %
 %\begin{figure}[!h]
 %\begin{center}
-%\includegraphics[width=0.9\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_ecalib_over_etrue.png}
+%\includegraphics[width=\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_ecalib_over_etrue.png}
 %\caption{$E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm true}$.}
 %\end{center}
 %\end{figure}
@@ -612,21 +607,21 @@ energystep_ecal_neq_0 = 5\\
 %
 %\begin{figure}[!h]
 %\begin{center}
-%\includegraphics[width=0.9\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_calibration.png}
+%\includegraphics[width=\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_calibration.png}
 %\caption{Courbe de calibration pour $E_{\rm ecal} = 0$.}
 %\end{center}
 %\end{figure}
 %
 %\begin{figure}[!h]
 %\begin{center}
-%\includegraphics[width=0.9\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_ecalib_over_etrue_functionof_ecal_hcal.png}
+%\includegraphics[width=\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_ecalib_over_etrue_functionof_ecal_hcal.png}
 %\caption{$E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm ecal}$ et $E_{\rm hcal}$.}
 %\end{center}
 %\end{figure}
 %
 %\begin{figure}[!h]
 %\begin{center}
-%\includegraphics[width=0.9\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_ecalib_over_etrue.png}
+%\includegraphics[width=\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_ecalib_over_etrue.png}
 %\caption{$E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm true}$.}
 %\end{center}
 %\end{figure}
@@ -640,7 +635,7 @@ energystep_ecal_neq_0 = 5\\
 \subsection{Méthodes des plus proches voisins}
 %\begin{figure}[!h]
 %\begin{center}
-%\includegraphics[width=0.9\textwidth]{images/pictures/comparisons/comparison1.eps}
+%\includegraphics[width=\textwidth]{images/pictures/comparisons/comparison1.eps}
 %\caption{$E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm true}$.}
 %\end{center}
 %\end{figure}
@@ -649,7 +644,7 @@ energystep_ecal_neq_0 = 5\\
 %\section{Meilleure méthode}
 %\begin{figure}[!h]
 %\begin{center}
-%\includegraphics[width=0.9\textwidth]{images/pictures/comparisons/comparison2.eps}
+%\includegraphics[width=\textwidth]{images/pictures/comparisons/comparison2.eps}
 %\caption{$E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm true}$.}
 %\end{center}
 %\end{figure}
