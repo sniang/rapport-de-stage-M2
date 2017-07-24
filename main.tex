@@ -31,7 +31,7 @@
 \usepackage{fancyhdr} 
 \usepackage{epstopdf} 
 \usepackage[squaren,Gray]{SIunits}
-\usepackage{tabularx} % gestion avancÃƒÂ©e des tableaux
+\usepackage{tabularx} % gestion avancÃƒÆ’Ã‚Â©e des tableaux
 \usepackage{url}
 \usepackage{hyperref}
 \usepackage{bbold}
@@ -80,11 +80,11 @@
 
 
 \pagestyle{fancy}
-\fancyhead[L]{\scriptsize \textsc{Une méthode de calibration non paramétrique pour les calorimètres de CMS}}
+\fancyhead[L]{\scriptsize \textsc{Une mÃ©thode de calibration non paramÃ©trique pour les calorimÃ¨tres de CMS}}
 \fancyhead[R]{\scriptsize \textsc{Samuel Niang}} 
 \fancyfoot[C]{ \thepage}
 
-% commande de dÃƒÂ©placement d'un objet
+% commande de dÃƒÆ’Ã‚Â©placement d'un objet
 \newcommand{\drawat}[3]{\makebox[0pt][l]{\raisebox{#2}{\hspace*{#1}#3}}}
 
 \usepackage[printwatermark]{xwatermark}
@@ -93,7 +93,7 @@
   
 \begin{document}
 
-% Pour faciliter la mise en forme de la page du titre, on supprime l'indentation automatique en dÃƒÂ©but de paragraphe
+% Pour faciliter la mise en forme de la page du titre, on supprime l'indentation automatique en dÃƒÆ’Ã‚Â©but de paragraphe
 \setlength{\parindent}{0pt}
 
 \thispagestyle{empty}
@@ -103,9 +103,9 @@
 \vspace{1cm}
 
 \begin{tabularx}{\textwidth}{@{} l X l @{} }
-{\sc Master Science de la matière} & & Rapport de stage\\
-{\it \'{E}cole Normale Supérieure de Lyon} & & Samuel Niang\\
-{\it Université Claude Bernard Lyon I} & & M2 Physique - Concepts et applications
+{\sc Master Science de la matiÃ¨re} & & Rapport de stage\\
+{\it \'{E}cole Normale SupÃ©rieure de Lyon} & & Samuel Niang\\
+{\it UniversitÃ© Claude Bernard Lyon I} & & M2 Physique - Concepts et applications
 
 \end{tabularx}
 
@@ -116,15 +116,15 @@
 
 \rule[11pt]{5cm}{0.5pt}
 
-\textbf{\huge Une méthode de calibration non paramétrique pour les calorimètres de CMS.}
+\textbf{\huge Une mÃ©thode de calibration non paramÃ©trique pour les calorimÃ¨tres de CMS.}
 
 \rule{5cm}{0.5pt}
 
 \vspace{2cm}
 
 \parbox{15cm}{\small
-\textbf{Résumé} : \\
-\rm Dans le détecteur CMS, l'énergie des hadrons neutres est déterminée à partir de l'énergie mesurée dans les calorimètres électromagnétiques ($E_{\rm ecal}$) et hadroniques ($E_{\rm hcal}$). Une calibration est cependant nécessaire pour estimer l'énergie vraie du hadron neutre à partir de $E_{\rm ecal}$ et $E_{\rm hcal}$. Dans un premier temps, j'ai utilisé comme calibration une fonction linéaire de $E_{\rm ecal}$ et $E_{\rm hcal}$. Ensuite, afin de décrire la non linéarité de la mesure de l'énergie, j'ai inventé une nouvelle méthode de calibration non paramétrique.
+\textbf{RÃ©sumÃ©} : \\
+\rm Dans le dÃ©tecteur CMS, l'Ã©nergie des hadrons neutres est dÃ©terminÃ©e Ã  partir de l'Ã©nergie mesurÃ©e dans les calorimÃ¨tres Ã©lectromagnÃ©tiques ($E_{\rm ecal}$) et hadroniques ($E_{\rm hcal}$). Une calibration est cependant nÃ©cessaire pour estimer l'Ã©nergie vraie du hadron neutre Ã  partir de $E_{\rm ecal}$ et $E_{\rm hcal}$. Dans un premier temps, j'ai utilisÃ© comme calibration une fonction linÃ©aire de $E_{\rm ecal}$ et $E_{\rm hcal}$. Ensuite, afin de dÃ©crire la non linÃ©aritÃ© de la mesure de l'Ã©nergie, j'ai inventÃ© une nouvelle mÃ©thode de calibration non paramÃ©trique.
 }
 
 \vspace{1cm}
@@ -138,23 +138,23 @@
 \vspace{1cm}
 
 \parbox{15cm}{
-\textbf{Mots clefs} : \it Calibration, Modélisation, Physique des particules
+\textbf{Mots clefs} : \it Calibration, ModÃ©lisation, Physique des particules
 } 
 
 \vspace{0.5cm}
 
 \parbox{15cm}{
-Stage encadré par :
+Stage encadrÃ© par :
 
 {\bf Colin Bernet}
 \href{mailto:colin.bernet@cern.ch}{\tt colin.bernet@cern.ch} 
 
 %Nom du Laboratoire d'accueil
 
-{\it Bâtiment Paul Dirac\\
+{\it BÃ¢timent Paul Dirac\\
 4, Rue Enrico Fermi\\
 69622 Villeurbanne Cedex\\
-Tél. : +33 (0) 4 72 44 84 57}
+TÃ©l. : +33 (0) 4 72 44 84 57}
 
 } %fin de la commande \parbox encadrant / laboratoire d'accueil
 
@@ -177,69 +177,69 @@ Tél. : +33 (0) 4 72 44 84 57}
 
 \newpage
 \section{Introduction}
-Après avoir permis la découverte expérimentale du boson de Higgs en 2012, les expériences généralistes ATLAS \cite{HiggsATLAS} et CMS \cite{HiggsCMS} installées sur le LHC du CERN, sont toujours en place dans l'optique de découvrir de la nouvelle physique au-delà du modèle standard.
+AprÃ¨s avoir permis la dÃ©couverte expÃ©rimentale du boson de Higgs en 2012, les expÃ©riences gÃ©nÃ©ralistes ATLAS \cite{HiggsATLAS} et CMS \cite{HiggsCMS} installÃ©es sur le LHC du CERN, sont toujours en place dans l'optique de dÃ©couvrir de la nouvelle physique au-delÃ  du modÃ¨le standard.
 
-Les détecteurs ATLAS et CMS sont basés sur les mêmes principes : cylindriques, ils sont constitués d'un ensemble de sous-détecteurs disposés en couches concentriques autour du point d'interaction. Les informations provenant de ces sous-détecteurs sont combinées pour déterminer le type, l'énergie et la direction des particules de l'état final de la collision, pour pouvoir mesurer les propriétés de celle-ci, et par exemple determiner si une particule instable encore inconnue a été produite. 
+Les dÃ©tecteurs ATLAS et CMS sont basÃ©s sur les mÃªmes principes : cylindriques, ils sont constituÃ©s d'un ensemble de sous-dÃ©tecteurs disposÃ©s en couches concentriques autour du point d'interaction. Les informations provenant de ces sous-dÃ©tecteurs sont combinÃ©es pour dÃ©terminer le type, l'Ã©nergie et la direction des particules de l'Ã©tat final de la collision, pour pouvoir mesurer les propriÃ©tÃ©s de celle-ci, et par exemple dÃ©terminer si une particule instable encore inconnue a Ã©tÃ© produite. 
 
-Nous allons nous intéresser plus spécifiquement au détecteur CMS \cite{CMS}. Celui-ci dispose  :
+Nous allons nous intÃ©resser plus spÃ©cifiquement au dÃ©tecteur CMS \cite{CMS}. Celui-ci dispose  :
 \begin{itemize}
-\item d'un champ magnétique, pour courber la trajectoire des particules chargées;
-\item d'un trajectographe, pour reconstruire la trajectoire des particules chargées, et ainsi obtenir la charge et l'impulsion;
-\item d'un calorimètre électromagnétique (ECAL) \cite{ECAL}, constitué d'un cristal de tungstate de plomb, permettant de collecter les dépôts d'énergie des particules, principalement électrons et photons, mais aussi hadrons chargés et neutres);
-\item d'un calorimètre hadronique (HCAL) \cite{HCAL}, composé de plusieurs couches d'absorbeur en laiton et de carreaux scintillateurs en plastique, avec une segmentation grossière. La resolution du HCAL pour la mesure de l'energie $E$ d'un hadron est de l'ordre de $100\%\sqrt{(E / \SIUnits{}{\giga\electronvolt})}$;
-\item de chambres à muons, qui permettent l'dentification de ces particules, les seules à pouvoir y parvenir.
+\item d'un champ magnÃ©tique, pour courber la trajectoire des particules chargÃ©es;
+\item d'un trajectographe, pour reconstruire la trajectoire des particules chargÃ©es, et ainsi obtenir la charge et l'impulsion;
+\item d'un calorimÃ¨tre Ã©lectromagnÃ©tique (ECAL) \cite{ECAL}, constituÃ© d'un cristal de tungstate de plomb, permettant de collecter les dÃ©pÃ´ts d'Ã©nergie des particules, principalement Ã©lectrons et photons, mais aussi hadrons chargÃ©s et neutres;
+\item d'un calorimÃ¨tre hadronique (HCAL) \cite{HCAL}, composÃ© de plusieurs couches d'absorbeur en laiton et de carreaux scintillateurs en plastique, avec une segmentation grossiÃ¨re. La resolution du HCAL pour la mesure de l'energie $E$ d'un hadron est de l'ordre de $100\%\sqrt{(E / \SIUnits{}{\giga\electronvolt})}$;
+\item de chambres Ã  muons, qui permettent l'dentification de ces particules, les seules Ã  pouvoir y parvenir.
 \end{itemize}
 
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[width=0.7\textwidth]{images/detecteur.pdf}
-\caption{Une esquisse des interactions spécifiques des particules dans une tranche transversale du détecteur CMS.}
+\caption{Une esquisse des interactions spÃ©cifiques des particules dans une tranche transversale du dÃ©tecteur CMS.}
 \label{schemaCMS}
 \label{detecteur}
 \end{center}
 \end{figure}
 
-Détaillons alors le comportement des particules  :
+DÃ©taillons alors le comportement des particules  :
 \begin{itemize}
     \item photons (exemple 1 dans la Fig. \ref{schemaCMS}) :
     	\begin{itemize}
-		\item déposent leur énergie dans ECAL;
+		\item dÃ©posent leur Ã©nergie dans ECAL;
 	\end{itemize}
     \item $e^+,e^-$ (exemple 2 dans la Fig. \ref{schemaCMS}) :
         \begin{itemize}
         		\item produisent une trace dans le trajectographe;
-		\item déposent leur énergie dans ECAL;
+		\item dÃ©posent leur Ã©nergie dans ECAL;
         \end{itemize}
-    \item hadrons chargés (exemple 3 dans la Fig. \ref{schemaCMS}) :
+    \item hadrons chargÃ©s (exemple 3 dans la Fig. \ref{schemaCMS}) :
         \begin{itemize}
         		\item produisent une trace dans le trajectographe;
-    		\item déposent en minorité des cas leur énergie dans ECAL;
-    		\item déposent leur énergie dans HCAL;
-		\item fin de course dans HCAL;
+    		\item dÃ©posent en minoritÃ© des cas leur Ã©nergie dans ECAL;
+    		\item dÃ©posent leur Ã©nergie dans HCAL;
+		\item finnissent leur course dans HCAL;
         \end{itemize}
     \item hadrons neutres (exemple 4 dans la Fig. \ref{schemaCMS}) :
         \begin{itemize}
-        		\item déposent leur énergie dans le HCAL;
-		\item déposent en minorité des cas leur énergie dans ECAL;
-		\item fin de course dans HCAL;
+        		\item dÃ©posent leur Ã©nergie dans le HCAL;
+		\item dÃ©posent dans la minoritÃ© des cas leur Ã©nergie dans ECAL;
+		\item finnissent leur course dans HCAL;
         \end{itemize}
     \item $\mu^+,\mu^-$ (exemple 5 dans la Fig. \ref{schemaCMS}) :
         \begin{itemize}
         		\item produisent une trace dans le trajectographe;
 		\item traversent ECAL, HCAL;
-		\item chambre à muons.
+		\item sont visibles dans la chambre Ã  muons.
         \end{itemize}
 \end{itemize}
-\`A noter que dans notre étude seuls les hadrons neutres nous intéressent. \\
+\`A noter que dans notre Ã©tude, seuls les hadrons neutres nous intÃ©ressent. \\
 
-La connaissance des dépôts d'énergies et du comportement des particules dans les différentes parties du détecteur nous permette de reconnaître et distinguer les particules, cette opération s'appelle le \textit{Particle Flow (PF)}. Cependant, il est aussi nécessaire d'estimer l'énergie des particules ($E_{\rm true})$ à l'aide d'une calibration des calorimètres. En effet, ces derniers ne présentent pas une réponse linéaire et la somme des énergies dans les calorimètres ne correspond pas à l'énergie de la particule. Cette énergie de calibration sera notée $E_{\rm calib}$.
+La connaissance des dÃ©pÃ´ts d'Ã©nergie et du comportement des particules dans les diffÃ©rentes parties du dÃ©tecteur nous permettent de reconnaÃ®tre et distinguer les particules : cette opÃ©ration s'appelle le \textit{Particle Flow (PF)}. Cependant, il est aussi nÃ©cessaire d'estimer l'Ã©nergie des particules ($E_{\rm true})$ Ã  l'aide d'une calibration des calorimÃ¨tres. En effet, ces derniers ne prÃ©sentent pas une rÃ©ponse linÃ©aire et la somme des Ã©nergies dans les calorimÃ¨tres ne correspond pas Ã  l'Ã©nergie de la particule. Cette Ã©nergie de calibration sera notÃ©e $E_{\rm calib}$.
 
-En première approximation, nous déterminerons l'énergie calibrée par une fonction linéaire de l'énergie lue dans le ECAL (énergie notée par la suite $E_{\rm ecal}$) et de celle lue dans le HCAL (notée par la suite $H_{\rm ecal}$). Cette méthode sera présentée dans la section \ref{LR}.
+En premiÃ¨re approximation, nous dÃ©terminerons l'Ã©nergie calibrÃ©e par une fonction linÃ©aire de l'Ã©nergie lue dans le ECAL (Ã©nergie notÃ©e par la suite $E_{\rm ecal}$) et de celle lue dans le HCAL (notÃ©e par la suite $H_{\rm ecal}$). Cette mÃ©thode sera prÃ©sentÃ©e dans la section \ref{LR}.
 
-Ensuite, ce rapport présente de nouvelles techniques de calibration qui permettent de prendre en compte la non-linearité des calorimètres. Ces techniques seront présentées dans les sections \ref{CL} et \ref{KNN}.\\
-Enfin, dans la section \ref{comparaison} nous comparerons ces méthodes. 
+Ce rapport prÃ©sente ensuite de nouvelles techniques de calibration qui permettent de prendre en compte la non-linearitÃ© des calorimÃ¨tres. Ces techniques seront prÃ©sentÃ©es dans les sections \ref{CL} et \ref{KNN}.\\
+Enfin, nous comparerons ces mÃ©thodes dans la section \ref{comparaison}. 
 
-\section{Production de l'échantillon}
+\section{Production de l'Ã©chantillon}
 
 \begin{figure}[!h]
 \begin{center}
@@ -250,44 +250,44 @@ Enfin, dans la section \ref{comparaison} nous comparerons ces méthodes.
 
 - paragraphe de Colin sur la simulation\\
 
-Les données simulées sont stockées dans un fichier \textit{.root}. Pour des soucis de compatibilité, j'ai voulu écarter \textit{Root}, qui est à  la fois un programme et une librairie C++ pour tout faire en Python.  J'ai donc écrit un programme \cite{RootToPhython} pour extraire les données du fichier initial pour les déplacer dans un nouveau dans un fichier binaire importable facilement par Python et qui contient pour chaque hadron simulée : son énergie réelle ($E_{\rm true}$), son impulsion, l'énergie déposée dans ECAL ($E_{\rm ecal}$), l'énergie déposée dans HCAL ($E_{\rm hcal}$), la pseudo-rapidité.
+Les donnÃ©es simulÃ©es sont stockÃ©es dans un fichier \textit{.root}. Par souci de compatibilitÃ©, j'ai voulu Ã©carter \textit{Root}, qui est Ã Â  la fois un programme et une librairie C++ pour tout faire en Python.  J'ai donc Ã©crit un programme \cite{RootToPhython} pour extraire les donnÃ©es du fichier initial pour les dÃ©placer dans un nouveau fichier binaire importable facilement par Python et qui contient, pour chaque hadron simulÃ© : son Ã©nergie rÃ©elle ($E_{\rm true}$), son impulsion, l'Ã©nergie dÃ©posÃ©e dans ECAL ($E_{\rm ecal}$), l'Ã©nergie dÃ©posÃ©e dans HCAL ($E_{\rm hcal}$), sa pseudo-rapiditÃ©.
 
-On séparera et traitera différemment les événements qui ont $E_{\rm ecal} = 0$.  Ces événements sont liés à des particules qui ont interagit avec le détecteur hardronique mais pas avec le détecteur électromagnétique (cf Fig.\ref{detecteur}). Cette séparation se justifie par le fait que modéliser les dépôts d'énergie dans les deux calorimètres pour en conclure ce qui se passe dans le cas particulier où il n'y a des dépôts que dans un amène un biais. Ainsi, à chaque construction de calibration, on créera en fait deux modèles.
+On sÃ©parera et traitera diffÃ©remment les Ã©vÃ©nements qui ont $E_{\rm ecal} = 0$.  Ces Ã©vÃ©nements sont liÃ©s Ã  des particules qui ont interagi avec le dÃ©tecteur hardronique mais pas avec le dÃ©tecteur Ã©lectromagnÃ©tique (cf Fig.\ref{detecteur}). Cette sÃ©paration se justifie, car modÃ©liser les dÃ©pÃ´ts d'Ã©nergie dans les deux calorimÃ¨tres pour en conclure ce qui se passe dans le cas particulier oÃ¹ il n'y a de dÃ©pÃ´t que dans l'un d'eux amÃ¨ne un biais. Ainsi, Ã  chaque construction de calibration, on crÃ©era en fait deux modÃ¨les.
 
-De plus, la simulation crée un palier car les particules sont limitées à $E_{\rm true} = \SIUnits{200}{\giga\electronvolt}$, si l'on regarde par exemple sur la Fig. \ref{limite} ce qui se passe dans le plan $E_{\rm ecal} = 0$, on voit bien ce palier qui apparaît vers $\SIUnits{150}{\giga\electronvolt}$, il est donc ici impossible de déduire une énergie de calibration à partir des points au-delà de cette limite . Avec ce jeu de donnée, nous allons fixer une limite $E_{\rm ecal} + E_{\rm hcal}$  = (lim = \SIUnits{150}{\giga\electronvolt})$.
+De plus, la simulation crÃ©e un palier car les particules sont limitÃ©es Ã  $E_{\rm true} = \SIUnits{200}{\giga\electronvolt}$? Si l'on regarde par exemple sur la Fig. \ref{limite} ce qui se passe dans le plan $E_{\rm ecal} = 0$, on voit bien ce palier qui apparaÃ®t vers $\SIUnits{150}{\giga\electronvolt}$, il est donc ici impossible de dÃ©duire une Ã©nergie de calibration Ã  partir des points au-delÃ  de cette limite . Avec ce jeu de donnÃ©es, nous allons fixer une limite $E_{\rm ecal} + E_{\rm hcal}$  = (lim = \SIUnits{150}{\giga\electronvolt})$.
 
 \begin{figure}[!h]
     \begin{center}
         \includegraphics[width=\textwidth]{images/pictures/explain/limit_arrow.png}
-        \caption{On place une limite à $E_{\rm ecal}+E_{\rm hcal} = 150$. Les points verts sont les points rejetés.}
+        \caption{On place une limite Ã  $E_{\rm ecal}+E_{\rm hcal} = 150$. Les points verts sont les points rejetÃ©s.}
         \label{limite}
     \end{center}
 \end{figure}
 
-\section{Calibration par régression linéaire}
+\section{Calibration par rÃ©gression linÃ©aire}
 \label{LR}
 
-Comme première calibration, j'ai utilisé une méthode simple, la régression linéaire. Il s'agit de supposer qu'il existe une relation 
+Comme premiÃ¨re calibration, j'ai utilisÃ© une mÃ©thode simple, la rÃ©gression linÃ©aire. Il s'agit de supposer qu'il existe une relation 
 \begin{equation}
     E_{\rm true} = a_1 E_{\rm ecal} + a_2 E_{\rm hcal} + b
 \end{equation}
-et de trouver les coefficient $a_1, a_2,  b$ optimaux pour que le modèle coïncide au mieux aux données d'entrainement. Au niveau de la programmation, j'ai utilisé la librairie de \textit{Sciki Learn}  \cite{scikitLR} qui se base une méthode des moindres carrés, c'est à dire dans notre cas, trouver les coefficients qui, pour un ensemble de données d'entraînement  $(E_{\rm ecal}^n,E_{\rm hcal}^n, E_{\rm true}^n)$ minimiseront :
+et de trouver les coefficient $a_1, a_2,  b$ optimaux pour que le modÃ¨le coÃ¯ncide au mieux aux donnÃ©es d'entrainement. Au niveau de la programmation, j'ai utilisÃ© la librairie de \textit{Sciki Learn}  \cite{scikitLR} qui se base sur une mÃ©thode des moindres carrÃ©s. Dans notre cas, cela revient Ã  trouver les coefficients qui, pour un ensemble de donnÃ©es d'entraÃ®nement  $(E_{\rm ecal}^n,E_{\rm hcal}^n, E_{\rm true}^n)$ minimiseront :
 \begin{equation}
 	\epsilon = \sum_n |E_{\rm true} - a_1 E_{\rm ecal} - a_2 E_{\rm hcal} - b|^2
 \end{equation}
 
-Comme j'ai constaté qu'à faible  $E_{\rm ecal},  E_{\rm hcal}$ il y a quelques points à très haut $E_{\rm true}$ qui correspondent à des défauts de la détection des énergies dans les calorimètres, je les ai enlevés des données d'entraînement pour la regression linéaire (cf Fig. \ref{selectedpoints}).
+J'ai constatÃ© qu'Ã  faible  $E_{\rm ecal},  E_{\rm hcal}$ il y a quelques points Ã  trÃ¨s haut $E_{\rm true}$ qui correspondent Ã  des dÃ©fauts de la dÃ©tection des Ã©nergies dans les calorimÃ¨tres, je les ai donc enlevÃ©s des donnÃ©es d'entraÃ®nement pour la regression linÃ©aire (cf Fig. \ref{selectedpoints}).
 
 \begin{figure}[!h]
     \begin{center}
         \includegraphics[width=\textwidth]{images/pictures/testLinearRegression/LinearRegression_selectedpoints.png}
-        \caption{En bleu, les points sélectionnés pour faire la régression linéaire.}
+        \caption{En bleu, les points sÃ©lectionnÃ©s pour faire la rÃ©gression linÃ©aire.}
         \label{selectedpoints}
     \end{center}
 \end{figure}
 
 \begin{minipage}{0.65\linewidth}
-    Nous pouvons à présent effectuer la regression linéaire sur un premier jeu de donné d'entrainement \cite{GitHubLR}  en ne prenant en compte dans la régression que les points tels que $ $\rm{lim_{\rm min}} < E_{\rm ecal} + E_{\rm hcal} < \rm{lim_{\rm max}}$, avec $\rm{lim_{\rm min}} = 10,\rm{lim_{\rm min}} = 150 $. Nous obtenons alors :
+    Nous pouvons Ã  prÃ©sent effectuer la regression linÃ©aire sur un premier jeu de donnÃ© d'entrainement \cite{GitHubLR}  en ne prenant en compte dans la rÃ©gression que les points tels que $ $\rm{lim_{\rm min}} < E_{\rm ecal} + E_{\rm hcal} < \rm{lim_{\rm max}}$, avec $\rm{lim_{\rm min}} = 10,\rm{lim_{\rm min}} = 150 $. Nous obtenons alors :
     \[
     \begin{cases}
     E_{\rm calib} =  0.95359395 E_{\rm hcal}  + 5.9057809 & E_{\rm ecal} = 0 \\
@@ -297,7 +297,7 @@ Comme j'ai constaté qu'à faible  $E_{\rm ecal},  E_{\rm hcal}$ il y a quelques p
 \end{minipage}
 \begin{minipage}{0.35\linewidth}
 	\includegraphics[width = \textwidth]{images/pictures/testLinearRegression/LinearRegression_plot3D_surf.eps}
-	\captionof{figure}{Nuage de points modélisé par un plan}
+	\captionof{figure}{Nuage de points modÃ©lisÃ© par un plan}
 \end{minipage}
 
 \begin{figure}[!h]
@@ -307,9 +307,9 @@ Comme j'ai constaté qu'à faible  $E_{\rm ecal},  E_{\rm hcal}$ il y a quelques p
 \end{center}
 \end{figure}
 
-Nous constatons en particulier dans le cas  $E_{\rm ecal} = 0$ que la courbe ne passe pas par le le coeur du nuage de point à faible  $E_{\rm hcal} = 0$. Maintenant que la régression est faite, nous allons calibrer un second jeu de données et afficher $E_{\rm calib}/$E_{\rm true}$ pour ce nouveau jeu de donnée. $E_{\rm calib}/$E_{\rm true}$ doit être le plus proche possible de 1.
+Nous constatons en particulier que dans le cas  $E_{\rm ecal} = 0$, la courbe ne passe pas par le le coeur du nuage de point Ã  faible  $E_{\rm hcal} = 0$. Maintenant que la rÃ©gression est faite, nous allons calibrer un second jeu de donnÃ©es et afficher $E_{\rm calib}/$E_{\rm true}$ pour ce nouveau jeu de donnÃ©es. $E_{\rm calib}/$E_{\rm true}$ doit Ãªtre le plus proche possible de 1.
 
-Sur la Fig. \ref{LR_ecaliboveretrue_ecal_hcal}, à gauche, nous constatons que comme prévu la régression linéaire est mauvaise à faible $E_{\rm hcal}$ car en moyenne, $E_{\rm calib}/E_{\rm true}$ n'est pas proche de $1$. Plus intéressant, la figure de droite met en avant les non-linéarités du nuage de point.\\
+Sur la Fig. \ref{LR_ecaliboveretrue_ecal_hcal}, Ã  gauche, nous constatons comme prÃ©vu que la rÃ©gression linÃ©aire est mauvaise Ã  faible $E_{\rm hcal}$ car en moyenne, $E_{\rm calib}/E_{\rm true}$ n'est pas proche de $1$. Plus intÃ©ressant, la figure de droite met en avant les non-linÃ©aritÃ©s du nuage de point.\\
 
 \begin{figure}[!h]
 \begin{center}
@@ -320,7 +320,7 @@ Sur la Fig. \ref{LR_ecaliboveretrue_ecal_hcal}, à gauche, nous constatons que co
 \end{figure}
 
 
-Sur la Fig. \ref{LR_ecaliboveretrue_etrue} nous constatons également que la calibration s'écarte $E_{\rm calib}/E_{\rm true}$  est trop écartée de 1.
+Sur la Fig. \ref{LR_ecaliboveretrue_etrue} nous constatons Ã©galement que la calibration dÃ©vie : $E_{\rm calib}/E_{\rm true}$  est trop Ã©cartÃ© de 1.
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[height =4.5cm]{images/pictures/testLinearRegression/LinearRegression_ecalib_over_etrue.png}
@@ -329,32 +329,32 @@ Sur la Fig. \ref{LR_ecaliboveretrue_etrue} nous constatons également que la cali
 \end{center}
 \end{figure}
 
-Il faut donc proposer une méthode qui prend en compte la non-linéarité entre les 3 variables. 
+Il faut donc proposer une mÃ©thode qui prend en compte la non-linÃ©aritÃ© entre les 3 variables. 
 
 
 
-\section{Méthode non paramétrique binnée}
+\section{MÃ©thode non paramÃ©trique binnÃ©e}
 \label{CL}
 \noindent
 \begin{minipage}{0.60\linewidth}
-Ici, l'idée est de découper le plan $(E_{\rm ecal},E_{\rm hcal})$ en carré et de calculer la moyenne des $E_{\rm true}$ dans chaque carré qui sera la valeur $E_{\rm calib}$. Ainsi pour prédire une énergie de $E_{\rm calib}^i$ pour un point $(E_{\rm ecal}^i,E_{\rm hcal}^i)$, nous allons regarder dans quel carré il se trouve et retourner la valeur d'énergie calibrée correspondante. Nous pouvons voir sur la Fig. \ref{legos} une illustration où la hauteur de chaque brique correspond à l'énergie calibrée d'un carré.
+Ici, l'idÃ©e est de dÃ©couper le plan $(E_{\rm ecal},E_{\rm hcal})$ en carrÃ©s et de calculer la moyenne des $E_{\rm true}$ dans chaque carrÃ© qui sera la valeur $E_{\rm calib}$. Ainsi pour prÃ©dire une Ã©nergie de $E_{\rm calib}^i$ pour un point $(E_{\rm ecal}^i,E_{\rm hcal}^i)$, nous allons regarder dans quel carrÃ© il se trouve et retourner la valeur d'Ã©nergie calibrÃ©e correspondante. Nous pouvons voir sur la Fig. \ref{legos} une illustration oÃ¹ la hauteur de chaque brique correspond Ã  l'Ã©nergie calibrÃ©e d'un carrÃ©.
 \end{minipage}
 \begin{minipage}{0.4\linewidth}
 	\includegraphics[width=\linewidth]{images/pictures/testCalibrationLego/CalibrationLego_plot3D_legos.eps}
-	\captionof{figure}{Illustration de la calibration avec $100\times100$ carrés.}
+	\captionof{figure}{Illustration de la calibration avec $100\times100$ carrÃ©s.}
 	\label{legos}
 \end{minipage}
 
-L'avantage de cette calibration est de prendre en compte ce qui se passe localement dans la distribution contrairement à la régression linéaire, mais elle a pour désavantage d'être liée au pas des carrés. Un pas trop grand fait perdre en précision, un pas trop petit laisse des trous dans la position des briques (cf Fig. \ref{legos}), et fait exploser le temps de calcul. 
+L'avantage de cette calibration est de prendre en compte ce qui se passe localement dans la distribution contrairement Ã  la rÃ©gression linÃ©aire, mais elle a pour dÃ©savantage d'Ãªtre liÃ©e au pas des carrÃ©s. Un pas trop grand fait perdre en prÃ©cision, un pas trop petit laisse des trous dans la position des briques (cf Fig. \ref{legos}), et fait exploser le temps de calcul. 
 
 \noindent
 \begin{minipage}{0.60\linewidth}
-Construisons la calibration \cite{GitHubCL} à l'aide d'un premier jeu de données, avec $100\times100$ carrés. Premièrement, nous constatons que la surface est toute cabossée, et si nous regardons ce qui se passe dans le plan $E{\rm ecal} = 0$ (Fig. \ref{calibCL}), nous voyons que cette méthode binnée donne des énergies calibrée $E_{\rm calib}$ égales pour des ensembles de points, par paliers. Deuxièmement, nous constatons une fois de plus que la courbe de calibration ne passe pas par le coeur de la distribution à bas $E_{\rm hcal}$, $E_{\rm calib}$ y est sur-évaluée.
+Construisons la calibration \cite{GitHubCL} Ã  l'aide d'un premier jeu de donnÃ©es, avec $100\times100$ carrÃ©s. PremiÃ¨rement, nous constatons que la surface est "cabossÃ©e", et si nous regardons ce qui se passe dans le plan $E{\rm ecal} = 0$ (Fig. \ref{calibCL}), nous voyons que cette mÃ©thode binnÃ©e donne des Ã©nergies calibrÃ©es $E_{\rm calib}$ Ã©gales pour des ensembles de points, par paliers. DeuxiÃ¨mement, nous constatons une fois de plus que la courbe de calibration ne passe pas par le coeur de la distribution Ã  bas $E_{\rm hcal}$ : $E_{\rm calib}$ y est sur-Ã©valuÃ©e.
 \end{minipage}
 \hfill
 \begin{minipage}{0.4\linewidth}
 	\includegraphics[width=\textwidth]{images/pictures/testCalibrationLego/CalibrationLego_plot3D_surf.eps}
-	\captionof{figure}{Surface de calibration avec $100\times100$ carrés.}
+	\captionof{figure}{Surface de calibration avec $100\times100$ carrÃ©s.}
 	\label{legos}
 \end{minipage}
 
@@ -366,17 +366,17 @@ Construisons la calibration \cite{GitHubCL} à l'aide d'un premier jeu de données
 \end{center}
 \end{figure}
 
-Effectuons la calibration d'un second jeu de données :
+Effectuons la calibration d'un second jeu de donnÃ©es :
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[width=\textwidth]{images/pictures/testCalibrationLego/CalibrationLego_ecalib_over_etrue.png}
-\caption{$E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm true}$. Nous voyons clairement une structure qui s'est formée liée au caractère binnée de la méthode.}
+\caption{$E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm true}$. Nous voyons clairement l'apparition d'une structure, liÃ©e au caractÃ¨re binnÃ© de la mÃ©thode.}
 \label{ecaliboveretrueCL}
 \end{center}
 \end{figure}
 
-Nous remarquons que la présence de paliers dans la courbe de calibration biaise la calibration en faisant apparaître une structure (des hyperboles) dans $E_{\rm calib}/E_{\rm true}$ comme nous pouvons le voir dans la Fig. \ref{ecaliboveretrueCL}, structure liée aux points qui ont la même énergie de calibration, contrairement à la régression linéaire (cf Fig.  \ref{LR_ecaliboveretrue_etrue}). 
-Nous constatons également sur la Fig. \ref{ecaliboveretrueCL} que $E_{\rm calib}/E_{\rm true}$ est en moyenne constamment $> 1$, ce qui montre qu'il y a une tendance à la sur-évaluation de $E_{\rm calib}$.
+Nous remarquons que la prÃ©sence de paliers dans la courbe de calibration biaise la calibration en faisant apparaÃ®tre une structure (des hyperboles) dans $E_{\rm calib}/E_{\rm true}$, comme nous pouvons le voir dans la Fig. \ref{ecaliboveretrueCL}. Cette structure est liÃ©e aux points possÃ©dant la mÃªme Ã©nergie de calibration, contrairement au cas de la rÃ©gression linÃ©aire (cf Fig.  \ref{LR_ecaliboveretrue_etrue}). 
+Nous constatons Ã©galement sur la Fig. \ref{ecaliboveretrueCL} que $E_{\rm calib}/E_{\rm true}$ est en moyenne constamment $> 1$, ce qui montre qu'il y a une tendance Ã  la sur-Ã©valuation de $E_{\rm calib}$.
 
 \begin{figure}[!h]
 \begin{center}
@@ -386,27 +386,27 @@ Nous constatons également sur la Fig. \ref{ecaliboveretrueCL} que $E_{\rm calib}
 \end{center}
 \end{figure}
 
-La Fig. \ref{ecaliboveretrueCL_etrue} nous montre une fois de plus que $E_{\rm calib}/E_{\rm true}$  est globalement sur-évaluée, mais que cette fois si, nous avons pris en compte les non-linéarités. Il nous faut alors une méthode qui reprenne l'idée de moyenner des $E_{\rm true}$ en enlevant les contraintes et biais provenants des bins.
+La Fig. \ref{ecaliboveretrueCL_etrue} nous montre une fois de plus que $E_{\rm calib}/E_{\rm true}$  est globalement sur-Ã©valuÃ©e, mais que cette fois-ci, nous avons pris en compte les non-linÃ©aritÃ©s. Il nous faut alors une mÃ©thode qui reprenne l'idÃ©e de moyenner des $E_{\rm true}$ en enlevant les contraintes et biais provenants des bins.
 
-\section{Méthodes basées sur les plus proches voisins}
+\section{MÃ©thodes basÃ©es sur les plus proches voisins}
 \label{KNN}
-\subsection{Moyenne pondérée}
-Nous utilisons encore des données simulées pour effectuer la calibration : chaque particule simulée $i$ est vue comme un point d'un espace tridimensionnel possédant des coordonnées $(E_{\rm ecal}^i, E_{\rm hcal}^i,E_{\rm true}^i)$.
-Pour trouver l'énergie calibrée d'un point de coordonnées $(E_{\rm ecal}^0, E_{\rm hcal}^0)$ :
+\subsection{Moyenne pondÃ©rÃ©e}
+Nous utilisons encore des donnÃ©es simulÃ©es pour effectuer la calibration : chaque particule simulÃ©e $i$ est vue comme un point d'un espace tridimensionnel possÃ©dant des coordonnÃ©es $(E_{\rm ecal}^i, E_{\rm hcal}^i,E_{\rm true}^i)$.
+Pour trouver l'Ã©nergie calibrÃ©e d'un point de coordonnÃ©es $(E_{\rm ecal}^0, E_{\rm hcal}^0)$ :
 \begin{itemize}
 	\item on recherche ses $k$ plus proches voisins dans le plan $(E_{\rm ecal}, E_{\rm hcal}) \rightarrow (E_{\rm ecal}^i, E_{\rm hcal}^i), i \in [|1,...,k|]$
-	\item on effectue une moyenne pondérée une moyenne pondérée des $E_{\rm true}^i$ de ces plus proches voisins $\rightarrow E_{\rm calib}^0$ : l'énergie calibrée 
+	\item on effectue une moyenne pondÃ©rÃ©e des $E_{\rm true}^i$ de ces plus proches voisins $\rightarrow E_{\rm calib}^0$ : l'Ã©nergie calibrÃ©e.
 \end{itemize}
 
-La moyenne pondérée va donc s'exprimer ainsi :
+La moyenne pondÃ©rÃ©e va donc s'exprimer ainsi :
 \begin{equation}
 	 E_{\rm calib}^0 = \frac{\sum_{i=1}^k g(E_{\rm ecal}^i, E_{\rm hcal}^i) \times E_{\rm true}^i}{\sum_{i=1}^k g(E_{\rm ecal}^i, E_{\rm hcal}^i)}
 \end{equation}
-Dans notre cas nous avons pris pour $g$ la distribution gaussienne $g(\vec{x}) = \exp{-\frac{1}{2}(\frac{(\vec{x} - \vec{x}^0)^2}{\sigma^2})}$, pour donner plus d'importance aux plus proches des k plus proches voisins.\\
+Dans notre cas nous avons pris pour facteur de pondÃ©ration $g$ la distribution gaussienne $g(\vec{x}) = \exp{-\frac{1}{2}(\frac{(\vec{x} - \vec{x}^0)^2}{\sigma^2})}$, pour donner plus d'importance aux plus proches des k plus proches voisins.\\
 
-Pour trouver les plus proches voisins, j'ai utilisé la librairie \textit{Scikit Learn} \cite{scikitKNN}, l'avantage de cette librairie, est qu'elle propose différents algorithmes optimisés de recherche. Lors de la construction de la calibration \cite{GitHubKNN}, j'ai d'ailleurs laissé le choix de l'algorithme de recherche.
+Pour trouver les plus proches voisins, j'ai utilisÃ© la librairie \textit{Scikit Learn} \cite{scikitKNN}, l'avantage de cette librairie, est qu'elle propose diffÃ©rents algorithmes optimisÃ©s de recherche. Lors de la construction de la calibration \cite{GitHubKNN}, j'ai d'ailleurs laissÃ© le choix de l'algorithme de recherche.
 
-Si l'on regarde la Fig.  \ref{neighbors}, on voit que l'on sélectionne les points à moyenner dans des cercles dont le rayon varie en fonction de la densité de points. Il y a un problème à bas $E_{\rm hcal}$ et haut $E_{ecal}$ car nous manquons de points.
+Si l'on regarde la Fig.  \ref{neighbors}, on voit que l'on sÃ©lectionne les points Ã  moyenner dans des cercles dont le rayon varie en fonction de la densitÃ© de points. Il y a un problÃ¨me Ã  bas $E_{\rm hcal}$ et haut $E_{ecal}$ car nous manquons de points.
 
 \begin{figure}[!h]
 	\begin{center}
@@ -418,7 +418,7 @@ Si l'on regarde la Fig.  \ref{neighbors}, on voit que l'on sélectionne les point
 
 \noindent
 \begin{minipage}{0.6\linewidth}
-Construisons alors la calibration  \cite{GitHubKNN} à l'aide des paramètres suivants : 
+Construisons alors la calibration  \cite{GitHubKNN} Ã  l'aide des paramÃ¨tres suivants : 
 \[
 \begin{cases}
 \rm{lim} & = 150\\
@@ -444,9 +444,9 @@ n_{\rm neighbors, E_{\rm ecal} \neq 0} & = 250\\
 \end{center}
 \end{figure}
 
-Nous constatons ici que la surface est beaucoup plus lisse que pour la méthode précédente, mais en regardant le cas particulier de $E_{\rm ecal} = 0$, nous constatons une fois encore, à bas $E_{\rm hcal}$, la courbe de calibration ne passe pas par le coeur de la gerbe, cela est dû à des points aberrants qui correspondent à des particules de haute énergie qui ne déposent ou peu leur énergie dans les calorimètres. Il faudra alors trouver un moyen de les écarter par la suite.
+Nous constatons ici que la surface est beaucoup plus lisse qu'avec la mÃ©thode prÃ©cÃ©dente, mais en regardant le cas particulier de $E_{\rm ecal} = 0$, nous constatons qu'une fois encore, Ã  bas $E_{\rm hcal}$, la courbe de calibration ne passe pas par le coeur de la gerbe. Cela est dÃ» Ã  des points aberrants qui correspondent Ã  des particules de haute Ã©nergie qui ne dÃ©posent pas ou peu leur Ã©nergie dans les calorimÃ¨tres. Il faudra trouver un moyen de les Ã©carter par la suite.
 
-Effectuons alors la calibration d'un second jeu de données : 
+Effectuons alors la calibration d'un second jeu de donnÃ©es : 
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[width=\textwidth]{images/pictures/testKNN/KNN_ecalib_over_etrue.png}
@@ -463,40 +463,40 @@ Effectuons alors la calibration d'un second jeu de données :
 \end{center}
 \end{figure}
 
-Nous constatons que partout l'énergie de calibration est sur-estimée et particulièrement à bas $E_{\rm ecal}$ et $E_{\rm hcal}$ si l'on regarde la Fig. \ref{ecaliboveretrueKNN_ecal_hcal}.
+Nous constatons que l'Ã©nergie de calibration est toujours sur-estimÃ©e, et particuliÃ¨rement Ã  bas $E_{\rm ecal}$ et $E_{\rm hcal}$ ( \textit{cf.} \ref{ecaliboveretrueKNN_ecal_hcal}).
 
 
 
 \subsection{Nettoyage gaussien}
-Cette méthode est assez similaires à la précédente. Elle se base sur la constatation que la distribution en énergie vraie des paquets de plus proches voisins est un distribution gaussienne. Nous allons donc en utilisant la méthode des moindres carrés trouver les paramètres de la gaussienne en question et ne prendre en compte les plus proches voisins dont l'énergie vraie est $\mu -c\sigma \leq E_{\rm true}^i \leq \mu + c\sigma$ (nous prenons par défaut $c = 2$), avec $\mu, \sigma$ la moyenne et l'écart type de la distribution gaussienne.\\
+Cette mÃ©thode est assez similaire Ã  la prÃ©cÃ©dente. Elle se base sur la constatation que la distribution en Ã©nergie vraie des paquets de plus proches voisins est un distribution gaussienne. En utilisant la mÃ©thode des moindres carrÃ©s, nous allons donc  trouver les paramÃ¨tres de la gaussienne en question et ne prendre en compte les plus proches voisins dont l'Ã©nergie vraie est $\mu -c\sigma \leq E_{\rm true}^i \leq \mu + c\sigma$ (nous prenons par dÃ©faut $c = 2$), avec $\mu, \sigma$ la moyenne et l'Ã©cart type de la distribution gaussienne.\\
 Principe de l'algorithme :
 \begin{itemize}
-	\item on considère des points $(E_{\rm ecal}^{0,j}, E_{\rm hcal}^{0,j})$ où nous allons évaluer l'énergie calibrée.
+	\item on considÃ¨re des points $(E_{\rm ecal}^{0,j}, E_{\rm hcal}^{0,j})$ oÃ¹ nous allons Ã©valuer l'Ã©nergie calibrÃ©e.
 	\item pour chaque $(E_{\rm ecal}^{0,j}, E_{\rm hcal}^{0,j})$ :
 	\begin{itemize}
 		\item on recherche ses $k$ plus proches voisins dans le plan $(E_{\rm ecal}, E_{\rm hcal}) \rightarrow (E_{\rm ecal}^i, E_{\rm hcal}^i), i \in [|1,...,k|]$
 		\item on trouve la gaussienne correspondante $\mu -c\sigma \leq E_{\rm true}^i \leq \mu + c\sigma$
 		\item on ne conserve que les voisins dont : $\mu -c\sigma \leq E_{\rm true}^i \leq \mu + c\sigma$
-		\item on effectue une moyenne pondérée une moyenne pondérée de l'énergie vraie de ces plus proches voisins $\rightarrow E_{\rm calib}^0$ : l'énergie calibrée 
+		\item on effectue une moyenne pondÃ©rÃ©e une moyenne pondÃ©rÃ©e de l'Ã©nergie vraie de ces plus proches voisins $\rightarrow E_{\rm calib}^0$ : l'Ã©nergie calibrÃ©e 
 	\end{itemize}
-	\item on effectue une interpolation pour donner une valeur d'énergie calibrée quelque soit $(E_{\rm ecal}^{0}, E_{\rm hcal}^{0})$
+	\item on effectue une interpolation pour donner une valeur d'Ã©nergie calibrÃ©e quelque soit $(E_{\rm ecal}^{0}, E_{\rm hcal}^{0})$
 \end{itemize}
 
 
-- on enlève les points éloignés du coeur de la distribution\\
+- on enlÃ¨ve les points Ã©loignÃ©s du coeur de la distribution\\
 - principe de l'algo\\
 - comment fait-on un fit\\
 -scipy \cite{scipyFit}\\
--{Efficacité du fit}:
+-{EfficacitÃ© du fit}:
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[width=0.7\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_chi2_calib.eps}
-\caption{Le $\chi^2$ réduit pour chaque fit effectué.}
+\caption{Le $\chi^2$ rÃ©duit pour chaque fit effectuÃ©.}
 \end{center}
 \end{figure}
-%	A différents moment, nous aurons besoin de calculer des moyennes. Or souvent, la moyenne classique ne serait pas représentative de ce que tous souhaitons montrer car certains points sont ont des valeurs $E_{\rm ecal},E_{\rm hcal}$ mal estimées car la simulation prend en compte les défauts des calorimètres. Il serait donc alors incorrecte de les prendre en compte pour juger l'efficacité d'une calibration car ils sont complètement incohérents.\\
-%Pour résoudre ce problème, nous allons ajuster une gaussienne de la distribution des points à moyenner et choisir considérer que la moyenne à prendre en compte est la moyenne de la gaussienne. Ainsi, les points aberrants totalement écarté du centre de la distribution ne perturberont pas le calcul de la moyenne alors que dans le cas d'une moyenne classique, ils peuvent fortement attirer la moyenne vers eux.\\
-%Ces points aberrants peuvent également venir d'une particule qui se serait décomposée avant le calorimètre. Ainsi on trouve près de l'origine, des points à fort $E_{\rm true}$ et pour de faibles valeurs de  $E_{\rm ecal}$ et $E_{\rm hcal}$, et ces points ne sont pas du tout représentatif de l'efficacité d'une calibration. 
+%	A diffÃ©rents moment, nous aurons besoin de calculer des moyennes. Or souvent, la moyenne classique ne serait pas reprÃ©sentative de ce que tous souhaitons montrer car certains points sont ont des valeurs $E_{\rm ecal},E_{\rm hcal}$ mal estimÃ©es car la simulation prend en compte les dÃ©fauts des calorimÃ¨tres. Il serait donc alors incorrecte de les prendre en compte pour juger l'efficacitÃ© d'une calibration car ils sont complÃ¨tement incohÃ©rents.\\
+%Pour rÃ©soudre ce problÃ¨me, nous allons ajuster une gaussienne de la distribution des points Ã  moyenner et choisir considÃ©rer que la moyenne Ã  prendre en compte est la moyenne de la gaussienne. Ainsi, les points aberrants totalement Ã©cartÃ© du centre de la distribution ne perturberont pas le calcul de la moyenne alors que dans le cas d'une moyenne classique, ils peuvent fortement attirer la moyenne vers eux.\\
+%Ces points aberrants peuvent Ã©galement venir d'une particule qui se serait dÃ©composÃ©e avant le calorimÃ¨tre. Ainsi on trouve prÃ¨s de l'origine, des points Ã  fort $E_{\rm true}$ et pour de faibles valeurs de  $E_{\rm ecal}$ et $E_{\rm hcal}$, et ces points ne sont pas du tout reprÃ©sentatif de l'efficacitÃ© d'une calibration. 
 %
 %\begin{minipage}{0.5\linewidth}
 %	\begin{center}
@@ -505,20 +505,20 @@ Principe de l'algorithme :
 %\end{minipage}
 %\hfill
 %\begin{minipage}{0.45\linewidth}
-%	Ici, on peut voir sur cet exemple que si nous prenons la moyenne classique de $E_{\rm true}$,  on obtient $79.12$, or la moyenne de la gaussienne fitée est de $77.82$, au vu de ce que nous avons dit précédemment, nous considèrerons que la seconde est plus judicieuse.
+%	Ici, on peut voir sur cet exemple que si nous prenons la moyenne classique de $E_{\rm true}$,  on obtient $79.12$, or la moyenne de la gaussienne fitÃ©e est de $77.82$, au vu de ce que nous avons dit prÃ©cÃ©demment, nous considÃ¨rerons que la seconde est plus judicieuse.
 %\end{minipage}
 %
 %\subsection{Comment est fait un fit ?}
 expliquer : \\
 - barre d'erreur\\
 - minimisation du chi2\\
-- un bon chi2 réduit ?\\
-- quand nous ferons un fit gaussien ce sera toujours le même principe\\
+- un bon chi2 rÃ©duit ?\\
+- quand nous ferons un fit gaussien ce sera toujours le mÃªme principe\\
 - interpolation \cite{scipyInterp}\\
 
 \noindent
 \begin{minipage}{0.6\linewidth}
-Construisons alors la calibration  \cite{GitHubKNNGC} à l'aide des paramètres suivants : 
+Construisons alors la calibration  \cite{GitHubKNNGC} Ã  l'aide des paramÃ¨tres suivants : 
 \[
 \begin{cases}
 \rm{lim} & = 150\\
@@ -547,7 +547,7 @@ n_{\rm neighbors, E_{\rm ecal} \neq 0} & = 250\\
 \end{center}
 \end{figure}
 
-Effectuons alors la calibration d'un second jeu de données : 
+Effectuons alors la calibration d'un second jeu de donnÃ©es : 
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[width=\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_ecalib_over_etrue.png}
@@ -566,22 +566,22 @@ Effectuons alors la calibration d'un second jeu de données :
 
 
 \subsection{Fit gaussien}
-Ici, il s'agit du même principe que précédemment mais nous allons considérer que la valeur de $E_{\rm calib}$ est la moyenne de la gaussienne. 
+Ici, il s'agit du mÃªme principe que prÃ©cÃ©demment mais nous allons considÃ©rer que la valeur de $E_{\rm calib}$ est la moyenne de la gaussienne. 
 Principe de l'algorithme :
 \begin{itemize}
-	\item on considère des points $(E_{\rm ecal}^{0,j}, E_{\rm hcal}^{0,j})$ où nous allons évaluer l'énergie calibrée.
+	\item on considÃ¨re des points $(E_{\rm ecal}^{0,j}, E_{\rm hcal}^{0,j})$ oÃ¹ nous allons Ã©valuer l'Ã©nergie calibrÃ©e.
 	\item pour chaque $(E_{\rm ecal}^{0,j}, E_{\rm hcal}^{0,j})$ :
 	\begin{itemize}
 		\item on recherche ses $k$ plus proches voisins dans le plan $(E_{\rm ecal}, E_{\rm hcal}) \rightarrow (E_{\rm ecal}^i, E_{\rm hcal}^i), i \in [|1,...,k|]$
 		\item on trouve la gaussienne correspondante \rightarrow \sigma, \mu$
 		\item $\rightarrow E_{\rm calib}^0 = \mu$
 	\end{itemize}
-	\item on effectue une interpolation pour donner une valeur d'énergie calibrée quelque soit $(E_{\rm ecal}^{0}, E_{\rm hcal}^{0})$
+	\item on effectue une interpolation pour donner une valeur d'Ã©nergie calibrÃ©e quelque soit $(E_{\rm ecal}^{0}, E_{\rm hcal}^{0})$
 \end{itemize}
 
 \noindent
 \begin{minipage}{0.6\linewidth}
-Construisons alors la calibration  \cite{GitHubKNNGF} à l'aide des paramètres suivants : 
+Construisons alors la calibration  \cite{GitHubKNNGF} Ã  l'aide des paramÃ¨tres suivants : 
 \[
 \begin{cases}
 \rm{lim} & = 150\\
@@ -607,7 +607,7 @@ n_{\rm neighbors, E_{\rm ecal} \neq 0} & = 250\\
 \end{center}
 \end{figure}
 
-Effectuons alors la calibration d'un second jeu de données : 
+Effectuons alors la calibration d'un second jeu de donnÃ©es : 
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[width=\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_ecalib_over_etrue.png}
@@ -625,9 +625,9 @@ Effectuons alors la calibration d'un second jeu de données :
 \end{figure}
 
 
-\section{Comparaison des méthodes}
+\section{Comparaison des mÃ©thodes}
 \label{comparaison}
-\subsection{Méthodes des plus proches voisins}
+\subsection{MÃ©thodes des plus proches voisins}
 %\begin{figure}[!h]
 %\begin{center}
 %\includegraphics[width=\textwidth]{images/pictures/comparisons/comparison1.eps}
@@ -636,7 +636,7 @@ Effectuons alors la calibration d'un second jeu de données :
 %\end{figure}
 %
 %
-%\section{Meilleure méthode}
+%\section{Meilleure mÃ©thode}
 %\begin{figure}[!h]
 %\begin{center}
 %\includegraphics[width=\textwidth]{images/pictures/comparisons/comparison2.eps}
@@ -653,7 +653,7 @@ Effectuons alors la calibration d'un second jeu de données :
 
 \newpage
 \bibliographystyle{unsrt}
-\bibliography{biblio} % mon fichier de base de données s'appelle biblio.bib
+\bibliography{biblio} % mon fichier de base de donnÃ©es s'appelle biblio.bib
 
 \end{document}
 
