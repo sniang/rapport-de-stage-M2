@@ -179,7 +179,7 @@ Tél. : +33 (0) 4 72 44 84 57}
 \section{Introduction}
 Après avoir permis la découverte expérimentale du boson de Higgs en 2012, les expériences généralistes ATLAS \cite{HiggsATLAS} et CMS \cite{HiggsCMS} installées sur le LHC du CERN, sont toujours en place dans l'optique de découvrir de la nouvelle physique au-delà  du modèle standard.
 
-Les détecteurs ATLAS et CMS sont basés sur les màªmes principes : cylindriques, ils sont constitués d'un ensemble de sous-détecteurs disposés en couches concentriques autour du point d'interaction. Les informations provenant de ces sous-détecteurs sont combinées pour déterminer le type, l'énergie et la direction des particules de l'état final de la collision, pour pouvoir mesurer les propriétés de celle-ci, et par exemple déterminer si une particule instable encore inconnue a été produite. 
+Les détecteurs ATLAS et CMS sont basés sur les mêmes principes : cylindriques, ils sont constitués d'un ensemble de sous-détecteurs disposés en couches concentriques autour du point d'interaction. Les informations provenant de ces sous-détecteurs sont combinées pour déterminer le type, l'énergie et la direction des particules de l'état final de la collision, pour pouvoir mesurer les propriétés de celle-ci, et par exemple déterminer si une particule instable encore inconnue a été produite. 
 
 Nous allons nous intéresser plus spécifiquement au détecteur CMS \cite{CMS}. Celui-ci dispose  :
 \begin{itemize}
@@ -307,7 +307,7 @@ J'ai constaté qu'à  faible  $E_{\rm ecal},  E_{\rm hcal}$ il y a quelques points
 \end{center}
 \end{figure}
 
-Nous constatons en particulier que dans le cas  $E_{\rm ecal} = 0$, la courbe ne passe pas par le le coeur du nuage de point à  faible  $E_{\rm hcal} = 0$. Maintenant que la régression est faite, nous allons calibrer un second jeu de données et afficher $E_{\rm calib}/$E_{\rm true}$ pour ce nouveau jeu de données. $E_{\rm calib}/$E_{\rm true}$ doit àªtre le plus proche possible de 1.
+Nous constatons en particulier que dans le cas  $E_{\rm ecal} = 0$, la courbe ne passe pas par le le coeur du nuage de point à  faible  $E_{\rm hcal} = 0$. Maintenant que la régression est faite, nous allons calibrer un second jeu de données et afficher $E_{\rm calib}/$E_{\rm true}$ pour ce nouveau jeu de données. $E_{\rm calib}/$E_{\rm true}$ doit être le plus proche possible de 1.
 
 Sur la Fig. \ref{LR_ecaliboveretrue_ecal_hcal}, à  gauche, nous constatons comme prévu que la régression linéaire est mauvaise à  faible $E_{\rm hcal}$ car en moyenne, $E_{\rm calib}/E_{\rm true}$ n'est pas proche de $1$. Plus intéressant, la figure de droite met en avant les non-linéarités du nuage de point.\\
 
@@ -345,7 +345,7 @@ Ici, l'idée est de découper le plan $(E_{\rm ecal},E_{\rm hcal})$ en carrés et d
 	\label{legos}
 \end{minipage}
 
-L'avantage de cette calibration est de prendre en compte ce qui se passe localement dans la distribution contrairement à  la régression linéaire, mais elle a pour désavantage d'àªtre liée au pas des carrés. Un pas trop grand fait perdre en précision, un pas trop petit laisse des trous dans la position des briques (cf Fig. \ref{legos}), et fait exploser le temps de calcul. 
+L'avantage de cette calibration est de prendre en compte ce qui se passe localement dans la distribution contrairement à  la régression linéaire, mais elle a pour désavantage d'être liée au pas des carrés. Un pas trop grand fait perdre en précision, un pas trop petit laisse des trous dans la position des briques (cf Fig. \ref{legos}), et fait exploser le temps de calcul. 
 
 \noindent
 \begin{minipage}{0.60\linewidth}
@@ -375,7 +375,7 @@ Effectuons la calibration d'un second jeu de données :
 \end{center}
 \end{figure}
 
-Nous remarquons que la présence de paliers dans la courbe de calibration biaise la calibration en faisant apparaître une structure (des hyperboles) dans $E_{\rm calib}/E_{\rm true}$, comme nous pouvons le voir dans la Fig. \ref{ecaliboveretrueCL}. Cette structure est liée aux points possédant la màªme énergie de calibration, contrairement au cas de la régression linéaire (cf Fig.  \ref{LR_ecaliboveretrue_etrue}). 
+Nous remarquons que la présence de paliers dans la courbe de calibration biaise la calibration en faisant apparaître une structure (des hyperboles) dans $E_{\rm calib}/E_{\rm true}$, comme nous pouvons le voir dans la Fig. \ref{ecaliboveretrueCL}. Cette structure est liée aux points possédant la même énergie de calibration, contrairement au cas de la régression linéaire (cf Fig.  \ref{LR_ecaliboveretrue_etrue}). 
 Nous constatons également sur la Fig. \ref{ecaliboveretrueCL} que $E_{\rm calib}/E_{\rm true}$ est en moyenne constamment $> 1$, ce qui montre qu'il y a une tendance à  la sur-évaluation de $E_{\rm calib}$.
 
 \begin{figure}[!h]
@@ -513,7 +513,7 @@ expliquer : \\
 - barre d'erreur\\
 - minimisation du chi2\\
 - un bon chi2 réduit ?\\
-- quand nous ferons un fit gaussien ce sera toujours le màªme principe\\
+- quand nous ferons un fit gaussien ce sera toujours le même principe\\
 - interpolation \cite{scipyInterp}\\
 
 \noindent
@@ -566,7 +566,7 @@ Effectuons alors la calibration d'un second jeu de données :
 
 
 \subsection{Fit gaussien}
-Ici, il s'agit du màªme principe que précédemment mais nous allons considérer que la valeur de $E_{\rm calib}$ est la moyenne de la gaussienne. 
+Ici, il s'agit du même principe que précédemment mais nous allons considérer que la valeur de $E_{\rm calib}$ est la moyenne de la gaussienne. 
 Principe de l'algorithme :
 \begin{itemize}
 	\item on considère des points $(E_{\rm ecal}^{0,j}, E_{\rm hcal}^{0,j})$ où nous allons évaluer l'énergie calibrée.
