@@ -124,7 +124,7 @@
 
 \parbox{15cm}{\small
 \textbf{Résumé} : \\
-\rm Dans le détecteur CMS, l'énergie des hadrons neutres est déterminée à partir de l'énergie mesurée dans les calorimètres électromagnétiques ($E_{\rm ecal}$) et hadroniques ($E_{\rm hcal}$). Une calibration est cependant nécessaire pour estimer l'énergie vraie du hadron neutre à  partir de $E_{\rm ecal}$ et $E_{\rm hcal}$. Dans un premier temps, j'ai utilisé comme calibration une fonction linéaire de $E_{\rm ecal}$ et $E_{\rm hcal}$. Ensuite, afin de décrire la non linéarité de la mesure de l'énergie, j'ai inventé une nouvelle méthode de calibration non paramétrique.
+\rm Avec le détecteur CMS, l'énergie des hadrons neutres est déterminée à partir de l'énergie mesurée dans les calorimètres électromagnétiques ($E_{\rm ecal}$) et hadroniques ($E_{\rm hcal}$). Une calibration est cependant nécessaire pour estimer l'énergie vraie du hadron neutre à  partir de $E_{\rm ecal}$ et $E_{\rm hcal}$. Dans un premier temps, j'ai utilisé comme calibration une fonction linéaire de $E_{\rm ecal}$ et $E_{\rm hcal}$. Ensuite, afin de décrire la non linéarité de la mesure de l'énergie, j'ai inventé une nouvelle méthode de calibration non paramétrique.
 }
 
 \vspace{1cm}
@@ -177,62 +177,63 @@ Tél. : +33 (0) 4 72 44 84 57}
 
 \newpage
 \section{Introduction}
-Après avoir permis la découverte expérimentale du boson de Higgs en 2012, les expériences généralistes ATLAS \cite{HiggsATLAS} et CMS \cite{HiggsCMS} installées sur le LHC du CERN, sont toujours en place dans l'optique de découvrir de la nouvelle physique au-delà  du modèle standard.
+Après avoir permis la découverte expérimentale du boson de Higgs en 2012 \cite{HiggsATLAS,HiggsCMS}, les expériences généralistes ATLAS et CMS installées sur le LHC du CERN sont toujours en place dans l'optique de découvrir de la nouvelle physique au-delà du modèle standard.
 
-Les détecteurs ATLAS et CMS sont basés sur les mêmes principes : cylindriques, ils sont constitués d'un ensemble de sous-détecteurs disposés en couches concentriques autour du point d'interaction. Les informations provenant de ces sous-détecteurs sont combinées pour déterminer le type, l'énergie et la direction des particules de l'état final de la collision, pour pouvoir mesurer les propriétés de celle-ci, et par exemple déterminer si une particule instable encore inconnue a été produite. 
+Les détecteurs ATLAS et CMS sont basés sur les mêmes principes : cylindriques, ils sont constitués d'un ensemble de sous-détecteurs disposés en couches concentriques autour du point d'interaction. Les informations provenant de ces sous-détecteurs sont combinées pour déterminer le type, l'énergie et la direction des particules de l'état final de la collision afin d'en mesurer les propriétés, et par exemple déterminer si une particule instable encore inconnue a été produite. 
 
 Nous allons nous intéresser plus spécifiquement au détecteur CMS \cite{CMS}. Celui-ci dispose  :
 \begin{itemize}
 \item d'un champ magnétique, pour courber la trajectoire des particules chargées;
-\item d'un trajectographe, pour reconstruire la trajectoire des particules chargées, et ainsi obtenir la charge et l'impulsion;
-\item d'un calorimètre électromagnétique (ECAL) \cite{ECAL}, constitué d'un cristal de tungstate de plomb, permettant de collecter les dépôts d'énergie des particules, principalement électrons et photons, mais aussi hadrons chargés et neutres;
-\item d'un calorimètre hadronique (HCAL) \cite{HCAL}, composé de plusieurs couches d'absorbeur en laiton et de carreaux scintillateurs en plastique, avec une segmentation grossière. La resolution du HCAL pour la mesure de l'energie $E$ d'un hadron est de l'ordre de $100\%\sqrt{(E / \SIUnits{}{\giga\electronvolt})}$;
-\item de chambres à  muons, qui permettent l'dentification de ces particules, les seules à  pouvoir y parvenir.
+\item d'un trajectographe, pour reconstruire la trajectoire des particules chargées, et ainsi obtenir la charge et l'impulsion à partir de la courbure de la trajectoire dans le champ magnétique; 
+\item d'un calorimètre électromagnétique (ECAL) \cite{ECAL} constitué d'un cristal de tungstate de plomb, permettant de collecter les dépôts d'énergie des particules, principalement électrons et photons, mais aussi hadrons chargés et neutres;
+\item d'un calorimètre hadronique (HCAL) \cite{HCAL} composé de plusieurs couches d'absorbeur en laiton et de carreaux scintillateurs en plastique, avec une segmentation grossière. HCAL permet la mesure de l'énergie $E$ d'un hadron avec une résolution de l'ordre de $100\%\sqrt{(E / \SIUnits{}{\giga\electronvolt})}$;
+\item de chambres à  muons qui permettent l'dentification de ces particules, les seules à  pouvoir y parvenir.
 \end{itemize}
+
+La Fig. \ref{detecteur} illustre le comportement des particules dans les différentes couches du détecteur:
+\begin{enumerate}
+    \item photons :
+    	\begin{itemize}
+		\item déposent leur énergie dans ECAL;
+	\end{itemize}
+    \item $e^+,e^-$ :
+        \begin{itemize}
+        		\item produisent une trace dans le trajectographe;
+		\item déposent leur énergie dans ECAL;
+        \end{itemize}
+    \item hadrons chargés :
+        \begin{itemize}
+        		\item produisent une trace dans le trajectographe;
+    		\item peuvent démarrer une gerbe hadronique dans le ECAL et y déposer une partie de leur énergie;
+    		\item déposent le reste de leur énergie dans le HCAL;
+		\item finissent leur course dans HCAL;
+        \end{itemize}
+    \item hadrons neutres :
+        \begin{itemize}
+        		\item peuvent démarrer une gerbe hadronique dans le ECAL et y déposer une partie de leur énergie;
+    		\item déposent le reste de leur énergie dans le HCAL;
+		\item finissent leur course dans HCAL;
+        \end{itemize}
+    \item $\mu^+,\mu^-$ :
+        \begin{itemize}
+        		\item produisent une trace dans le trajectographe;
+		\item traversent le ECAL et le HCAL comme des particules au minimum d'ionisation;
+		\item sont détectées dans la chambre à  muons.
+        \end{itemize}
+\end{enumerate}
 
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[width=0.7\textwidth]{images/detecteur.pdf}
 \caption{Une esquisse des interactions spécifiques des particules dans une tranche transversale du détecteur CMS.}
-\label{schemaCMS}
 \label{detecteur}
 \end{center}
 \end{figure}
-
-Détaillons alors le comportement des particules  :
-\begin{itemize}
-    \item photons (exemple 1 dans la Fig. \ref{schemaCMS}) :
-    	\begin{itemize}
-		\item déposent leur énergie dans ECAL;
-	\end{itemize}
-    \item $e^+,e^-$ (exemple 2 dans la Fig. \ref{schemaCMS}) :
-        \begin{itemize}
-        		\item produisent une trace dans le trajectographe;
-		\item déposent leur énergie dans ECAL;
-        \end{itemize}
-    \item hadrons chargés (exemple 3 dans la Fig. \ref{schemaCMS}) :
-        \begin{itemize}
-        		\item produisent une trace dans le trajectographe;
-    		\item déposent en minorité des cas leur énergie dans ECAL;
-    		\item déposent leur énergie dans HCAL;
-		\item finnissent leur course dans HCAL;
-        \end{itemize}
-    \item hadrons neutres (exemple 4 dans la Fig. \ref{schemaCMS}) :
-        \begin{itemize}
-        		\item déposent leur énergie dans le HCAL;
-		\item déposent dans la minorité des cas leur énergie dans ECAL;
-		\item finnissent leur course dans HCAL;
-        \end{itemize}
-    \item $\mu^+,\mu^-$ (exemple 5 dans la Fig. \ref{schemaCMS}) :
-        \begin{itemize}
-        		\item produisent une trace dans le trajectographe;
-		\item traversent ECAL, HCAL;
-		\item sont visibles dans la chambre à  muons.
-        \end{itemize}
-\end{itemize}
 \`A noter que dans notre étude, seuls les hadrons neutres nous intéressent. \\
 
 La connaissance des dépôts d'énergie et du comportement des particules dans les différentes parties du détecteur nous permettent de reconnaître et distinguer les particules : cette opération s'appelle le \textit{Particle Flow (PF)}. Cependant, il est aussi nécessaire d'estimer l'énergie des particules ($E_{\rm true})$ à  l'aide d'une calibration des calorimètres. En effet, ces derniers ne présentent pas une réponse linéaire et la somme des énergies dans les calorimètres ne correspond pas à  l'énergie de la particule. Cette énergie de calibration sera notée $E_{\rm calib}$.
+
+Pour effectuer la calibration nous allons utiliser des particules simulées. La production de ces données sera explicitée dans la section \ref{echantillon}.
 
 En première approximation, nous déterminerons l'énergie calibrée par une fonction linéaire de l'énergie lue dans le ECAL (énergie notée par la suite $E_{\rm ecal}$) et de celle lue dans le HCAL (notée par la suite $H_{\rm ecal}$). Cette méthode sera présentée dans la section \ref{LR}.
 
@@ -240,29 +241,37 @@ Ce rapport présente ensuite de nouvelles techniques de calibration qui permetten
 Enfin, nous comparerons ces méthodes dans la section \ref{comparaison}. 
 
 \section{Production de l'échantillon}
+\label{echantillon}
 
-\begin{figure}[!h]
-\begin{center}
-\includegraphics[height=5cm]{images/pictures/testLinearRegression/LinearRegression_plot3D_training.png}
-\caption{Le nuage de points $(E_{\rm ecal},E_{\rm hcal}, E_{\rm true})$}
-\end{center}
-\end{figure}
-
-- paragraphe de Colin sur la simulation\\
+La calibration des calorimètres est réalisée grâce à un échantillon de pions chargés. Chaque événement contient un unique hadron chargé d'énergie comprise entre 0 et 200 GeV, et de pseudorapidité inférieure à 0.5. La calibration n'est pour l'instant pas réalisée pour des particules d'énergie supérieure, ou émises vers l'avant. 
+Chaque hadron est traité par la simulation complète de CMS, dans laquelle les interactions avec les détecteurs sont modélisées par GEANT4 \cite{GEANT4}. Les dépôts d'énergie calorimétriques sont reconstruits par l'algorithme de reconstruction standard de CMS.
 
 Les données simulées sont stockées dans un fichier \textit{.root}. Par souci de compatibilité, j'ai voulu écarter \textit{Root}, qui est à la fois un programme et une librairie C++ pour tout faire en Python.  J'ai donc écrit un programme \cite{RootToPhython} pour extraire les données du fichier initial pour les déplacer dans un nouveau fichier binaire importable facilement par Python et qui contient, pour chaque hadron simulé : son énergie réelle ($E_{\rm true}$), son impulsion, l'énergie déposée dans ECAL ($E_{\rm ecal}$), l'énergie déposée dans HCAL ($E_{\rm hcal}$), sa pseudo-rapidité.
 
-On séparera et traitera différemment les événements qui ont $E_{\rm ecal} = 0$.  Ces événements sont liés à  des particules qui ont interagi avec le détecteur hardronique mais pas avec le détecteur électromagnétique (cf Fig.\ref{detecteur}). Cette séparation se justifie, car modéliser les dépôts d'énergie dans les deux calorimètres pour en conclure ce qui se passe dans le cas particulier où il n'y a de dépôt que dans l'un d'eux amène un biais. Ainsi, à  chaque construction de calibration, on créera en fait deux modèles.
+On séparera et traitera différemment les événements qui ont $E_{\rm ecal} = 0$ de ceux avec $E_{\rm ecal} \neq 0$ (Fig. \ref{points}).  Ces événements sont liés à des particules qui ont interagi avec le détecteur hardronique mais pas avec le détecteur électromagnétique (cf Fig.\ref{detecteur}). Cette séparation se justifie, car modéliser les dépôts d'énergie dans les deux calorimètres pour en conclure ce qui se passe dans le cas particulier où il n'y a de dépôt que dans l'un d'eux amène un biais. Ainsi, à  chaque construction de calibration, on créera en fait deux modèles.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.49\linewidth]{images/pictures/testLinearRegression/LinearRegression_plot3D_training.png}
+\includegraphics[width=0.49\linewidth]{images/pictures/explain/ecal_eq_0.png}
+\caption{A gauche, l'energie vraie $E_{\rm true}$ en fonction de l'énergie mesurée dans le ECAL, $E_{\rm ecal} \neq 0$, et de l'énergie mesurée dans le HCAL, $E_{\rm hcal}$, pour un échantillon d'événements ou un seul hadron est simulé dans le détecteur. À droite, idem mais avec avec $E_{\rm ecal} = 0$. Ces deux nuages de points seront modélisés séparément.}
+\label{points}
+\end{center}
+\end{figure}
 
 De plus, la simulation crée un palier car les particules sont limitées à  $E_{\rm true} = \SIUnits{200}{\giga\electronvolt}$. Si l'on regarde par exemple sur la Fig. \ref{limite} ce qui se passe dans le plan $E_{\rm ecal} = 0$, on voit bien ce palier qui apparaît vers $\SIUnits{150}{\giga\electronvolt}$, il est donc ici impossible de déduire une énergie de calibration à  partir des points au-delà  de cette limite . Avec ce jeu de données, nous allons fixer une limite $E_{\rm ecal} + E_{\rm hcal}$  = (lim = \SIUnits{150}{\giga\electronvolt})$.
 
-\begin{figure}[!h]
+La Fig. \ref{limite} montre en particulier que dans le plan 
+
+\begin{figure}[!t]
     \begin{center}
         \includegraphics[width=\textwidth]{images/pictures/explain/limit_arrow.png}
-        \caption{On place une limite à  $E_{\rm ecal}+E_{\rm hcal} = 150$. Les points verts sont les points rejetés.}
+        \caption{On place une limite à  $E_{\rm ecal}+E_{\rm hcal} = 150$. À gauche : en bleu la zone où nous pouvons calculer les énergies calibrée, en vert, là où nous ne le pouvons pas. En haut à droite : la même choses pour les particules qui ont $E_{\rm ecal} = 0$. En bas à droit : avec les points dans le cône.}
         \label{limite}
     \end{center}
 \end{figure}
+
+
 
 \section{Calibration par régression linéaire}
 \label{LR}
@@ -271,7 +280,7 @@ Comme première calibration, j'ai utilisé une méthode simple, la régression linéa
 \begin{equation}
     E_{\rm true} = a_1 E_{\rm ecal} + a_2 E_{\rm hcal} + b
 \end{equation}
-et de trouver les coefficient $a_1, a_2,  b$ optimaux pour que le modèle coà¯ncide au mieux aux données d'entrainement. Au niveau de la programmation, j'ai utilisé la librairie de \textit{Sciki Learn}  \cite{scikitLR} qui se base sur une méthode des moindres carrés. Dans notre cas, cela revient à  trouver les coefficients qui, pour un ensemble de données d'entraînement  $(E_{\rm ecal}^n,E_{\rm hcal}^n, E_{\rm true}^n)$ minimiseront :
+et de trouver les coefficient $a_1, a_2,  b$ optimaux pour que le modèle coïncide au mieux aux données d'entrainement. Au niveau de la programmation, j'ai utilisé la librairie de \textit{Sciki Learn}  \cite{scikitLR} qui se base sur une méthode des moindres carrés. Dans notre cas, cela revient à  trouver les coefficients qui, pour un ensemble de données d'entraînement  $(E_{\rm ecal}^n,E_{\rm hcal}^n, E_{\rm true}^n)$ minimiseront :
 \begin{equation}
 	\epsilon = \sum_n |E_{\rm true} - a_1 E_{\rm ecal} - a_2 E_{\rm hcal} - b|^2
 \end{equation}
@@ -552,6 +561,8 @@ Effectuons alors la calibration d'un second jeu de données :
 \end{center}
 \end{figure}
 
+La Fig. \ref{ecaliboveretrueKNNGC} nous montre que la calibration est bonne car en moyenne $E_{\rm calib}/E_{\rm true}$ est proche de 1 (sauf à bas et haut $/E_{\rm true}$).
+
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[width=\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_ecalib_over_etrue_functionof_ecal_hcal.png}
@@ -560,6 +571,9 @@ Effectuons alors la calibration d'un second jeu de données :
 \end{center}
 \end{figure}
 
+La Fig. \ref{ecaliboveretrueKNNGC_ecal_hcal} nous montre également que la calibration est bonne et prend en compte les non-linéarités. 
+
+Cependant, nous rejetons certains points pour effectuer la calibration, est-ce judicieux? De plus nous utilisons une moyenne pondérée avec un paramètre $\sigma$ qui est fixé empiriquement. Nous allons alors proposer une dernière méthode pour remédier à cela.
 
 \subsection{Fit gaussien}
 Ici, il s'agit du même principe que précédemment mais nous allons considérer que la valeur de $E_{\rm calib}$ est la moyenne de la gaussienne. 
@@ -632,6 +646,7 @@ Effectuons alors la calibration d'un second jeu de données :
 \end{figure}
 
 
+\newpage
 \section{Meilleure méthode}
 \begin{figure}[!h]
 \begin{center}
@@ -643,7 +658,7 @@ Effectuons alors la calibration d'un second jeu de données :
 
 
 
-
+\newpage
 \section{Annexes}
 \subsection{Fonctions utiles du programme}
 
