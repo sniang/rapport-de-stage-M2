@@ -482,51 +482,32 @@ Principe de l'algorithme :
 	\item on effectue une interpolation pour donner une valeur d'énergie calibrée quelque soit $(E_{\rm ecal}^{0}, E_{\rm hcal}^{0})$
 \end{itemize}
 
-
-- on enlève les points éloignés du coeur de la distribution\\
-- principe de l'algo\\
-- comment fait-on un fit\\
--scipy \cite{scipyFit}\\
-
 \noindent 
-\begin{minipage}{0.4\linewidth}
+\begin{minipage}{0.5\linewidth}
 	\includegraphics[width=\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_example_hist.eps}
 	\captionof{figure}{Exemple d'un fit gaussien.}
 	\label{gaussianfit}
 \end{minipage}
-\begin{minipage}{0.6\linewidth}
+\begin{minipage}{0.5\linewidth}
+Le fit gaussien s'effectue grâce à la librairie \textit{Scipy} \cite{scipyFit}, le principe étant de trouver les paramètres qui minimisent 
+\begin{equation}
+\chi^2 = \sum_i \left(\frac{y_i - g(x_i)}{\epsilon_i} \right)^2
+\end{equation}
+où $(x_i,y_i)$sont les valeurs à fiter (ici les valeur de l'histogramme) $g$ la fonction à paramètre (ici une gaussienne), $\epsilon^_i$, l'erreur sur $y_i$. Nous pouvons également considérer le $\chi^2$ réduit, $\chi^2/df$, avec $df$ le degré de liberté, qui doit être le plus proche de 1 pour correspondre à un fit de bonne qualité (Fig. \ref{chi2}). 
 \end{minipage}
-
 
 \begin{figure}[!h]
 \begin{center}
-\includegraphics[width=0.7\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_chi2_calib.eps}
-\caption{Le $\chi^2$ réduit pour chaque fit effectué.}
+\includegraphics[width=0.6\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_chi2_calib.eps}
+\caption{Le $\chi^2$ réduit pour chaque fit effectué. \\
+$n_{\rm neighbors, E_{\rm ecal} = 0} & = 2000, n_{\rm neighbors, E_{\rm ecal} \neq 0} & = 250$.}
+\label{chi2}
 \end{center}
 \end{figure}
-%	A différents moment, nous aurons besoin de calculer des moyennes. Or souvent, la moyenne classique ne serait pas représentative de ce que tous souhaitons montrer car certains points sont ont des valeurs $E_{\rm ecal},E_{\rm hcal}$ mal estimées car la simulation prend en compte les défauts des calorimètres. Il serait donc alors incorrecte de les prendre en compte pour juger l'efficacité d'une calibration car ils sont complètement incohérents.\\
-%Pour résoudre ce problème, nous allons ajuster une gaussienne de la distribution des points à  moyenner et choisir considérer que la moyenne à  prendre en compte est la moyenne de la gaussienne. Ainsi, les points aberrants totalement écarté du centre de la distribution ne perturberont pas le calcul de la moyenne alors que dans le cas d'une moyenne classique, ils peuvent fortement attirer la moyenne vers eux.\\
-%Ces points aberrants peuvent également venir d'une particule qui se serait décomposée avant le calorimètre. Ainsi on trouve près de l'origine, des points à  fort $E_{\rm true}$ et pour de faibles valeurs de  $E_{\rm ecal}$ et $E_{\rm hcal}$, et ces points ne sont pas du tout représentatif de l'efficacité d'une calibration. 
-%
-%\begin{minipage}{0.5\linewidth}
-%	\begin{center}
-%	\includegraphics[height=5cm]{images/pictures/testKNNGF/KNNGaussianFit_example_hist.eps}
-%	\end{center}
-%\end{minipage}
-%\hfill
-%\begin{minipage}{0.45\linewidth}
-%	Ici, on peut voir sur cet exemple que si nous prenons la moyenne classique de $E_{\rm true}$,  on obtient $79.12$, or la moyenne de la gaussienne fitée est de $77.82$, au vu de ce que nous avons dit précédemment, nous considèrerons que la seconde est plus judicieuse.
-%\end{minipage}
-%
-%\subsection{Comment est fait un fit ?}
 
+Au vu du $\chi^2/df$ (Fig. \ref{chi2}), nous pouvons en conclure que le fit est très bon pour $E_{\rm ecal} \neq 0$ car la distribution du $\chi^2/df$ est centrée en 1. Ce n'est pas le cas pour $E_{\rm ecal} = 0$ mais nous nous en contenterons pour l'instant. Cela peut notamment s'expliquer que cela vient du fait que nous prenons plus de voisins dans le cas $E_{\rm ecal} = 0$. 
 
-expliquer : \\
-- barre d'erreur\\
-- minimisation du chi2\\
-- un bon chi2 réduit ?\\
-- quand nous ferons un fit gaussien ce sera toujours le même principe\\
-- interpolation \cite{scipyInterp}\\
+Pour l'interpolation, j'ai également utilisé une fonction proposée par textit{Scipy} \cite{scipyInterp}, qui nous laisse le choix entre une interpolation linéaire et une interpolation à splines cubiques.
 
 \noindent
 \begin{minipage}{0.6\linewidth}
@@ -559,6 +540,9 @@ n_{\rm neighbors, E_{\rm ecal} \neq 0} & = 250\\
 \end{center}
 \end{figure}
 
+Cette fois ci, nous avons dans le plan $E_{ecal \rm} = 0$ la courbe qui passe par le coeur de la distribution à faible $E_{\rm hcal}$, l'objectif est donc atteint. 
+
+\newpage
 Effectuons alors la calibration d'un second jeu de données : 
 \begin{figure}[!h]
 \begin{center}
