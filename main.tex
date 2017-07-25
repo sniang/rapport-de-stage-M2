@@ -151,7 +151,7 @@ Stage encadré par :
 
 %Nom du Laboratoire d'accueil
 
-{\it Bà¢timent Paul Dirac\\
+{\it Bâtiment Paul Dirac\\
 4, Rue Enrico Fermi\\
 69622 Villeurbanne Cedex\\
 Tél. : +33 (0) 4 72 44 84 57}
@@ -444,7 +444,7 @@ n_{\rm neighbors, E_{\rm ecal} \neq 0} & = 250\\
 \end{center}
 \end{figure}
 
-Nous constatons ici que la surface est beaucoup plus lisse qu'avec la méthode précédente, mais en regardant le cas particulier de $E_{\rm ecal} = 0$, nous constatons qu'une fois encore, à  bas $E_{\rm hcal}$, la courbe de calibration ne passe pas par le coeur de la gerbe. Cela est dû à  des points aberrants qui correspondent à  des particules de haute énergie qui ne déposent pas ou peu leur énergie dans les calorimètres. Il faudra trouver un moyen de les écarter par la suite.
+Nous constatons ici que la surface est beaucoup plus lisse qu'avec la méthode précédente, mais en regardant le cas particulier de $E_{\rm ecal} = 0$, nous constatons qu'une fois encore, à  bas $E_{\rm hcal}$, la courbe de calibration ne passe pas par le coeur de la gerbe. Cela est dÃ» à  des points aberrants qui correspondent à  des particules de haute énergie qui ne déposent pas ou peu leur énergie dans les calorimètres. Il faudra trouver un moyen de les écarter par la suite.
 
 Effectuons alors la calibration d'un second jeu de données : 
 \begin{figure}[!h]
@@ -468,7 +468,7 @@ Nous constatons que l'énergie de calibration est toujours sur-estimée, et partic
 
 
 \subsection{Nettoyage gaussien}
-Cette méthode est assez similaire à  la précédente. Elle se base sur la constatation que la distribution en énergie vraie des paquets de plus proches voisins est un distribution gaussienne. En utilisant la méthode des moindres carrés, nous allons donc  trouver les paramètres de la gaussienne en question et ne prendre en compte les plus proches voisins dont l'énergie vraie est $\mu -c\sigma \leq E_{\rm true}^i \leq \mu + c\sigma$ (nous prenons par défaut $c = 2$), avec $\mu, \sigma$ la moyenne et l'écart type de la distribution gaussienne.\\
+Cette méthode est assez similaire à  la précédente. Elle se base sur la constatation que la distribution en énergie vraie $E_{\rm true}$ des paquets de plus proches voisins est une distribution gaussienne (cf Fig. \ref{gaussianfit}). Nous allons donc effectuer un fit pour trouver les paramètres de la gaussienne en question et ne prendre en compte les plus proches voisins dont l'énergie vraie est $\mu -c\sigma \leq E_{\rm true}^i \leq \mu + c\sigma$ (nous prenons par défaut $c = 2$), avec $\mu, \sigma$ la moyenne et l'écart type de la distribution gaussienne.\\
 Principe de l'algorithme :
 \begin{itemize}
 	\item on considère des points $(E_{\rm ecal}^{0,j}, E_{\rm hcal}^{0,j})$ où nous allons évaluer l'énergie calibrée.
@@ -487,7 +487,17 @@ Principe de l'algorithme :
 - principe de l'algo\\
 - comment fait-on un fit\\
 -scipy \cite{scipyFit}\\
--{Efficacité du fit}:
+
+\noindent 
+\begin{minipage}{0.4\linewidth}
+	\includegraphics[width=\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_example_hist.eps}
+	\captionof{figure}{Exemple d'un fit gaussien.}
+	\label{gaussianfit}
+\end{minipage}
+\begin{minipage}{0.6\linewidth}
+\end{minipage}
+
+
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[width=0.7\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_chi2_calib.eps}
@@ -509,6 +519,8 @@ Principe de l'algorithme :
 %\end{minipage}
 %
 %\subsection{Comment est fait un fit ?}
+
+
 expliquer : \\
 - barre d'erreur\\
 - minimisation du chi2\\
