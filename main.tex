@@ -359,27 +359,26 @@ Il faut donc proposer une méthode qui prend en compte la non-linéarité entre les
 Ici, l'idée est de découper le plan $(E_{\rm ecal},E_{\rm hcal})$ en bins et de calculer la moyenne des $E_{\rm true}$ dans chaque bin qui sera la valeur $E_{\rm calib}$. 
 
 \noindent
-\begin{minipage}{0.60\linewidth}
+\begin{minipage}{0.6\linewidth}
 Ainsi pour prédire une énergie de $E_{\rm calib}^i$ pour un point $(E_{\rm ecal}^i,E_{\rm hcal}^i)$, nous allons regarder dans quel bin il se trouve et retourner la valeur d'énergie calibrée correspondante. Nous pouvons voir sur la Fig. \ref{legos} une illustration où la hauteur de chaque brique correspond à  l'énergie calibrée d'un bin.
 
-L'avantage de cette calibration est de prendre en compte ce qui se passe localement dans la distribution contrairement à  la régression linéaire, mais elle a pour désavantage d'être liée au pas des bins. Un pas trop grand fait perdre en précision, un pas trop petit laisse des trous dans la position des briques (cf Fig. \ref{legos}), et fait exploser le temps de calcul. 
+L'avantage de cette calibration est de prendre en compte ce qui se passe localement dans la distribution contrairement à  la régression linéaire, mais elle a pour désavantage d'avoir un paramètre arbitraire qui influe sur la calibration, la taille des bins :  un pas trop grand fait perdre en précision car un grand nombre de particules se retrouvent avec la même énergie de calibration, un pas trop petit laisse des trous dans la position des briques (cf Fig. \ref{legos}) ce qui donne des bins vides et une impossibilité de prédire une énergie de calibration. De plus, un grand nombre de bins fait exploser le temps de calcul. 
 \end{minipage}
 \begin{minipage}{0.4\linewidth}
 	\includegraphics[width=\linewidth]{images/pictures/testCalibrationLego/CalibrationLego_plot3D_legos.eps}
-	\captionof{figure}{Illustration de la calibration avec $100\times100$ bins.}
+	\captionof{figure}{Illustration de la calibration avec $100\times100$ bins. La hauteur d'une brique correspond à l'énergie de calibration du bin.}
 	\label{legos}
 \end{minipage}
 
 
 
 \noindent
-\begin{minipage}{55\linewidth}
-Construisons la calibration \cite{GitHubCL} à  l'aide d'un premier jeu de données, avec $100\times100$ bins. Premièrement, nous constatons que la surface est "cabossée", et si nous regardons ce qui se passe dans le plan $E{\rm ecal} = 0$ (Fig. \ref{calibCL}), nous voyons que cette méthode binnée donne des énergies calibrées $E_{\rm calib}$ égales pour des ensembles de points, par paliers. Deuxièmement, nous constatons une fois de plus que la courbe de calibration ne passe pas par le coeur de la distribution à  bas $E_{\rm hcal}$ : $E_{\rm calib}$ y est sur-évaluée.
+\begin{minipage}{0.6\linewidth}
+Construisons la calibration \cite{GitHubCL} à  l'aide d'un premier jeu de données, avec $100\times100$ bins. Premièrement, nous constatons que la surface n'est pas lisse, $E_{\rm calib}$ fluctue fortement, et si nous regardons ce qui se passe dans le plan $E_{\rm ecal} = 0$ (Fig. \ref{calibCL}), nous voyons que cette méthode binnée donne des énergies calibrées $E_{\rm calib}$ égales pour des ensembles de points, par paliers. Deuxièmement, nous constatons une fois de plus que la courbe de calibration ne passe pas par le coeur de la distribution à  bas $E_{\rm hcal}$ : $E_{\rm calib}$ y est sur-évaluée.
 \end{minipage}
-\hfill
-\begin{minipage}{0.45\linewidth}
+\begin{minipage}{0.4\linewidth}
 	\includegraphics[width=\textwidth]{images/pictures/testCalibrationLego/CalibrationLego_plot3D_surf.eps}
-	\captionof{figure}{Surface de calibration avec $100\times100$ bins.}
+	\captionof{figure}{Surface de calibration $E_{\rm calib}$  en fonction de $E_{\rm ecal}$ et $E_{\rm hcal}$ , avec $100\times100$ bins.}
 	\label{surfaceCL}
 \end{minipage}
 
@@ -391,7 +390,11 @@ Construisons la calibration \cite{GitHubCL} à  l'aide d'un premier jeu de donnée
 \end{center}
 \end{figure}
 
-Effectuons la calibration d'un second jeu de données :
+Il est alors possible de calculer l'énergie de calibration pour un second jeu de données. Nous remarquons que la présence de paliers dans la courbe de calibration biaise la calibration en faisant apparaître une structure (des hyperboles) dans $E_{\rm calib}/E_{\rm true}$, comme nous pouvons le voir dans la Fig. \ref{ecaliboveretrueCL}. Cette structure est liée aux points possédant la même énergie de calibration, contrairement au cas de la régression linéaire (cf Fig.  \ref{LR_ecaliboveretrue_etrue}). 
+Nous constatons également sur la Fig. \ref{ecaliboveretrueCL} que $E_{\rm calib}/E_{\rm true}$ est en moyenne constamment $> 1$, ce qui montre qu'il y a une tendance à  la sur-évaluation de $E_{\rm calib}$.
+
+La Fig. \ref{ecaliboveretrueCL_etrue} nous montre une fois de plus que $E_{\rm calib}/E_{\rm true}$  est globalement sur-évaluée, mais que cette fois-ci, nous avons pris en compte les non-linéarités. Il nous faut alors une méthode qui reprenne l'idée de moyenner des $E_{\rm true}$ en enlevant les contraintes et biais provenants des bins.
+
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[width=\textwidth]{images/pictures/testCalibrationLego/CalibrationLego_ecalib_over_etrue.png}
@@ -399,9 +402,6 @@ Effectuons la calibration d'un second jeu de données :
 \label{ecaliboveretrueCL}
 \end{center}
 \end{figure}
-
-Nous remarquons que la présence de paliers dans la courbe de calibration biaise la calibration en faisant apparaître une structure (des hyperboles) dans $E_{\rm calib}/E_{\rm true}$, comme nous pouvons le voir dans la Fig. \ref{ecaliboveretrueCL}. Cette structure est liée aux points possédant la même énergie de calibration, contrairement au cas de la régression linéaire (cf Fig.  \ref{LR_ecaliboveretrue_etrue}). 
-Nous constatons également sur la Fig. \ref{ecaliboveretrueCL} que $E_{\rm calib}/E_{\rm true}$ est en moyenne constamment $> 1$, ce qui montre qu'il y a une tendance à  la sur-évaluation de $E_{\rm calib}$.
 
 \begin{figure}[!h]
 \begin{center}
@@ -411,9 +411,8 @@ Nous constatons également sur la Fig. \ref{ecaliboveretrueCL} que $E_{\rm calib}
 \end{center}
 \end{figure}
 
-La Fig. \ref{ecaliboveretrueCL_etrue} nous montre une fois de plus que $E_{\rm calib}/E_{\rm true}$  est globalement sur-évaluée, mais que cette fois-ci, nous avons pris en compte les non-linéarités. Il nous faut alors une méthode qui reprenne l'idée de moyenner des $E_{\rm true}$ en enlevant les contraintes et biais provenants des bins.
 
-\section{Méthodes basées sur les plus proches voisins}
+\section{Méthodes des plus proches voisins}
 \label{KNN}
 \subsection{Moyenne pondérée}
 Nous utilisons encore des données simulées pour effectuer la calibration : chaque particule simulée $i$ est vue comme un point d'un espace tridimensionnel possédant des coordonnées $(E_{\rm ecal}^i, E_{\rm hcal}^i,E_{\rm true}^i)$.
@@ -431,7 +430,7 @@ Dans notre cas nous avons pris pour facteur de pondération $g$ la distribution g
 
 Pour trouver les plus proches voisins, j'ai utilisé la librairie \textit{Scikit Learn} \cite{scikitKNN}, l'avantage de cette librairie, est qu'elle propose différents algorithmes optimisés de recherche. Lors de la construction de la calibration \cite{GitHubKNN}, j'ai d'ailleurs laissé le choix de l'algorithme de recherche.
 
-Si l'on regarde la Fig.  \ref{neighbors}, on voit que l'on sélectionne les points à  moyenner dans des cercles dont le rayon varie en fonction de la densité de points. Il y a un problème à  bas $E_{\rm hcal}$ et haut $E_{ecal}$ car nous manquons de points.
+Si l'on regarde la Fig.  \ref{neighbors}, on voit que l'on sélectionne les points à  moyenner dans des cercles dont le rayon varie en fonction de la densité de points. Il y a un problème à  bas $E_{\rm hcal}$ et haut $E_{\rm ecal}$ car nous manquons de points.
 
 \begin{figure}[!h]
 	\begin{center}
@@ -442,7 +441,7 @@ Si l'on regarde la Fig.  \ref{neighbors}, on voit que l'on sélectionne les point
 \end{figure}
 
 \noindent
-\begin{minipage}{0.6\linewidth}
+\begin{minipage}{0.5\linewidth}
 Construisons alors la calibration  \cite{GitHubKNN} à  l'aide des paramètres suivants : 
 \[
 \begin{cases}
@@ -456,11 +455,13 @@ n_{\rm neighbors, E_{\rm ecal} \neq 0} & = 250\\
 \end{cases}
 \]
 \end{minipage}
-\begin{minipage}{0.4\linewidth}
+\begin{minipage}{0.5\linewidth}
 	\includegraphics[width=\textwidth]{images/pictures/testKNN/KNN_plot3D_surf.eps}
-	\captionof{figure}{Surface de calibration.}
+	\captionof{figure}{Surface de calibration $E_{\rm calib}$  en fonction de $E_{\rm ecal}$ et $E_{\rm hcal}$.}
 	\label{surfKNN}
 \end{minipage}
+
+Nous constatons sur la Fig. \ref{surfKNN} que la surface est beaucoup plus lisse qu'avec la méthode précédente, mais en regardant le cas particulier de $E_{\rm ecal} = 0$, nous constatons qu'une fois encore, à  bas $E_{\rm hcal}$, la courbe de calibration ne passe pas par le coeur de la gerbe. Cela est dÃ» à  des points aberrants qui correspondent à  des particules de haute énergie qui ne déposent pas ou peu leur énergie dans les calorimètres. Il faudra trouver un moyen de les écarter par la suite.
 
 \begin{figure}[!h]
 \begin{center}
@@ -469,7 +470,7 @@ n_{\rm neighbors, E_{\rm ecal} \neq 0} & = 250\\
 \end{center}
 \end{figure}
 
-Nous constatons ici que la surface est beaucoup plus lisse qu'avec la méthode précédente, mais en regardant le cas particulier de $E_{\rm ecal} = 0$, nous constatons qu'une fois encore, à  bas $E_{\rm hcal}$, la courbe de calibration ne passe pas par le coeur de la gerbe. Cela est dÃ» à  des points aberrants qui correspondent à  des particules de haute énergie qui ne déposent pas ou peu leur énergie dans les calorimètres. Il faudra trouver un moyen de les écarter par la suite.
+
 
 Effectuons alors la calibration d'un second jeu de données : 
 \begin{figure}[!h]
@@ -554,7 +555,7 @@ n_{\rm neighbors, E_{\rm ecal} \neq 0} & = 250\\
 \end{minipage}
 \begin{minipage}{0.4\linewidth}
 	\includegraphics[width=\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_plot3D_surf.eps}
-	\captionof{figure}{Surface de calibration.}
+	\captionof{figure}{Surface de calibration $E_{\rm calib}$  en fonction de $E_{\rm ecal}$ et $E_{\rm hcal}$.}
 	\label{surfKNNGC}
 \end{minipage}
 
@@ -566,9 +567,6 @@ n_{\rm neighbors, E_{\rm ecal} \neq 0} & = 250\\
 \end{figure}
 
 Cette fois ci, nous avons dans le plan $E_{ecal \rm} = 0$ la courbe qui passe par le coeur de la distribution à faible $E_{\rm hcal}$, l'objectif est donc atteint. 
-
-\newpage
-Effectuons alors la calibration d'un second jeu de données : 
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[width=\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_ecalib_over_etrue.png}
@@ -577,7 +575,7 @@ Effectuons alors la calibration d'un second jeu de données :
 \end{center}
 \end{figure}
 
-La Fig. \ref{ecaliboveretrueKNNGC} nous montre que la calibration est bonne car en moyenne $E_{\rm calib}/E_{\rm true}$ est proche de 1 (sauf à bas et haut $/E_{\rm true}$).
+Il est alors possible de calculer l'énergie de calibration pour un second jeu de données. La Fig. \ref{ecaliboveretrueKNNGC} nous montre que la calibration est bonne car en moyenne $E_{\rm calib}/E_{\rm true}$ est proche de 1 (sauf à bas et haut $/E_{\rm true}$).
 
 \begin{figure}[!h]
 \begin{center}
@@ -623,7 +621,7 @@ n_{\rm neighbors, E_{\rm ecal} \neq 0} & = 250\\
 \end{minipage}
 \begin{minipage}{0.4\linewidth}
 	\includegraphics[width=\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_plot3D_surf.eps}
-	\captionof{figure}{Surface de calibration.}
+	\captionof{figure}{Surface de calibration $E_{\rm calib}$  en fonction de $E_{\rm ecal}$ et $E_{\rm hcal}$.}
 	\label{surfKNNGF}
 \end{minipage}
 \begin{figure}[!h]
@@ -649,10 +647,11 @@ Effectuons alors la calibration d'un second jeu de données :
 \label{ecaliboveretrueKNNGF_ecal_hcal}
 \end{center}
 \end{figure}
+Commentaire 
 
+\newpage
 \section{Comparaison des méthodes}
 \label{comparaison}
-\subsection{Méthodes des plus proches voisins}
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[width=\textwidth]{images/pictures/comparisons/comparison1.eps}
@@ -660,18 +659,12 @@ Effectuons alors la calibration d'un second jeu de données :
 \end{center}
 \end{figure}
 
-
-\newpage
-\section{Meilleure méthode}
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[width=\textwidth]{images/pictures/comparisons/comparison2.eps}
 \caption{À gauche : en bleu $E_{\rm calib}/E_{\rm true}$ pour les particules n'interagissant pas avec ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante. À droite : idem les particules qui interagissent avec ECAL et HCAL.}
 \end{center}
 \end{figure}
-
-
-
 
 \newpage
 \section{Annexes}
