@@ -248,7 +248,7 @@ Chaque hadron est traité par la simulation complète de CMS, dans laquelle les in
 
 Les données simulées sont stockées dans un fichier \textit{.root}. Par souci de compatibilité, j'ai voulu écarter \textit{Root}, qui est à la fois un programme et une librairie C++ pour tout faire en Python.  J'ai donc écrit un programme \cite{RootToPhython} pour extraire les données du fichier initial pour les déplacer dans un nouveau fichier binaire importable facilement par Python et qui contient, pour chaque hadron simulé : son énergie réelle ($E_{\rm true}$), son impulsion, l'énergie déposée dans ECAL ($E_{\rm ecal}$), l'énergie déposée dans HCAL ($E_{\rm hcal}$), sa pseudo-rapidité.
 
-On séparera et traitera différemment les événements qui ont $E_{\rm ecal} = 0$ de ceux avec $E_{\rm ecal} \neq 0$ (Fig. \ref{points}).  Ces événements sont liés à des particules qui ont interagi avec le détecteur hardronique mais pas avec le détecteur électromagnétique (cf Fig.\ref{detecteur}). Cette séparation se justifie, car modéliser les dépôts d'énergie dans les deux calorimètres pour en conclure ce qui se passe dans le cas particulier où il n'y a de dépôt que dans l'un d'eux amène un biais. Ainsi, à  chaque construction de calibration, on créera en fait deux modèles.
+On séparera et traitera différemment les événements qui ont $E_{\rm ecal} = 0$ de ceux avec $E_{\rm ecal} \neq 0$ (Fig. \ref{points}).  Ces événements sont liés à des particules qui ont interagi avec le détecteur hardronique mais pas avec le détecteur électromagnétique (\textit{cf.} Fig.\ref{detecteur}). Cette séparation se justifie, car modéliser les dépôts d'énergie dans les deux calorimètres pour en conclure ce qui se passe dans le cas particulier où il n'y a de dépôt que dans l'un d'eux amène un biais. Ainsi, à  chaque construction de calibration, on créera en fait deux modèles.
 
 \begin{figure}[!h]
 \begin{center}
@@ -289,7 +289,7 @@ et de trouver les coefficient $a_1, a_2,  b$ optimaux pour que le modèle coïncid
 	\epsilon = \sum_{n=1}^N  \left(E_{\rm true} - a_1 E_{\rm ecal} - a_2 E_{\rm hcal} - b \right)^2
 \end{equation}
 
-J'ai constaté qu'à  faible  $E_{\rm ecal},  E_{\rm hcal}$ il y a quelques points à  très haut $E_{\rm true}$ qui correspondent à  des défauts de la détection des énergies dans les calorimètres, je les ai donc enlevés des données d'entraînement pour la regression linéaire (cf Fig. \ref{selectedpoints}). J'ai également enlevé les points à haut $E_{\rm ecal},  E_{\rm hcal}$ pour les raisons expliquées dans la section précédente.
+J'ai constaté qu'à  faible  $E_{\rm ecal},  E_{\rm hcal}$ il y a quelques points à  très haut $E_{\rm true}$ qui correspondent à  des défauts de la détection des énergies dans les calorimètres, je les ai donc enlevés des données d'entraînement pour la regression linéaire (\textit{cf.} Fig. \ref{selectedpoints}). J'ai également enlevé les points à haut $E_{\rm ecal},  E_{\rm hcal}$ pour les raisons expliquées dans la section précédente.
 
 \begin{figure}[!h]
     \begin{center}
@@ -301,7 +301,7 @@ J'ai constaté qu'à  faible  $E_{\rm ecal},  E_{\rm hcal}$ il y a quelques points
 
 \notindent
 \begin{minipage}{0.55\linewidth}
- Nous pouvons à  présent effectuer la regression linéaire \cite{GitHubLR} sur un premier jeu de données d'entrainement en ne prenant en compte dans la régression que les points tels que $ $\rm{E_{\rm min}} < E_{\rm ecal} + E_{\rm hcal} < \rm{E_{\rm max}}$, avec $\rm{E_{\rm min}} = \SIUnits{150}{\giga\electronvolt}, \rm{E_{\rm min}} = \SIUnits{150}{\giga\electronvolt}$. Nous obtenons alors (cf Fig. \ref{surfaceLR}, Fig. \ref{courbeLR}):
+ Nous pouvons à  présent effectuer la regression linéaire \cite{GitHubLR} sur un premier jeu de données d'entrainement en ne prenant en compte dans la régression que les points tels que $ $\rm{E_{\rm min}} < E_{\rm ecal} + E_{\rm hcal} < \rm{E_{\rm max}}$, avec $\rm{E_{\rm min}} = \SIUnits{150}{\giga\electronvolt}, \rm{E_{\rm min}} = \SIUnits{150}{\giga\electronvolt}$. Nous obtenons alors (\textit{cf.} Fig. \ref{surfaceLR}, Fig. \ref{courbeLR}):
     \[
     \begin{cases}
      E_{\rm ecal} = 0 : \\
@@ -335,7 +335,7 @@ Sur la Fig. \ref{LR_ecaliboveretrue_ecal_hcal}, à  gauche, nous constatons que l
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[height =4.5cm]{images/pictures/testLinearRegression/LinearRegression_ecalib_over_etrue.png}
-\caption{À gauche : en bleu $E_{\rm calib}/E_{\rm true}$ pour les particules n'interagissant pas avec ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante. À droite : idem les particules qui interagissent avec ECAL et HCAL.}
+\caption{À gauche : en bleu $E_{\rm calib}/E_{\rm true}$ pour les particules n'interagissant pas avec ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante. À droite : idem pour les particules qui interagissent avec ECAL et HCAL.}
 \label{LR_ecaliboveretrue_etrue}
 \end{center}
 \end{figure}
@@ -362,7 +362,7 @@ Ici, l'idée est de découper le plan $(E_{\rm ecal},E_{\rm hcal})$ en bins et de 
 \begin{minipage}{0.6\linewidth}
 Ainsi pour prédire une énergie de $E_{\rm calib}^i$ pour un point $(E_{\rm ecal}^i,E_{\rm hcal}^i)$, nous allons regarder dans quel bin il se trouve et retourner la valeur d'énergie calibrée correspondante. Nous pouvons voir sur la Fig. \ref{legos} une illustration où la hauteur de chaque brique correspond à  l'énergie calibrée d'un bin.
 
-L'avantage de cette calibration est de prendre en compte ce qui se passe localement dans la distribution contrairement à  la régression linéaire, mais elle a pour désavantage d'avoir un paramètre arbitraire qui influe sur la calibration, la taille des bins :  un pas trop grand fait perdre en précision car un grand nombre de particules se retrouvent avec la même énergie de calibration, un pas trop petit laisse des trous dans la position des briques (cf Fig. \ref{legos}) ce qui donne des bins vides et une impossibilité de prédire une énergie de calibration. De plus, un grand nombre de bins fait exploser le temps de calcul. 
+L'avantage de cette calibration est de prendre en compte ce qui se passe localement dans la distribution contrairement à  la régression linéaire, mais elle a pour désavantage d'avoir un paramètre arbitraire qui influe sur la calibration, la taille des bins :  un pas trop grand fait perdre en précision car un grand nombre de particules se retrouvent avec la même énergie de calibration, un pas trop petit laisse des trous dans la position des briques (\textit{cf.} Fig. \ref{legos}) ce qui donne des bins vides et une impossibilité de prédire une énergie de calibration. De plus, un grand nombre de bins fait exploser le temps de calcul. 
 \end{minipage}
 \begin{minipage}{0.4\linewidth}
 	\includegraphics[width=\linewidth]{images/pictures/testCalibrationLego/CalibrationLego_plot3D_legos.eps}
@@ -390,7 +390,7 @@ Construisons la calibration \cite{GitHubCL} à  l'aide d'un premier jeu de donnée
 \end{center}
 \end{figure}
 
-Il est alors possible de calculer l'énergie de calibration pour un second jeu de données. Nous remarquons que la présence de paliers dans la courbe de calibration biaise la calibration en faisant apparaître une structure (des hyperboles) dans $E_{\rm calib}/E_{\rm true}$, comme nous pouvons le voir dans la Fig. \ref{ecaliboveretrueCL}. Cette structure est liée aux points possédant la même énergie de calibration, contrairement au cas de la régression linéaire (cf Fig.  \ref{LR_ecaliboveretrue_etrue}). 
+Il est alors possible de calculer l'énergie de calibration pour un second jeu de données. Nous remarquons que la présence de paliers dans la courbe de calibration biaise la calibration en faisant apparaître une structure (des hyperboles) dans $E_{\rm calib}/E_{\rm true}$, comme nous pouvons le voir dans la Fig. \ref{ecaliboveretrueCL}. Cette structure est liée aux points possédant la même énergie de calibration, contrairement au cas de la régression linéaire (\textit{cf.} Fig.  \ref{LR_ecaliboveretrue_etrue}). 
 Nous constatons également sur la Fig. \ref{ecaliboveretrueCL} que $E_{\rm calib}/E_{\rm true}$ est en moyenne constamment $> 1$, ce qui montre qu'il y a une tendance à  la sur-évaluation de $E_{\rm calib}$.
 
 La Fig. \ref{ecaliboveretrueCL_etrue} nous montre une fois de plus que $E_{\rm calib}/E_{\rm true}$  est globalement sur-évaluée, mais que cette fois-ci, nous avons pris en compte les non-linéarités. Il nous faut alors une méthode qui reprenne l'idée de moyenner des $E_{\rm true}$ en enlevant les contraintes et biais provenants des bins.
@@ -398,7 +398,7 @@ La Fig. \ref{ecaliboveretrueCL_etrue} nous montre une fois de plus que $E_{\rm c
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[width=\textwidth]{images/pictures/testCalibrationLego/CalibrationLego_ecalib_over_etrue.png}
-\caption{À gauche : en bleu $E_{\rm calib}/E_{\rm true}$ pour les particules n'interagissant pas avec ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante. À droite : idem les particules qui interagissent avec ECAL et HCAL. Nous voyons clairement l'apparition d'une structure, liée au caractère binné de la méthode.}
+\caption{À gauche : en bleu $E_{\rm calib}/E_{\rm true}$ pour les particules n'interagissant pas avec ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante. À droite : idem pour les particules qui interagissent avec ECAL et HCAL. Nous voyons clairement l'apparition d'une structure, liée au caractère binné de la méthode.}
 \label{ecaliboveretrueCL}
 \end{center}
 \end{figure}
@@ -406,11 +406,10 @@ La Fig. \ref{ecaliboveretrueCL_etrue} nous montre une fois de plus que $E_{\rm c
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[width=\textwidth]{images/pictures/testCalibrationLego/CalibrationLego_ecalib_over_etrue_functionof_ecal_hcal.png}
-\caption{À gauche : en bleu $E_{\rm calib}/E_{\rm true}$ pour les particules n'interagissant pas avec ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante. A droite : équivalent 2D de la courbe verte de gauche pour les particules qui interagissent avec ECAL et HCAL.}
+\caption{À gauche : en bleu $E_{\rm calib}/E_{\rm true}$ pour les particules n'interagissant pas avec ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante. À droite : équivalent 2D de la courbe verte de gauche pour les particules qui interagissent avec ECAL et HCAL.}
 \label{ecaliboveretrueCL_etrue}
 \end{center}
 \end{figure}
-
 
 \section{Méthodes des plus proches voisins}
 \label{KNN}
@@ -426,7 +425,7 @@ La moyenne pondérée va donc s'exprimer ainsi :
 \begin{equation}
 	 E_{\rm calib}^0 = \frac{\sum_{i=1}^k g(E_{\rm ecal}^i, E_{\rm hcal}^i) \times E_{\rm true}^i}{\sum_{i=1}^k g(E_{\rm ecal}^i, E_{\rm hcal}^i)}
 \end{equation}
-Dans notre cas nous avons pris pour facteur de pondération $g$ la distribution gaussienne $g(\vec{x}) = \exp{-\frac{1}{2}(\frac{(\vec{x} - \vec{x}^0)^2}{\sigma^2})}$, pour donner plus d'importance aux plus proches des k plus proches voisins.\\
+Dans notre cas nous avons pris pour facteur de pondération $g$ la distribution gaussienne $g(\vec{x}) = \exp{-\frac{1}{2}(\frac{(\vec{x} - \vec{x}^0)^2}{\sigma^2})}$, pour donner plus d'importance aux plus proches des k plus proches voisins.
 
 Pour trouver les plus proches voisins, j'ai utilisé la librairie \textit{Scikit Learn} \cite{scikitKNN}, l'avantage de cette librairie, est qu'elle propose différents algorithmes optimisés de recherche. Lors de la construction de la calibration \cite{GitHubKNN}, j'ai d'ailleurs laissé le choix de l'algorithme de recherche.
 
@@ -434,8 +433,8 @@ Si l'on regarde la Fig.  \ref{neighbors}, on voit que l'on sélectionne les point
 
 \begin{figure}[!h]
 	\begin{center}
-		\includegraphics[width=\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_neighborhood.png}
-		\caption{$n_{voisins} = 2000$ pour $E_{\rm ecal} = 0$, $n_{voisins} = 250$ pour $E_{\rm ecal} \neq 0$}
+		\includegraphics[width=0.8\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_neighborhood.png}
+		\caption{À gauche : les voisins sélectionnés pour quelques valeurs de $E_{\rm ecal} = 0$ ($n_{voisins} = 2000$).  À droite : idem pour le cas pour le cas $E_{\rm ecal} \neq 0$ ($n_{voisins} = 250$ pour $E_{\rm ecal} \neq 0$).}
 		\label{neighbors}
 		\end{center}
 \end{figure}
@@ -456,45 +455,42 @@ n_{\rm neighbors, E_{\rm ecal} \neq 0} & = 250\\
 \]
 \end{minipage}
 \begin{minipage}{0.5\linewidth}
-	\includegraphics[width=\textwidth]{images/pictures/testKNN/KNN_plot3D_surf.eps}
+	\centering
+	\includegraphics[width=0.6\textwidth]{images/pictures/testKNN/KNN_plot3D_surf.eps}
 	\captionof{figure}{Surface de calibration $E_{\rm calib}$  en fonction de $E_{\rm ecal}$ et $E_{\rm hcal}$.}
 	\label{surfKNN}
 \end{minipage}
 
-Nous constatons sur la Fig. \ref{surfKNN} que la surface est beaucoup plus lisse qu'avec la méthode précédente, mais en regardant le cas particulier de $E_{\rm ecal} = 0$, nous constatons qu'une fois encore, à  bas $E_{\rm hcal}$, la courbe de calibration ne passe pas par le coeur de la gerbe. Cela est dÃ» à  des points aberrants qui correspondent à  des particules de haute énergie qui ne déposent pas ou peu leur énergie dans les calorimètres. Il faudra trouver un moyen de les écarter par la suite.
+Nous constatons sur la Fig. \ref{surfKNN} que la surface est beaucoup plus lisse qu'avec la méthode précédente, mais en regardant le cas particulier de $E_{\rm ecal} = 0$ sur la Fig. \ref{KNNcalib}, nous constatons une fois de plus que à  bas $E_{\rm hcal}$, la courbe de calibration ne passe pas par le coeur de la distribution. Cela est dû à  des points aberrants qui correspondent à  des particules de haute énergie qui ne déposent pas ou peu leur énergie dans les calorimètres. Il faudra trouver un moyen de les écarter par la suite.
 
 \begin{figure}[!h]
 \begin{center}
-\includegraphics[width=\textwidth]{images/pictures/testKNN/KNN_calibration.png}
+\includegraphics[width=0.9\textwidth]{images/pictures/testKNN/KNN_calibration.png}
 \caption{En bleu : \'Energie vraie en fonction de l'énergie déposée dans HCAL, pour l'échantillon de hadrons n'interagissant pas dans ECAL. En vert : courbe de calibration $E_{\rm calib} = f(E_{\rm ecal} = 0,E_{\rm hcal})$.}
+\label{KNNcalib}
 \end{center}
 \end{figure}
 
+Il est alors possible de calculer l'énergie de calibration pour un second jeu de données. La Fig. \ref{ecaliboveretrueKNN} indique que l'énergie est en moyenne sur-évaluée (sauf vers \SIUnits{100}{\giga\electronvolt}). La Fig. \ref{ecaliboveretrueKNN_ecal_hcal} nous montre également cette sur-évaluation ($E_{\rm calib}/E_{\rm true} > 1$ pour la courbe de gauche, et la prédominance du rouge dans la figure de droite), cependant nous pouvons voir à droite de la Fig. \ref{ecaliboveretrueKNN_ecal_hcal} qu'il y a des zones où la calibration est correcte et que nous avons pris en compte les non-linéarités.
 
-
-Effectuons alors la calibration d'un second jeu de données : 
 \begin{figure}[!h]
 \begin{center}
-\includegraphics[width=\textwidth]{images/pictures/testKNN/KNN_ecalib_over_etrue.png}
-\caption{À gauche : en bleu $E_{\rm calib}/E_{\rm true}$ pour les particules n'interagissant pas avec ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante. À droite : idem les particules qui interagissent avec ECAL et HCAL.}
+\includegraphics[width=0.9\textwidth]{images/pictures/testKNN/KNN_ecalib_over_etrue.png}
+\caption{À gauche : en bleu $E_{\rm calib}/E_{\rm true}$ pour les particules n'interagissant pas avec ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante. À droite : idem pour les particules qui interagissent avec ECAL et HCAL.}
 \label{ecaliboveretrueKNN}
 \end{center}
 \end{figure}
-
 \begin{figure}[!h]
 \begin{center}
-\includegraphics[width=\textwidth]{images/pictures/testKNN/KNN_ecalib_over_etrue_functionof_ecal_hcal.png}
-\caption{À gauche : en bleu $E_{\rm calib}/E_{\rm true}$ pour les particules n'interagissant pas avec ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante. A droite : équivalent 2D de la courbe verte de gauche pour les particules qui interagissent avec ECAL et HCAL.}
+\includegraphics[width=0.9\textwidth]{images/pictures/testKNN/KNN_ecalib_over_etrue_functionof_ecal_hcal.png}
+\caption{À gauche : en bleu $E_{\rm calib}/E_{\rm true}$ pour les particules n'interagissant pas avec ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante. À droite : équivalent 2D de la courbe verte de gauche pour les particules qui interagissent avec ECAL et HCAL.}
 \label{ecaliboveretrueKNN_ecal_hcal}
 \end{center}
 \end{figure}
 
-Nous constatons que l'énergie de calibration est toujours sur-estimée, et particulièrement à  bas $E_{\rm ecal}$ et $E_{\rm hcal}$ ( \textit{cf.} \ref{ecaliboveretrueKNN_ecal_hcal}).
-
-
 
 \subsection{Nettoyage gaussien}
-Cette méthode est assez similaire à  la précédente. Elle se base sur la constatation que la distribution en énergie vraie $E_{\rm true}$ des paquets de plus proches voisins est une distribution gaussienne (cf Fig. \ref{gaussianfit}). Nous allons donc effectuer un fit pour trouver les paramètres de la gaussienne en question et ne prendre en compte les plus proches voisins dont l'énergie vraie est $\mu -c\sigma \leq E_{\rm true}^i \leq \mu + c\sigma$ (nous prenons par défaut $c = 2$), avec $\mu, \sigma$ la moyenne et l'écart type de la distribution gaussienne.\\
+Cette méthode est assez similaire à  la précédente. Elle se base sur la constatation que la distribution en énergie vraie $E_{\rm true}$ des paquets de plus proches voisins est une distribution gaussienne (\textit{cf.} Fig. \ref{gaussianfit}). Nous allons donc effectuer un fit pour trouver les paramètres de la gaussienne en question et ne prendre en compte les plus proches voisins dont l'énergie vraie est $\mu -c\sigma \leq E_{\rm true}^i \leq \mu + c\sigma$ (nous prenons par défaut $c = 2$), avec $\mu, \sigma$ la moyenne et l'écart type de la distribution gaussienne.\\
 Principe de l'algorithme :
 \begin{itemize}
 	\item on considère des points $(E_{\rm ecal}^{0,j}, E_{\rm hcal}^{0,j})$ où nous allons évaluer l'énergie calibrée.
@@ -570,7 +566,7 @@ Cette fois ci, nous avons dans le plan $E_{ecal \rm} = 0$ la courbe qui passe pa
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[width=\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_ecalib_over_etrue.png}
-\caption{À gauche : en bleu $E_{\rm calib}/E_{\rm true}$ pour les particules n'interagissant pas avec ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante. À droite : idem les particules qui interagissent avec ECAL et HCAL.}
+\caption{À gauche : en bleu $E_{\rm calib}/E_{\rm true}$ pour les particules n'interagissant pas avec ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante. À droite : idem pour les particules qui interagissent avec ECAL et HCAL.}
 \label{ecaliboveretrueKNNGC}
 \end{center}
 \end{figure}
@@ -580,7 +576,7 @@ Il est alors possible de calculer l'énergie de calibration pour un second jeu de
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[width=\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_ecalib_over_etrue_functionof_ecal_hcal.png}
-\caption{À gauche : en bleu $E_{\rm calib}/E_{\rm true}$ pour les particules n'interagissant pas avec ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante. A droite : équivalent 2D de la courbe verte de gauche pour les particules qui interagissent avec ECAL et HCAL.}
+\caption{À gauche : en bleu $E_{\rm calib}/E_{\rm true}$ pour les particules n'interagissant pas avec ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante. À droite : équivalent 2D de la courbe verte de gauche pour les particules qui interagissent avec ECAL et HCAL.}
 \label{ecaliboveretrueKNNGC_ecal_hcal}
 \end{center}
 \end{figure}
@@ -635,7 +631,7 @@ Effectuons alors la calibration d'un second jeu de données :
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[width=\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_ecalib_over_etrue.png}
-\caption{À gauche : en bleu $E_{\rm calib}/E_{\rm true}$ pour les particules n'interagissant pas avec ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante. À droite : idem les particules qui interagissent avec ECAL et HCAL.}
+\caption{À gauche : en bleu $E_{\rm calib}/E_{\rm true}$ pour les particules n'interagissant pas avec ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante. À droite : idem pour les particules qui interagissent avec ECAL et HCAL.}
 \label{ecaliboveretrueKNNGF}
 \end{center}
 \end{figure}
@@ -643,26 +639,26 @@ Effectuons alors la calibration d'un second jeu de données :
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[width=\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_ecalib_over_etrue_functionof_ecal_hcal.png}
-\caption{À gauche : en bleu $E_{\rm calib}/E_{\rm true}$ pour les particules n'interagissant pas avec ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante. A droite : équivalent 2D de la courbe verte de gauche pour les particules qui interagissent avec ECAL et HCAL.}
+\caption{À gauche : en bleu $E_{\rm calib}/E_{\rm true}$ pour les particules n'interagissant pas avec ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante. À droite : équivalent 2D de la courbe verte de gauche pour les particules qui interagissent avec ECAL et HCAL.}
 \label{ecaliboveretrueKNNGF_ecal_hcal}
 \end{center}
 \end{figure}
 Commentaire 
 
 \newpage
-\section{Comparaison des méthodes}
+\section{Comparaison et résultats}
 \label{comparaison}
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[width=\textwidth]{images/pictures/comparisons/comparison1.eps}
-\caption{À gauche : en bleu $E_{\rm calib}/E_{\rm true}$ pour les particules n'interagissant pas avec ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante. À droite : idem les particules qui interagissent avec ECAL et HCAL.}
+\caption{À gauche : en bleu $E_{\rm calib}/E_{\rm true}$ pour les particules n'interagissant pas avec ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante. À droite : idem pour les particules qui interagissent avec ECAL et HCAL.}
 \end{center}
 \end{figure}
 
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[width=\textwidth]{images/pictures/comparisons/comparison2.eps}
-\caption{À gauche : en bleu $E_{\rm calib}/E_{\rm true}$ pour les particules n'interagissant pas avec ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante. À droite : idem les particules qui interagissent avec ECAL et HCAL.}
+\caption{À gauche : en bleu $E_{\rm calib}/E_{\rm true}$ pour les particules n'interagissant pas avec ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante. À droite : idem pour les particules qui interagissent avec ECAL et HCAL.}
 \end{center}
 \end{figure}
 
