@@ -504,32 +504,35 @@ Principe de l'algorithme :
 	\item on effectue une interpolation pour donner une valeur d'énergie calibrée quelque soit $(E_{\rm ecal}^{0}, E_{\rm hcal}^{0})$
 \end{itemize}
 
-\noindent 
-\begin{minipage}{0.5\linewidth}
-	\includegraphics[width=\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_example_hist.eps}
-	\captionof{figure}{Exemple d'un fit gaussien.}
-	\label{gaussianfit}
-\end{minipage}
-\begin{minipage}{0.5\linewidth}
 Le fit gaussien s'effectue grâce à la librairie \textit{Scipy} \cite{scipyFit}, le principe étant de trouver les paramètres qui minimisent 
 \begin{equation}
 \chi^2 = \sum_i \left(\frac{y_i - g(x_i)}{\epsilon_i} \right)^2
 \end{equation}
-où $(x_i,y_i)$sont les valeurs à fiter (ici les valeur de l'histogramme) $g$ la fonction à paramètre (ici une gaussienne), $\epsilon^_i$, l'erreur sur $y_i$. Nous pouvons également considérer le $\chi^2$ réduit, $\chi^2/df$, avec $df$ le degré de liberté, qui doit être le plus proche de 1 pour correspondre à un fit de bonne qualité (Fig. \ref{chi2}). 
-\end{minipage}
+où $(x_i,y_i)$ sont les valeurs à fiter (ici les valeur de l'histogramme) $g$ la fonction à paramètre (ici une gaussienne), $\epsilon^_i$, l'erreur sur $y_i$ (illustraion Fig. \ref{gaussianfit}). Nous pouvons également considérer le $\chi^2$ réduit, $\chi^2/df$, avec $df$ le degré de liberté, qui doit être le plus proche de 1 pour correspondre à un fit de bonne qualité (Fig. \ref{chi2}). 
 
 \begin{figure}[!h]
 \begin{center}
-\includegraphics[width=0.6\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_chi2_calib.eps}
-\caption{Le $\chi^2$ réduit pour chaque fit effectué. \\
-$n_{\rm neighbors, E_{\rm ecal} = 0} & = 2000, n_{\rm neighbors, E_{\rm ecal} \neq 0} & = 250$.}
-\label{chi2}
+	\includegraphics[width=0.6\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_example_hist.eps}
+	\caption{Exemple d'un fit gaussien pour un histogramme de valeurs de $E_{\rm true}$. En bleu : les valeurs de l'histogramme; en vert : la courbe de fit; en rouge : la moyenne de la gaussienne; en gris : la moyenne des $E_{\rm true}$ qui constitue l'histogramme. }
+	\label{gaussianfit}
 \end{center}
 \end{figure}
 
 Au vu du $\chi^2/df$ (Fig. \ref{chi2}), nous pouvons en conclure que le fit est très bon pour $E_{\rm ecal} \neq 0$ car la distribution du $\chi^2/df$ est centrée en 1. Ce n'est pas le cas pour $E_{\rm ecal} = 0$ mais nous nous en contenterons pour l'instant. Cela peut notamment s'expliquer que cela vient du fait que nous prenons plus de voisins dans le cas $E_{\rm ecal} = 0$. 
 
-Pour l'interpolation, j'ai également utilisé une fonction proposée par textit{Scipy} \cite{scipyInterp}, qui nous laisse le choix entre une interpolation linéaire et une interpolation à splines cubiques.
+Pour l'interpolation, j'ai également utilisé une fonction proposée par \textit{Scipy} \cite{scipyInterp}, qui nous laisse le choix entre une interpolation linéaire et une interpolation à splines cubiques.
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.8\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_chi2_calib.eps}
+\caption{En haut à gauche : $\chi^2$ obtenu pour chaque fit effectué en fonction $E_{\rm hcal}$ dans le cas $E_{\rm ecal} = 0$ ($n_{\rm neighbors, E_{\rm ecal} = 0} = 2000$).\\
+En haut à droite : l'histogramme des $\chi^2$ correspondant.\\
+En bas à gauche : $\chi^2$ obtenu pour chaque fit effectué en fonction $(E_{\rm ecal},E_{\rm hcal})$ dans le cas $E_{\rm ecal} \neq 0$  (n_{\rm neighbors, E_{\rm ecal} \neq 0} = 250$).\\
+En haut à droite : l'histogramme des $\chi^2$ correspondant.}
+\label{chi2}
+\end{center}
+\end{figure}
+
+
 
 \noindent
 \begin{minipage}{0.6\linewidth}
@@ -548,6 +551,7 @@ n_{\rm neighbors, E_{\rm ecal} \neq 0} & = 250\\
 \rm{cut} & = 2\\
 \end{cases}
 \]
+Cette fois ci, nous avons dans le plan $E_{\rm ecal } = 0$ (\textit{cf.} Fig. \ref{calibrationKNNGC}), la courbe de calibration qui passe par le coeur de la distribution à faible $E_{\rm hcal}$, l'objectif est donc atteint. 
 \end{minipage}
 \begin{minipage}{0.4\linewidth}
 	\includegraphics[width=\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_plot3D_surf.eps}
@@ -555,35 +559,34 @@ n_{\rm neighbors, E_{\rm ecal} \neq 0} & = 250\\
 	\label{surfKNNGC}
 \end{minipage}
 
+
 \begin{figure}[!h]
 \begin{center}
-\includegraphics[width=\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_calibration.png}
+\includegraphics[width=0.8\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_calibration.png}
 \caption{En bleu : \'Energie vraie en fonction de l'énergie déposée dans HCAL, pour l'échantillon de hadrons n'interagissant pas dans ECAL. En vert : courbe de calibration $E_{\rm calib} = f(E_{\rm ecal} = 0,E_{\rm hcal})$.}
+\label{calibrationKNNGC}
 \end{center}
 \end{figure}
 
-Cette fois ci, nous avons dans le plan $E_{ecal \rm} = 0$ la courbe qui passe par le coeur de la distribution à faible $E_{\rm hcal}$, l'objectif est donc atteint. 
+Il est alors possible de calculer l'énergie de calibration pour un second jeu de données. La Fig. \ref{ecaliboveretrueKNNGC} nous montre que la calibration est bonne car en moyenne $E_{\rm calib}/E_{\rm true}$ est proche de 1 (sauf à bas et haut $E_{\rm true}$). La Fig. \ref{ecaliboveretrueKNNGC_ecal_hcal} nous montre également que la calibration est bonne et prend en compte les non-linéarités. 
+
 \begin{figure}[!h]
 \begin{center}
-\includegraphics[width=\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_ecalib_over_etrue.png}
+\includegraphics[width=0.8\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_ecalib_over_etrue.png}
 \caption{À gauche : en bleu $E_{\rm calib}/E_{\rm true}$ pour les particules n'interagissant pas avec ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante. À droite : idem pour les particules qui interagissent avec ECAL et HCAL.}
 \label{ecaliboveretrueKNNGC}
 \end{center}
 \end{figure}
 
-Il est alors possible de calculer l'énergie de calibration pour un second jeu de données. La Fig. \ref{ecaliboveretrueKNNGC} nous montre que la calibration est bonne car en moyenne $E_{\rm calib}/E_{\rm true}$ est proche de 1 (sauf à bas et haut $/E_{\rm true}$).
-
 \begin{figure}[!h]
 \begin{center}
-\includegraphics[width=\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_ecalib_over_etrue_functionof_ecal_hcal.png}
+\includegraphics[width=0.8\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_ecalib_over_etrue_functionof_ecal_hcal.png}
 \caption{À gauche : en bleu $E_{\rm calib}/E_{\rm true}$ pour les particules n'interagissant pas avec ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante. À droite : équivalent 2D de la courbe verte de gauche pour les particules qui interagissent avec ECAL et HCAL.}
 \label{ecaliboveretrueKNNGC_ecal_hcal}
 \end{center}
 \end{figure}
-
-La Fig. \ref{ecaliboveretrueKNNGC_ecal_hcal} nous montre également que la calibration est bonne et prend en compte les non-linéarités. 
-
-Cependant, nous rejetons certains points pour effectuer la calibration, est-ce judicieux? De plus nous utilisons une moyenne pondérée avec un paramètre $\sigma$ qui est fixé empiriquement. Nous allons alors proposer une dernière méthode pour remédier à cela.
+De plus, la non prédominance dans le colormap de la Fig. \ref{ecaliboveretrueKNNGC_ecal_hcal} d'une couleur à part le blanc nous montre que la calibration est bonne.
+Néanmoins, nous rejetons certains points pour effectuer la calibration, est-ce judicieux? De plus nous utilisons une moyenne pondérée avec un paramètre $\sigma$ qui est fixé empiriquement. Nous allons alors proposer une dernière méthode pour remédier à cela.
 
 \subsection{Fit gaussien}
 Ici, il s'agit du même principe que précédemment mais nous allons considérer que la valeur de $E_{\rm calib}$ est la moyenne de la gaussienne. 
