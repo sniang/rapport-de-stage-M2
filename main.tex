@@ -603,7 +603,7 @@ Principe de l'algorithme :
 \end{itemize}
 
 \noindent
-\begin{minipage}{0.6\linewidth}
+\begin{minipage}{0.5\linewidth}
 Construisons alors la calibration  \cite{GitHubKNNGF} à  l'aide des paramètres suivants : 
 \[
 \begin{cases}
@@ -618,19 +618,23 @@ n_{\rm neighbors, E_{\rm ecal} \neq 0} & = 250\\
 \end{cases}
 \]
 \end{minipage}
-\begin{minipage}{0.4\linewidth}
-	\includegraphics[width=\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_plot3D_surf.eps}
+\begin{minipage}{0.5\linewidth}
+	\centering
+	\includegraphics[width=0.7\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_plot3D_surf.eps}
 	\captionof{figure}{Surface de calibration $E_{\rm calib}$  en fonction de $E_{\rm ecal}$ et $E_{\rm hcal}$.}
 	\label{surfKNNGF}
 \end{minipage}
+
+Si l'on regarde la Fig. \ref{calibrationKNNGF}, on constate que la courbe de calibration passe bien par le coeur de la distribution comme dans la section précédente. 
 \begin{figure}[!h]
 \begin{center}
-\includegraphics[width=\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_calibration.png}
+\includegraphics[width=0.8\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_calibration.png}
 \caption{En bleu : \'Energie vraie en fonction de l'énergie déposée dans HCAL, pour l'échantillon de hadrons n'interagissant pas dans ECAL. En vert : courbe de calibration $E_{\rm calib} = f(E_{\rm ecal} = 0,E_{\rm hcal})$.}
+\label{calibrationKNNGF}
 \end{center}
 \end{figure}
 
-Effectuons alors la calibration d'un second jeu de données : 
+Il est alors possible de calculer l'énergie de calibration pour un second jeu de données et nous obtenons des résultats similaires à la section précédente. En effet, ma Fig. \ref{ecaliboveretrueKNNGF} nous montre que la calibration est bonne car en moyenne $E_{\rm calib}/E_{\rm true}$ est proche de 1 (sauf à bas et haut $E_{\rm true}$). La Fig. \ref{ecaliboveretrueKNNGF_ecal_hcal} nous montre également que la calibration est bonne, qu'elle prend en compte les non-linéarités et qu'il n'y a pas de zones où l'énergie de calibration particulièrement sur ou sous-évaluées. 
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[width=\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_ecalib_over_etrue.png}
@@ -646,7 +650,8 @@ Effectuons alors la calibration d'un second jeu de données :
 \label{ecaliboveretrueKNNGF_ecal_hcal}
 \end{center}
 \end{figure}
-Commentaire 
+ 
+Cette méthode de calibration semble aussi bonne que la précédente tout en étant plus simple (moins de paramètres, moins de calculs, plus rapide). Il est donc temps de comparer plus précisément toutes les méthodes proposées. 
 
 \newpage
 \section{Comparaison et résultats}
