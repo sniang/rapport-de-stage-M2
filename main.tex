@@ -263,11 +263,11 @@ De plus, la simulation crée un palier car les particules sont limitées à  $E_{\r
 
 La Fig. \ref{limite} montre en particulier que dans le plan $E_{\rm ecal} = 0$, la limite fixée nous évite bien le palier (en vert sur la figure), de plus pour se convaincre que cette limite est acceptable, il est présenté en bas à droite de la Fig. \ref{limite} les points qui se trouvent proches du plan tourné de $\theta = \pi/4$, en effet, nous pouvons constater que le palier est aussi évité avec cette limite. 
 
-Au niveau du programme, si l'on tente de prédire une énergie calibrée dans la zone $E_{\rm ecal} + E_{\rm hcal}  > (\rm{lim} = \SIUnits{150}{\giga\electronvolt})$, le programme nous retournera $E_{\rm ecal} = \rm{\textit{math.nan}}$ (not a number), pour nous indiquer qu'il est impossible de retourner une valeur.
+Dans le programme développé, la limitation se manifeste ainsi : si l'on tente de prédire une énergie calibrée dans la zone $E_{\rm ecal} + E_{\rm hcal}  > (\rm{lim} = \SIUnits{150}{\giga\electronvolt})$, le programme nous retournera $E_{\rm ecal} = \rm{\textit{math.nan}}$ (not a number), pour nous indiquer qu'il est impossible de retourner une valeur.
 
 \begin{figure}[!t]
     \begin{center}
-        \includegraphics[width=0.9\textwidth]{images/pictures/explain/limit_arrow.png}
+        \includegraphics[width=0.9\textwidth]{images/pictures/explain/limit.png}
         \caption{On place une limite à  $E_{\rm ecal}+E_{\rm hcal} = 150$. À gauche : en bleu la zone où nous pouvons calculer les énergies calibrée, en vert, là où nous ne le pouvons pas. En haut à droite : idem mais pour les points qui ont $E_{\rm ecal} = 0$. En bas à droit : idem mais pour les points dans le cône.}
         \label{limite}
     \end{center}
@@ -282,16 +282,16 @@ Comme première calibration, j'ai utilisé une méthode simple, la régression linéa
 \begin{equation}
     E_{\rm calib} = a_1 E_{\rm ecal} + a_2 E_{\rm hcal} + b
 \end{equation}
-et de trouver les coefficient $a_1, a_2,  b$ optimaux pour que le modèle coïncide au mieux aux données d'entrainement. L'ajustement est réalisé par la méthode des moindres carrés, grâce à la librairie \textit{Sciki Learn}  \cite{scikitLR}.Au niveau de la programmation, j'ai utilisé la librairie de  qui se base sur une méthode des moindres carrés. Dans notre cas, cela revient à  trouver les coefficients qui, pour un ensemble de données d'entraînement  $(E_{\rm ecal}^n,E_{\rm hcal}^n, E_{\rm true}^n)$ minimiseront :
+et de trouver les coefficient $a_1, a_2,  b$ optimaux pour que le modèle coïncide au mieux aux données d'entrainement. L'ajustement est réalisé par la méthode des moindres carrés, grâce à la librairie \textit{Sciki Learn}  \cite{scikitLR}. Dans notre cas, cela revient à  trouver les coefficients qui, pour un ensemble de données d'entraînement  composé de $N$ points $(E_{\rm ecal}^n,E_{\rm hcal}^n, E_{\rm true}^n), n \in \{1,...,N\}$ minimiseront :
 \begin{equation}
-	\epsilon = \sum_n |E_{\rm true} - a_1 E_{\rm ecal} - a_2 E_{\rm hcal} - b|^2
+	\epsilon = \sum_{n=1}^N  \left(E_{\rm true} - a_1 E_{\rm ecal} - a_2 E_{\rm hcal} - b \right)^2
 \end{equation}
 
 J'ai constaté qu'à  faible  $E_{\rm ecal},  E_{\rm hcal}$ il y a quelques points à  très haut $E_{\rm true}$ qui correspondent à  des défauts de la détection des énergies dans les calorimètres, je les ai donc enlevés des données d'entraînement pour la regression linéaire (cf Fig. \ref{selectedpoints}).
 
 \begin{figure}[!h]
     \begin{center}
-        \includegraphics[width=\textwidth]{images/pictures/testLinearRegression/LinearRegression_selectedpoints.png}
+        \includegraphics[width=0.8\textwidth]{images/pictures/testLinearRegression/LinearRegression_selectedpoints.png}
         \caption{En bleu, les points sélectionnés pour faire la régression linéaire.}
         \label{selectedpoints}
     \end{center}
