@@ -327,7 +327,7 @@ Nous constatons en particulier que dans le cas  $E_{\rm ecal} = 0$ (Figure \ref{
 \end{center}
 \end{figure}
 
-Maintenant que la régression est faite, nous allons calibrer un second jeu de données et afficher $E_{\rm calib}/$E_{\rm true}$ pour ce nouveau jeu de données. $E_{\rm calib}/$E_{\rm true}$ doit être le plus proche possible de 1.
+On teste maintenant l?efficacité de la calibration sur un second jeu de données en affichant $E_{\rm calib}/$E_{\rm true}$ pour ce nouveau jeu de données. $E_{\rm calib}/$E_{\rm true}$ doit être le plus proche possible de 1.
 
 La Figure \ref{LR_ecaliboveretrue_ecal_hcal}, nous montre que la régression linéaire est mauvaise à  faible $E_{\rm hcal}$ car en moyenne, $E_{\rm calib}/E_{\rm true}$ n'est pas proche de $1$. Plus intéressant, la figure de droite met en avant les non-linéarités du nuage de point : en effet il y a clairement une zone limitée où le modèle linéaire semble fonctionner, mais partout ailleurs, les points sont éloignés du plan.  
 
@@ -380,10 +380,11 @@ L'avantage de cette calibration est de prendre en compte ce qui se passe localem
 
 \noindent
 \begin{minipage}{0.5\linewidth}
-Construisons la calibration \cite{GitHubCL} à  l'aide d'un premier jeu de données, avec $100\times100$ bins. Premièrement, nous constatons que la surface n'est pas lisse, $E_{\rm calib}$ fluctue fortement, et si nous regardons ce qui se passe dans le plan $E_{\rm ecal} = 0$ (Figure \ref{calibCL}), nous voyons que cette méthode binnée donne des énergies calibrées $E_{\rm calib}$ égales pour des ensembles de points, par paliers. Deuxièmement, nous constatons une fois de plus que la courbe de calibration ne passe pas par le coeur de la distribution à  bas $E_{\rm hcal}$ : $E_{\rm calib}$ y est sur-évaluée.
+La calibration \cite{GitHubCL} est construite à  l'aide d'un premier jeu de données, avec $100\times100$ bins. Premièrement, nous constatons que la surface n'est pas lisse, $E_{\rm calib}$ fluctue fortement, et si nous regardons ce qui se passe dans le plan $E_{\rm ecal} = 0$ (Figure \ref{calibCL}), nous voyons que cette méthode binnée donne des énergies calibrées $E_{\rm calib}$ égales pour des ensembles de points, par paliers. Deuxièmement, nous constatons une fois de plus que la courbe de calibration ne passe pas par le coeur de la distribution à  bas $E_{\rm hcal}$ : $E_{\rm calib}$ y est sur-évaluée.
 \end{minipage}
 \begin{minipage}{0.5\linewidth}
-	\includegraphics[width=\textwidth]{images/pictures/testCalibrationLego/CalibrationLego_plot3D_surf.eps}
+	\centering
+	\includegraphics[width=0.7\textwidth]{images/pictures/testCalibrationLego/CalibrationLego_plot3D_surf.eps}
 	\captionof{figure}{Surface de calibration $E_{\rm calib}$  en fonction de $E_{\rm ecal}$ et $E_{\rm hcal}$ , avec $100\times100$ bins.}
 	\label{surfaceCL}
 \end{minipage}
@@ -447,54 +448,52 @@ La Figure  \ref{neighbors} montre que l'on sélectionne les points à  moyenner da
 		\end{center}
 \end{figure}
 
-\noindent
-\begin{minipage}{0.45\linewidth}
 La calibration est réalisée \cite{GitHubKNN} avec 2000 voisins dans le cas $E_{\rm ecal}=0$ et 250 voisins dans le cas $E_{\rm ecal}\neq0$. Pour la pondération, une largeur de 5 GeV est choisie pour la gaussienne. 
 
 La Figure \ref{surfKNN} montre que la surface est beaucoup plus lisse qu'avec la méthode précédente, mais en regardant le cas particulier de $E_{\rm ecal} = 0$ sur la Figure \ref{KNNcalib}, nous constatons une fois de plus que à  bas $E_{\rm hcal}$, la courbe de calibration ne passe pas par le coeur de la distribution. 
 
-Cela est peut dû à de dans lesquels des particules de haute énergie ne déposent pas ou peu leur énergie dans les calorimètres. Il faudra trouver un moyen de les écarter pour vérifier.
-\end{minipage}
-\hfill
-\begin{minipage}{0.45\linewidth}
-	\centering
-	\includegraphics[width=0.8\textwidth]{images/pictures/testKNN/KNN_plot3D_surf.eps}
-	\captionof{figure}{Surface de calibration $E_{\rm calib}$  en fonction de $E_{\rm ecal}$ et $E_{\rm hcal}$.}
+Cela est peut être dû à de rares cas dans lesquels des particules de haute énergie $(E_{\rm true})$ ne déposent pas ou peu leur énergie dans les calorimètres. Il faudra trouver un moyen de les écarter pour vérifier.
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics[width=0.5\textwidth]{images/pictures/testKNN/KNN_plot3D_surf.eps}
+	\caption{Surface de calibration $E_{\rm calib}$  en fonction de $E_{\rm ecal}$ et $E_{\rm hcal}$.}
 	\label{surfKNN}
-\end{minipage}
+\end{center}
+\end{figure}
 
 \begin{figure}[!h]
 \begin{center}
-\includegraphics[width=0.9\textwidth]{images/pictures/testKNN/KNN_calibration.png}
+\includegraphics[width=\textwidth]{images/pictures/testKNN/KNN_calibration.png}
 \caption{En bleu : \'Energie vraie en fonction de l'énergie déposée dans le HCAL, pour l'échantillon de hadrons n'interagissant pas dans le ECAL. En vert : courbe de calibration $E_{\rm calib} = f(E_{\rm hcal})$. La figure de droite est un zoom proche de l'origine de la figure de gauche.}
 \label{KNNcalib}
 \end{center}
 \end{figure}
 
-On teste maintenant l'efficacité de la calibration sur un second jeu de données. La Figure \ref{ecaliboveretrueKNN_ecal_hcal} montre qu'en moyenne que l'énergie calibrée est en moyenne une sur-évaluation de l'énergie vraie car en moyenne  $E_{\rm calib}/E_{\rm true} > 1$ (position de la courbe verte à gauche, prédominance du rouge à droite). La Figure \ref{ecaliboveretrueKNN} montre également cette sur évalutaiton pour les particules dont l'énergie vraie est inférieure à \SIUnits{100}{\giga\electronvolt}.
-
+On teste maintenant l'efficacité de la calibration sur un second jeu de données. La Figure \ref{ecaliboveretrueKNN_ecal_hcal} montre qu'en moyenne que l'énergie calibrée est en moyenne une sur-évaluation de l'énergie vraie car en moyenne  $E_{\rm calib}/E_{\rm true} > 1$ (position de la courbe verte à gauche, prédominance du rouge à droite). 
 Cependant, nous pouvons voir à droite de la Figure \ref{ecaliboveretrueKNN_ecal_hcal} que la calibration est correcte dans la majeure partie du plan $(E_{\rm ecal}, E_{\rm ecal})$, et que nous avons pris en compte les non-linéarités.
+
+La Figure \ref{ecaliboveretrueKNN} montre également cette sur évaluation pour les particules dont l'énergie vraie est inférieure à \SIUnits{100}{\giga\electronvolt}.
 
 \begin{figure}[!h]
 \begin{center}
-\includegraphics[width=0.9\textwidth]{images/pictures/testKNN/KNN_ecalib_over_etrue_functionof_ecal_hcal.png}
+\includegraphics[width=\textwidth]{images/pictures/testKNN/KNN_ecalib_over_etrue_functionof_ecal_hcal.png}
 \caption{À gauche : en bleu $E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm hcal}$ pour les particules n'interagissant pas avec le ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante.
 À droite : chaque pixel correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches des coordonnées du pixel pour les particules qui interagissent avec le ECAL et le HCAL.}
 \label{ecaliboveretrueKNN_ecal_hcal}
 \end{center}
 \end{figure}
 
-
 \begin{figure}[!h]
 \begin{center}
-\includegraphics[width=0.9\textwidth]{images/pictures/testKNN/KNN_ecalib_over_etrue.png}
+\includegraphics[width=\textwidth]{images/pictures/testKNN/KNN_ecalib_over_etrue.png}
 \caption{À gauche : en bleu la distribution en fonction des $E_{\rm true}$ des $E_{\rm calib}/E_{\rm true}$ pour les particules n'interagissant pas avec le ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante. À droite : idem pour les particules qui interagissent avec le ECAL et le HCAL.}
 \label{ecaliboveretrueKNN}
 \end{center}
 \end{figure}
 
+\newpage
 \subsection{Nettoyage gaussien}
-Cette méthode \cite{GitHubKNNGC est une variation de la précédente. Elle se base sur la constatation que la distribution en énergie vraie $E_{\rm true}$ des paquets de plus proches voisins est une distribution gaussienne (\textit{cf.} Figure \ref{gaussianfit}). Nous allons donc effectuer un fit pour trouver les paramètres de la gaussienne en question et ne prendre en compte que les plus proches voisins dont l'énergie vraie est $\mu -c\sigma \leq E_{\rm true}^i \leq \mu + c\sigma$ (nous prenons par défaut $c = 2$), avec $\mu, \sigma$ la moyenne et l'écart type de la distribution gaussienne.\\
+Cette méthode \cite{GitHubKNNGC} est une variation de la précédente. Elle se base sur la constatation que la distribution en énergie vraie $E_{\rm true}$ des paquets de plus proches voisins est une distribution gaussienne (\textit{cf.} Figure \ref{gaussianfit}). Nous allons donc effectuer un fit pour trouver les paramètres de la gaussienne en question et ne prendre en compte que les plus proches voisins dont l'énergie vraie est $\mu -c\sigma \leq E_{\rm true}^i \leq \mu + c\sigma$ (nous prenons par défaut $c = 2$), avec $\mu, \sigma$ la moyenne et l'écart type de la distribution gaussienne.\\
 Principe de l'algorithme :
 \begin{itemize}
 	\item on considère des points $(E_{\rm ecal}^{0,j}, E_{\rm hcal}^{0,j})$ où nous allons évaluer l'énergie calibrée.
@@ -504,6 +503,7 @@ Principe de l'algorithme :
 		\item on fit les $E_{\rm ecal}^l$ par une gaussienne ce qui donne $\sigma$ et $\mu$, l'écart type et la moyenne de la gaussienne
 		\item on ne conserve que les voisins dont : $\mu -c\sigma \leq E_{\rm true}^l \leq \mu + c\sigma$
 		\item on effectue une moyenne pondérée une moyenne pondérée de l'énergie vraie de ces plus proches voisins, ce qui nous donne $E_{\rm calib}^{0,j}$, l'énergie calibrée 
+	\end{itemize}
 \end{itemize}
 
 	Pour obtenir une valeur d'énergie calibrée quelque soit $(E_{\rm ecal}, E_{\rm hcal})$, on effectue une interpolation des $(E_{\rm ecal}^{0,j}, E_{\rm hcal}^{0,j}, E_{\rm calib}^{0,j})$ donnés précédemment.
@@ -516,7 +516,7 @@ où $(x_i,y_i)$ sont les valeurs à fiter (ici les valeur de l'histogramme) par la
 
 \begin{figure}[!h]
 \begin{center}
-	\includegraphics[width=0.6\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_example_hist.eps}
+	\includegraphics[width=0.35\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_example_hist.eps}
 	\caption{Exemple d'un fit gaussien pour un histogramme de valeurs de $E_{\rm true}$. En bleu : les valeurs de l'histogramme; en vert : la courbe de fit; en rouge : la moyenne de la gaussienne; en gris : moyenne arithmétique de la distribution des $E_{\rm true}.}
 	\label{gaussianfit}
 \end{center}
@@ -525,10 +525,9 @@ Nous pouvons également considérer le $\chi^2$ réduit, $\chi^2/ndf$, avec $ndf$ l
 
 Au vu du $\chi^2/ndf$ (Figure \ref{chi2}), nous pouvons en conclure que le fit est très bon pour $E_{\rm ecal} \neq 0$ car la distribution du $\chi^2/ndf$ est centrée en 1. Ce n'est pas le cas pour $E_{\rm ecal} = 0$ mais nous nous en contenterons pour l'instant.
 
-Pour l'interpolation, j'ai également utilisé une fonction proposée par \textit{Scipy} \cite{scipyInterp}, qui nous laisse le choix entre une interpolation linéaire et une interpolation à splines cubiques.
 \begin{figure}[!h]
 \begin{center}
-\includegraphics[width=0.8\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_chi2_calib.eps}
+\includegraphics[width=0.65\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_chi2_calib.eps}
 \caption{En haut à gauche : $\chi^2$ obtenu pour chaque fit effectué dans le cas $E_{\rm ecal} \neq 0$.
 En haut à droite : l'histogramme des $\chi^2$ correspondant.
 En bas à gauche : $\chi^2$ obtenu pour chaque fit effectué dans le cas $E_{\rm ecal} = 0$.
@@ -537,6 +536,7 @@ En bas à droite : l'histogramme des $\chi^2$ correspondant.}
 \end{center}
 \end{figure}
 
+Pour l'interpolation, j'ai également utilisé une fonction proposée par \textit{Scipy} \cite{scipyInterp}, qui nous laisse le choix entre une interpolation linéaire et une interpolation à splines cubiques.
 
 Les résultats de l'interpolations sont présentés sur les Figures \ref{surfKNNGC} et \ref{calibrationKNNGC}.
 Cette fois ci, nous avons dans le plan $E_{\rm ecal } = 0$ (\textit{cf.} Figure \ref{calibrationKNNGC}), la courbe de calibration qui passe par le coeur de la distribution à faible $E_{\rm hcal}$ grâce au nettoyage gaussien.
