@@ -237,24 +237,24 @@ Pour effectuer la calibration nous allons utiliser des particules simulées. La p
 
 En première approximation, nous déterminerons l'énergie calibrée par une fonction linéaire de l'énergie lue dans le ECAL (énergie notée par la suite $E_{\rm ecal}$) et de celle lue dans le HCAL (notée par la suite $H_{\rm ecal}$). Cette méthode sera présentée dans la section \ref{LR}.
 
-Ce rapport présente ensuite de nouvelles techniques de calibration qui permettent de prendre en compte la non-linearité des calorimètres. Ces techniques seront présentées dans les sections \ref{CL} et \ref{KNN}.\\
+Ce rapport présente ensuite de nouvelles techniques de calibration qui permettent de prendre en compte la non-linéarité des calorimètres. Ces techniques seront présentées dans les sections \ref{CL} et \ref{KNN}.\\
 Enfin, nous comparerons ces méthodes dans la section \ref{comparaison}. 
 
 \section{Production de l'échantillon}
 \label{echantillon}
 
-La calibration des calorimètres est réalisée grâce à un échantillon de pions chargés. Chaque événement contient un unique hadron chargé d'énergie comprise entre 0 et 200 GeV, et de pseudorapidité inférieure à 0.5. La calibration n'est pour l'instant pas réalisée pour des particules d'énergie supérieure, ou émises vers l'avant. 
+La calibration des calorimètres est réalisée grâce à un échantillon de pions chargés. Chaque événement contient un unique hadron chargé d'énergie comprise entre 0 et 200 GeV, et de pseudo-rapidité inférieure à 0.5. La calibration n'est pour l'instant pas réalisée pour des particules d'énergie supérieure, ou émises vers l'avant. 
 Chaque hadron est traité par la simulation complète de CMS, dans laquelle les interactions avec les détecteurs sont modélisées par GEANT4 \cite{GEANT4}. Les dépôts d'énergie calorimétriques sont reconstruits par l'algorithme de reconstruction standard de CMS.
 
 Les données simulées sont stockées dans un fichier \textit{.root}. Par souci de compatibilité, j'ai voulu écarter \textit{Root}, qui est à la fois un programme et une librairie C++ pour tout faire en Python.  J'ai donc écrit un programme \cite{RootToPhython} pour extraire les données du fichier initial pour les déplacer dans un nouveau fichier binaire importable facilement par Python et qui contient, pour chaque hadron simulé : son énergie réelle ($E_{\rm true}$), son impulsion, l'énergie déposée dans le ECAL ($E_{\rm ecal}$), l'énergie déposée dans le HCAL ($E_{\rm hcal}$), sa pseudo-rapidité.
 
-On séparera et traitera différemment les événements qui ont $E_{\rm ecal} = 0$ de ceux avec $E_{\rm ecal} \neq 0$ (Figure \ref{points}).  Ces événements sont liés à des particules qui ont interagi avec le détecteur hardronique mais pas avec le détecteur électromagnétique (\textit{cf.} Figure\ref{detecteur}). Cette séparation se justifie, car modéliser les dépôts d'énergie dans les deux calorimètres pour en conclure ce qui se passe dans le cas particulier où il n'y a de dépôt que dans l'un d'eux amène un biais. Ainsi, à  chaque construction de calibration, on créera en fait deux modèles.
+On séparera et traitera différemment les événements qui ont $E_{\rm ecal} = 0$ de ceux avec $E_{\rm ecal} \neq 0$ (Figure \ref{points}).  Ces événements sont liés à des particules qui ont interagi avec le détecteur hadronique mais pas avec le détecteur électromagnétique (\textit{cf.} Figure\ref{detecteur}). Cette séparation se justifie, car modéliser les dépôts d'énergie dans les deux calorimètres pour en conclure ce qui se passe dans le cas particulier où il n'y a de dépôt que dans l'un d'eux amène un biais. Ainsi, à  chaque construction de calibration, on créera en fait deux modèles.
 
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[width=0.45\linewidth]{images/pictures/testLinearRegression/LinearRegression_plot3D_training.png}
 \includegraphics[width=0.45\linewidth]{images/pictures/explain/ecal_eq_0.png}
-\caption{A gauche, l'energie vraie $E_{\rm true}$ en fonction de l'énergie mesurée dans le ECAL, $E_{\rm ecal} \neq 0$, et de l'énergie mesurée dans le HCAL, $E_{\rm hcal}$, pour un échantillon d'événements ou un seul hadron est simulé dans le détecteur. À droite, idem mais avec avec $E_{\rm ecal} = 0$. Ces deux nuages de points seront modélisés séparément.}
+\caption{A gauche, l'énergie vraie $E_{\rm true}$ en fonction de l'énergie mesurée dans le ECAL, $E_{\rm ecal} \neq 0$, et de l'énergie mesurée dans le HCAL, $E_{\rm hcal}$, pour un échantillon d'événements ou un seul hadron est simulé dans le détecteur. À droite, idem mais avec avec $E_{\rm ecal} = 0$. Ces deux nuages de points seront modélisés séparément.}
 \label{points}
 \end{center}
 \end{figure}
@@ -284,7 +284,7 @@ Comme première calibration, j'ai utilisé une méthode simple, la régression linéa
 \begin{equation}
     E_{\rm calib} = a_1 E_{\rm ecal} + a_2 E_{\rm hcal} + b
 \end{equation}
-et de trouver les coefficient $a_1, a_2,  b$ optimaux pour que le modèle coïncide au mieux aux données d'entrainement. L'ajustement est réalisé par la méthode des moindres bins, grâce à la librairie \textit{Sciki Learn}  \cite{scikitLR}. Dans notre cas, cela revient à  trouver les coefficients qui, pour un ensemble de données d'entraînement  composé de $N$ points $(E_{\rm ecal}^n,E_{\rm hcal}^n, E_{\rm true}^n), n \in \{1,...,N\}$ minimiseront :
+et de trouver les coefficient $a_1, a_2,  b$ optimaux pour que le modèle coïncide au mieux aux données d'entrainement. L'ajustement est réalisé par la méthode des moindres bins, grâce à la librairie \textit{Scikit Learn}  \cite{scikitLR}. Dans notre cas, cela revient à  trouver les coefficients qui, pour un ensemble de données d'entraînement  composé de $N$ points $(E_{\rm ecal}^n,E_{\rm hcal}^n, E_{\rm true}^n), n \in \{1,...,N\}$ minimiseront :
 \begin{equation}
 	\epsilon = \sum_{n=1}^N  \left(E_{\rm true} - a_1 E_{\rm ecal} - a_2 E_{\rm hcal} - b \right)^2
 \end{equation}
@@ -362,7 +362,7 @@ Il faut à présent proposer une méthode qui prend en compte la non-linéarité entr
 
 
 
-\section{Méthode non paramétrique binnée}
+\section{Méthode non paramétrique binée}
 \label{CL}
 Ici, l'idée est de découper le plan $(E_{\rm ecal},E_{\rm hcal})$ en bins et de calculer la moyenne des $E_{\rm true}$ dans chaque bin qui sera la valeur $E_{\rm calib}$. 
 
@@ -380,7 +380,7 @@ L'avantage de cette calibration est de prendre en compte ce qui se passe localem
 
 \noindent
 \begin{minipage}{0.5\linewidth}
-La calibration \cite{GitHubCL} est construite à  l'aide d'un premier jeu de données, avec $100\times100$ bins. Premièrement, nous constatons que la surface n'est pas lisse, $E_{\rm calib}$ fluctue fortement, et si nous regardons ce qui se passe dans le plan $E_{\rm ecal} = 0$ (Figure \ref{calibCL}), nous voyons que cette méthode binnée donne des énergies calibrées $E_{\rm calib}$ égales pour des ensembles de points, par paliers. Deuxièmement, nous constatons une fois de plus que la courbe de calibration ne passe pas par le coeur de la distribution à  bas $E_{\rm hcal}$ : $E_{\rm calib}$ y est sur-évaluée.
+La calibration \cite{GitHubCL} est construite à  l'aide d'un premier jeu de données, avec $100\times100$ bins. Premièrement, nous constatons que la surface n'est pas lisse, $E_{\rm calib}$ fluctue fortement, et si nous regardons ce qui se passe dans le plan $E_{\rm ecal} = 0$ (Figure \ref{calibCL}), nous voyons que cette méthode binée donne des énergies calibrées $E_{\rm calib}$ égales pour des ensembles de points, par paliers. Deuxièmement, nous constatons une fois de plus que la courbe de calibration ne passe pas par le coeur de la distribution à  bas $E_{\rm hcal}$ : $E_{\rm calib}$ y est sur-évaluée.
 \end{minipage}
 \begin{minipage}{0.5\linewidth}
 	\centering
@@ -405,7 +405,7 @@ La Figure \ref{ecaliboveretrueCL_etrue} nous montre une fois de plus que $E_{\rm
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[width=\textwidth]{images/pictures/testCalibrationLego/CalibrationLego_ecalib_over_etrue.png}
-\caption{À gauche : en bleu la distribution en fonction des $E_{\rm true}$ des $E_{\rm calib}/E_{\rm true}$ pour les particules n'interagissant pas avec le ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante. À droite : idem pour les particules qui interagissent avec le ECAL et le HCAL. Nous voyons clairement l'apparition d'une structure, liée au caractère binné de la méthode.}
+\caption{À gauche : en bleu la distribution en fonction des $E_{\rm true}$ des $E_{\rm calib}/E_{\rm true}$ pour les particules n'interagissant pas avec le ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante. À droite : idem pour les particules qui interagissent avec le ECAL et le HCAL. Nous voyons clairement l'apparition d'une structure, liée au caractère biné de la méthode.}
 \label{ecaliboveretrueCL}
 \end{center}
 \end{figure}
@@ -588,7 +588,7 @@ Principe de l'algorithme :
 	\begin{itemize}
 		\item on recherche ses $k$ plus proches voisins dans le plan $(E_{\rm ecal}, E_{\rm hcal})$ notés $(E_{\rm ecal}^i, E_{\rm hcal}^i), i \in [|1,...,k|]$
 		on fit les $E_{\rm ecal}^i$ par une gaussienne ce qui donne $\sigma$ et $\mu$, l'écart type et la moyenne de la gaussienne
-		\item $\rightarrow E_{\rm calib}^{0,j} = \mu$
+		\item On considère $E_{\rm calib}^{0,j} = \mu$
 	\end{itemize}
 \end{itemize}
 
@@ -640,14 +640,38 @@ Cette méthode de calibration semble aussi bonne que la précédente tout en étant 
 \newpage
 \section{Comparaison et résultats}
 \label{comparaison}
-\begin{figure}[!h]
+
+\begin{figure}
 \begin{center}
 \includegraphics[width=\textwidth]{images/pictures/comparisons/comparison1.eps}
-\caption{En haut à gauche : \\
-En haut à droite : \\
-En bas à gauche : \\
-En haut à droite : }
+\caption{caption}
 \end{center}
+\end{figure}
+
+\begin{figure}
+\begin{flushright}
+\begin{subfigure}{0.45\textwidth}
+\includegraphics[width=\textwidth]{images/pictures/comparisons/ecaliboveretrue_LinearRegression.png}
+\caption{Régression linéaire}
+\end{subfigure}
+\begin{subfigure}{0.45\textwidth}
+\includegraphics[width=\textwidth]{images/pictures/comparisons/ecaliboveretrue_CalibrationLego.png}
+\caption{Méthode non paramétrique binée}
+\end{subfigure}
+\begin{subfigure}{0.45\textwidth}
+\includegraphics[width=\textwidth]{images/pictures/comparisons/ecaliboveretrue_KNN.png}
+\caption{Plus proches voisins}
+\end{subfigure}
+\begin{subfigure}{0.45\textwidth}
+\includegraphics[width=\textwidth]{images/pictures/comparisons/ecaliboveretrue_KNNGaussianCleaning.png}
+\caption{Plus proches voisins - Nettoyage gaussien}
+\end{subfigure}
+\begin{subfigure}{0.45\textwidth}
+\includegraphics[width=\textwidth]{images/pictures/comparisons/ecaliboveretrue_KNNGaussianFit.png}
+\caption{Plus proches voisins - Fit gaussien}
+\end{subfigure}
+\end{flushright}
+\caption{Chaque pixel correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches des coordonnées du pixel pour les particules qui interagissent avec le ECAL et le HCAL.}
 \end{figure}
 
 \begin{figure}[!h]
