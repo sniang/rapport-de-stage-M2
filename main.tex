@@ -641,12 +641,16 @@ Cette méthode de calibration semble aussi bonne que la précédente tout en étant 
 \section{Comparaison et résultats}
 \label{comparaison}
 
-\begin{figure}
-\begin{center}
+La Figure \ref{comparaison1} montre les courbes $E_{\rm calib}/E_{\rm true}$ moyens en fonction de $E_{\rm hcal}$ dans le plan $E_{\rm ecal} = 0$ pour toutes les méthodes de calibration. Il apparaît alors que dans ce plan, la méthode des plus proches voisins avec un nettoyage gaussien donne le meilleur résultat. Celle avec le fit gaussien donne des résultats assez similaires. Il est à noté que pour des particules de bas $E_{\rm hcal}$ $(< \SIUnits{10}{\giga\electronvolts}$), l'énergie calibrée sous évalue en moyenne l'énergie vraie pour ces deux méthodes. Par la suite, il faudra trouver un moyen de corriger cela.
+
+\begin{figure}[!h]
+\centering
 \includegraphics[width=\textwidth]{images/pictures/comparisons/comparison1.eps}
-\caption{caption}
-\end{center}
+\caption{$E_{\rm calib}/E_{\rm true}$ moyens en fonction de $E_{\rm hcal}$ pour les particules n'interagissant pas avec le ECAL. Chaque point d'une courbe correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante.}
+\label{comparaison1}
 \end{figure}
+
+La Figure \ref{comparaison1} illustre $E_{\rm calib}/E_{\rm true}$ dans le plan $(E_{\rm ecal},E_{\rm hcal})$ pour toutes les méthodes de calibration. Les méthodes des plus proches voisins avec le nettoyage gaussien et le fit gaussien sont les meilleures proposées. A noter que l'on observe une sous évaluation de l'énergie vraie par l'énergie calibrée à bas $E_{\rm ecal}$, mais la calibration reste bonne dans le plan  $(E_{\rm ecal},E_{\rm hcal})$.
 
 \begin{figure}
 \begin{flushright}
@@ -672,17 +676,33 @@ Cette méthode de calibration semble aussi bonne que la précédente tout en étant 
 \end{subfigure}
 \end{flushright}
 \caption{Chaque pixel correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches des coordonnées du pixel pour les particules qui interagissent avec le ECAL et le HCAL.}
+\label{comparaison2}
 \end{figure}
 
+La Figure \ref{comparaison3} nous montre pour les sous-figures du haut $E_{\rm calib}/E_{\rm true}$ moyens en fonction de $E_{\rm true}$ dans les cas $E_{\rm ecal} = 0$ et $E_{\rm ecal} \neq 0$. Ces figures illustrent encore que les deux dernières méthodes sont les meilleures et permettent une bonne calibration pour des particules d'énergie vraie $E_{\rm true}$ comprises entre $10$ et $\SIUnits{120}{\giga\electronvolts}$ dans le premier cas et entre $20$ et $\SIUnits{140}{\giga\electronvolts}$ dans le second.
+
+Les sous-figures du bas présente l'écart-type des $E_{\rm calib}/E_{\rm true}$ moyens en fonction de $E_{\rm true}$ dans les cas $E_{\rm ecal} = 0$ et $E_{\rm ecal} \neq 0$. Ces écarts-types sont des fonctions décroissantes de l'énergie vraie, cela signifie que la précision augmente avec l'énergie vraie.
 \begin{figure}[!h]
-\begin{center}
+\centering
 \includegraphics[width=\textwidth]{images/pictures/comparisons/comparison2.eps}
 \caption{En haut à gauche : \\
 En haut à droite : \\
 En bas à gauche : \\
 En haut à droite : }
-\end{center}
+\label{comparaison3}
 \end{figure}
+
+
+\newpage
+\section{Conclusion}
+Les méthodes des plus proches voisins avec un nettoyage gaussien ou avec un fit gaussien permettent de calibrer l'énergie des particules pour estimer l'énergie vraie des particules en fonction de leur dépôts d'énergie dans les calorimètres ECAL et HCAL. Cependant, elles restent à améliorer, notamment pour améliorer la calibration pour les particules de faible énergie. 
+
+D'autres points seront à développer :
+\begin{itemize}
+\item comment extrapoler une énergie de calibration pour des particules de plus hautes énergies ?
+\item il faudrait prendre en compte plus d'informations comme par exemple l'angle de la trajectoire des particules.
+\item il faudrait comparer avec la calibration faite jusqu'à présent qui elle utilisent une fonction paramétrée. \cite{PF}
+\end{itemize}
 
 \newpage
 \section{Annexes}
