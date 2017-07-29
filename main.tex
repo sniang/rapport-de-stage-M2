@@ -284,7 +284,7 @@ Comme première calibration, j'ai utilisé une méthode simple, la régression linéa
 \begin{equation}
     E_{\rm calib} = a_1 E_{\rm ecal} + a_2 E_{\rm hcal} + b
 \end{equation}
-et de trouver les coefficient $a_1, a_2,  b$ optimaux pour que le modèle coïncide au mieux aux données d'entrainement. L'ajustement est réalisé par la méthode des moindres bins, grâce à la librairie \textit{Scikit Learn}  \cite{scikitLR}. Dans notre cas, cela revient à  trouver les coefficients qui, pour un ensemble de données d'entraînement  composé de $N$ points $(E_{\rm ecal}^n,E_{\rm hcal}^n, E_{\rm true}^n), n \in \{1,...,N\}$ minimiseront :
+et de trouver les coefficient $a_1, a_2,  b$ optimaux pour que le modèle coïncide au mieux aux données d'entrainement. L'ajustement est réalisé par la méthode des moindres carrés, grâce à la librairie \textit{Scikit Learn}  \cite{scikitLR}. Dans notre cas, cela revient à  trouver les coefficients qui, pour un ensemble de données d'entraînement  composé de $N$ points $(E_{\rm ecal}^n,E_{\rm hcal}^n, E_{\rm true}^n), n \in \{1,...,N\}$ minimiseront :
 \begin{equation}
 	\epsilon = \sum_{n=1}^N  \left(E_{\rm true} - a_1 E_{\rm ecal} - a_2 E_{\rm hcal} - b \right)^2
 \end{equation}
@@ -317,7 +317,7 @@ J'ai constaté qu'à  faible  $E_{\rm ecal},  E_{\rm hcal}$ il y a quelques points
 	\label{surfaceLR}
 \end{minipage}
 
-Nous constatons en particulier que dans le cas  $E_{\rm ecal} = 0$ (Figure \ref{courbeLR}), la courbe ne passe pas par le le coeur du nuage de point à  faible  $E_{\rm hcal}$. 
+La Figure \ref{courbeLR} montre que en particulier que dans le cas  $E_{\rm ecal} = 0$, la courbe ne passe pas par le le coeur du nuage de point à faible $E_{\rm hcal}$. 
 
 \begin{figure}[!h]
 \begin{center}
@@ -327,11 +327,11 @@ Nous constatons en particulier que dans le cas  $E_{\rm ecal} = 0$ (Figure \ref{
 \end{center}
 \end{figure}
 
-On teste maintenant l?efficacité de la calibration sur un second jeu de données en affichant $E_{\rm calib}/$E_{\rm true}$ pour ce nouveau jeu de données. $E_{\rm calib}/$E_{\rm true}$ doit être le plus proche possible de 1.
+On teste maintenant l'efficacité de la calibration sur un second jeu de données en affichant $E_{\rm calib}/$E_{\rm true}$ pour ce nouveau jeu de données. $E_{\rm calib}/$E_{\rm true}$ doit être le plus proche possible de 1.
 
-La Figure \ref{LR_ecaliboveretrue_ecal_hcal}, nous montre que la régression linéaire est mauvaise à  faible $E_{\rm hcal}$ car en moyenne, $E_{\rm calib}/E_{\rm true}$ n'est pas proche de $1$. Plus intéressant, la figure de droite met en avant les non-linéarités du nuage de point : en effet il y a clairement une zone limitée où le modèle linéaire semble fonctionner, mais partout ailleurs, les points sont éloignés du plan.  
+La Figure \ref{LR_ecaliboveretrue_ecal_hcal} montre que la régression linéaire est mauvaise à faible $E_{\rm hcal}$ car en moyenne, $E_{\rm calib}/E_{\rm true}$ n'est pas proche de $1$. Plus intéressant, la figure de droite met en avant les non-linéarités du nuage de point : en effet il y a clairement une zone limitée où le modèle linéaire semble fonctionner, mais partout ailleurs, les points sont éloignés du plan.  
 
-La Figure \ref{LR_ecaliboveretrue_etrue} montre que la calibration n'est pas bonne : $E_{\rm calib}/E_{\rm true}$  est trop écarté de 1, à part autour de $E_{\rm true} = \SIUnits{100}{\giga\electronvolt}$. Nous constatons que à haute énergie, la distribution dessine une asymptote. Cela est en fait un artefact lié à la simulation car les particules sont limités à $E_{\rm true} = \SIUnits{200}{\giga\electronvolt}$, donc nous ne retrouvons pas des points de part et d'autre de la ligne $E_{\rm calib}/E_{\rm true} = 1$. On ne peut donc rien donner de la courbe verte qui tente de suivre la distribution à haute énergie ($\approx \SIUnits{150}{\giga\electronvolt}$). Cela est valable pour toutes les figures qui présenteront E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm true}$.
+La Figure \ref{LR_ecaliboveretrue_etrue} montre que la calibration n'est pas bonne : $E_{\rm calib}/E_{\rm true}$  est trop écarté de 1, à part autour de $E_{\rm true} = \SIUnits{100}{\giga\electronvolt}$. Nous constatons que à haute énergie, la distribution dessine une asymptote. Cela est en fait un artefact lié à la simulation car les particules sont limitées à $E_{\rm true} = \SIUnits{200}{\giga\electronvolt}$, donc nous ne retrouvons pas des points de part et d'autre de la ligne $E_{\rm calib}/E_{\rm true} = 1$. On ne peut donc rien déduire de la courbe verte qui tente de suivre la distribution à haute énergie ($\approx \SIUnits{150}{\giga\electronvolt}$). Cela est valable pour toutes les figures qui présenteront E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm true}$.
 
 \begin{figure}[!h]
 \begin{center}
@@ -539,7 +539,7 @@ En bas à droite : l'histogramme des $\chi^2$ correspondant.}
 Pour l'interpolation, j'ai également utilisé une fonction proposée par \textit{Scipy} \cite{scipyInterp}, qui nous laisse le choix entre une interpolation linéaire et une interpolation à splines cubiques.
 
 Les résultats de l'interpolations sont présentés sur les Figures \ref{surfKNNGC} et \ref{calibrationKNNGC}.
-Cette fois ci, nous avons dans le plan $E_{\rm ecal } = 0$ (\textit{cf.} Figure \ref{calibrationKNNGC}), la courbe de calibration qui passe par le coeur de la distribution à faible $E_{\rm hcal}$ grâce au nettoyage gaussien.
+Cette fois ci, dans le plan $E_{\rm ecal } = 0$ (\textit{cf.} Figure \ref{calibrationKNNGC}), la courbe de calibration passe par le coeur de la distribution à faible $E_{\rm hcal}$ grâce au nettoyage gaussien.
 
 \begin{figure}[!h]
 \begin{center}
@@ -616,7 +616,7 @@ Nous obtenons des surfaces et courbes de calibration assez similaires à celles p
 
 On teste maintenant l'efficacité de la calibration sur un second jeu de données et nous obtenons des résultats similaires à la section précédente. La Figure \ref{ecaliboveretrueKNNGF_ecal_hcal} montre que la calibration est correcte dans le plan $E_{\rm ecal} = 0$ car la courbe de moyenne est très proche de 1. De plus, la non prédominance d'une couleur sauf le blanc dans le colormap de la Figure \ref{ecaliboveretrueKNNGF_ecal_hcal} montre que la calibration est correcte dans le plan ($E_{\rm ecal} ,E_{\rm hcal} $) et que les non-linéarités sont prises en compte.
 
-La Figure \ref{ecaliboveretrueKNNGF} nous montre que la calibration correcte pour les particules dont l'énergie vraie est comprise entre $20$ et $140 \giga\electronvolt$.
+La Figure \ref{ecaliboveretrueKNNGF} nous montre que la calibration est correcte pour les particules dont l'énergie vraie est comprise entre $20$ et $140 \giga\electronvolt$.
 
 \begin{figure}[!h]
 \begin{center}
@@ -641,16 +641,16 @@ Cette méthode de calibration semble aussi bonne que la précédente tout en étant 
 \section{Comparaison et résultats}
 \label{comparaison}
 
-La Figure \ref{comparaison1} montre les courbes $E_{\rm calib}/E_{\rm true}$ moyens en fonction de $E_{\rm hcal}$ dans le plan $E_{\rm ecal} = 0$ pour toutes les méthodes de calibration. Il apparaît alors que dans ce plan, la méthode des plus proches voisins avec un nettoyage gaussien donne le meilleur résultat. Celle avec le fit gaussien donne des résultats assez similaires. Il est à noté que pour des particules de bas $E_{\rm hcal}$ $(< \SIUnits{10}{\giga\electronvolts}$), l'énergie calibrée sous évalue en moyenne l'énergie vraie pour ces deux méthodes. Par la suite, il faudra trouver un moyen de corriger cela.
+La Figure \ref{comparaison1} montre la $E_{\rm calib}/E_{\rm true}$ obtenue par fit gaussien en fonction de $E_{\rm hcal}$ pour $E_{\rm ecal} = 0$ et pour toutes les méthodes de calibration. Les deux dernières méthodes basées sur une recherche de plus proches voisins sont les plus adaptées car elles donnent une énergie calibrée proche de la valeur réelle quelque soit la valeur de $E_{\rm hcal}$. Il est à noter que pour que pour des dépôts de basse énergie dans le HCAL $(< \SIUnits{10}{\giga\electronvolt}$), l'énergie calibrée est en moyenne trop faible pour ces deux méthodes. Par la suite, il faudra trouver un moyen de corriger cela.
 
 \begin{figure}[!h]
 \centering
 \includegraphics[width=\textwidth]{images/pictures/comparisons/comparison1.eps}
-\caption{$E_{\rm calib}/E_{\rm true}$ moyens en fonction de $E_{\rm hcal}$ pour les particules n'interagissant pas avec le ECAL. Chaque point d'une courbe correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante.}
+\caption{Moyenne de $E_{\rm calib}/E_{\rm true}$ obtenue par un fit gaussien en fonction de $E_{\rm hcal}$ pour les particules n'interagissant pas dans le ECAL.}
 \label{comparaison1}
 \end{figure}
 
-La Figure \ref{comparaison1} illustre $E_{\rm calib}/E_{\rm true}$ dans le plan $(E_{\rm ecal},E_{\rm hcal})$ pour toutes les méthodes de calibration. Les méthodes des plus proches voisins avec le nettoyage gaussien et le fit gaussien sont les meilleures proposées. A noter que l'on observe une sous évaluation de l'énergie vraie par l'énergie calibrée à bas $E_{\rm ecal}$, mais la calibration reste bonne dans le plan  $(E_{\rm ecal},E_{\rm hcal})$.
+La Figure \ref{comparaison2} montre la moyenne de $E_{\rm calib}/E_{\rm true}$ en fonction de $(E_{\rm ecal},E_{\rm hcal})$ pour toutes les méthodes de calibration. Les méthodes des plus proches voisins avec le nettoyage gaussien et le fit gaussien sont les plus adaptées car elles donnent une énergie calibrée proche de la valeur réelle quelque soit $(E_{\rm ecal},E_{\rm hcal})$. 
 
 \begin{figure}
 \begin{flushright}
