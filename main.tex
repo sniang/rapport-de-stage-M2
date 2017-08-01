@@ -86,7 +86,7 @@
 
 \parbox{15cm}{\small
 \textbf{Résumé} : \\
-\rm Avec le détecteur CMS, l'énergie des hadrons neutres est déterminée à partir de l'énergie mesurée dans les calorimètres électromagnétiques ($E_{\rm ecal}$) et hadroniques ($E_{\rm hcal}$). Une calibration est cependant nécessaire pour estimer l'énergie vraie du hadron neutre à  partir de $E_{\rm ecal}$ et $E_{\rm hcal}$. Dans un premier temps, j'ai utilisé comme calibration une fonction linéaire de $E_{\rm ecal}$ et $E_{\rm hcal}$. Ensuite, afin de décrire la non linéarité de la mesure de l'énergie, j'ai inventé une nouvelle méthode de calibration non paramétrique.
+\rm Avec le détecteur CMS, l'énergie des hadrons neutres est déterminée à partir de l'énergie mesurée dans les calorimètres électromagnétiques ($E_{\rm ecal}$) et hadroniques ($E_{\rm hcal}$). Une calibration est cependant nécessaire pour estimer l'énergie vraie du hadron neutre à partir de $E_{\rm ecal}$ et $E_{\rm hcal}$. Dans un premier temps, j'ai utilisé comme calibration une fonction linéaire de $E_{\rm ecal}$ et $E_{\rm hcal}$. Ensuite, afin de décrire la non linéarité de la mesure de l'énergie, j'ai inventé une nouvelle méthode de calibration non paramétrique.
 }
 
 \vspace{1cm}
@@ -149,7 +149,7 @@ Nous allons nous intéresser plus spécifiquement au détecteur CMS \cite{CMS}. Cel
 \item d'un trajectographe, pour reconstruire la trajectoire des particules chargées, et ainsi obtenir la charge et l'impulsion à partir de la courbure de la trajectoire dans le champ magnétique; 
 \item d'un calorimètre électromagnétique (ECAL) \cite{ECAL} constitué d'un cristal de tungstate de plomb, permettant de collecter les dépôts d'énergie des particules, principalement électrons et photons, mais aussi hadrons chargés et neutres;
 \item d'un calorimètre hadronique (HCAL) \cite{HCAL} composé de plusieurs couches d'absorbeur en laiton et de carreaux scintillateurs en plastique, avec une segmentation grossière. Le HCAL permet la mesure de l'énergie $E$ d'un hadron avec une résolution de l'ordre de $100\%\sqrt{(E / \SIUnits{}{\giga\electronvolt})}$;
-\item de chambres à  muons qui permettent l'identification de ces particules, les seules à  pouvoir y parvenir.
+\item de chambres à muons qui permettent l'identification de ces particules, les seules à pouvoir y parvenir.
 \end{itemize}
 
 La Figure \ref{detecteur} illustre le comportement des particules dans les différentes couches du détecteur:
@@ -180,7 +180,7 @@ La Figure \ref{detecteur} illustre le comportement des particules dans les diffé
         \begin{itemize}
         		\item produisent une trace dans le trajectographe;
 		\item traversent le ECAL et le HCAL comme des particules au minimum d'ionisation;
-		\item sont détectées dans la chambre à  muons.
+		\item sont détectées dans la chambre à muons.
         \end{itemize}
 \end{enumerate}
 
@@ -193,11 +193,11 @@ La Figure \ref{detecteur} illustre le comportement des particules dans les diffé
 \end{figure}
 \`A noter que dans notre étude, seuls les hadrons neutres nous intéressent. \\
 
-La connaissance des dépôts d'énergie et du comportement des particules dans les différentes parties du détecteur nous permettent de reconnaître et distinguer les particules : cette opération s'appelle le \textit{Particle Flow (PF)}. Cependant, il est aussi nécessaire d'estimer l'énergie des particules ($E_{\rm true})$ à  l'aide d'une calibration des calorimètres. En effet, ces derniers ne présentent pas une réponse linéaire et la somme des énergies dans les calorimètres ne correspond pas à  l'énergie de la particule. Cette énergie de calibration sera notée $E_{\rm calib}$.
+La connaissance des dépôts d'énergie et du comportement des particules dans les différentes parties du détecteur nous permettent de reconnaître et distinguer les particules : cette opération s'appelle le \textit{Particle Flow (PF)}. Cependant, il est aussi nécessaire d'estimer l'énergie des particules ($E_{\rm true})$ à l'aide d'une calibration des calorimètres. En effet, ces derniers ne présentent pas une réponse linéaire et la somme des énergies dans les calorimètres ne correspond pas à l'énergie de la particule. Cette énergie de calibration sera notée $E_{\rm calib}$.
 
 Pour effectuer la calibration nous allons utiliser des particules simulées. La production de ces données sera explicitée dans la section \ref{echantillon}.
 
-En première approximation, nous déterminerons l'énergie calibrée par une fonction linéaire de l'énergie lue dans le ECAL (énergie notée par la suite $E_{\rm ecal}$) et de celle lue dans le HCAL (notée par la suite $H_{\rm ecal}$). Cette méthode sera présentée dans la section \ref{LR}.
+En première approximation, nous déterminerons l'énergie calibrée par une fonction linéaire de l'énergie lue dans le ECAL (énergie notée par la suite $E_{\rm ecal}$) et de celle lue dans le HCAL (notée par la suite $E_{\rm hcal}$). Cette méthode sera présentée dans la section \ref{LR}.
 
 Ce rapport présente ensuite de nouvelles techniques de calibration qui permettent de prendre en compte la non-linéarité des calorimètres. Ces techniques seront présentées dans les sections \ref{CL} et \ref{KNN}.\\
 Enfin, nous comparerons ces méthodes dans la section \ref{comparaison}. 
@@ -210,7 +210,7 @@ Chaque hadron est traité par la simulation complète de CMS, dans laquelle les in
 
 Les données simulées sont stockées dans un fichier \textit{.root}. Par souci de compatibilité, j'ai voulu écarter \textit{Root}, qui est à la fois un programme et une librairie C++ pour tout faire en Python.  J'ai donc écrit un programme \cite{RootToPhython} pour extraire les données du fichier initial pour les déplacer dans un nouveau fichier binaire importable facilement par Python et qui contient, pour chaque hadron simulé : son énergie réelle ($E_{\rm true}$), son impulsion, l'énergie déposée dans le ECAL ($E_{\rm ecal}$), l'énergie déposée dans le HCAL ($E_{\rm hcal}$), sa pseudo-rapidité.
 
-On séparera et traitera différemment les événements qui ont $E_{\rm ecal} = 0$ de ceux avec $E_{\rm ecal} \neq 0$ (Figure \ref{points}).  Ces événements sont liés à des particules qui ont interagi avec le détecteur hadronique mais pas avec le détecteur électromagnétique (\textit{cf.} Figure\ref{detecteur}). Cette séparation se justifie, car modéliser les dépôts d'énergie dans les deux calorimètres pour en conclure ce qui se passe dans le cas particulier où il n'y a de dépôt que dans l'un d'eux amène un biais. Ainsi, à  chaque construction de calibration, on créera en fait deux modèles.
+On séparera et traitera différemment les événements qui ont $E_{\rm ecal} = 0$ de ceux avec $E_{\rm ecal} \neq 0$ (Figure \ref{points}).  Ces événements sont liés à des particules qui ont interagi avec le détecteur hadronique mais pas avec le détecteur électromagnétique (\textit{cf.} Figure\ref{detecteur}). Cette séparation se justifie, car modéliser les dépôts d'énergie dans les deux calorimètres pour en conclure ce qui se passe dans le cas particulier où il n'y a de dépôt que dans l'un d'eux amène un biais. Ainsi, à chaque construction de calibration, on créera en fait deux modèles.
 
 \begin{figure}[!h]
 \begin{center}
@@ -221,18 +221,18 @@ On séparera et traitera différemment les événements qui ont $E_{\rm ecal} = 0$ d
 \end{center}
 \end{figure}
 
-De plus, la simulation crée un palier car les particules sont limitées à  $E_{\rm true} = \SIUnits{200}{\giga\electronvolt}$. Si l'on regarde par exemple sur la Figure \ref{limite} ce qui se passe dans le plan $E_{\rm ecal} = 0$, on voit bien ce palier qui apparaît vers $\SIUnits{150}{\giga\electronvolt}$, il est donc ici impossible de déduire une énergie de calibration à  partir des points au-delà  de cette limite. Avec ce jeu de données, nous allons fixer une limite $E_{\rm ecal} + E_{\rm hcal}  = (\rm{lim} = \SIUnits{150}{\giga\electronvolt})$.
+De plus, la simulation crée un palier car les particules sont limitées à $E_{\rm true} = \SIUnits{200}{\giga\electronvolt}$. Si l'on regarde par exemple sur la Figure \ref{limite} ce qui se passe dans le plan $E_{\rm ecal} = 0$, on voit bien ce palier qui apparaît vers $\SIUnits{150}{\giga\electronvolt}$, il est donc ici impossible de déduire une énergie de calibration à partir des points au-delà de cette limite. Avec ce jeu de données, nous allons fixer une limite $E_{\rm ecal} + E_{\rm hcal}  = (\rm{lim} = \SIUnits{150}{\giga\electronvolt})$.
 
-La Figure \ref{limite} montre en particulier que dans le plan $E_{\rm ecal} = 0$, la limite fixée nous évite bien le palier (en vert sur la figure), de plus pour se convaincre que cette limite est acceptable, il est présenté en bas à droite de la Figure \ref{limite} les points qui se trouvent proches du plan tourné de $\theta = \pi/4$, en effet, nous pouvons constater que le palier est aussi évité avec cette limite. 
+La Figure \ref{limite} montre en particulier que dans le plan $E_{\rm ecal} = 0$, la limite fixée nous évite bien le palier (en vert sur la figure), de plus pour se convaincre que cette limite est acceptable, il est présenté en bas à droite de la Figure \ref{limite} les points qui se trouvent proches du plan tourné de $\theta = \pi/4$, en effet, nous pouvons constater que le palier est aussi évité avec cette limite à $\SIUnits{150}{\giga\electronvolt}$.
 
 Dans le programme développé, la limitation se manifeste ainsi : si l'on tente de prédire une énergie calibrée dans la zone $E_{\rm ecal} + E_{\rm hcal}  > (\rm{lim} = \SIUnits{150}{\giga\electronvolt})$, le programme nous retournera $E_{\rm ecal} = \rm{\textit{math.nan}}$ (not a number), pour nous indiquer qu'il est impossible de retourner une valeur.
 
-Pour construire la calibration nous utiliserons un premier jeu de données dit d'entrainement, c'est à dire un ensemble de points ($E_{\rm ecal},E_{\rm hcal},E_{\rm true}$ obtenus par simulation d'interactions de pions chargés avec les calorimètres comme expliqué en début de section. L'efficacité d'une calibration sera évaluée avec un second jeu de données pour éviter un biais. On comparera alors l'énergie calibrée d'une particule $E_{\rm calib}$ à sa vraie énergie $E_{\rm true}$. 
+Pour construire la calibration nous utiliserons un premier jeu de données dit d'entrainement, c'est à dire un ensemble de points ($E_{\rm ecal},E_{\rm hcal},E_{\rm true})$ obtenus par simulation d'interactions de pions chargés avec les calorimètres comme expliqué en début de section. L'efficacité d'une calibration sera évaluée avec un second jeu de données pour éviter un biais. On comparera alors l'énergie calibrée d'une particule $E_{\rm calib}$ à sa vraie énergie $E_{\rm true}$. 
 
 \begin{figure}[!h]
     \begin{center}
         \includegraphics[width=0.75\textwidth]{images/pictures/explain/limit.png}
-        \caption{On place une limite à  $E_{\rm ecal}+E_{\rm hcal} = \SIUnits{150}{\giga\electronvolt}$. À gauche : en bleu la zone où nous pouvons calculer les énergies calibrée, en vert, là où nous ne le pouvons pas. En haut à droite : idem mais pour les points qui ont $E_{\rm ecal} = 0$. En bas à droit : idem mais pour les points dans le cône.}
+        \caption{On place une limite à $E_{\rm ecal}+E_{\rm hcal} = \SIUnits{150}{\giga\electronvolt}$. À gauche : en bleu la zone où nous pouvons calculer les énergies calibrée, en vert, là où nous ne le pouvons pas. En haut à droite : idem mais pour les points qui ont $E_{\rm ecal} = 0$. En bas à droit : idem mais pour les points dans le cône.}
         \label{limite}
     \end{center}
 \end{figure}
@@ -246,12 +246,12 @@ Comme première calibration, j'ai utilisé une méthode simple, la régression linéa
 \begin{equation}
     E_{\rm calib} = a_1 E_{\rm ecal} + a_2 E_{\rm hcal} + b
 \end{equation}
-et de trouver les coefficient $a_1, a_2,  b$ optimaux pour que le modèle coïncide au mieux aux données d'entrainement. L'ajustement est réalisé par la méthode des moindres carrés, grâce à la librairie \textit{Scikit Learn}  \cite{scikitLR}. Dans notre cas, cela revient à  trouver les coefficients qui, pour un ensemble de données d'entraînement  composé de $N$ points $(E_{\rm ecal}^n,E_{\rm hcal}^n, E_{\rm true}^n), n \in \{1,...,N\}$ minimiseront :
+et de trouver les coefficients $a_1, a_2,  b$ optimaux pour que le modèle coïncide au mieux aux données d'entrainement. L'ajustement est réalisé par la méthode des moindres carrés, grâce à la librairie \textit{Scikit Learn}  \cite{scikitLR}. Dans notre cas, cela revient à trouver les coefficients qui, pour un ensemble de données d'entraînement  composé de $N$ points $(E_{\rm ecal}^n,E_{\rm hcal}^n, E_{\rm true}^n), n \in \{1,...,N\}$ minimiseront :
 \begin{equation}
 	\epsilon = \sum_{n=1}^N  \left(E_{\rm true} - a_1 E_{\rm ecal} - a_2 E_{\rm hcal} - b \right)^2
 \end{equation}
 
-J'ai constaté qu'à  faible  $E_{\rm ecal},  E_{\rm hcal}$ il y a quelques points à  très haut $E_{\rm true}$ qui correspondent à  des défauts de la détection des énergies dans les calorimètres, je les ai donc enlevés des données d'entraînement pour la regression linéaire (\textit{cf.} Figure \ref{selectedpoints}). J'ai également enlevé les points à haut $E_{\rm ecal},  E_{\rm hcal}$ pour les raisons expliquées dans la section précédente.
+J'ai constaté qu'à faible $E_{\rm ecal}, E_{\rm hcal}$ il y a quelques points à très haut $E_{\rm true}$ qui correspondent à des défauts de la détection des énergies dans les calorimètres, je les ai donc enlevés des données d'entraînement pour la regression linéaire (\textit{cf.} Figure \ref{selectedpoints}). J'ai également enlevé les points à haut $E_{\rm ecal},  E_{\rm hcal}$ pour les raisons expliquées dans la section précédente.
 
 \begin{figure}[!h]
     \begin{center}
@@ -263,7 +263,7 @@ J'ai constaté qu'à  faible  $E_{\rm ecal},  E_{\rm hcal}$ il y a quelques points
 
 \notindent
 \begin{minipage}{0.55\linewidth}
- Nous pouvons à  présent effectuer la regression linéaire \cite{GitHubLR} sur un premier jeu de données d'entrainement en ne prenant en compte dans la régression que les points tels que $ $\rm{E_{\rm min}} < E_{\rm ecal} + E_{\rm hcal} < \rm{E_{\rm max}}$, avec $\rm{E_{\rm min}} = \SIUnits{150}{\giga\electronvolt}, \rm{E_{\rm min}} = \SIUnits{150}{\giga\electronvolt}$. Nous obtenons alors (\textit{cf.} Figure \ref{surfaceLR}, Figure \ref{courbeLR}):
+ Nous pouvons à présent effectuer la regression linéaire \cite{GitHubLR} sur un premier jeu de données d'entrainement en ne prenant en compte dans la régression que les points tels que $ $\rm{E_{\rm min}} < E_{\rm ecal} + E_{\rm hcal} < \rm{E_{\rm max}}$, avec $\rm{E_{\rm min}} = \SIUnits{150}{\giga\electronvolt}, \rm{E_{\rm min}} = \SIUnits{150}{\giga\electronvolt}$. Nous obtenons alors (\textit{cf.} Figure \ref{surfaceLR}, Figure \ref{courbeLR}):
     \[
     \begin{cases}
      E_{\rm ecal} = 0 : \\
@@ -328,9 +328,9 @@ Il faut à présent proposer une méthode qui prend en compte la non-linéarité entr
 \label{CL}
 Ici, l'idée est de découper le plan $(E_{\rm ecal},E_{\rm hcal})$ en bins et de calculer la moyenne des $E_{\rm true}$ dans chaque bin qui sera la valeur $E_{\rm calib}$. 
 
-Ainsi pour prédire une énergie de $E_{\rm calib}^i$ pour un point $(E_{\rm ecal}^i,E_{\rm hcal}^i)$, nous allons regarder dans quel bin il se trouve et retourner la valeur d'énergie calibrée correspondante. Nous pouvons voir sur la Figure \ref{legos} une illustration où la hauteur de chaque brique correspond à  l'énergie calibrée d'un bin.
+Ainsi pour prédire une énergie de $E_{\rm calib}^i$ pour un point $(E_{\rm ecal}^i,E_{\rm hcal}^i)$, nous allons regarder dans quel bin il se trouve et retourner la valeur d'énergie calibrée correspondante. Nous pouvons voir sur la Figure \ref{legos} une illustration où la hauteur de chaque brique correspond à l'énergie calibrée d'un bin.
 
-L'avantage de cette calibration est de prendre en compte ce qui se passe localement dans la distribution contrairement à  la régression linéaire, mais elle a pour désavantage d'avoir un paramètre arbitraire qui influe sur la calibration, la taille des bins :  un pas trop grand fait perdre en précision car un grand nombre de particules se retrouvent avec la même énergie de calibration, un pas trop petit laisse des trous dans la position des briques (\textit{cf.} Figure \ref{legos}) ce qui donne des bins vides et une impossibilité de prédire une énergie de calibration. De plus, un grand nombre de bins fait exploser le temps de calcul. 
+L'avantage de cette calibration est de prendre en compte ce qui se passe localement dans la distribution contrairement à la régression linéaire, mais elle a pour désavantage d'avoir un paramètre arbitraire qui influe sur la calibration, la taille des bins :  un pas trop grand fait perdre en précision car un grand nombre de particules se retrouvent avec la même énergie de calibration, un pas trop petit laisse des trous dans la position des briques (\textit{cf.} Figure \ref{legos}) ce qui donne des bins vides et une impossibilité de prédire une énergie de calibration. De plus, un grand nombre de bins fait exploser le temps de calcul. 
 
 \begin{figure}[!h]
 \begin{center}
@@ -342,7 +342,7 @@ L'avantage de cette calibration est de prendre en compte ce qui se passe localem
 
 \noindent
 \begin{minipage}{0.5\linewidth}
-La calibration \cite{GitHubCL} est construite à  l'aide d'un premier jeu de données, avec $100\times100$ bins. Premièrement, nous constatons que la surface n'est pas lisse, $E_{\rm calib}$ fluctue fortement, et si nous regardons ce qui se passe dans le plan $E_{\rm ecal} = 0$ (Figure \ref{calibCL}), nous voyons que cette méthode binée donne des énergies calibrées $E_{\rm calib}$ égales pour des ensembles de points, par paliers. Deuxièmement, nous constatons une fois de plus que la courbe de calibration ne passe pas par le coeur de la distribution à  bas $E_{\rm hcal}$ : $E_{\rm calib}$ y est sur-évaluée.
+La calibration \cite{GitHubCL} est construite à l'aide d'un premier jeu de données, avec $100\times100$ bins. Premièrement, nous constatons que la surface n'est pas lisse, $E_{\rm calib}$ fluctue fortement, et si nous regardons ce qui se passe dans le plan $E_{\rm ecal} = 0$ (Figure \ref{calibCL}), nous voyons que cette méthode binée donne des énergies calibrées $E_{\rm calib}$ égales pour des ensembles de points, par paliers. Deuxièmement, nous constatons une fois de plus que la courbe de calibration ne passe pas par le coeur de la distribution à bas $E_{\rm hcal}$ : $E_{\rm calib}$ y est sur-évaluée.
 \end{minipage}
 \begin{minipage}{0.5\linewidth}
 	\centering
@@ -360,7 +360,7 @@ La calibration \cite{GitHubCL} est construite à  l'aide d'un premier jeu de donn
 \end{figure}
 
 Il est alors possible de calculer l'énergie de calibration pour un second jeu de données. Nous remarquons que la présence de paliers dans la courbe de calibration biaise la calibration en faisant apparaître une structure (des hyperboles) dans $E_{\rm calib}/E_{\rm true}$, comme nous pouvons le voir dans la Figure \ref{ecaliboveretrueCL}. Cette structure est liée aux points possédant la même énergie de calibration, contrairement au cas de la régression linéaire (\textit{cf.} Figure  \ref{LR_ecaliboveretrue_etrue}). 
-Nous constatons également sur la Figure \ref{ecaliboveretrueCL} que $E_{\rm calib}/E_{\rm true}$ est en moyenne constamment $> 1$, ce qui montre qu'il y a une tendance à  la sur-évaluation de $E_{\rm calib}$.
+Nous constatons également sur la Figure \ref{ecaliboveretrueCL} que $E_{\rm calib}/E_{\rm true}$ est en moyenne constamment $> 1$, ce qui montre qu'il y a une tendance à la sur-évaluation de $E_{\rm calib}$.
 
 La Figure \ref{ecaliboveretrueCL_etrue} nous montre une fois de plus que $E_{\rm calib}/E_{\rm true}$  est globalement sur-évaluée, mais que cette fois-ci, nous avons pris en compte les non-linéarités. Il nous faut alors une méthode qui reprenne l'idée de moyenner des $E_{\rm true}$ en enlevant les contraintes et biais provenants des bins.
 
@@ -400,7 +400,7 @@ Nous avons pris pour facteur de pondération $g$ la distribution gaussienne $g(\v
 
 Pour trouver les plus proches voisins, j'ai utilisé la librairie \textit{Scikit Learn} \cite{scikitKNN} qui a l'avantage de proposer différents algorithmes optimisés de recherche.
 
-La Figure  \ref{neighbors} montre que l'on sélectionne les points à  moyenner dans des cercles dont le rayon varie en fonction de la densité de points. Il y a un problème à  bas $E_{\rm hcal}$ et haut $E_{\rm ecal}$ où la densité de points est faible. Dans le cas $E_{\rm ecal} = 0$, le nombre de voisin est grand pour lisser la courbe de calibration, et à faible $E_{\rm hcal}$.
+La Figure  \ref{neighbors} montre que l'on sélectionne les points à moyenner dans des cercles dont le rayon varie en fonction de la densité de points. Il y a un problème à bas $E_{\rm hcal}$ et haut $E_{\rm ecal}$ où la densité de points est faible. Dans le cas $E_{\rm ecal} = 0$, le nombre de voisin est grand pour lisser la courbe de calibration, et à faible $E_{\rm hcal}$.
 \begin{figure}[!h]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{images/pictures/testKNN/KNN_neighborhood.png}
@@ -412,7 +412,7 @@ La Figure  \ref{neighbors} montre que l'on sélectionne les points à  moyenner da
 
 La calibration est réalisée \cite{GitHubKNN} avec 2000 voisins dans le cas $E_{\rm ecal}=0$ et 250 voisins dans le cas $E_{\rm ecal}\neq0$. Pour la pondération, une largeur de 5 GeV est choisie pour la gaussienne. 
 
-La Figure \ref{surfKNN} montre que la surface est beaucoup plus lisse qu'avec la méthode précédente, mais en regardant le cas particulier de $E_{\rm ecal} = 0$ sur la Figure \ref{KNNcalib}, nous constatons une fois de plus que à  bas $E_{\rm hcal}$, la courbe de calibration ne passe pas par le coeur de la distribution. 
+La Figure \ref{surfKNN} montre que la surface est beaucoup plus lisse qu'avec la méthode précédente, mais en regardant le cas particulier de $E_{\rm ecal} = 0$ sur la Figure \ref{KNNcalib}, nous constatons une fois de plus que à bas $E_{\rm hcal}$, la courbe de calibration ne passe pas par le coeur de la distribution. 
 
 Cela est peut être dû à de rares cas dans lesquels des particules de haute énergie $(E_{\rm true})$ ne déposent pas ou peu leur énergie dans les calorimètres. Il faudra trouver un moyen de les écarter pour vérifier.
 \begin{figure}[!h]
@@ -431,7 +431,7 @@ Cela est peut être dû à de rares cas dans lesquels des particules de haute énerg
 \end{center}
 \end{figure}
 
-On teste maintenant l'efficacité de la calibration sur un second jeu de données. La Figure \ref{ecaliboveretrueKNN_ecal_hcal} montre qu'en moyenne que l'énergie calibrée est en moyenne une sur-évaluation de l'énergie vraie car en moyenne  $E_{\rm calib}/E_{\rm true} > 1$ (position de la courbe verte à gauche, prédominance du rouge à droite). 
+On teste maintenant l'efficacité de la calibration sur un second jeu de données. La Figure \ref{ecaliboveretrueKNN_ecal_hcal} montre qu'en moyenne que l'énergie calibrée est une sur-évaluation de l'énergie vraie car en moyenne  $E_{\rm calib}/E_{\rm true} > 1$ (position de la courbe verte à gauche, prédominance du rouge à droite). 
 Cependant, nous pouvons voir à droite de la Figure \ref{ecaliboveretrueKNN_ecal_hcal} que la calibration est correcte dans la majeure partie du plan $(E_{\rm ecal}, E_{\rm ecal})$, et que nous avons pris en compte les non-linéarités.
 
 La Figure \ref{ecaliboveretrueKNN} montre également cette sur évaluation pour les particules dont l'énergie vraie est inférieure à \SIUnits{100}{\giga\electronvolt}.
@@ -660,7 +660,7 @@ En bas à droite : $\sigma$ du fit gaussien correspondant.}
 Les méthodes des plus proches voisins avec un nettoyage gaussien ou avec un fit gaussien permettent de calibrer l'énergie des particules pour estimer correctement l'énergie vraie des particules en fonction de leur dépôts d'énergie dans les calorimètres ECAL et HCAL. 
 
 Comparées à la régression linéaire, les méthodes proposées sont plus avantageuses car elles prennent en compte ce qui se passe localement et ne cherchent pas à donner une fonction générale pour déterminer $E_{\rm calib}$ en fonction de $E_{\rm ecal}$ et $E_{\rm hcal}$ et on constate qu'elles fournissent des énergies de calibrations plus proches de la réalité comparées à la régression linéaire. 
-Cependant, ces méthodes restent à améliorer, notamment pour améliorer la calibration pour les particules de faible énergie. 
+Cependant, ces méthodes restent à améliorer, notamment en ce qui concerne la calibration pour les particules de faible énergie. 
 
 \'Egalement, d'autres points seront seront à développer par la suite. En effet, il faudrait être capable d'extrapoler une énergie de calibration pour des particules de plus hautes énergies. De plus il faudrait prendre en compte plus d'informations comme par exemple l'angle de la trajectoire des particules. Et enfin, il faudrait comparer avec la calibration utilisée actuellement par CMS pour le particle flow qui se base sur une fonction paramétrée \cite{PF}.
 
