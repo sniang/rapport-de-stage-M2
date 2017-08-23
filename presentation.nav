@@ -1,0 +1,49 @@
+\beamer@endinputifotherversion {3.36pt}
+\headcommand {\slideentry {0}{0}{1}{1/1}{}{0}}
+\headcommand {\beamer@framepages {1}{1}}
+\headcommand {\sectionentry {1}{Introduction}{2}{Introduction}{0}}
+\headcommand {\beamer@sectionpages {1}{1}}
+\headcommand {\beamer@subsectionpages {1}{1}}
+\headcommand {\beamer@subsectionentry {0}{1}{1}{2}{Contexte}}\headcommand {\beamer@subsectionpages {2}{1}}
+\headcommand {\slideentry {1}{1}{1}{2/2}{Contexte}{0}}
+\headcommand {\beamer@framepages {2}{2}}
+\headcommand {\beamer@subsectionentry {0}{1}{2}{3}{Production de l'\'echantillon}}\headcommand {\beamer@subsectionpages {2}{2}}
+\headcommand {\slideentry {1}{2}{1}{3/3}{Production de l'\'echantillon}{0}}
+\headcommand {\beamer@framepages {3}{3}}
+\headcommand {\sectionentry {2}{M\'ethodes de calibrations propos\'ees}{4}{M\'ethodes de calibrations propos\'ees}{0}}
+\headcommand {\beamer@sectionpages {2}{3}}
+\headcommand {\beamer@subsectionpages {3}{3}}
+\headcommand {\beamer@subsectionentry {0}{2}{1}{4}{Calibration par r\'egression lin\'eaire}}\headcommand {\beamer@subsectionpages {4}{3}}
+\headcommand {\slideentry {2}{1}{1}{4/4}{Calibration par r\'egression lin\'eaire}{0}}
+\headcommand {\beamer@framepages {4}{4}}
+\headcommand {\beamer@subsectionentry {0}{2}{2}{5}{M\'ethode non param\'etrique bin\'ee}}\headcommand {\beamer@subsectionpages {4}{4}}
+\headcommand {\slideentry {2}{2}{1}{5/5}{M\'ethode non param\'etrique bin\'ee}{0}}
+\headcommand {\beamer@framepages {5}{5}}
+\headcommand {\beamer@subsectionentry {0}{2}{3}{6}{Moyenne pond\'er\'ee}}\headcommand {\beamer@subsectionpages {5}{5}}
+\headcommand {\slideentry {2}{3}{1}{6/6}{Moyenne pond\'er\'ee}{0}}
+\headcommand {\beamer@framepages {6}{6}}
+\headcommand {\beamer@subsectionentry {0}{2}{4}{7}{Nettoyage gaussien}}\headcommand {\beamer@subsectionpages {6}{6}}
+\headcommand {\slideentry {2}{4}{1}{7/7}{Nettoyage gaussien}{0}}
+\headcommand {\beamer@framepages {7}{7}}
+\headcommand {\beamer@subsectionentry {0}{2}{5}{8}{Fit gaussien}}\headcommand {\beamer@subsectionpages {7}{7}}
+\headcommand {\slideentry {2}{5}{1}{8/8}{Fit gaussien}{0}}
+\headcommand {\beamer@framepages {8}{8}}
+\headcommand {\sectionentry {3}{Comparaison et r\'esultats}{9}{Comparaison et r\'esultats}{0}}
+\headcommand {\beamer@sectionpages {4}{8}}
+\headcommand {\beamer@subsectionpages {8}{8}}
+\headcommand {\slideentry {3}{0}{1}{9/9}{}{0}}
+\headcommand {\beamer@framepages {9}{9}}
+\headcommand {\slideentry {3}{0}{2}{10/10}{}{0}}
+\headcommand {\beamer@framepages {10}{10}}
+\headcommand {\slideentry {3}{0}{3}{11/11}{}{0}}
+\headcommand {\beamer@framepages {11}{11}}
+\headcommand {\sectionentry {4}{Conclusion}{12}{Conclusion}{0}}
+\headcommand {\beamer@sectionpages {9}{11}}
+\headcommand {\beamer@subsectionpages {9}{11}}
+\headcommand {\slideentry {4}{0}{1}{12/12}{}{0}}
+\headcommand {\beamer@framepages {12}{12}}
+\headcommand {\beamer@partpages {1}{12}}
+\headcommand {\beamer@subsectionpages {12}{12}}
+\headcommand {\beamer@sectionpages {12}{12}}
+\headcommand {\beamer@documentpages {12}}
+\headcommand {\def \inserttotalframenumber {12}}
