@@ -65,28 +65,123 @@
 \end{figure}
 \end{frame}
 
+\begin{frame}{Limitation}
+\begin{figure}[!h]
+    \begin{center}
+        \includegraphics[height=0.7\textheight]{images/pictures/explain/limit.png}
+        \caption{On place une limite à $E_{\rm ecal}+E_{\rm hcal} = \SIUnits{150}{\giga\electronvolt}$}
+        \label{limite}
+    \end{center}
+\end{figure}
+\end{frame}
+
 \section{Méthodes de calibrations proposées}
 \subsection{Calibration par régression linéaire}
 \begin{frame}{Issues and objectives 1}
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[height =4.5cm]{images/pictures/testLinearRegression/LinearRegression_ecalib_over_etrue_functionof_ecal_hcal.png}
+\caption{À gauche : en bleu $E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm hcal}$ pour les particules n'interagissant pas avec le ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante.
+À droite : chaque pixel correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches des coordonnées du pixel pour les particules qui interagissent avec le ECAL et le HCAL.}
+\label{LR_ecaliboveretrue_ecal_hcal}
+\end{center}
+\end{figure}
+\end{frame}
 
+\begin{frame}{Issues and objectives 1}
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[height =4.5cm]{images/pictures/testLinearRegression/LinearRegression_ecalib_over_etrue.png}
+\caption{À gauche : en bleu la distribution en fonction des $E_{\rm true}$ des $E_{\rm calib}/E_{\rm true}$ pour les particules n'interagissant pas avec le ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante. À droite : idem pour les particules qui interagissent avec le ECAL et le HCAL.}
+\label{LR_ecaliboveretrue_etrue}
+\end{center}
+\end{figure}
 \end{frame}
 \subsection{Méthode non paramétrique binée}
 \begin{frame}{Issues and objectives 1}
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=\textwidth]{images/pictures/testCalibrationLego/CalibrationLego_ecalib_over_etrue.png}
+\caption{À gauche : en bleu la distribution en fonction des $E_{\rm true}$ des $E_{\rm calib}/E_{\rm true}$ pour les particules n'interagissant pas avec le ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante. À droite : idem pour les particules qui interagissent avec le ECAL et le HCAL. Nous voyons clairement l'apparition d'une structure, liée au caractère biné de la méthode.}
+\label{ecaliboveretrueCL}
+\end{center}
+\end{figure}
+\end{frame}
 
+\begin{frame}{Issues and objectives 1}
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=\textwidth]{images/pictures/testCalibrationLego/CalibrationLego_ecalib_over_etrue_functionof_ecal_hcal.png}
+\caption{À gauche : en bleu $E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm hcal}$ pour les particules n'interagissant pas avec le ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante.
+À droite : chaque pixel correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches des coordonnées du pixel pour les particules qui interagissent avec le ECAL et le HCAL.}
+\label{ecaliboveretrueCL_etrue}
+\end{center}
+\end{figure}
 \end{frame}
 \subsection{Moyenne pondérée}
 \begin{frame}{Issues and objectives 1}
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=\textwidth]{images/pictures/testKNN/KNN_ecalib_over_etrue_functionof_ecal_hcal.png}
+\caption{À gauche : en bleu $E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm hcal}$ pour les particules n'interagissant pas avec le ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante.
+À droite : chaque pixel correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches des coordonnées du pixel pour les particules qui interagissent avec le ECAL et le HCAL.}
+\label{ecaliboveretrueKNN_ecal_hcal}
+\end{center}
+\end{figure}
+\end{frame}
 
+\begin{frame}{Issues and objectives 1}
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=\textwidth]{images/pictures/testKNN/KNN_ecalib_over_etrue.png}
+\caption{À gauche : en bleu la distribution en fonction des $E_{\rm true}$ des $E_{\rm calib}/E_{\rm true}$ pour les particules n'interagissant pas avec le ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante. À droite : idem pour les particules qui interagissent avec le ECAL et le HCAL.}
+\label{ecaliboveretrueKNN}
+\end{center}
+\end{figure}
 \end{frame}
 
 \subsection{Nettoyage gaussien}
 \begin{frame}{Issues and objectives 1}
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.8\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_ecalib_over_etrue_functionof_ecal_hcal.png}
+\caption{À gauche : en bleu $E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm hcal}$ pour les particules n'interagissant pas avec le ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante.
+À droite : chaque pixel correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches des coordonnées du pixel pour les particules qui interagissent avec le ECAL et le HCAL.}
+\label{ecaliboveretrueKNNGC_ecal_hcal}
+\end{center}
+\end{figure}
+\end{frame}
 
+\begin{frame}{Issues and objectives 1}
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.8\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_ecalib_over_etrue.png}
+\caption{À gauche : en bleu la distribution en fonction des $E_{\rm true}$ des $E_{\rm calib}/E_{\rm true}$ pour les particules n'interagissant pas avec le ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante. À droite : idem pour les particules qui interagissent avec le ECAL et le HCAL.}
+\label{ecaliboveretrueKNNGC}
+\end{center}
+\end{figure}
 \end{frame}
 
 \subsection{Fit gaussien}
 \begin{frame}{Issues and objectives 1}
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_ecalib_over_etrue.png}
+\caption{À gauche : en bleu la distribution en fonction des $E_{\rm true}$ des $E_{\rm calib}/E_{\rm true}$ pour les particules n'interagissant pas avec le ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante. À droite : idem pour les particules qui interagissent avec le ECAL et le HCAL.}
+\label{ecaliboveretrueKNNGF}
+\end{center}
+\end{figure}
+\end{frame}
 
+\begin{frame}{Issues and objectives 1}
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_ecalib_over_etrue_functionof_ecal_hcal.png}
+\caption{À gauche : en bleu $E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm hcal}$ pour les particules n'interagissant pas avec le ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante.
+À droite : chaque pixel correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches des coordonnées du pixel pour les particules qui interagissent avec le ECAL et le HCAL.}
+\label{ecaliboveretrueKNNGF_ecal_hcal}
+\end{center}
+\end{figure}
 \end{frame}
 \section{Comparaison et résultats}
 \begin{frame}{$E_{\rm calib}/E_{\rm true}$ moyens en fonction de $(E_{\rm ecal},E_{\rm hcal})$}
@@ -115,7 +210,7 @@
 \begin{center}
 \begin{subfigure}{0.31\textwidth}
 \includegraphics[width=\textwidth]{images/pictures/comparisons/ecaliboveretrue_KNN.png}
-\caption{Plus proches voisins}
+\caption{Plus proches voisins - Moyenne pondérée}
 \end{subfigure}
 \begin{subfigure}{0.31\textwidth}
 \includegraphics[width=\textwidth]{images/pictures/comparisons/ecaliboveretrue_KNNGaussianCleaning.png}
