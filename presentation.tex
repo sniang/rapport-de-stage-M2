@@ -15,8 +15,8 @@
 \title[Title]{Une méthode de calibration non paramétrique pour les calorimètres de CMS}
 \author[Samuel Niang]{Samuel Niang}
 \date{\today}
-  \setbeamersize{text margin left=0mm}
-  \setbeamersize{text margin right=0mm}
+  \setbeamersize{text margin left=5mm}
+  \setbeamersize{text margin right=5mm}
 
 
 % pour supprimer les symboles de navigation
@@ -41,9 +41,21 @@
         \end{center}
 \end{frame}
 
+\begin{frame}
+\tableofcontents
+\end{frame}
 
 \section{Introduction}
 \subsection{Contexte}
+\begin{frame}{CMS}
+	\begin{itemize}
+		\item Découverte du boson de Higgs en 2012
+		\item Recherche de nouvelle physique au-delà du modèle standard
+		\item utilisation de détecteurs 
+		\item Comment fonctionne CMS ?
+	\end{itemize}
+\end{frame}
+
 \begin{frame}{Détecteur}
 \begin{figure}[!h]
 \begin{center}
@@ -53,7 +65,27 @@
 \end{center}
 \end{figure}
 \end{frame}
-\subsection{Production de l'échantillon}
+
+\begin{frame}{Problématique}
+	\begin{center}
+	\textbf{Il nous faut connaitre l'énergie ($E_{\rm true}$) des particules qui entrent dans le détecteur}
+	\end{center}
+	\begin{itemize}
+		\item $E_{\rm true} \neq E_{\rm ecal} + E_{\rm hcal}$
+		\item non linéarité des calorimètres ECAL, HCAL
+		\item besoin d'une calibration $E_{\rm calib} = f(E_{\rm ecal},E_{\rm hcal})$
+	\end{itemize}
+	On souhaite une calibration :
+	\begin{itemize}
+		\item $E_{\rm calib}$ le plus proche possible de $E_{\rm true}$
+		\item Calibration non paramétrique
+	\end{itemize}
+	\begin{center}
+	\textbf{Utilisation de particules simulées}
+	\end{center}
+\end{frame}
+
+\subsection{Production de l'échantillon}
 \begin{frame}{Illustration de particules simulées}
 \begin{figure}[!h]
 \begin{center}
@@ -76,114 +108,174 @@
 \end{frame}
 
 \section{Méthodes de calibrations proposées}
-\subsection{Calibration par régression linéaire}
-\begin{frame}{Issues and objectives 1}
+
+\subsection{Calibration par régression linéaire}
+\begin{frame}{La régression linéaire}
+	\begin{minipage}{0.55\textwidth}
+	Modèle paramétrique :
+	\begin{equation}
+    		E_{\rm calib} = a_1 E_{\rm ecal} + a_2 E_{\rm hcal} + b
+	\end{equation}
+	Minimisation de :
+	\begin{equation}
+		\epsilon = \sum_{n=1}^N  \left(E_{\rm true} - a_1 E_{\rm ecal} - a_2 E_{\rm hcal} - b \right)^2
+	\end{equation}
+	\end{minipage}
+	\begin{minipage}{0.44\textwidth}
+	\includegraphics[width = \textwidth]{images/pictures/testLinearRegression/LinearRegression_plot3D_surf.eps}
+	\end{minipage}
+\end{frame}
+
+\begin{frame}{La régression linéaire}
+	\begin{figure}[!h]
+		\begin{center}
+			\includegraphics[width = \textwidth]{images/pictures/testLinearRegression/LinearRegression_calibration.png}
+			\caption{Courbe de calibration dans le plan $E_{\rm ecal} = 0$.}
+		\end{center}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{$E_{\rm calib}/E_{\rm true}$ en fonction de $(E_{\rm ecal},E_{\rm hcal})$}
 \begin{figure}[!h]
 \begin{center}
-\includegraphics[height =4.5cm]{images/pictures/testLinearRegression/LinearRegression_ecalib_over_etrue_functionof_ecal_hcal.png}
-\caption{À gauche : en bleu $E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm hcal}$ pour les particules n'interagissant pas avec le ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante.
-À droite : chaque pixel correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches des coordonnées du pixel pour les particules qui interagissent avec le ECAL et le HCAL.}
+\includegraphics[width = \textwidth]{images/pictures/testLinearRegression/LinearRegression_ecalib_over_etrue_functionof_ecal_hcal.png}
+\caption{$E_{\rm calib}/E_{\rm true}$ en fonction de $(E_{\rm ecal},E_{\rm hcal})$}
 \label{LR_ecaliboveretrue_ecal_hcal}
 \end{center}
 \end{figure}
 \end{frame}
 
-\begin{frame}{Issues and objectives 1}
+\begin{frame}{$E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm true}$}
 \begin{figure}[!h]
 \begin{center}
-\includegraphics[height =4.5cm]{images/pictures/testLinearRegression/LinearRegression_ecalib_over_etrue.png}
-\caption{À gauche : en bleu la distribution en fonction des $E_{\rm true}$ des $E_{\rm calib}/E_{\rm true}$ pour les particules n'interagissant pas avec le ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante. À droite : idem pour les particules qui interagissent avec le ECAL et le HCAL.}
+\includegraphics[width = \textwidth]{images/pictures/testLinearRegression/LinearRegression_ecalib_over_etrue.png}
+\caption{Distribution en fonction des $E_{\rm true}$ des $E_{\rm calib}/E_{\rm true}$}
 \label{LR_ecaliboveretrue_etrue}
 \end{center}
 \end{figure}
 \end{frame}
-\subsection{Méthode non paramétrique binée}
-\begin{frame}{Issues and objectives 1}
+
+\subsection{Méthode non paramétrique binée}
+\begin{frame}{La régression linéaire}
+	\begin{figure}[!h]
+		\begin{center}
+			\includegraphics[width = \textwidth]{images/pictures/testCalibrationLego/CalibrationLego_calibration.png}
+			\caption{Courbe de calibration dans le plan $E_{\rm ecal} = 0$.}
+		\end{center}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{$E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm true}$}
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[width=\textwidth]{images/pictures/testCalibrationLego/CalibrationLego_ecalib_over_etrue.png}
-\caption{À gauche : en bleu la distribution en fonction des $E_{\rm true}$ des $E_{\rm calib}/E_{\rm true}$ pour les particules n'interagissant pas avec le ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante. À droite : idem pour les particules qui interagissent avec le ECAL et le HCAL. Nous voyons clairement l'apparition d'une structure, liée au caractère biné de la méthode.}
+\caption{Distribution en fonction des $E_{\rm true}$ des $E_{\rm calib}/E_{\rm true}$ Nous voyons clairement l'apparition d'une structure, liée au caractère biné de la méthode.}
 \label{ecaliboveretrueCL}
 \end{center}
 \end{figure}
 \end{frame}
 
-\begin{frame}{Issues and objectives 1}
+\begin{frame}{$E_{\rm calib}/E_{\rm true}$ en fonction de $(E_{\rm ecal},E_{\rm hcal})$}
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[width=\textwidth]{images/pictures/testCalibrationLego/CalibrationLego_ecalib_over_etrue_functionof_ecal_hcal.png}
-\caption{À gauche : en bleu $E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm hcal}$ pour les particules n'interagissant pas avec le ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante.
-À droite : chaque pixel correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches des coordonnées du pixel pour les particules qui interagissent avec le ECAL et le HCAL.}
+\caption{$E_{\rm calib}/E_{\rm true}$ en fonction de $(E_{\rm ecal},E_{\rm hcal})$}
 \label{ecaliboveretrueCL_etrue}
 \end{center}
 \end{figure}
 \end{frame}
-\subsection{Moyenne pondérée}
-\begin{frame}{Issues and objectives 1}
+
+\subsection{Moyenne pondérée}
+\begin{frame}{La régression linéaire}
+	\begin{figure}[!h]
+		\begin{center}
+			\includegraphics[width = \textwidth]{images/pictures/testKNN/KNN_calibration.png}
+			\caption{Courbe de calibration dans le plan $E_{\rm ecal} = 0$.}
+		\end{center}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{$E_{\rm calib}/E_{\rm true}$ en fonction de $(E_{\rm ecal},E_{\rm hcal})$}
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[width=\textwidth]{images/pictures/testKNN/KNN_ecalib_over_etrue_functionof_ecal_hcal.png}
-\caption{À gauche : en bleu $E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm hcal}$ pour les particules n'interagissant pas avec le ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante.
-À droite : chaque pixel correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches des coordonnées du pixel pour les particules qui interagissent avec le ECAL et le HCAL.}
+\caption{$E_{\rm calib}/E_{\rm true}$ en fonction de $(E_{\rm ecal},E_{\rm hcal})$}
 \label{ecaliboveretrueKNN_ecal_hcal}
 \end{center}
 \end{figure}
 \end{frame}
 
-\begin{frame}{Issues and objectives 1}
+\begin{frame}{$E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm true}$}
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[width=\textwidth]{images/pictures/testKNN/KNN_ecalib_over_etrue.png}
-\caption{À gauche : en bleu la distribution en fonction des $E_{\rm true}$ des $E_{\rm calib}/E_{\rm true}$ pour les particules n'interagissant pas avec le ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante. À droite : idem pour les particules qui interagissent avec le ECAL et le HCAL.}
+\caption{Distribution en fonction des $E_{\rm true}$ des $E_{\rm calib}/E_{\rm true}$}
 \label{ecaliboveretrueKNN}
 \end{center}
 \end{figure}
 \end{frame}
 
 \subsection{Nettoyage gaussien}
-\begin{frame}{Issues and objectives 1}
+\begin{frame}{La régression linéaire}
+	\begin{figure}[!h]
+		\begin{center}
+			\includegraphics[width = \textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_calibration.png}
+			\caption{Courbe de calibration dans le plan $E_{\rm ecal} = 0$.}
+		\end{center}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{$E_{\rm calib}/E_{\rm true}$ en fonction de $(E_{\rm ecal},E_{\rm hcal})$}
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[width=0.8\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_ecalib_over_etrue_functionof_ecal_hcal.png}
-\caption{À gauche : en bleu $E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm hcal}$ pour les particules n'interagissant pas avec le ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante.
-À droite : chaque pixel correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches des coordonnées du pixel pour les particules qui interagissent avec le ECAL et le HCAL.}
+\caption{$E_{\rm calib}/E_{\rm true}$ en fonction de $(E_{\rm ecal},E_{\rm hcal})$}
 \label{ecaliboveretrueKNNGC_ecal_hcal}
 \end{center}
 \end{figure}
 \end{frame}
 
-\begin{frame}{Issues and objectives 1}
+\begin{frame}{$E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm true}$}
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[width=0.8\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_ecalib_over_etrue.png}
-\caption{À gauche : en bleu la distribution en fonction des $E_{\rm true}$ des $E_{\rm calib}/E_{\rm true}$ pour les particules n'interagissant pas avec le ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante. À droite : idem pour les particules qui interagissent avec le ECAL et le HCAL.}
+\caption{Distribution en fonction des $E_{\rm true}$ des $E_{\rm calib}/E_{\rm true}$}
 \label{ecaliboveretrueKNNGC}
 \end{center}
 \end{figure}
 \end{frame}
 
 \subsection{Fit gaussien}
-\begin{frame}{Issues and objectives 1}
+\begin{frame}{La régression linéaire}
+	\begin{figure}[!h]
+		\begin{center}
+			\includegraphics[width = \textwidth]{images/pictures/testKNNGF/KNNGaussianFit_calibration.png}
+			\caption{Courbe de calibration dans le plan $E_{\rm ecal} = 0$.}
+		\end{center}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{$E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm true}$}
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[width=\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_ecalib_over_etrue.png}
-\caption{À gauche : en bleu la distribution en fonction des $E_{\rm true}$ des $E_{\rm calib}/E_{\rm true}$ pour les particules n'interagissant pas avec le ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante. À droite : idem pour les particules qui interagissent avec le ECAL et le HCAL.}
+\caption{Distribution en fonction des $E_{\rm true}$ des $E_{\rm calib}/E_{\rm true}$}
 \label{ecaliboveretrueKNNGF}
 \end{center}
 \end{figure}
 \end{frame}
 
-\begin{frame}{Issues and objectives 1}
+\begin{frame}{$E_{\rm calib}/E_{\rm true}$ en fonction de $(E_{\rm ecal},E_{\rm hcal})$}
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[width=\textwidth]{images/pictures/testKNNGF/KNNGaussianFit_ecalib_over_etrue_functionof_ecal_hcal.png}
-\caption{À gauche : en bleu $E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm hcal}$ pour les particules n'interagissant pas avec le ECAL, chaque point de la courbe verte correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches de l'abscisse correspondante.
-À droite : chaque pixel correspond à la moyenne d'un fit gaussien de points $E_{\rm calib}/E_{\rm true}$ proches des coordonnées du pixel pour les particules qui interagissent avec le ECAL et le HCAL.}
+\caption{$E_{\rm calib}/E_{\rm true}$ en fonction de $(E_{\rm ecal},E_{\rm hcal})$}
 \label{ecaliboveretrueKNNGF_ecal_hcal}
 \end{center}
 \end{figure}
 \end{frame}
-\section{Comparaison et résultats}
+
+\section{Comparaisons et résultats}
 \begin{frame}{$E_{\rm calib}/E_{\rm true}$ moyens en fonction de $(E_{\rm ecal},E_{\rm hcal})$}
 \begin{figure}
 \begin{center}
@@ -236,7 +328,8 @@
 \end{frame}
 
 
-\section{Conclusion}\begin{frame}{Conclusion}
+\section{Conclusion}
+\begin{frame}{Conclusion}
 
 \end{frame}
 
