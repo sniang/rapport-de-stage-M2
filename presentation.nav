@@ -13,67 +13,92 @@
 \headcommand {\beamer@framepages {4}{4}}
 \headcommand {\slideentry {1}{1}{3}{5/5}{Contexte}{0}}
 \headcommand {\beamer@framepages {5}{5}}
-\headcommand {\beamer@subsectionentry {0}{1}{2}{6}{Production de l'\'echantillon}}\headcommand {\beamer@subsectionpages {3}{5}}
-\headcommand {\slideentry {1}{2}{1}{6/6}{Production de l'\'echantillon}{0}}
+\headcommand {\beamer@subsectionentry {0}{1}{2}{6}{Probl\'ematique}}\headcommand {\beamer@subsectionpages {3}{5}}
+\headcommand {\slideentry {1}{2}{1}{6/6}{Probl\'ematique}{0}}
 \headcommand {\beamer@framepages {6}{6}}
-\headcommand {\slideentry {1}{2}{2}{7/7}{Production de l'\'echantillon}{0}}
+\headcommand {\slideentry {1}{2}{2}{7/7}{Probl\'ematique}{0}}
 \headcommand {\beamer@framepages {7}{7}}
-\headcommand {\sectionentry {2}{M\'ethodes de calibrations propos\'ees}{8}{M\'ethodes de calibrations propos\'ees}{0}}
-\headcommand {\beamer@sectionpages {3}{7}}
-\headcommand {\beamer@subsectionpages {6}{7}}
-\headcommand {\beamer@subsectionentry {0}{2}{1}{8}{Calibration par r\'egression lin\'eaire}}\headcommand {\beamer@subsectionpages {8}{7}}
-\headcommand {\slideentry {2}{1}{1}{8/8}{Calibration par r\'egression lin\'eaire}{0}}
+\headcommand {\beamer@subsectionentry {0}{1}{3}{8}{Production de l'\'echantillon}}\headcommand {\beamer@subsectionpages {6}{7}}
+\headcommand {\slideentry {1}{3}{1}{8/8}{Production de l'\'echantillon}{0}}
 \headcommand {\beamer@framepages {8}{8}}
-\headcommand {\slideentry {2}{1}{2}{9/9}{Calibration par r\'egression lin\'eaire}{0}}
+\headcommand {\slideentry {1}{3}{2}{9/9}{Production de l'\'echantillon}{0}}
 \headcommand {\beamer@framepages {9}{9}}
-\headcommand {\slideentry {2}{1}{3}{10/10}{Calibration par r\'egression lin\'eaire}{0}}
+\headcommand {\slideentry {1}{3}{3}{10/10}{Production de l'\'echantillon}{0}}
 \headcommand {\beamer@framepages {10}{10}}
-\headcommand {\slideentry {2}{1}{4}{11/11}{Calibration par r\'egression lin\'eaire}{0}}
+\headcommand {\sectionentry {2}{M\'ethodes de calibrations propos\'ees}{11}{M\'ethodes de calibrations propos\'ees}{0}}
+\headcommand {\beamer@sectionpages {3}{10}}
+\headcommand {\beamer@subsectionpages {8}{10}}
+\headcommand {\beamer@subsectionentry {0}{2}{1}{11}{Calibration par r\'egression lin\'eaire}}\headcommand {\beamer@subsectionpages {11}{10}}
+\headcommand {\slideentry {2}{1}{1}{11/11}{Calibration par r\'egression lin\'eaire}{0}}
 \headcommand {\beamer@framepages {11}{11}}
-\headcommand {\beamer@subsectionentry {0}{2}{2}{12}{M\'ethode non param\'etrique bin\'ee}}\headcommand {\beamer@subsectionpages {8}{11}}
-\headcommand {\slideentry {2}{2}{1}{12/12}{M\'ethode non param\'etrique bin\'ee}{0}}
+\headcommand {\slideentry {2}{1}{2}{12/12}{Calibration par r\'egression lin\'eaire}{0}}
 \headcommand {\beamer@framepages {12}{12}}
-\headcommand {\slideentry {2}{2}{2}{13/13}{M\'ethode non param\'etrique bin\'ee}{0}}
+\headcommand {\slideentry {2}{1}{3}{13/13}{Calibration par r\'egression lin\'eaire}{0}}
 \headcommand {\beamer@framepages {13}{13}}
-\headcommand {\slideentry {2}{2}{3}{14/14}{M\'ethode non param\'etrique bin\'ee}{0}}
+\headcommand {\slideentry {2}{1}{4}{14/14}{Calibration par r\'egression lin\'eaire}{0}}
 \headcommand {\beamer@framepages {14}{14}}
-\headcommand {\beamer@subsectionentry {0}{2}{3}{15}{Moyenne pond\'er\'ee}}\headcommand {\beamer@subsectionpages {12}{14}}
-\headcommand {\slideentry {2}{3}{1}{15/15}{Moyenne pond\'er\'ee}{0}}
+\headcommand {\slideentry {2}{1}{5}{15/15}{Calibration par r\'egression lin\'eaire}{0}}
 \headcommand {\beamer@framepages {15}{15}}
-\headcommand {\slideentry {2}{3}{2}{16/16}{Moyenne pond\'er\'ee}{0}}
+\headcommand {\beamer@subsectionentry {0}{2}{2}{16}{M\'ethode non param\'etrique bin\'ee}}\headcommand {\beamer@subsectionpages {11}{15}}
+\headcommand {\slideentry {2}{2}{1}{16/16}{M\'ethode non param\'etrique bin\'ee}{0}}
 \headcommand {\beamer@framepages {16}{16}}
-\headcommand {\slideentry {2}{3}{3}{17/17}{Moyenne pond\'er\'ee}{0}}
+\headcommand {\slideentry {2}{2}{2}{17/17}{M\'ethode non param\'etrique bin\'ee}{0}}
 \headcommand {\beamer@framepages {17}{17}}
-\headcommand {\beamer@subsectionentry {0}{2}{4}{18}{Nettoyage gaussien}}\headcommand {\beamer@subsectionpages {15}{17}}
-\headcommand {\slideentry {2}{4}{1}{18/18}{Nettoyage gaussien}{0}}
+\headcommand {\slideentry {2}{2}{3}{18/18}{M\'ethode non param\'etrique bin\'ee}{0}}
 \headcommand {\beamer@framepages {18}{18}}
-\headcommand {\slideentry {2}{4}{2}{19/19}{Nettoyage gaussien}{0}}
+\headcommand {\slideentry {2}{2}{4}{19/19}{M\'ethode non param\'etrique bin\'ee}{0}}
 \headcommand {\beamer@framepages {19}{19}}
-\headcommand {\slideentry {2}{4}{3}{20/20}{Nettoyage gaussien}{0}}
+\headcommand {\slideentry {2}{2}{5}{20/20}{M\'ethode non param\'etrique bin\'ee}{0}}
 \headcommand {\beamer@framepages {20}{20}}
-\headcommand {\beamer@subsectionentry {0}{2}{5}{21}{Fit gaussien}}\headcommand {\beamer@subsectionpages {18}{20}}
-\headcommand {\slideentry {2}{5}{1}{21/21}{Fit gaussien}{0}}
+\headcommand {\beamer@subsectionentry {0}{2}{3}{21}{M\'ethode des plus proches voisins : Moyenne pond\'er\'ee}}\headcommand {\beamer@subsectionpages {16}{20}}
+\headcommand {\slideentry {2}{3}{1}{21/21}{M\'ethode des plus proches voisins : Moyenne pond\'er\'ee}{0}}
 \headcommand {\beamer@framepages {21}{21}}
-\headcommand {\slideentry {2}{5}{2}{22/22}{Fit gaussien}{0}}
+\headcommand {\slideentry {2}{3}{2}{22/22}{M\'ethode des plus proches voisins : Moyenne pond\'er\'ee}{0}}
 \headcommand {\beamer@framepages {22}{22}}
-\headcommand {\slideentry {2}{5}{3}{23/23}{Fit gaussien}{0}}
+\headcommand {\slideentry {2}{3}{3}{23/23}{M\'ethode des plus proches voisins : Moyenne pond\'er\'ee}{0}}
 \headcommand {\beamer@framepages {23}{23}}
-\headcommand {\sectionentry {3}{Comparaisons et r\'esultats}{24}{Comparaisons et r\'esultats}{0}}
-\headcommand {\beamer@sectionpages {8}{23}}
-\headcommand {\beamer@subsectionpages {21}{23}}
-\headcommand {\slideentry {3}{0}{1}{24/24}{}{0}}
+\headcommand {\slideentry {2}{3}{4}{24/24}{M\'ethode des plus proches voisins : Moyenne pond\'er\'ee}{0}}
 \headcommand {\beamer@framepages {24}{24}}
-\headcommand {\slideentry {3}{0}{2}{25/25}{}{0}}
+\headcommand {\slideentry {2}{3}{5}{25/25}{M\'ethode des plus proches voisins : Moyenne pond\'er\'ee}{0}}
 \headcommand {\beamer@framepages {25}{25}}
-\headcommand {\slideentry {3}{0}{3}{26/26}{}{0}}
+\headcommand {\beamer@subsectionentry {0}{2}{4}{26}{M\'ethode des plus proches voisins : Nettoyage gaussien}}\headcommand {\beamer@subsectionpages {21}{25}}
+\headcommand {\slideentry {2}{4}{1}{26/26}{M\'ethode des plus proches voisins : Nettoyage gaussien}{0}}
 \headcommand {\beamer@framepages {26}{26}}
-\headcommand {\sectionentry {4}{Conclusion}{27}{Conclusion}{0}}
-\headcommand {\beamer@sectionpages {24}{26}}
-\headcommand {\beamer@subsectionpages {24}{26}}
-\headcommand {\slideentry {4}{0}{1}{27/27}{}{0}}
+\headcommand {\slideentry {2}{4}{2}{27/27}{M\'ethode des plus proches voisins : Nettoyage gaussien}{0}}
 \headcommand {\beamer@framepages {27}{27}}
-\headcommand {\beamer@partpages {1}{27}}
-\headcommand {\beamer@subsectionpages {27}{27}}
-\headcommand {\beamer@sectionpages {27}{27}}
-\headcommand {\beamer@documentpages {27}}
-\headcommand {\def \inserttotalframenumber {27}}
+\headcommand {\slideentry {2}{4}{3}{28/28}{M\'ethode des plus proches voisins : Nettoyage gaussien}{0}}
+\headcommand {\beamer@framepages {28}{28}}
+\headcommand {\slideentry {2}{4}{4}{29/29}{M\'ethode des plus proches voisins : Nettoyage gaussien}{0}}
+\headcommand {\beamer@framepages {29}{29}}
+\headcommand {\slideentry {2}{4}{5}{30/30}{M\'ethode des plus proches voisins : Nettoyage gaussien}{0}}
+\headcommand {\beamer@framepages {30}{30}}
+\headcommand {\beamer@subsectionentry {0}{2}{5}{31}{M\'ethode des plus proches voisins : Fit gaussien}}\headcommand {\beamer@subsectionpages {26}{30}}
+\headcommand {\slideentry {2}{5}{1}{31/31}{M\'ethode des plus proches voisins : Fit gaussien}{0}}
+\headcommand {\beamer@framepages {31}{31}}
+\headcommand {\slideentry {2}{5}{2}{32/32}{M\'ethode des plus proches voisins : Fit gaussien}{0}}
+\headcommand {\beamer@framepages {32}{32}}
+\headcommand {\slideentry {2}{5}{3}{33/33}{M\'ethode des plus proches voisins : Fit gaussien}{0}}
+\headcommand {\beamer@framepages {33}{33}}
+\headcommand {\slideentry {2}{5}{4}{34/34}{M\'ethode des plus proches voisins : Fit gaussien}{0}}
+\headcommand {\beamer@framepages {34}{34}}
+\headcommand {\slideentry {2}{5}{5}{35/35}{M\'ethode des plus proches voisins : Fit gaussien}{0}}
+\headcommand {\beamer@framepages {35}{35}}
+\headcommand {\sectionentry {3}{Comparaisons et r\'esultats}{36}{Comparaisons et r\'esultats}{0}}
+\headcommand {\beamer@sectionpages {11}{35}}
+\headcommand {\beamer@subsectionpages {31}{35}}
+\headcommand {\slideentry {3}{0}{1}{36/36}{}{0}}
+\headcommand {\beamer@framepages {36}{36}}
+\headcommand {\slideentry {3}{0}{2}{37/37}{}{0}}
+\headcommand {\beamer@framepages {37}{37}}
+\headcommand {\slideentry {3}{0}{3}{38/38}{}{0}}
+\headcommand {\beamer@framepages {38}{38}}
+\headcommand {\sectionentry {4}{Conclusion}{39}{Conclusion}{0}}
+\headcommand {\beamer@sectionpages {36}{38}}
+\headcommand {\beamer@subsectionpages {36}{38}}
+\headcommand {\slideentry {4}{0}{1}{39/39}{}{0}}
+\headcommand {\beamer@framepages {39}{39}}
+\headcommand {\beamer@partpages {1}{39}}
+\headcommand {\beamer@subsectionpages {39}{39}}
+\headcommand {\beamer@sectionpages {39}{39}}
+\headcommand {\beamer@documentpages {39}}
+\headcommand {\def \inserttotalframenumber {39}}
