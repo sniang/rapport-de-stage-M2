@@ -219,21 +219,21 @@
 
 \subsection{Méthode des plus proches voisins : Moyenne pondérée}
 \begin{frame}{Principe de l'algorithme}
-	\begin{minipage}{0.5\textwidth}
-Nous utilisons encore des données simulées pour effectuer la calibration : chaque particule simulée $i$ est vue comme un point d'un espace tridimensionnel possédant des coordonnées $(E_{\rm ecal}^i, E_{\rm hcal}^i,E_{\rm true}^i)$.
-Pour trouver l'énergie calibrée d'un point de coordonnées $(E_{\rm ecal}^0, E_{\rm hcal}^0)$ :
-\begin{itemize}
-	\item on recherche ses $k$ plus proches voisins dans le plan $(E_{\rm ecal}, E_{\rm hcal})$ que nous notons $(E_{\rm ecal}^i, E_{\rm hcal}^i), i \in [|1,...,k|]$
-	\item on effectue une moyenne pondérée des $E_{\rm true}^i$ de ces plus proches voisins ce qui nous donne $E_{\rm calib}^0$, l'énergie calibrée.
-\end{itemize}
-
-La moyenne pondérée va donc s'exprimer ainsi :
-\begin{equation}
-	 E_{\rm calib}^0 = \frac{\sum_{i=1}^k g(\vec{x}^i,\sigma) \times E_{\rm true}^i}{\sum_{i=1}^k g(\vec{x}^i,\sigma)}, \vec{x}^i = (E_{\rm ecal}^i - E_{\rm ecal}^0, E_{\rm hcal}^i-E_{\rm hcal}^0)
-\end{equation}
+	\begin{minipage}{0.55\textwidth}
+		\'Energie calibrée d'un point de coordonnées $(E_{\rm ecal}^0, E_{\rm hcal}^0)$ :
+		\begin{itemize}
+			\item on recherche ses $k$ plus proches voisins dans le plan $(E_{\rm ecal}, E_{\rm hcal}) \rightarrow (E_{\rm ecal}^i, E_{\rm hcal}^i), i \in [|1,...,k|]$
+			\item moyenne pondérée des $E_{\rm true}^i$ de ces plus proches voisins $\right E_{\rm calib}^0$, l'énergie calibrée.
+		\end{itemize}
+		\begin{equation}
+			\begin{cases}
+			 	E_{\rm calib}^0 & = \frac{\sum_{i=1}^k g(\vec{x}^i,\sigma) \times E_{\rm true}^i}{\sum_{i=1}^k g(\vec{x}^i,\sigma)}\\
+			 	\vec{x}^i & = (E_{\rm ecal}^i - E_{\rm ecal}^0, E_{\rm hcal}^i-E_{\rm hcal}^0)
+			 \end{cases}
+		\end{equation}
 	\end{minipage}
 	\hfill
-	\begin{minipage}{0.45\textwidth}
+	\begin{minipage}{0.4\textwidth}
 		\begin{figure}[!h]
 			\begin{center}
 				\includegraphics[width=\textwidth]{images/pictures/testKNN/KNN_plot3D_surf.eps}
@@ -275,20 +275,21 @@ La moyenne pondérée va donc s'exprimer ainsi :
 
 \subsection{Méthode des plus proches voisins : Nettoyage gaussien}
 \begin{frame}{Principe de l'algorithme}
-	\begin{minipage}{0.5\textwidth}
-\begin{itemize}
-	\item on considère des points $(E_{\rm ecal}^{0,j}, E_{\rm hcal}^{0,j})$ où nous allons évaluer l'énergie calibrée.
-	\item pour chaque $(E_{\rm ecal}^{0,j}, E_{\rm hcal}^{0,j})$ :
-	\begin{itemize}
-		\item on recherche ses $k$ plus proches voisins dans le plan $(E_{\rm ecal}, E_{\rm hcal})$ que nous notons $(E_{\rm ecal}^l, E_{\rm hcal}^l), l \in [|1,...,k|]$
-		\item on fit les $E_{\rm ecal}^l$ par une gaussienne ce qui donne $\sigma$ et $\mu$, l'écart type et la moyenne de la gaussienne
-		\item on ne conserve que les voisins dont : $\mu -c\sigma \leq E_{\rm true}^l \leq \mu + c\sigma$
-		\item on effectue une moyenne pondérée une moyenne pondérée de l'énergie vraie de ces plus proches voisins, ce qui nous donne $E_{\rm calib}^{0,j}$, l'énergie calibrée 
-	\end{itemize}
-\end{itemize}
+	\begin{minipage}{0.6\textwidth}
+		\begin{itemize}
+			\item Points d'évaluation $(E_{\rm ecal}^{0,i}, E_{\rm hcal}^{0,i})$
+			\item Pour chaque $(E_{\rm ecal}^{0,i}, E_{\rm hcal}^{0,i})$ :
+			\begin{itemize}
+				\item on recherche ses $k$ plus proches voisins dans le plan $(E_{\rm ecal}, E_{\rm hcal}) \rightarrow (E_{\rm ecal}^j, E_{\rm hcal}^j), j \in [|1,...,k|]$
+				\item fit $E_{\rm ecal}^j$ par une $\rightarrow \sigma, \mu$
+				\item on ne conserve que les voisins dont : $\mu -c\sigma \leq E_{\rm true}^l \leq \mu + c\sigma$
+				\item moyenne pondérée une moyenne pondérée de l'énergie vraie de ces plus proches voisins $\rightarrow E_{\rm calib}^{0,i}$ 
+			\end{itemize}
+			\item interpolation pour les points différents des points d'évaluation
+		\end{itemize}
 	\end{minipage}
 	\hfill
-	\begin{minipage}{0.45\textwidth}
+	\begin{minipage}{0.39\textwidth}
 		\begin{figure}[!h]
 			\begin{center}
 				\includegraphics[width=\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_plot3D_surf.eps}
@@ -311,7 +312,7 @@ La moyenne pondérée va donc s'exprimer ainsi :
 \begin{frame}{$E_{\rm calib}/E_{\rm true}$ en fonction de $(E_{\rm ecal},E_{\rm hcal})$}
 \begin{figure}[!h]
 \begin{center}
-\includegraphics[width=0.8\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_ecalib_over_etrue_functionof_ecal_hcal.png}
+\includegraphics[width=\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_ecalib_over_etrue_functionof_ecal_hcal.png}
 \caption{$E_{\rm calib}/E_{\rm true}$ en fonction de $(E_{\rm ecal},E_{\rm hcal})$.}
 \label{ecaliboveretrueKNNGC_ecal_hcal}
 \end{center}
@@ -321,7 +322,7 @@ La moyenne pondérée va donc s'exprimer ainsi :
 \begin{frame}{$E_{\rm calib}/E_{\rm true}$ en fonction de $E_{\rm true}$}
 \begin{figure}[!h]
 \begin{center}
-\includegraphics[width=0.8\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_ecalib_over_etrue.png}
+\includegraphics[width=\textwidth]{images/pictures/testKNNGC/KNNGaussianCleaning_ecalib_over_etrue.png}
 \caption{Distribution en fonction des $E_{\rm true}$ des $E_{\rm calib}/E_{\rm true}$.}
 \label{ecaliboveretrueKNNGC}
 \end{center}
@@ -331,15 +332,16 @@ La moyenne pondérée va donc s'exprimer ainsi :
 \subsection{Méthode des plus proches voisins : Fit gaussien}
 \begin{frame}{Principe de l'algorithme}
 	\begin{minipage}{0.5\textwidth}
-\begin{itemize}
-	\item on considère des points $(E_{\rm ecal}^{0,j}, E_{\rm hcal}^{0,j})$ où nous allons évaluer l'énergie calibrée.
-	\item pour chaque $(E_{\rm ecal}^{0,j}, E_{\rm hcal}^{0,j})$ :
-	\begin{itemize}
-		\item on recherche ses $k$ plus proches voisins dans le plan $(E_{\rm ecal}, E_{\rm hcal})$ notés $(E_{\rm ecal}^i, E_{\rm hcal}^i), i \in [|1,...,k|]$
-		on fit les $E_{\rm ecal}^i$ par une gaussienne ce qui donne $\sigma$ et $\mu$, l'écart type et la moyenne de la gaussienne
-		\item On considère $E_{\rm calib}^{0,j} = \mu$
-	\end{itemize}
-\end{itemize}
+			\begin{itemize}
+			\item Points d'évaluation $(E_{\rm ecal}^{0,i}, E_{\rm hcal}^{0,i})$
+			\item Pour chaque $(E_{\rm ecal}^{0,i}, E_{\rm hcal}^{0,i})$ :
+			\begin{itemize}
+				\item on recherche ses $k$ plus proches voisins dans le plan $(E_{\rm ecal}, E_{\rm hcal}) \rightarrow (E_{\rm ecal}^j, E_{\rm hcal}^j), j \in [|1,...,k|]$
+				\item fit $E_{\rm ecal}^j$ par une $\rightarrow \sigma, \mu$
+				\item on considère $E_{\rm calib}^{0,j} = \mu$
+			\end{itemize}
+			\item interpolation pour les points différents des points d'évaluation
+		\end{itemize}
 	\end{minipage}
 	\hfill
 	\begin{minipage}{0.45\textwidth}
@@ -437,18 +439,29 @@ La moyenne pondérée va donc s'exprimer ainsi :
 
 \section{Conclusion}
 \begin{frame}{Conclusion}
-Les méthodes des plus proches voisins avec un nettoyage gaussien ou avec un fit gaussien permettent de calibrer l'énergie des particules pour estimer correctement l'énergie vraie des particules en fonction de leur dépôts d'énergie dans les calorimètres ECAL et HCAL. 
+	\begin{itemize}
+		\item Méthodes des plus proches voisins avec un nettoyage gaussien ou avec un fit gaussien fonctionnent
+		\item Estimation correcte l'énergie vraie des particules en fonction de leur dépôts d'énergie dans les calorimètres ECAL et HCAL
+		\item Prise en compte ce qui se passe localement
+		\item Meilleures qu'une régression linéaire
+	\end{itemize}
+	
+	Reste à faire :
+	\begin{itemize}
+		\item Amélioration pour la calibration pour les particules de faible énergie
+		\item Extrapolation une énergie de calibration pour des particules de plus hautes énergies
+		\item Prise en compte plus d'informations comme par exemple l'angle de la trajectoire des particules
+		\item Comparaison avec la calibration utilisée actuellement par CMS (une fonction paramétrée)
+	\end{itemize}
+\end{frame}
 
-Comparées à la régression linéaire, les méthodes proposées sont plus avantageuses car elles prennent en compte ce qui se passe localement et ne cherchent pas à donner une fonction générale pour déterminer $E_{\rm calib}$ en fonction de $E_{\rm ecal}$ et $E_{\rm hcal}$ et on constate qu'elles fournissent des énergies de calibrations plus proches de la réalité comparées à la régression linéaire. 
-Cependant, ces méthodes restent à améliorer, notamment en ce qui concerne la calibration pour les particules de faible énergie. 
-
-\'Egalement, d'autres points seront seront à développer par la suite. En effet, il faudrait être capable d'extrapoler une énergie de calibration pour des particules de plus hautes énergies. De plus il faudrait prendre en compte plus d'informations comme par exemple l'angle de la trajectoire des particules. Et enfin, il faudrait comparer avec la calibration utilisée actuellement par CMS pour le particle flow qui se base sur une fonction paramétrée.
-
-\small
-\textit{
-Tous les codes développés durant le stage sont consultables sur la plateforme Github :\\
-\href{https://sniang.github.io/particle\_flow\_calibration/}{https://sniang.github.io/particle\_flow\_calibration}.
-}
+\begin{frame}{"Fork me on GitHub"}
+	\begin{center}
+	\tiny
+	\textit{Tous les codes développés durant le stage sont consultables sur la plateforme Github : \href{https://sniang.github.io/particle\_flow\_calibration/}{https://sniang.github.io/particle\_flow\_calibration}.}\\
+	\includegraphics[width=0.6\textwidth]{images/github.png}\\
+	\LARGE Merci de votre attention, avez vous des questions ?
+	\end{center}
 \end{frame}
 
 \end{document}
